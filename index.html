@@ -109,7 +109,16 @@
         .student-list li::before {
             content: '🛰️'; /* Satellite emoji bullet point */
             margin-right: 0.75rem;
-        }
+        }* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}.hero-section {
+  width: 100%; /* bukan 100vw */
+}<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         .lesson-list li::before {
             content: '🌠'; /* Shooting star emoji bullet point */
             margin-right: 0.75rem;
