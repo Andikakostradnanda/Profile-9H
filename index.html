@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Kamu</title>
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+  </style>
+</head>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Murid Kelas 9H - Misi Antariksa Malam</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
+    <style><style>
+  body {
+    overflow-x: hidden;
+  }
+    </style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #050a10; /* Even darker space background */
@@ -805,7 +819,10 @@
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
                 star.style.animationDelay = `${Math.random() * 5}s`; // Random delay for twinkle effect
-                starsContainer.appendChild(star);
+                starsContainer.appendChild(star);img {
+  max-width: 100%;
+  height: auto;
+                }
             }
         }
 
