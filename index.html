@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murid Kelas 9H - Misi Antariksa</title>
+    <title>Murid Kelas 9H - Misi Antariksa Malam</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1a26; /* Dark space background */
+            background-color: #050a10; /* Even darker space background */
             color: #e0f2fe; /* Light blue text for contrast */
             overflow-x: hidden; /* Prevent horizontal scroll */
             position: relative; /* For shooting stars */
         }
         .container {
-            max-width: 95%; /* More fluid for mobile */
+            max-width: 95%; /* Fluid for mobile */
             margin: 0 auto;
             padding: 1.5rem;
+            position: relative; /* Ensure content is above nebula */
+            z-index: 10;
         }
         .section-title {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #81e6d9; /* Teal color for section titles */
+            color: #a7d9f7; /* Lighter blue for section titles */
             text-align: center;
             margin-bottom: 2rem;
             padding-bottom: 0.75rem;
-            border-bottom: 4px solid #4fd1c5;
-            text-shadow: 0 0 10px rgba(129, 230, 217, 0.7);
+            border-bottom: 4px solid #63b3ed; /* Brighter blue underline */
+            text-shadow: 0 0 12px rgba(167, 217, 247, 0.8); /* Stronger glow */
             position: relative;
             z-index: 10;
             animation: fadeIn 1s ease-out;
         }
         .section-title::after {
-            content: '✨'; /* Sparkle emoji */
+            content: '🌌'; /* Galaxy emoji */
             position: absolute;
             right: 0;
             bottom: -5px;
@@ -42,19 +44,19 @@
             transform: rotate(20deg);
         }
         .card {
-            background-color: #1a2b3c; /* Darker blue for cards */
+            background-color: #101a26; /* Darker blue for cards */
             border-radius: 1.5rem; /* More rounded corners */
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); /* Stronger shadow */
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 2px solid #365b80; /* Subtle border */
+            border: 2px solid #2c5282; /* Darker subtle border */
             animation: fadeInUp 0.8s ease-out forwards; /* Initial animation */
             opacity: 0; /* Start hidden for animation */
         }
         .card:hover {
             transform: translateY(-8px) scale(1.02); /* Lift and slightly enlarge on hover */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
         .day-title {
             font-size: 1.8rem; /* Larger font for day */
@@ -70,7 +72,7 @@
             padding: 0;
         }
         .student-list li, .lesson-list li {
-            background-color: #2a3c4f; /* Slightly lighter blue for list items */
+            background-color: #1a2b3c; /* Slightly lighter blue for list items */
             padding: 0.85rem 1.2rem;
             margin-bottom: 0.6rem;
             border-radius: 0.75rem;
@@ -84,29 +86,29 @@
             cursor: pointer; /* Indicate clickable */
         }
         .student-list li:hover {
-            background-color: #364e68; /* Darker on hover */
+            background-color: #2a3c4f; /* Darker on hover */
             transform: translateX(5px);
         }
         .student-list li:last-child, .lesson-list li:last-child {
             margin-bottom: 0;
         }
         .student-list li::before {
-            content: '🚀'; /* Rocket emoji bullet point */
+            content: '🛰️'; /* Satellite emoji bullet point */
             margin-right: 0.75rem;
         }
         .lesson-list li::before {
-            content: '📚'; /* Book emoji bullet point */
+            content: '🌠'; /* Shooting star emoji bullet point */
             margin-right: 0.75rem;
         }
         .header {
-            background: linear-gradient(135deg, #4299e1, #63b3ed); /* Gradient blue header */
+            background: linear-gradient(135deg, #1f3246, #0e1b2a); /* Darker gradient header */
             color: #ffffff;
             padding: 2rem 0;
             border-radius: 1.5rem;
             margin-bottom: 2.5rem;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            border: 2px solid #90cdf4;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid #4299e1; /* Blue border */
             position: relative;
             overflow: hidden;
             animation: fadeInDown 1s ease-out;
@@ -115,7 +117,7 @@
             font-size: 3rem; /* Large title */
             font-weight: 900; /* Extra bold */
             margin-bottom: 0.75rem;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
         .header p {
             font-size: 1.25rem;
@@ -123,12 +125,12 @@
             opacity: 0.95;
         }
         .info-box {
-            background-color: #1a2b3c;
+            background-color: #101a26;
             border-radius: 1.5rem;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            border: 1px solid #365b80;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 1px solid #2c5282;
             text-align: center;
             color: #e0f2fe;
             animation: fadeIn 1s ease-out;
@@ -136,7 +138,7 @@
         .info-box h2 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #81e6d9;
+            color: #a7d9f7;
             margin-bottom: 0.75rem;
         }
         .info-box p {
@@ -151,10 +153,10 @@
 
         /* Organization Section Specific Styles */
         .org-role-card {
-            background-color: #2a3c4f; /* Slightly lighter card for roles */
+            background-color: #1a2b3c; /* Slightly lighter card for roles */
             border-radius: 1rem;
             padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             border: 1px solid #4fd1c5; /* Teal border for org roles */
             text-align: center;
             animation: fadeInUp 0.8s ease-out forwards; /* Initial animation */
@@ -182,7 +184,7 @@
             transform: translateX(3px);
         }
         .org-role-card li::before {
-            content: '⭐'; /* Star emoji */
+            content: '🔭'; /* Telescope emoji */
             margin-right: 0.5rem;
         }
         .org-activity-list {
@@ -217,7 +219,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+            background-color: rgba(0, 0, 0, 0.9); /* Even darker overlay */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -230,15 +232,15 @@
             visibility: visible;
         }
         .modal-content {
-            background: linear-gradient(145deg, #1f3246, #0e1b2a); /* Gradient background for ID card */
+            background: linear-gradient(145deg, #2c5282, #1f3246); /* Darker gradient for ID card */
             padding: 2.5rem;
             border-radius: 2rem; /* More rounded */
             width: 90%;
             max-width: 450px; /* Slightly narrower for ID card feel */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); /* Stronger shadow */
             position: relative;
-            border: 3px solid #4fd1c5; /* Teal border */
-            animation: fadeInScale 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bounce animation */
+            border: 3px solid #63b3ed; /* Brighter blue border */
+            animation: fadeInScale 0.3s ease-out forwards; /* Simplified animation */
             color: #e0f2fe;
             text-align: left;
             overflow: hidden; /* For internal glow effects */
@@ -250,7 +252,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(129, 230, 217, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(144, 205, 244, 0.15) 0%, transparent 70%); /* Brighter glow */
             animation: rotateGlow 15s linear infinite;
             z-index: 0;
         }
@@ -261,22 +263,22 @@
         .modal-content h3 {
             font-size: 2rem;
             font-weight: 800;
-            color: #81e6d9;
+            color: #a7d9f7; /* Lighter blue for modal title */
             margin-bottom: 1.5rem;
             text-align: center;
-            border-bottom: 3px solid #4fd1c5;
+            border-bottom: 3px solid #63b3ed;
             padding-bottom: 0.75rem;
-            text-shadow: 0 0 10px rgba(129, 230, 217, 0.7);
+            text-shadow: 0 0 10px rgba(167, 217, 247, 0.7);
         }
         .modal-content .org-detail {
             display: flex;
             align-items: center;
             margin-bottom: 0.8rem;
             font-size: 1.15rem;
-            background-color: rgba(42, 60, 79, 0.5); /* Semi-transparent background for detail rows */
+            background-color: rgba(44, 82, 130, 0.5); /* Darker semi-transparent background for detail rows */
             padding: 0.6rem 1rem;
             border-radius: 0.75rem;
-            border: 1px solid rgba(79, 209, 197, 0.3);
+            border: 1px solid rgba(99, 179, 237, 0.3);
         }
         .modal-content .org-detail .icon {
             margin-right: 1rem;
@@ -296,15 +298,14 @@
             z-index: 2; /* Ensure it's above glow */
         }
         .close-button:hover {
-            color: #81e6d9;
+            color: #a7d9f7; /* Lighter blue on hover */
             transform: rotate(90deg);
         }
 
         /* Animations */
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.8); }
-            70% { opacity: 1; transform: scale(1.05); }
-            100% { transform: scale(1); }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -372,6 +373,31 @@
                 transform: translateX(150vw) translateY(150vh) rotate(45deg);
                 opacity: 0;
             }
+            /* Randomize starting position for each star */
+            &:nth-child(1) { top: 10%; left: 20%; animation-delay: 2s; }
+            &:nth-child(2) { top: 50%; left: 70%; animation-delay: 6s; }
+            &:nth-child(3) { top: 80%; left: 5%; animation-delay: 10s; }
+        }
+
+        /* Nebula Background Effect */
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(20, 30, 40, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(30, 20, 40, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 10%, rgba(40, 30, 20, 0.2) 0%, transparent 50%);
+            background-size: 200% 200%; /* Larger than viewport */
+            animation: moveNebula 30s linear infinite alternate; /* Slow, gentle movement */
+            z-index: -2; /* Below stars and content */
+            opacity: 0.7;
+        }
+
+        @keyframes moveNebula {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         /* Responsive adjustments */
@@ -422,6 +448,7 @@
     </style>
 </head>
 <body>
+    <div class="nebula-bg"></div>
     <div class="stars" id="stars-background"></div>
     <div class="shooting-star" style="top: 10%; left: 20%; animation-delay: 2s;"></div>
     <div class="shooting-star" style="top: 50%; left: 70%; animation-delay: 6s;"></div>
@@ -493,7 +520,7 @@
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.8s;">
-                <h3>Kepramukaan</h3> <!-- Corrected from KePram Utusan -->
+                <h3>Kepramukaan</h3>
                 <ul>
                     <li data-name="Belva">Belva Ramania</li>
                     <li data-name="Fazri">Fazri Indra Nugraha</li>
@@ -671,14 +698,14 @@
             "Zaifa": { fullName: "Siti Zaifa Zhufairah", gender: "Perempuan", role: "Bendahara 2" },
             "Rika": { fullName: "Rika Rismayanti", gender: "Perempuan", role: "Sekretaris 1" },
             "Diana": { fullName: "Diana Widyawati Rahayu", gender: "Perempuan", role: "Sekretaris 2" },
-            "Yana": { fullName: "Yana Nuryana", gender: "Laki-laki", role: "Seksi Keamanan 1" }, // Jenis kelamin dikoreksi
+            "Yana": { fullName: "Yana Nuryana", gender: "Laki-laki", role: "Seksi Keamanan 1" },
             "Suci": { fullName: "Suci Latifah Oktaviani", gender: "Perempuan", role: "Seksi Keamanan 2" },
             "Rizky A.R.F": { fullName: "Rizky Arief F.", gender: "Laki-laki", role: "Seksi Perpustakaan 1" },
             "Vienard": { fullName: "Vienard Caizhi Nisaesu Irhab", gender: "Laki-laki", role: "Seksi Perpustakaan 2" },
             "Khayra": { fullName: "Khayra Azkia Haifa", gender: "Perempuan", role: "Kerohanian 1" },
             "Idham": { fullName: "Muhammad Idhan Al-Hafiz", gender: "Laki-laki", role: "Kerohanian 2" },
-            "Belva": { fullName: "Belva Ramania", gender: "Perempuan", role: "Kepramukaan" }, // Role dikoreksi
-            "Fazri": { fullName: "Fazri Indra Nugraha", gender: "Laki-laki", role: "Kepramukaan" }, // Role dikoreksi
+            "Belva": { fullName: "Belva Ramania", gender: "Perempuan", role: "Kepramukaan" },
+            "Fazri": { fullName: "Fazri Indra Nugraha", gender: "Laki-laki", role: "Kepramukaan" },
             "Syifa Org": { fullName: "Syifa Nurdini H", gender: "Perempuan", role: "Olahraga 1" }, // Syifa yang di organisasi
             "Apri": { fullName: "Apriyanto", gender: "Laki-laki", role: "Olahraga 2" },
             "Salma": { fullName: "Salma Nurdestiani", gender: "Perempuan", role: "Absensi 1" },
