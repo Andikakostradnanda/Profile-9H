@@ -1,24 +1,112 @@
-// Cegah zoom saat gesture di layar sentuh (mobile)
-document.addEventListener('gesturestart', function (e) {
-  e.preventDefault();
+// Data lengkap siswa (unchanged)
+const studentDetails = {
+    "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Murid" },
+    "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2" },
+    // ... (rest of studentDetails unchanged)
+};
+
+// Data guru (unchanged)
+const teacherDetails = {
+    "IPA": "Hj. Elis Herawati, S.Pd.",
+    // ... (rest of teacherDetails unchanged)
+};
+
+// Get modal elements
+const modal = document.getElementById('organizationModal');
+const modalContent = modal.querySelector('.modal-content');
+const modalStudentName = document.getElementById('modalStudentName');
+const modalFullName = document.getElementById('modalFullName');
+const modalGender = document.getElementById('modalGender');
+const modalRole = document.getElementById('modalRole');
+
+// Function to open the modal
+function openModal(nameKey) {
+    const studentData = studentDetails[nameKey];
+    let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru", "");
+    modalStudentName.textContent = displayName;
+
+    if (studentData) {
+        modalFullName.textContent = studentData.fullName;
+        modalGender.textContent = studentData.gender;
+        modalRole.textContent = studentData.role;
+    } else {
+        modalFullName.textContent = displayName;
+        modalGender.textContent = "Tidak diketahui";
+        modalRole.textContent = "Murid";
+    }
+
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+        modal.classList.add('show');
+    });
+}
+
+// Function to close the modal
+function closeModal() {
+    modal.classList.remove('show');
+    modal.addEventListener('transitionend', function handler(event) {
+        if (event.propertyName === 'opacity' && event.target === modal) {
+            modal.style.display = 'none';
+            modal.removeEventListener('transitionend', handler);
+        }
+    }, { once: true });
+}
+
+// Add click and touch listeners to student names
+document.querySelectorAll('.student-list li, .org-role-card li').forEach(item => {
+    const handleInteraction = (e) => {
+        e.preventDefault(); // Prevent default browser behavior (e.g., zooming)
+        const studentNameKey = item.dataset.name;
+        openModal(studentNameKey);
+    };
+
+    item.addEventListener('click', handleInteraction);
+    item.addEventListener('touchstart', handleInteraction, { passive: false });
 });
 
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-  const now = new Date().getTime();
-  if (now - lastTouchEnd <= 300) {
-    event.preventDefault(); // cegah zoom karena double tap
-  }
-  lastTouchEnd = now;
-}, false);
+// Close modal on touch/click outside content
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
 
-// Tombol ID Card
-document.addEventListener('DOMContentLoaded', function () {
-  const idCardBtn = document.getElementById('idCard');
-  if (idCardBtn) {
-    idCardBtn.addEventListener('click', function () {
-      // Tambahkan aksi yang kamu inginkan di sini
-      alert('Menampilkan ID Card...');
+window.addEventListener('touchstart', (event) => {
+    if (event.target === modal) {
+        event.preventDefault(); // Prevent zoom on touch
+        closeModal();
+    }
+}, { passive: false });
+
+// Close button handler
+document.querySelector('.close-button').addEventListener('click', closeModal);
+document.querySelector('.close-button').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    closeModal();
+}, { passive: false });
+
+// Generate dynamic stars background
+function createStars() {
+    const starsContainer = document.getElementById('stars-background');
+    const numStars = 100;
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = `${Math.random() * 3 + 1}px`;
+        star.style.height = star.style.width;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starsContainer.appendChild(star);
+    }
+}
+
+// Apply staggered animation to cards
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card, .org-role-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.style.animationFillMode = 'forwards';
     });
-  }
+    createStars(); // Call createStars on DOM load
 });
