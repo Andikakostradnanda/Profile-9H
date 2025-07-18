@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Murid Kelas 9H - Misi Antariksa Final</title>
@@ -9,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+        body {
             font-family: 'Inter', sans-serif;
             background-color: #050a10; /* Even darker space background */
             color: #e0f2fe; /* Light blue text for contrast */
@@ -521,7 +520,7 @@
                 <h3>Kerohanian</h3>
                 <ul>
                     <li data-name="Khayra">Khayra Azkia Haifa</li>
-                    <li data-name="Idham">Muhammad Idhan Al-Hafiz</li>
+                    <li data-name="Idham">Muhammad Idham Al-Hafiz</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.8s;">
@@ -566,7 +565,7 @@
                     <li data-name="Khayra">Khyra</li>
                     <li data-name="Diana">Diana</li>
                     <li data-name="Rama">Rama</li>
-                    <li data-name="M. Rizky">Mochammad Rizky</li>
+                    <li data-name="Fazri">Fazri</li>
                 </ul>
             </div>
 
@@ -578,7 +577,7 @@
                     <li data-name="Gendis">Gendis</li>
                     <li data-name="Rika">Rika</li>
                     <li data-name="Dewi">Dewi</li>
-                    <li data-name="Apri">Apriyanto</li>
+                    <li data-name="Idham">Idham</li>
                     <li data-name="Andika">Andika</li>
                     <li data-name="Ricky">Ricky</li>
                 </ul>
@@ -592,7 +591,7 @@
                     <li data-name="Syifa (Non-Org)">Syifa</li>
                     <li data-name="Dinda">Dinda</li>
                     <li data-name="Rizky A.R.F">Rizky A.R.F</li>
-                    <li data-name="Idham">Idham</li>
+                    <li data-name="Apri">Apri</li>
                     <li data-name="Nadzar">Nadzhar</li>
                 </ul>
             </div>
@@ -607,6 +606,7 @@
                     <li data-name="Faiq">Faiq</li>
                     <li data-name="Adi">Adi</li>
                     <li data-name="Yana">Yana</li>
+                    <li data-name="Citra">Citra</li>
                 </ul>
             </div>
 
@@ -616,11 +616,10 @@
                 <ul class="student-list">
                     <li data-name="Melisa">Melisa</li>
                     <li data-name="Nadia">Nadia</li>
-                    <li data-name="Syifa Baru">Syifa (baru)</li>
+                    <li data-name="Syifa Baru Pindahan">Syifa (baru pindahan)</li>
                     <li data-name="Kazril">Kazril</li>
                     <li data-name="Vienard">Vienard</li>
-                    <li data-name="Fazri">Fazri</li>
-                    <li data-name="Citra">Citra</li> <!-- Citra added to Friday -->
+                    <li data-name="M. Rizky">Mochammad Rizky</li>
                 </ul>
             </div>
         </div>
@@ -702,7 +701,7 @@
             "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2" },
             "Azhira": { fullName: "AZHIRA JIONELIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2" },
             "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Kepramukaan" },
-            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid" }, // Updated full name
+            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid" },
             "Dewi": { fullName: "DEWI NUR HAWA", gender: "Perempuan", role: "Murid" },
             "Diana": { fullName: "DIANA WIDYAWATI", gender: "Perempuan", role: "Sekretaris 2" },
             "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Murid" },
@@ -731,7 +730,7 @@
             "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2" },
             "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1" },
             "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid" },
-            "Syifa Baru": { fullName: "SYIFA (BARU)", gender: "Perempuan", role: "Murid" },
+            "Syifa Baru Pindahan": { fullName: "SYIFA (BARU Pindahan)", gender: "Perempuan", role: "Murid" }, // New Syifa with updated name
         };
 
         // Data guru untuk setiap mata pelajaran
@@ -761,7 +760,8 @@
         // Function to open the modal
         function openModal(nameKey) {
             const studentData = studentDetails[nameKey];
-            let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru", "");
+            // Clean up the displayed name for the modal title
+            let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
             modalStudentName.textContent = displayName;
 
             if (studentData) {
@@ -769,6 +769,7 @@
                 modalGender.textContent = studentData.gender;
                 modalRole.textContent = studentData.role;
             } else {
+                // Fallback if nameKey somehow not found (shouldn't happen with comprehensive studentDetails)
                 modalFullName.textContent = displayName;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
