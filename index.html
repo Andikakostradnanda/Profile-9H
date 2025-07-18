@@ -244,6 +244,7 @@
             color: #e0f2fe;
             text-align: left;
             overflow: hidden; /* For internal glow effects */
+            /* will-change: transform, opacity; */ /* Added for potential performance hint */
         }
         .modal-content::before {
             content: '';
@@ -304,8 +305,8 @@
 
         /* Animations */
         @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; /* transform: scale(0.9); */ } /* Removed transform */
+            to { opacity: 1; /* transform: scale(1); */ } /* Removed transform */
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -516,7 +517,7 @@
                 <h3>Kerohanian</h3>
                 <ul>
                     <li data-name="Khayra">Khayra Azkia Haifa</li>
-                    <li data-name="Idham">Muhammad Idhan Al-Hafiz</li>
+                    <li data-name="Idham">Muhammad Idham Al-Hafiz</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.8s;">
@@ -710,7 +711,7 @@
             "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Murid" },
             "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid" },
             "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian 2" },
-            "Rafli": { fullName: "MUHAMMAD RAFLI SETIAWAN", gender: "Laki-laki", role: "Murid" }, // Added from photo
+            "Rafli": { fullName: "MUHAMMAD RAFLI SETIAWAN", gender: "Laki-laki", role: "Murid" },
             "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Ketua Kelas" },
             "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Murid" },
             "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Murid" },
@@ -719,13 +720,13 @@
             "Rizky A.R.F": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan 1" },
             "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi 1" },
             "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara 2" },
-            "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Murid" }, // Corrected from Aul to Sri Aulia
+            "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Murid" },
             "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan 2" },
             "Syifa Org": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga 1" },
             "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2" },
             "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1" },
-            "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid" }, // Added from photo, assuming Zalfa is short for something
-            "Syifa Baru": { fullName: "SYIFA (BARU)", gender: "Perempuan", role: "Murid" }, // New Syifa
+            "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid" },
+            "Syifa Baru": { fullName: "SYIFA (BARU)", gender: "Perempuan", role: "Murid" },
         };
 
         // Data guru untuk setiap mata pelajaran
