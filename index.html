@@ -220,7 +220,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9); /* Even darker overlay */
-            /* Using display: none by default, controlled by JS */
             display: none; /* Hidden by default */
             justify-content: center;
             align-items: center;
@@ -242,8 +241,7 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); /* Stronger shadow */
             position: relative;
             border: 3px solid #63b3ed; /* Brighter blue border */
-            /* Removed transform from animation to prevent zoom issues */
-            animation: fadeInOnly 0.3s ease-out forwards; /* New animation for fade only */
+            /* Removed animation property here */
             color: #e0f2fe;
             text-align: left;
             overflow: hidden; /* For internal glow effects */
@@ -307,10 +305,7 @@
         }
 
         /* Animations */
-        @keyframes fadeInOnly { /* New animation for modal content */
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        /* Removed @keyframes fadeInOnly as it's no longer directly applied to modal-content */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -730,7 +725,7 @@
             "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2" },
             "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1" },
             "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid" },
-            "Syifa Baru Pindahan": { fullName: "SYIFA (BARU Pindahan)", gender: "Perempuan", role: "Murid" }, // New Syifa with updated name
+            "Syifa Baru Pindahan": { fullName: "SYIFA (BARU Pindahan)", gender: "Perempuan", role: "Murid" },
         };
 
         // Data guru untuk setiap mata pelajaran
@@ -751,7 +746,7 @@
 
         // Get modal elements
         const modal = document.getElementById('organizationModal');
-        const modalContent = modal.querySelector('.modal-content'); // Get modal content element
+        const modalContent = modal.querySelector('.modal-content');
         const modalStudentName = document.getElementById('modalStudentName');
         const modalFullName = document.getElementById('modalFullName');
         const modalGender = document.getElementById('modalGender');
@@ -760,7 +755,6 @@
         // Function to open the modal
         function openModal(nameKey) {
             const studentData = studentDetails[nameKey];
-            // Clean up the displayed name for the modal title
             let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
             modalStudentName.textContent = displayName;
 
@@ -769,7 +763,6 @@
                 modalGender.textContent = studentData.gender;
                 modalRole.textContent = studentData.role;
             } else {
-                // Fallback if nameKey somehow not found (shouldn't happen with comprehensive studentDetails)
                 modalFullName.textContent = displayName;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
