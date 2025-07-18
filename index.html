@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+<button id="idCard">Lihat ID Card</button>
+
+  <script>
+    // Cegah zoom karena gesture (untuk iOS/Android)
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+
+    // Jika kamu pakai touch screen, ini juga bantu cegah zoom saat double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
+    // Contoh fungsi saat tombol ID Card diklik
+    document.getElementById('idCard').addEventListener('click', function () {
+      alert('Menampilkan ID Card...');
+      // Di sini kamu bisa tambahkan fitur untuk buka modal atau tampilkan kartu
+    });
+  </script>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -619,6 +645,7 @@
                     <li data-name="Kazril">Kazril</li>
                     <li data-name="Vienard">Vienard</li>
                     <li data-name="Fazri">Fazri</li>
+                    <li data-name="Citra">Citra</li> <!-- Citra added to Friday -->
                 </ul>
             </div>
         </div>
@@ -700,7 +727,7 @@
             "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2" },
             "Azhira": { fullName: "AZHIRA JIONELIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2" },
             "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Kepramukaan" },
-            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid" },
+            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid" }, // Updated full name
             "Dewi": { fullName: "DEWI NUR HAWA", gender: "Perempuan", role: "Murid" },
             "Diana": { fullName: "DIANA WIDYAWATI", gender: "Perempuan", role: "Sekretaris 2" },
             "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Murid" },
@@ -772,9 +799,7 @@
                 modalRole.textContent = "Murid";
             }
 
-            // Set display to flex immediately, then add 'show' class for opacity transition
             modal.style.display = 'flex';
-            // Use requestAnimationFrame to ensure display change is rendered before opacity transition starts
             requestAnimationFrame(() => {
                 modal.classList.add('show');
             });
@@ -783,14 +808,12 @@
         // Function to close the modal
         function closeModal() {
             modal.classList.remove('show');
-            // Listen for the end of the opacity transition
             modal.addEventListener('transitionend', function handler(event) {
-                // Ensure the transition is for opacity on the modal itself, not its children
                 if (event.propertyName === 'opacity' && event.target === modal) {
-                    modal.style.display = 'none'; // Hide completely after fade out
-                    modal.removeEventListener('transitionend', handler); // Remove listener
+                    modal.style.display = 'none';
+                    modal.removeEventListener('transitionend', handler);
                 }
-            }, { once: true }); // Ensure listener is removed after one use
+            }, { once: true });
         }
 
         // Add click listeners to all student names in cleaning schedule AND organization section
@@ -838,4 +861,35 @@
     </script>
 </body>
 </html>
+<style>
+  button, input, select, textarea {
+    font-size: 16px;
+    touch-action: manipulation; /* Biar tombol gak dianggap gesture zoom */
+  }
 
+  body {
+    overflow-x: hidden; /* cegah geser kanan-kiri */
+  }
+</style><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><button id="idCard">Lihat ID Card</button>
+
+<script>
+  document.getElementById("idCard").addEventListener("click", function () {
+    alert("ID Card diklik!");
+    // Bisa kamu ganti dengan menampilkan kartu ID-mu
+  });
+</script><script>
+  // Cegah pinch-to-zoom di mobile
+  document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+  });
+
+  // Cegah zoom karena double tap
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (e) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      e.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+</script>
