@@ -159,4 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Panggil fungsi createStars saat seluruh halaman (termasuk gambar) telah dimuat
 window.onload = createStars;
+"Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
+
 
