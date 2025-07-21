@@ -67,11 +67,11 @@
             padding-bottom: 0.75rem;
             text-shadow: 0 0 8px rgba(129, 230, 217, 0.5); /* Efek bercahaya */
         }
-        .student-list, .lesson-list {
+        .student-list, .lesson-list, .dress-code-list {
             list-style: none;
             padding: 0;
         }
-        .student-list li, .lesson-list li {
+        .student-list li, .lesson-list li, .dress-code-list li {
             background-color: #1a2b3c; /* Biru sedikit lebih terang untuk item daftar */
             padding: 0.85rem 1.2rem;
             margin-bottom: 0.6rem;
@@ -89,7 +89,7 @@
             background-color: #2a3c4f; /* Lebih gelap saat hover */
             transform: translateX(5px);
         }
-        .student-list li:last-child, .lesson-list li:last-child {
+        .student-list li:last-child, .lesson-list li:last-child, .dress-code-list li:last-child {
             margin-bottom: 0;
         }
         .student-list li::before {
@@ -98,6 +98,10 @@
         }
         .lesson-list li::before {
             content: '🪐'; /* Emoji Saturnus sebagai poin */
+            margin-right: 0.75rem;
+        }
+        .dress-code-list li::before {
+            content: '👕'; /* Emoji T-shirt sebagai poin */
             margin-right: 0.75rem;
         }
         .header {
@@ -444,7 +448,7 @@
             .day-title {
                 font-size: 2rem;
             }
-            .student-list li, .lesson-list li {
+            .student-list li, .lesson-list li, .dress-code-list li {
                 font-size: 1.1rem;
             }
             .section-title {
@@ -629,10 +633,10 @@
                     <li data-name="Apri">Apriyanto</li>
                 </ul>
                 <ul class="org-activity-list">
-                    <li>Mengadakan Latihan Fisik Kru</li>
+                    <li>Mengadakan Latihan Fisik Kru Dengan Baik😝</li>
                     <li>Mempersiapkan Kompetisi Antar Unit</li>
                     <li>Menjaga Kebugaran Mental dan Fisik</li>
-                    <li>Mempromosikan Gaya Hidup Sehat</li>
+                    <li>Mempromosikan Gaya Hidup Sehat </li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 1.0s;">
@@ -640,10 +644,10 @@
                 <p class="org-motto">Pencatat Kehadiran Kru, Pemantau Kesiapan Awak.</p>
                 <ul>
                     <li data-name="Salma">Salma Nurdestiani</li>
-                    <li data-name="Azhira">Azhira Jionelia Navisha Bilqir</li>
+                    <li data-name="Azhira"AZHIRA VIENOLIA NAVISHA BILQIS</li>
                 </ul>
                 <ul class="org-activity-list">
-                    <li>Mencatat Kehadiran Harian Awak</li>
+                    <li>Mencatat Kehadiran Harian Murid Ganteng Dan Catik🫠</li>
                     <li>Melaporkan Data Absensi</li>
                     <li>Memastikan Disiplin Waktu</li>
                     <li>Merekapitulasi Statistik Kehadiran</li>
@@ -724,7 +728,7 @@
 
         <!-- Bagian Jadwal Pelajaran -->
         <h2 class="section-title">Jadwal Pelajaran Antar Bintang</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <!-- Kartu Pelajaran Senin -->
             <div class="card" style="animation-delay: 0.1s;">
                 <h2 class="day-title">Senin</h2>
@@ -778,6 +782,42 @@
                 </ul>
             </div>
         </div>
+
+        <!-- Bagian Jadwal Pakaian -->
+        <h2 class="section-title">Jadwal Pakaian Kru</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card" style="animation-delay: 0.1s;">
+                <h2 class="day-title">Senin</h2>
+                <ul class="dress-code-list">
+                    <li>Putih Biru</li>
+                </ul>
+            </div>
+            <div class="card" style="animation-delay: 0.2s;">
+                <h2 class="day-title">Selasa</h2>
+                <ul class="dress-code-list">
+                    <li>Batik Putih</li>
+                </ul>
+            </div>
+            <div class="card" style="animation-delay: 0.3s;">
+                <h2 class="day-title">Rabu</h2>
+                <ul class="dress-code-list">
+                    <li>Batik Biru</li>
+                </ul>
+            </div>
+            <div class="card" style="animation-delay: 0.4s;">
+                <h2 class="day-title">Kamis</h2>
+                <ul class="dress-code-list">
+                    <li>Muslim</li>
+                </ul>
+            </div>
+            <div class="card" style="animation-delay: 0.5s;">
+                <h2 class="day-title">Jumat</h2>
+                <ul class="dress-code-list">
+                    <li>Pramuka</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <!-- Modal Organisasi (Kartu Identitas) -->
@@ -803,7 +843,7 @@
         const studentDetails = {
             "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid bersemangat yang siap belajar dan berkembang." },
             "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg", description: "Atlet yang selalu siap menjaga kebugaran tim." },
-            "Azhira": { fullName: "AZHIRA JIONELIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Teliti dalam mencatat setiap kehadiran, memastikan semua kru lengkap." },
+            "Azhira": { fullName: "AZHIRA VIENOLIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Teliti dalam mencatat setiap kehadiran, memastikan semua kru lengkap." },
             "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Wakil Kelas", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Bintang penyeimbang yang selalu siap mendukung kepemimpinan." },
             "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang ceria dan penuh semangat dalam setiap aktivitas." },
             "Dewi": { fullName: "DEWI NUR HAWA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang tenang dan fokus dalam meraih ilmu." },
@@ -814,13 +854,13 @@
             "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pengelola keuangan yang cermat, memastikan setiap dana terpakai dengan bijak." },
             "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh rasa ingin tahu dan selalu siap belajar hal baru." },
             "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pembimbing spiritual yang membawa ketenangan dan inspirasi." },
-            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
+            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Pemimpin yang berwibawa Dan Disiplin, siap membawa kelas menuju tujuan Dengan Gembira🥰." },
             "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang rajin dan tekun dalam setiap tugas." },
             "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh semangat dan selalu siap berkontribusi." },
             "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang tenang dan memiliki pemikiran yang mendalam." },
             "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian 2", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Penjaga moral yang selalu mengingatkan akan nilai-nilai kebaikan." },
             "Rafli": { fullName: "MUHAMMAD RAFLI SETIAWAN", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang bersemangat dan siap menghadapi tantangan." },
-            "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pramuka sejati yang tangguh dan selalu siap berpetualang." },
+            "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg", description: "Pramuka sejati yang tangguh dan selalu siap berpetualangan." },
             "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang cerdas dan memiliki banyak ide." },
             "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Murid", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg", description: "Murid yang antusias dan selalu membawa energi positif." },
             "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pramuka yang cekatan dan selalu siap untuk misi baru." },
@@ -875,7 +915,7 @@
                 modalFullName.textContent = nameKey;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
-                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found';"; // Pastikan fallback URL benar
+                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found"; // Pastikan fallback URL benar
                 profileDescription.textContent = "Informasi tambahan belum tersedia.";
             } else {
                 let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
