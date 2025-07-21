@@ -180,7 +180,7 @@
             transition: color 0.2s ease, transform 0.1s ease;
         }
         .org-role-card li:hover {
-            color: #81e6d9;
+            background-color: #2a3c4f; /* Lebih gelap saat hover */
             transform: translateX(3px);
         }
         .org-role-card li::before {
@@ -197,7 +197,7 @@
         }
         .org-activity-list {
             list-style: none;
-            padding-left: 0;
+            padding: 0; /* Hapus padding-left */
             margin-top: 0.75rem;
             border-top: 1px dashed rgba(79, 209, 197, 0.5);
             padding-top: 0.75rem;
@@ -278,6 +278,34 @@
             border-bottom: 3px solid #63b3ed;
             padding-bottom: 0.75rem;
             text-shadow: 0 0 10px rgba(167, 217, 247, 0.7);
+        }
+        .modal-content .profile-section { /* Gaya baru untuk bagian profil */
+            display: flex;
+            flex-direction: column; /* Ubah menjadi kolom untuk tumpukan */
+            align-items: center; /* Pusatkan item */
+            gap: 1rem; /* Kurangi jarak */
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(44, 82, 130, 0.3);
+            border-radius: 1rem;
+            border: 1px solid rgba(99, 179, 237, 0.2);
+            text-align: center; /* Pusatkan teks deskripsi */
+        }
+        .modal-content .profile-section img {
+            width: 120px; /* Ukuran foto yang lebih besar */
+            height: 120px;
+            border-radius: 15%; /* Bentuk kotak dengan sudut membulat */
+            object-fit: cover; /* Memastikan foto pas */
+            border: 3px solid #63b3ed; /* Border biru untuk foto */
+            box-shadow: 0 0 10px rgba(99, 179, 237, 0.5);
+            flex-shrink: 0; /* Mencegah gambar menyusut */
+        }
+        .modal-content .profile-text {
+            flex-grow: 1;
+            text-align: center; /* Pusatkan teks deskripsi */
+            font-size: 1.05rem; /* Sedikit lebih kecil */
+            color: #e0f2fe;
+            line-height: 1.5;
         }
         .modal-content .org-detail {
             display: flex;
@@ -752,6 +780,12 @@
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
             <h3 id="modalStudentName"></h3>
+            <div id="profileSection" class="profile-section">
+                <img id="profilePhoto" src="" alt="Foto Profil" onerror="this.onerror=null;this.src='https://placehold.co/120x120/333333/ffffff?text=Not+Found';">
+                <div class="profile-text">
+                    <p id="profileDescription"></p>
+                </div>
+            </div>
             <div class="org-detail"><span class="icon">🆔</span> <strong>Nama Lengkap:</strong> <span id="modalFullName"></span></div>
             <div class="org-detail"><span class="icon">🚻</span> <strong>Jenis Kelamin:</strong> <span id="modalGender"></span></div>
             <div class="org-detail"><span class="icon">🌟</span> <strong>Peran:</strong> <span id="modalRole"></span></div>
@@ -760,43 +794,43 @@
     </div>
 
     <script>
-        // Data lengkap siswa, termasuk nama panggilan/pendek, nama lengkap, jenis kelamin, dan peran organisasi
+        // Data lengkap siswa, termasuk nama panggilan/pendek, nama lengkap, jenis kelamin, peran organisasi, URL foto, dan deskripsi pribadi
         const studentDetails = {
-            "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Murid" },
-            "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2" },
-            "Azhira": { fullName: "AZHIRA JIONELIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2" },
-            "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Wakil Kelas" },
-            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid" },
-            "Dewi": { fullName: "DEWI NUR HAWA", gender: "Perempuan", role: "Murid" },
-            "Diana": { fullName: "DIANA WIDYAWATI", gender: "Perempuan", role: "Sekretaris 2" },
-            "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Murid" },
-            "Fazri": { fullName: "FAZRI INDRA NUGRAHA", gender: "Laki-laki", role: "Murid" },
-            "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Murid" },
-            "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara 1" },
-            "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid" },
-            "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian 1" },
-            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas" },
-            "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Murid" },
-            "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Murid" },
-            "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid" },
-            "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian 2" },
-            "Rafli": { fullName: "MUHAMMAD RAFLI SETIAWAN", gender: "Laki-laki", role: "Murid" },
-            "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan" },
-            "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Murid" },
-            "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Murid" },
-            "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan" },
-            "Rika": { fullName: "RIKA RISMAYANTI", gender: "Perempuan", role: "Sekretaris 1" },
-            "Rizky A.R.F": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan 1" },
-            "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi 1" },
-            "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara 2" },
-            "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Murid" },
-            "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan 2" },
-            "Syifa Org": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga 1" },
-            "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2" },
-            "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1" },
-            "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid" },
-            "Syifa Baru Pindahan": { fullName: "SYIFA (BARU Pindahan)", gender: "Perempuan", role: "Murid" },
-            "Syifa (Non-Org)": { fullName: "SYIFA", gender: "Perempuan", role: "Murid" },
+            "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid bersemangat yang siap belajar dan berkembang." },
+            "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga 2", photo: "https://github.com/Andikakostradnanda/Profile-9H/blob/12f0edb78f62451df842e7cb68850a9b82882dc6/Apriyanto.jpg, description: "Atlet yang selalu siap menjaga kebugaran tim." },
+            "Azhira": { fullName: "AZHIRA JIONELIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi 2", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Teliti dalam mencatat setiap kehadiran, memastikan semua kru lengkap." },
+            "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Wakil Kelas", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Bintang penyeimbang yang selalu siap mendukung kepemimpinan." },
+            "Citra": { fullName: "CITRA LESTARI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang ceria dan penuh semangat dalam setiap aktivitas." },
+            "Dewi": { fullName: "DEWI NUR HAWA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang tenang dan fokus dalam meraih ilmu." },
+            "Diana": { fullName: "DIANA WIDYAWATI", gender: "Perempuan", role: "Sekretaris 2", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Teliti dalam mencatat, memastikan setiap detail misi terdokumentasi." },
+            "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang berdedikasi dan selalu siap membantu." },
+            "Fazri": { fullName: "FAZRI INDRA NUGRAHA", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang aktif dan bersemangat dalam setiap kegiatan." },
+            "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang penuh ide dan kreativitas." },
+            "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pengelola keuangan yang cermat, memastikan setiap dana terpakai dengan bijak." },
+            "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang penuh rasa ingin tahu dan selalu siap belajar hal baru." },
+            "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pembimbing spiritual yang membawa ketenangan dan inspirasi." },
+            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
+            "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang rajin dan tekun dalam setiap tugas." },
+            "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang penuh semangat dan selalu siap berkontribusi." },
+            "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang tenang dan memiliki pemikiran yang mendalam." },
+            "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian 2", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Penjaga moral yang selalu mengingatkan akan nilai-nilai kebaikan." },
+            "Rafli": { fullName: "MUHAMMAD RAFLI SETIAWAN", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang bersemangat dan siap menghadapi tantangan." },
+            "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pramuka sejati yang tangguh dan selalu siap berpetualang." },
+            "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang cerdas dan memiliki banyak ide." },
+            "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Murid", photo: "https://github.com/Andikakostradnanda/Profile-9H/blob/12f0edb78f62451df842e7cb68850a9b82882dc6/Rama.jpg, description: "Murid yang antusias dan selalu membawa energi positif." },
+            "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pramuka yang cekatan dan selalu siap untuk misi baru." },
+            "Rika": { fullName: "RIKA RISMAYANTI", gender: "Perempuan", role: "Sekretaris 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Sekretaris yang rapi dan memastikan semua catatan akurat." },
+            "Rizky A.R.F": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Penjaga gerbang ilmu, siap memandu ke dunia pengetahuan." },
+            "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pencatat kehadiran yang teliti, memastikan disiplin kru." },
+            "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara 2", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Bendahara yang handal, mengelola keuangan dengan integritas." },
+            "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa yang berprestasi dan selalu berusaha memberikan yang terbaik." },
+            "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan 2", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Penjaga keamanan yang sigap, menciptakan lingkungan yang kondusif." },
+            "Syifa Org": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
+            "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2", photo: "uploaded:https://github.com/Andikakostradnanda/Profile-9H/blob/12f0edb78f62451df842e7cb68850a9b82882dc6/Vienard.jpg", description: "Vienard Lucu dan Suka Bikin orang ketawa." },
+            "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Petugas keamanan yang bertanggung jawab, memastikan ketertiban." },
+            "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang penuh potensi dan semangat belajar." },
+            "Syifa Baru Pindahan": { fullName: "SYIFA (BARU Pindahan)", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Siswa baru yang siap beradaptasi dan berkontribusi." },
+            "Syifa (Non-Org)": { fullName: "SYIFA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/1a2b3c/e0f2fe?text=Foto", description: "Murid yang berdedikasi dalam setiap tugasnya." },
         };
 
         // Data guru untuk setiap mata pelajaran
@@ -817,8 +851,9 @@
 
         // Dapatkan elemen modal
         const modal = document.getElementById('organizationModal');
-        const modalContent = modal.querySelector('.modal-content');
         const modalStudentName = document.getElementById('modalStudentName');
+        const profilePhoto = document.getElementById('profilePhoto');
+        const profileDescription = document.getElementById('profileDescription');
         const modalFullName = document.getElementById('modalFullName');
         const modalGender = document.getElementById('modalGender');
         const modalRole = document.getElementById('modalRole');
@@ -826,7 +861,6 @@
         // Fungsi untuk membuka modal
         function openModal(nameKey) {
             const studentData = studentDetails[nameKey];
-            // Bersihkan nama yang ditampilkan untuk judul modal
             let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
             modalStudentName.textContent = displayName;
 
@@ -834,11 +868,14 @@
                 modalFullName.textContent = studentData.fullName;
                 modalGender.textContent = studentData.gender;
                 modalRole.textContent = studentData.role;
+                profilePhoto.src = studentData.photo;
+                profileDescription.textContent = studentData.description;
             } else {
-                // Fallback jika nameKey tidak ditemukan (seharusnya tidak terjadi dengan studentDetails yang komprehensif)
                 modalFullName.textContent = displayName;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
+                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found"; // Fallback placeholder dengan teks "Not Found"
+                profileDescription.textContent = "Informasi tambahan belum tersedia.";
             }
 
             modal.style.display = 'flex';
