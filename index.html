@@ -172,14 +172,12 @@
             list-style: none;
             padding: 0;
         }
-        .org-role-card li {
-            font-size: 1rem;
-            color: #e0f2fe;
-            margin-bottom: 0.25rem;
+        /* Hanya li yang memiliki data-name yang dapat diklik */
+        .org-role-card li[data-name] {
             cursor: pointer; /* Menunjukkan dapat diklik */
-            transition: color 0.2s ease, transform 0.1s ease;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
-        .org-role-card li:hover {
+        .org-role-card li[data-name]:hover {
             background-color: #2a3c4f; /* Lebih gelap saat hover */
             transform: translateX(3px);
         }
@@ -194,6 +192,7 @@
             margin-bottom: 0.75rem;
             font-style: italic;
             opacity: 0.8;
+            cursor: default; /* Pastikan moto tidak dapat diklik */
         }
         .org-activity-list {
             list-style: none;
@@ -209,6 +208,8 @@
             margin-bottom: 0.3rem;
             display: flex;
             align-items: flex-start;
+            cursor: default; /* Pastikan aktivitas tidak dapat diklik */
+            transition: none; /* Hapus transisi hover jika ada */
         }
         .org-activity-list li::before {
             content: '✨'; /* Emoji kilau */
@@ -412,25 +413,27 @@
             &:nth-child(3) { top: 80%; left: 5%; animation-delay: 10s; }
         }
 
-        /* Efek Latar Belakang Nebula */
+        /* Efek Latar Belakang Nebula / Galaksi */
         .nebula-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(20, 30, 40, 0.4) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(30, 20, 40, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 50% 10%, rgba(40, 30, 20, 0.2) 0%, transparent 50%);
-            background-size: 200% 200%; /* Lebih besar dari viewport */
+            /* Lapisan gradien untuk efek galaksi yang lebih kaya */
+            background: radial-gradient(circle at 15% 85%, rgba(100, 50, 150, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 15%, rgba(50, 150, 100, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(150, 100, 50, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 30% 70%, rgba(70, 120, 180, 0.3) 0%, transparent 60%);
+            background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%; /* Lebih besar dari viewport */
             animation: moveNebula 30s linear infinite alternate; /* Gerakan lambat, lembut */
             z-index: -2; /* Di bawah bintang dan konten */
-            opacity: 0.7;
+            opacity: 0.8; /* Sedikit lebih terlihat */
         }
 
         @keyframes moveNebula {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+            0% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%; }
+            100% { background-position: 100% 100%, 0% 0%, 50% 50%, 100% 0%; }
         }
 
         /* Penyesuaian Responsif */
@@ -591,10 +594,12 @@
                 <h3>Kerohanian</h3>
                 <p class="org-motto">Pembimbing Spiritual Awak, Kompas Moral Misi.</p>
                 <ul>
+                    <!-- Siswa yang bertanggung jawab atas kerohanian, ini tetap bisa diklik -->
                     <li data-name="Khayra">Khayra Azkia Haifa</li>
                     <li data-name="Idham">Muhammad Idham Al-Hafiz</li>
                 </ul>
                 <ul class="org-activity-list">
+                    <!-- Aktivitas ini TIDAK dapat diklik -->
                     <li>Memimpin Doa Bersama Awak</li>
                     <li>Mengadakan Diskusi Moral</li>
                     <li>Membina Ketenangan Batin</li>
@@ -809,7 +814,7 @@
             "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pengelola keuangan yang cermat, memastikan setiap dana terpakai dengan bijak." },
             "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh rasa ingin tahu dan selalu siap belajar hal baru." },
             "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pembimbing spiritual yang membawa ketenangan dan inspirasi." },
-            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
+            "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
             "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang rajin dan tekun dalam setiap tugas." },
             "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh semangat dan selalu siap berkontribusi." },
             "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang tenang dan memiliki pemikiran yang mendalam." },
@@ -870,7 +875,7 @@
                 modalFullName.textContent = nameKey;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
-                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found";
+                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found';"; // Pastikan fallback URL benar
                 profileDescription.textContent = "Informasi tambahan belum tersedia.";
             } else {
                 let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
@@ -902,8 +907,8 @@
             }, { once: true });
         }
 
-        // Tambahkan pendengar klik ke semua nama siswa di jadwal piket DAN bagian organisasi
-        document.querySelectorAll('.student-list li, .org-role-card li').forEach(item => {
+        // Tambahkan pendengar klik ke semua nama siswa di jadwal piket DAN nama siswa di bagian organisasi (yang memiliki data-name)
+        document.querySelectorAll('.student-list li, .org-role-card li[data-name]').forEach(item => {
             item.addEventListener('click', () => {
                 const studentNameKey = item.dataset.name;
                 console.log('Clicked on:', studentNameKey); // Debugging log
