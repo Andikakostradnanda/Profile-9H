@@ -1,4 +1,50 @@
-/* Pastikan box-sizing diatur secara universal untuk layout yang konsisten.
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container utama */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul */
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: #222;
+}
+
+/* Teks umum */
+p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}/* Pastikan box-sizing diatur secara universal untuk layout yang konsisten.
    Ini sangat penting agar padding dan border dihitung di dalam lebar/tinggi elemen. */
 *, *::before, *::after {
     box-sizing: border-box;
