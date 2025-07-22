@@ -340,4 +340,27 @@ window.onload = createStars;
 
 "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Murid", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg", description: "Siswa yang tenang dan memiliki pemikiran yang mendalam." },
 
+// Pastikan halaman sudah dimuat
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Website berhasil dimuat 🎉");
 
+  // Tombol salam (pastikan ada elemen dengan ID btnSalam)
+  const tombol = document.querySelector("#btnSalam");
+  if (tombol) {
+    tombol.addEventListener("click", function () {
+      alert("Halo! Selamat datang di website kami 🚀");
+    });
+  }
+
+  // Efek hover ke kartu murid (opsional)
+  const kartuMurid = document.querySelectorAll(".kartu-murid");
+  kartuMurid.forEach(function (kartu) {
+    kartu.addEventListener("mouseover", function () {
+      kartu.style.transform = "scale(1.03)";
+      kartu.style.transition = "transform 0.3s";
+    });
+    kartu.addEventListener("mouseout", function () {
+      kartu.style.transform = "scale(1)";
+    });
+  });
+});
