@@ -485,6 +485,160 @@
                 font-size: 3.2rem;
             }
         }
+
+        /* --- Gaya Baru untuk Fixed Header dan Navigasi --- */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(16, 26, 38, 0.95), rgba(16, 26, 38, 0.7)); /* Gradien transparan */
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 500; /* Pastikan di atas konten lain */
+            transition: transform 0.3s ease-out; /* Animasi geser */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+
+        .fixed-header.hide {
+            transform: translateY(-100%); /* Sembunyikan ke atas */
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .smp-logo {
+            height: 50px; /* Ukuran logo SMP */
+            width: auto;
+            border-radius: 0.5rem; /* Sedikit membulat */
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .class-logo {
+            height: 50px; /* Ukuran logo 9H */
+            width: 50px; /* Pastikan lebar dan tinggi sama untuk bulat */
+            border-radius: 50%; /* Membuat bulat */
+            object-fit: cover; /* Memastikan gambar pas dalam lingkaran */
+            border: 2px solid #63b3ed; /* Border biru */
+            box-shadow: 0 0 8px rgba(99, 179, 237, 0.6);
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Jarak antara logo kelas dan tombol menu */
+        }
+
+        .menu-toggle {
+            background-color: #4299e1; /* Warna biru untuk tombol menu */
+            color: #fff;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .menu-toggle:hover {
+            background-color: #63b3ed;
+            transform: scale(1.05);
+        }
+
+        /* Gaya Overlay Navigasi */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* Overlay gelap */
+            z-index: 499; /* Sedikit di bawah fixed-header */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .nav-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-item {
+            color: #a7d9f7; /* Warna teks item menu */
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            margin: 0.75rem 0;
+            text-decoration: none;
+            border-radius: 1rem;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            width: 80%; /* Lebar item menu */
+            max-width: 400px;
+            text-align: center;
+            background-color: rgba(66, 153, 225, 0.1); /* Latar belakang item */
+            border: 1px solid rgba(99, 179, 237, 0.3);
+        }
+
+        .nav-item:hover {
+            background-color: rgba(66, 153, 225, 0.3);
+            color: #e0f2fe;
+            transform: scale(1.02);
+        }
+
+        /* Gaya Tombol Scroll to Top */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4299e1;
+            color: #fff;
+            border: none;
+            border-radius: 50%; /* Bulat */
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            z-index: 400; /* Di atas konten tapi di bawah fixed-header */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #63b3ed;
+            transform: translateY(-3px);
+        }
+
+        /* Padding untuk konten agar tidak tertutup fixed header */
+        body {
+            padding-top: 80px; /* Sesuaikan dengan tinggi fixed-header */
+        }
     </style>
 </head>
 <body>
@@ -493,6 +647,25 @@
     <div class="shooting-star" style="top: 10%; left: 20%; animation-delay: 2s;"></div>
     <div class="shooting-star" style="top: 50%; left: 70%; animation-delay: 6s;"></div>
     <div class="shooting-star" style="top: 80%; left: 5%; animation-delay: 10s;"></div>
+
+    <!-- Fixed Header/Navbar Baru -->
+    <div id="fixed-header" class="fixed-header">
+        <div class="header-content">
+            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMP" class="smp-logo">
+            <div class="nav-right">
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Logo 9H" class="class-logo">
+                <button id="menu-toggle" class="menu-toggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Navigasi (Menu Kategori) -->
+    <div id="nav-overlay" class="nav-overlay">
+        <a href="#organization-section" class="nav-item">Organisasi</a>
+        <a href="#piket-section" class="nav-item">Jadwal Piket</a>
+        <a href="#pelajaran-section" class="nav-item">Jadwal Pelajaran</a>
+        <a href="#pakaian-section" class="nav-item">Jadwal Pakaian</a>
+    </div>
 
     <div class="container">
         <!-- Bagian Header -->
@@ -510,7 +683,7 @@
         </div>
 
         <!-- Bagian Organisasi -->
-        <h2 class="section-title">Struktur Organisasi 9H</h2>
+        <h2 class="section-title" id="organization-section">Struktur Organisasi 9H</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div class="org-role-card" style="animation-delay: 0.1s;">
                 <h3>Ketua Kelas</h3>
@@ -656,7 +829,7 @@
         </div>
 
         <!-- Bagian Jadwal Piket -->
-        <h2 class="section-title">Jadwal Piket Awak Kebersihan</h2>
+        <h2 class="section-title" id="piket-section">Jadwal Piket Awak Kebersihan</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <!-- Kartu Senin -->
             <div class="card" style="animation-delay: 0.1s;">
@@ -727,7 +900,7 @@
         </div>
 
         <!-- Bagian Jadwal Pelajaran -->
-        <h2 class="section-title">Jadwal Pelajaran Antar Bintang</h2>
+        <h2 class="section-title" id="pelajaran-section">Jadwal Pelajaran Antar Bintang</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <!-- Kartu Pelajaran Senin -->
             <div class="card" style="animation-delay: 0.1s;">
@@ -784,7 +957,7 @@
         </div>
 
         <!-- Bagian Jadwal Pakaian -->
-        <h2 class="section-title">Jadwal Pakaian Kru</h2>
+        <h2 class="section-title" id="pakaian-section">Jadwal Pakaian Kru</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="card" style="animation-delay: 0.1s;">
                 <h2 class="day-title">Senin</h2>
@@ -837,6 +1010,9 @@
             <p class="mt-4 text-sm text-gray-400">Informasi ini berdasarkan data yang diberikan dan identifikasi nama.</p>
         </div>
     </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top">⬆️</button>
 
     <script>
         // Data lengkap siswa, termasuk nama panggilan/pendek, nama lengkap, jenis kelamin, peran organisasi, URL foto, dan deskripsi pribadi
@@ -988,8 +1164,78 @@
             });
         });
 
-        // Panggil createStars saat jendela dimuat
-        window.onload = createStars;
+        // --- New JS for Fixed Header, Navigation, and Scroll-to-Top ---
+        const fixedHeader = document.getElementById('fixed-header');
+        const menuToggle = document.getElementById('menu-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        const navItems = document.querySelectorAll('#nav-overlay .nav-item');
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        let lastScrollY = 0;
+        let isMenuOpen = false; // Track menu state
+
+        // Function to handle header visibility on scroll
+        function handleScrollHeader() {
+            const currentScrollY = window.scrollY;
+
+            // Hide header when scrolling down, show when scrolling up
+            if (currentScrollY > lastScrollY && currentScrollY > 100) { // Scrolling down and past a certain point
+                fixedHeader.classList.add('hide');
+            } else { // Scrolling up or near top
+                fixedHeader.classList.remove('hide');
+            }
+            lastScrollY = currentScrollY;
+
+            // Show/hide scroll-to-top button
+            if (currentScrollY > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        }
+
+        // Function to toggle navigation overlay
+        function toggleNavOverlay() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                navOverlay.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                navOverlay.classList.remove('show');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+        // Listen for scroll events to show/hide header and scroll-to-top button
+        window.addEventListener('scroll', handleScrollHeader);
+
+        // Toggle menu on button click
+        menuToggle.addEventListener('click', toggleNavOverlay);
+
+        // Close menu and scroll to section when a nav item is clicked
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                const targetId = item.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+                toggleNavOverlay(); // Close the menu after clicking
+            });
+        });
+
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initial call for stars and header visibility on load
+        window.onload = () => {
+            createStars();
+            handleScrollHeader(); // Initial check for scroll-to-top button visibility
+        };
     </script>
 </body>
 </html>
