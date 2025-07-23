@@ -364,6 +364,88 @@
 
 
         /* Bintang Latar Belakang */
+        <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Latar Galaxy Full</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+
+    /* Gambar galaxy */
+    .galaxy {
+      background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.6);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Bintang-bintang */
+    .stars {
+      background: url('https://raw.githubusercontent.com/andikakostradnanda/galaxy-assets/main/stars.png') repeat;
+      animation: starsMove 200s linear infinite;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    /* Komet/bintang jatuh */
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 100px;
+      background: white;
+      opacity: 0.8;
+      transform: rotate(45deg);
+      animation: shoot 6s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes starsMove {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    @keyframes shoot {
+      0% {
+        left: -200px;
+        top: -100px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        left: 110%;
+        top: 100%;
+        opacity: 0;
+      }
+      100% {
+        left: 110%;
+        top: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="galaxy"></div>
+  <div class="stars"></div>
+  <div class="shooting-star"></div>
+</body>
+</html>
         .stars {
             position: fixed; /* Tetap untuk menutupi seluruh viewport */
             top: 0;
@@ -677,7 +759,7 @@
 
         <!-- Bagian Wali Kelas dan Motivasi -->
         <div class="info-box">
-            <h2>Komandan Stasiun
+            <h2>Komandan Stasiun 
                 (Wali Kelas)</h2>
             <p>Drs. Priyo Edy Hariyanto</p>
             <p class="quote">"Di setiap sudut kelas ini, kita membangun masa depan. Kebersihan adalah langkah awal menuju visi yang cemerlang. Mari bersama, jadikan kelas 9H sebagai galaksi inspirasi dan kebersihan!"</p>
@@ -688,7 +770,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div class="org-role-card" style="animation-delay: 0.1s;">
                 <h3>Ketua Kelas</h3>
-                <p class="org-motto">Nahkoda Pesawat Kelas, Pemimpin Misi Utama Akan Berhasil Sampai Akhir Ini🤭.</p>
+                <p class="org-motto">Nahkoda Pesawat Kelas, Pemimpin Misi Utama.</p>
                 <ul>
                     <li data-name="Andika">M. Andika Kostradnanda</li>
                 </ul>
@@ -697,12 +779,13 @@
                     <li>Mengkoordinasi Misi Harian</li>
                     <li>Menyampaikan Aspirasi Awak</li>
                     <li>Memastikan Kesiapan Operasi</li>
-                    <li>Memberikan Info Yang ada Di Kasih</li>
+                    <li>Memberikan Info Yang Dikasih Oleh Guru</li>
+                    <li>Orang Yang Baik Suka Senyum Ramah Tamah</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.2s;">
                 <h3>Wakil Kelas</h3>
-                <p class="org-motto">Bintang Penyeimbang Misi, Koordinator Operasi Harian.</p>
+                <p class="org-motto">Bintang Penyeimbang Misi, Koordinator Operasi Harian. Dengan Adanya Beban "Senyum Aja Kalau Ada Behel Ya" </p>
                 <ul>
                     <li data-name="Belva">Belva Ramania</li>
                 </ul>
@@ -711,12 +794,12 @@
                     <li>Mengatur Jadwal Patroli</li>
                     <li>Menggantikan Nahkoda saat Berhalangan</li>
                     <li>Mendukung Stabilitas Misi</li>
-                    <li>Sedikit Agak Beban Wkm Nya sih😂</li>
+                    <li>Memberikan Semua Beban Km (Canda Lagi )😬</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.3s;">
                 <h3>Bendahara</h3>
-                <p class="org-motto">Penjaga Logistik Kelas, Pengelola Sumber Daya Misi🤑.</p>
+                <p class="org-motto">Penjaga Logistik Antariksa, Pengelola Sumber Daya Misi.</p>
                 <ul>
                     <li data-name="Gendis">Gendis Aulia Maharani Wibowo</li>
                     <li data-name="Zaifa">Siti Zaifa Zhufairah</li>
@@ -726,7 +809,7 @@
                     <li>Mengelola Pengeluaran Logistik</li>
                     <li>Melaporkan Keuangan Misi</li>
                     <li>Merencanakan Anggaran Ekspedisi</li>
-                    <li>Yang Tidak Bayar Kas Harus Di hukum Mati😅 (Canda) </li>
+                    <li>Yang Sering Atau Sekali Tidak Bayar Kas Akan Di Hukum Mati Di tempat (Canda Jangan Marah 🥰😘) </li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.4s;">
@@ -769,12 +852,12 @@
                     <li>Membantu Pencarian Informasi</li>
                     <li>Mempromosikan Literasi Antariksa</li>
                     <li>Merawat Sumber Pengetahuan</li>
-                    <li>Kami Sedia Membantu Mengambilkan Buku (Kalau di paksa Km)😜</li>
+                    <li>Kami Akan Selalu Siap Mengambil Buku Tanpa Di suruh (Bohong Harus Di Marahain Dulu Sama Km Jangan Percaya Ya Adick Adick🥶😎)</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 0.7s;">
                 <h3>Kerohanian</h3>
-                <p class="org-motto">Pembimbing Doa Untuk Murid, Kompas Moral Misi.</p>
+                <p class="org-motto">Pembimbing Doa Untuk Murid , Kompas Moral Misi.</p>
                 <ul>
                     <!-- Siswa yang bertanggung jawab atas kerohanian, ini tetap bisa diklik -->
                     <li data-name="Khayra">Khayra Azkia Haifa</li>
@@ -815,6 +898,7 @@
                     <li>Mempersiapkan Kompetisi Antar Unit</li>
                     <li>Menjaga Kebugaran Mental dan Fisik</li>
                     <li>Mempromosikan Gaya Hidup Sehat</li>
+                    <li>Santai Ada Yang Pro di sini Untuk Menyiksa Badan Kalian😼</li>
                 </ul>
             </div>
             <div class="org-role-card" style="animation-delay: 1.0s;">
@@ -985,13 +1069,13 @@
             <div class="card" style="animation-delay: 0.4s;">
                 <h2 class="day-title">Kamis</h2>
                 <ul class="dress-code-list">
-                    <li>Muslim/Koko</li>
+                    <li>Muslim</li>
                 </ul>
             </div>
             <div class="card" style="animation-delay: 0.5s;">
                 <h2 class="day-title">Jumat</h2>
                 <ul class="dress-code-list">
-                    <li>Pramuka Lengkap</li>
+                    <li>Pramuka</li>
                 </ul>
             </div>
         </div>
@@ -1017,8 +1101,7 @@
     </div>
 
     <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="scroll-to-top">⏫️</button>
-        <button id="scrooll-to-down" class="scroll-to-down">⏬️</button>
+    <button id="scroll-to-top" class="scroll-to-top">⬆️</button>
 
     <script>
         // Data lengkap siswa, termasuk nama panggilan/pendek, nama lengkap, jenis kelamin, peran organisasi, URL foto, dan deskripsi pribadi
@@ -1052,12 +1135,12 @@
             "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara 2", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Bendahara yang handal, mengelola keuangan dengan integritas." },
             "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang berprestasi dan selalu berusaha memberikan yang terbaik." },
             "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan 2", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Penjaga keamanan yang sigap, menciptakan lingkungan yang kondusif." },
-            "Syifa org": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
+            "Syifa Org": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
             "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan 2", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg", description: "Vienard Lucu dan Suka Bikin orang ketawa." },
             "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Petugas keamanan yang bertanggung jawab, memastikan ketertiban." },
-            "Zalfa": { fullName: "ZALFA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh potensi dan semangat belajar." },
-            "Syifa ": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa baru yang siap beradaptasi dan berkontribusi." },
-            "Syifa (Non-Org)": { fullName: "SYIFA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang berdedikasi dalam setiap tugasnya." },
+            "Zalfa": { fullName: "SITI ZALFA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh potensi dan semangat belajar." },
+            "Syifa": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa baru yang siap beradaptasi dan berkontribusi." },
+            "Syifa (Non-Org)": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang berdedikasi dalam setiap tugasnya." },
         };
 
         // Data guru untuk setiap mata pelajaran
@@ -1148,15 +1231,15 @@
         // Hasilkan latar belakang bintang dinamis
         function createStars() {
             const starsContainer = document.getElementById('stars-background');
-            const numStars = 900; // Jumlah bintang
+            const numStars = 100; // Jumlah bintang
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                star.style.width = `${Math.random() * 10 + 5}px`; // Ukuran acak
+                star.style.width = `${Math.random() * 3 + 1}px`; // Ukuran acak
                 star.style.height = star.style.width;
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`; // Penundaan acak untuk efek kerlap-kerlip
+                star.style.animationDelay = `${Math.random() * 5}s`; // Penundaan acak untuk efek kerlap-kerlip
                 starsContainer.appendChild(star);
             }
         }
@@ -1170,13 +1253,12 @@
             });
         });
 
-        // --- New JS for Fixed Header, Navigation, and Scroll-to-Top And Scrool-to-down ---
+        // --- New JS for Fixed Header, Navigation, and Scroll-to-Top ---
         const fixedHeader = document.getElementById('fixed-header');
         const menuToggle = document.getElementById('menu-toggle');
         const navOverlay = document.getElementById('nav-overlay');
         const navItems = document.querySelectorAll('#nav-overlay .nav-item');
         const scrollToTopBtn = document.getElementById('scroll-to-top');
-        const scrollToDownBtn = documen.getElementById('scroll-to-down');
 
         let lastScrollY = 0;
         let isMenuOpen = false; // Track menu state
