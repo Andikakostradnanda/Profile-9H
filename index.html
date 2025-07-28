@@ -1035,7 +1035,7 @@
             "Fazri": { fullName: "FAZRI INDRA NUGRAHA", gender: "Laki-laki", role: "Murid", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg", description: "Murid yang aktif dan bersemangat dalam setiap kegiatan." },
             "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang penuh ide dan kreativitas." },
             "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pengelola keuangan yang cermat, memastikan setiap dana terpakai dengan bijak." },
-            "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Murid yang penuh rasa ingin tahu dan selalu siap belajar hal baru." },
+            "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Murid", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg", description: "Murid yang penuh rasa ingin tahu dan selalu siap belajar hal baru." },
             "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pembimbing spiritual yang membawa ketenangan dan inspirasi." },
             "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Pemimpin yang berwibawa, siap membawa kelas menuju tujuan." },
             "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang rajin dan tekun dalam setiap tugas." },
@@ -1046,7 +1046,7 @@
             "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg", description: "Pramuka sejati yang tangguh dan selalu siap berpetualangan." },
             "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Murid", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Siswa yang cerdas dan memiliki banyak ide." },
             "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Murid", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg", description: "Murid yang antusias dan selalu membawa energi positif." },
-            "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pramuka yang cekatan dan selalu siap untuk misi baru." },
+            "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg", description: "Pramuka yang cekatan dan selalu siap untuk misi baru." },
             "Rika": { fullName: "RIKA RISMAYANTI", gender: "Perempuan", role: "Sekretaris 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Sekretaris yang rapi dan memastikan semua catatan akurat." },
             "Rizky A.R.F": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Penjaga gerbang ilmu, siap memandu ke dunia pengetahuan." },
             "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi 1", photo: "https://placehold.co/120x120/333333/ffffff?text=Not+Found", description: "Pencatat kehadiran yang teliti, memastikan disiplin kru." },
@@ -1088,17 +1088,16 @@
 
         // Fungsi untuk membuka modal
         function openModal(nameKey) {
-            console.log('openModal called for:', nameKey); // Debugging log
             const studentData = studentDetails[nameKey];
 
             if (!studentData) {
-                console.error('Student data not found for:', nameKey); // Debugging error
-                // Fallback for missing student data
+                console.error('Student data not found for:', nameKey);
+                // Fallback untuk data siswa yang hilang
                 modalStudentName.textContent = nameKey;
                 modalFullName.textContent = nameKey;
                 modalGender.textContent = "Tidak diketahui";
                 modalRole.textContent = "Murid";
-                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found"; // Pastikan fallback URL benar
+                profilePhoto.src = "https://placehold.co/120x120/333333/ffffff?text=Not+Found";
                 profileDescription.textContent = "Informasi tambahan belum tersedia.";
             } else {
                 let displayName = nameKey.replace(" (Non-Org)", "").replace(" Pindahan", "").replace(" Org", "").replace(" Baru Pindahan", "");
@@ -1109,23 +1108,26 @@
                 profilePhoto.src = studentData.photo;
                 profileDescription.textContent = studentData.description;
             }
+            
+            // BUG FIX: Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
 
             modal.style.display = 'flex';
             requestAnimationFrame(() => {
                 modal.classList.add('show');
             });
-            console.log('Modal should be visible now.'); // Debugging log
         }
 
         // Fungsi untuk menutup modal
         function closeModal() {
-            console.log('closeModal called.'); // Debugging log
+            // BUG FIX: Restore body scrolling when modal is closed
+            document.body.style.overflow = '';
+
             modal.classList.remove('show');
             modal.addEventListener('transitionend', function handler(event) {
                 if (event.propertyName === 'opacity' && event.target === modal) {
                     modal.style.display = 'none';
                     modal.removeEventListener('transitionend', handler);
-                    console.log('Modal is hidden now.'); // Debugging log
                 }
             }, { once: true });
         }
@@ -1134,7 +1136,6 @@
         document.querySelectorAll('.student-list li, .org-role-card li[data-name]').forEach(item => {
             item.addEventListener('click', () => {
                 const studentNameKey = item.dataset.name;
-                console.log('Clicked on:', studentNameKey); // Debugging log
                 openModal(studentNameKey);
             });
         });
@@ -1252,4 +1253,4 @@
     </script>
 </body>
 </html>
-<script src="script.js"></script>
+
