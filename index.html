@@ -1,85 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Halaman Diblokir</title>
-  <style>
-    :root{--red:#c62828;--dark:#222;--muted:#666}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial; background:#f4f6f8;margin:0;color:var(--dark)}
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px}
-    .card{background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(20,30,40,0.08);max-width:880px;width:100%;overflow:hidden}
-    .band{background:linear-gradient(90deg,var(--red),#ef5350);color:#fff;padding:22px 28px;display:flex;align-items:center;gap:18px}
-    .shield{width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700}
-    .band h1{font-size:20px;margin:0}
-    .band p{margin:0;font-size:13px;opacity:0.95}
-    .body{padding:32px 28px;display:flex;gap:28px}
-    .left{flex:0 0 160px;display:flex;align-items:flex-start;justify-content:center}
-    .iconbig{font-size:56px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 6px 20px rgba(10,20,30,0.06);}
-    .right{flex:1}
-    .title{font-size:22px;margin:0 0 6px}
-    .sim{display:inline-block;background:#fff1f1;color:var(--red);padding:6px 10px;border-radius:999px;font-weight:600;margin-bottom:12px;font-size:13px}
-    .message{color:var(--muted);line-height:1.55}
-    .notice{margin-top:18px;padding:14px;background:#fff9e6;border-left:4px solid #ffd54f;border-radius:8px;color:#6b4d00}
-    .bigmsg{margin-top:18px;background:#fafafa;border:1px solid #eee;padding:18px;border-radius:8px;font-weight:700}
-    .actions{display:flex;gap:12px;margin-top:18px}
-    .btn{padding:10px 14px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
-    .btn--primary{background:var(--red);color:#fff}
-    .btn--ghost{background:transparent;border:1px solid #e6e6e6}
-    .footer{padding:16px 28px;background:#fbfcfd;border-top:1px solid #f0f0f0;color:#8b99a6;font-size:13px}
-    .muted{color:var(--muted)}
-    @media(max-width:680px){.body{flex-direction:column}.left{flex:unset}.band{padding:16px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Diblokir</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ff0000;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: url('https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg') no-repeat top center;
+            background-size: contain;
+            width: 100%;
+            max-width: 600px; /* Sesuaikan dengan lebar gambar asli */
+            height: 100%;
+            max-height: 800px; /* Sesuaikan dengan tinggi gambar asli */
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 2em;
+            margin: 120px 0 10px; /* Jarak atas disesuaikan dengan posisi logo */
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        p {
+            font-size: 0.9em;
+            margin: 5px 0;
+            line-height: 1.4;
+            text-align: left;
+            padding: 0 20px;
+        }
+        .check-link {
+            color: white;
+            text-decoration: underline;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                margin-top: 100px;
+            }
+            p {
+                padding: 0 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- WARNING: Web Telah Di Blokir RESMI DARI KEMENTERIAN -->
-  <div class="wrap">
-    <div class="card" role="document" aria-labelledby="blockedTitle">
-      <div class="band">
-        <div class="shield" aria-hidden="true">🚫</div>
-        <div>
-          <h1 id="blockedTitle">Pemberitahuan Pemblokiran</h1>
-          <p>Halaman ini Telah Melanggar. Karena Ketua Kelas Telah Keluar.</p>
-        </div>
-      </div>
-
-      <div class="body">
-        <div class="left">
-          <div class="iconbig" aria-hidden="true">🔒</div>
-        </div>
-
-        <div class="right">
-          <span class="sim">HALAMAN RESMI DARI PEMERINTAH</span>
-          <h2 class="title">Akses ke situs ini telah diblokir</h2>
-          <p class="message">Berdasarkan mekanisme penyaringan dan kebijakan yang berlaku, akses ke situs yang Anda coba buka telah dihentikan. Informasi di bawah ini adalah bagian dari <strong>KELUAR NYA KETUA KELAS YANG LAMA</strong> DAN AKAN DI GANTIKAN YANG BARU</p>
-
-          <div class="bigmsg">Ketua Kelas Telah Keluar. <br><strong>Anda tidak akan lagi melihat web ini lagi.</strong></div>
-
-          <div class="notice">
-            Catatan: WEB INI TELAH DI gunakan untuk menipu atau mengelabui orang lain.
-          </div>
-
-          <div class="actions" role="toolbar" aria-label="Tindakan">
-            <button class="btn btn--primary" onclick="window.location.href='about:blank'">Kembali ke Aman</button>
-            <button class="btn btn--ghost" onclick="copyText()">Share Ke teman Teman</button>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="muted">dibuat oleh:KOMDIGI <strong> •2025 </strong> — Tujuan: MEMBERANTAS NYA KE TIDAK ADILAN.</div>
-      </div>
+    <div class="container">
+        <h1>SITUS DIBLOKIR<br>WEBSITE BLOCKED</h1>
+        <p>UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK<br>Indonesian Law No. 19 Year 2016 Article 40 (2a) and (2b) regarding Information and Electronic Transaction</p>
+        <p>PERATURAN MENTERI KOMUNIKASI DAN INFORMATIKA NO.5 TAHUN 2020 TENTANG PENGELOLAAN SISTEM ELEKTRONIK LINKUP PRIVAT<br>Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p>
+        <p>MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA<br>YANG MELANGGAR PERATURAN KONTEN NEGATIF DI INDONESIA<br>Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law</p>
+        <a href="#" class="check-link">CHECK DATABASE TRUSTPOSITIF</a>
     </div>
-  </div>
-
-  <script>
-    function copyText(){
-      const text = 'Ketua Kelas Telah Keluar. Anda tidak akan lagi melihat web ini lagi.';
-      if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>alert('Teks disalin ke clipboard'));
-      else { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); alert('Teks disalin ke clipboard'); }
-    }
-  </script>
 </body>
 </html>
