@@ -5,68 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Situs Diblokir</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ff0000;
-            overflow: hidden;
-        }
-        .container {
-            text-align: center;
-            color: white;
+            margin: 0;
             padding: 20px;
-            background: url('https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg') no-repeat top center;
-            background-size: contain;
-            width: 100%;
-            max-width: 600px; /* Sesuaikan dengan lebar gambar asli */
-            height: 100%;
-            max-height: 800px; /* Sesuaikan dengan tinggi gambar asli */
             box-sizing: border-box;
         }
-        h1 {
-            font-size: 2em;
-            margin: 120px 0 10px; /* Jarak atas disesuaikan dengan posisi logo */
-            font-weight: bold;
-            line-height: 1.2;
-        }
-        p {
-            font-size: 0.9em;
-            margin: 5px 0;
-            line-height: 1.4;
-            text-align: left;
-            padding: 0 20px;
-        }
-        .check-link {
+        .container {
+            background-color: #c90000;
             color: white;
-            text-decoration: underline;
-            font-size: 0.9em;
-            margin-top: 10px;
-            display: block;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://placehold.co/1000x1000/000000/FFFFFF?text=INDONESIA');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-            h1 {
-                margin-top: 100px;
-            }
-            p {
-                padding: 0 10px;
-            }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(201, 0, 0, 0.85);
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+        .kominfo-text {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        h1, h2 {
+            margin: 0;
+            font-weight: 700;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .law-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .law-section p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .law-section .title {
+            font-weight: 700;
+        }
+        .main-message {
+            font-size: 18px;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+        .main-message strong {
+            display: block;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        .button-container {
+            margin-top: 30px;
+        }
+        .button-container a {
+            background-color: #0d47a1;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .button-container a:hover {
+            background-color: #0a357a;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SITUS DIBLOKIR<br>WEBSITE BLOCKED</h1>
-        <p>UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK<br>Indonesian Law No. 19 Year 2016 Article 40 (2a) and (2b) regarding Information and Electronic Transaction</p>
-        <p>PERATURAN MENTERI KOMUNIKASI DAN INFORMATIKA NO.5 TAHUN 2020 TENTANG PENGELOLAAN SISTEM ELEKTRONIK LINKUP PRIVAT<br>Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p>
-        <p>MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA<br>YANG MELANGGAR PERATURAN KONTEN NEGATIF DI INDONESIA<br>Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law</p>
-        <a href="#" class="check-link">CHECK DATABASE TRUSTPOSITIF</a>
+
+<div class="container">
+    <div class="content">
+        <div class="logo">
+            <img src="https://i.ibb.co/6P2613S/kominfo-logo.png" alt="Logo Kominfo">
+            <div class="kominfo-text">KOMINFO</div>
+        </div>
+        <h1>SITUS DIBLOKIR</h1>
+        <h2>WEBSITE BLOCKED</h2>
+        
+        <div class="law-section">
+            <p class="title">UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK</p>
+            <p>Indonesian Law No.19 Year 2016 Article 40 (2a) and (2b) regarding Information and Electronic Transaction</p>
+        </div>
+        
+        <div class="law-section">
+            <p class="title">PERATURAN MENTERI KOMUNIKASI DAN INFORMATIKA NO.5 TAHUN 2020 TENTANG PENYELENGGARA SISTEM ELEKTRONIK LINGKUP PRIVAT</p>
+            <p>Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p>
+        </div>
+        
+        <div class="main-message">
+            MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA KARENA MENGANDUNG KONTEN NEGATIF <br><strong>YANG MELANGGAR PERATURAN PERUNDANGAN DI INDONESIA</strong>
+            <br><br>
+            Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law
+        </div>
+        
+        <div class="button-container">
+            <a href="#">CHECK DATABASE TRUSTPOSITIF</a>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
+
