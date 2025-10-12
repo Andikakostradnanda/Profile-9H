@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Situs Kelas 9H</title>
-    <!-- Memuat Tailwind CSS untuk styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Memuat Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -277,7 +275,6 @@
 </head>
 <body>
 
-    <!-- Halaman Pertama: Situs Diblokir -->
     <div id="blocked-page" class="blocked-page-container">
         <div id="blood-particles"></div>
         <div class="flex flex-col items-center text-center p-6 sm:p-8 blocked-page-content">
@@ -319,7 +316,6 @@
         </div>
     </div>
 
-    <!-- Halaman Kedua: Konten Kelas 9H (Awalnya tersembunyi) -->
     <div id="main-page" class="main-page-content">
         <div id="ocean-bg"></div>
         <div id="sea-floor"></div>
@@ -357,11 +353,9 @@
             </div>
     
             <div id="content-wrapper">
-                <!-- Bagian Organisasi -->
                 <section id="organization-section" class="mb-12">
                     <h2 class="section-title" data-observe>Struktur Kru Ekspedisi</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Data Organisasi -->
                         <div class="org-role-card" data-observe><h3>Ketua Kelas</h3><p class="org-motto">Nahkoda yang memimpin pelayaran.</p><ul><li data-name="Andika">M. Andika Kostradnanda</li></ul></div>
                         <div class="org-role-card" data-observe><h3>Wakil Kelas</h3><p class="org-motto">Juru mudi yang menjaga arah.</p><ul><li data-name="Belva">Belva Ramania</li></ul></div>
                         <div class="org-role-card" data-observe><h3>Bendahara</h3><p class="org-motto">Penjaga peti harta karun.</p><ul><li data-name="Gendis">Gendis Aulia M. W.</li><li data-name="Zaifa">Siti Zaifa Zhufairah</li></ul></div>
@@ -370,23 +364,21 @@
                         <div class="org-role-card" data-observe><h3>Seksi Perpustakaan</h3><p class="org-motto">Penjaga peta ilmu.</p><ul><li data-name="Rizky">Rizky Arief</li><li data-name="Vienard">Vienard Caizhi N. I.</li></ul></div>
                         <div class="org-role-card" data-observe><h3>Kerohanian</h3><p class="org-motto">Kompas spiritual samudra.</p><ul><li data-name="Khayra">Khayra Azkia Haifa</li><li data-name="Idham">Muhammad Idham Al-Hafiz</li></ul></div>
                         <div class="org-role-card" data-observe><h3>Kepramukaan</h3><p class="org-motto">Navigator ahli arus & badai.</p><ul><li data-name="Nadia">Nadia Ramadina</li><li data-name="Ricky">Ricky Adly Maulana</li></ul></div>
-                        <div class="org-role-card" data-observe><h3>Olahraga</h3><p class="org-motto">Penjaga stamina awak kapal.</p><ul><li data-name="Syifa Org">Syifa Nurdini H.</li><li data-name="Apri">Apriyanto</li></ul></div>
+                        <div class="org-role-card" data-observe><h3>Olahraga</h3><p class="org-motto">Penjaga stamina awak kapal.</p><ul><li data-name="SyifaNurdini">Syifa Nurdini H.</li><li data-name="Apri">Apriyanto</li></ul></div>
                     </div>
                 </section>
                 
-                <!-- Bagian Piket -->
                 <section id="piket-section" class="mb-12">
                     <h2 class="section-title" data-observe>Patroli Kebersihan</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          <div class="card" data-observe><h2 class="day-title">Senin</h2><ul class="student-list"><li data-name="Azhira">Azhira</li><li data-name="Salma">Salma</li><li data-name="Khayra">Khayra</li><li data-name="Diana">Diana</li><li data-name="Rama">Rama</li><li data-name="Fazri">Fazri</li></ul></div>
                          <div class="card" data-observe><h2 class="day-title">Selasa</h2><ul class="student-list"><li data-name="Suci">Suci</li><li data-name="Gendis">Gendis</li><li data-name="Rika">Rika</li><li data-name="Salsabila">Salsabila</li><li data-name="Idham">Idham</li><li data-name="Andika">Andika</li></ul></div>
-                         <div class="card" data-observe><h2 class="day-title">Rabu</h2><ul class="student-list"><li data-name="Belva">Belva</li><li data-name="Syifa Non-Org">Syifa</li><li data-name="Dinda">Dinda</li><li data-name="Rizky">Rizky</li><li data-name="Apri">Apri</li><li data-name="Nadzar">Nadzhar</li></ul></div>
+                         <div class="card" data-observe><h2 class="day-title">Rabu</h2><ul class="student-list"><li data-name="Belva">Belva</li><li data-name="SyifaAulia">Syifa</li><li data-name="Dinda">Dinda</li><li data-name="Rizky">Rizky</li><li data-name="Apri">Apri</li><li data-name="Nadzar">Nadzhar</li></ul></div>
                          <div class="card" data-observe><h2 class="day-title">Kamis</h2><ul class="student-list"><li data-name="Zalfa">Zalfa</li><li data-name="Geane">Geane</li><li data-name="Aul">Sri Aulia</li><li data-name="Faiq">Faiq</li><li data-name="Adi">Adi</li><li data-name="Yana">Yana</li></ul></div>
-                         <div class="card" data-observe><h2 class="day-title">Jumat</h2><ul class="student-list"><li data-name="Melisa">Melisa</li><li data-name="Nadia">Nadia</li><li data-name="Syifa Aulia">Syifa Aulia</li><li data-name="Kazril">Kazril</li><li data-name="Vienard">Vienard</li><li data-name="M. Rizky">M. Rizky</li></ul></div>
+                         <div class="card" data-observe><h2 class="day-title">Jumat</h2><ul class="student-list"><li data-name="Melisa">Melisa</li><li data-name="Nadia">Nadia</li><li data-name="SyifaAulia">Syifa Aulia</li><li data-name="Kazril">Kazril</li><li data-name="Vienard">Vienard</li><li data-name="M. Rizky">M. Rizky</li></ul></div>
                     </div>
                 </section>
                 
-                <!-- Bagian Pelajaran -->
                 <section id="pelajaran-section" class="mb-12">
                     <h2 class="section-title" data-observe>Peta Pelayaran Ilmu</h2>
                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -398,7 +390,6 @@
                     </div>
                 </section>
                 
-                <!-- Bagian Pakaian -->
                 <section id="pakaian-section" class="mb-12">
                     <h2 class="section-title" data-observe>Seragam Ekspedisi</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -410,7 +401,6 @@
                     </div>
                 </section>
                 
-                <!-- (BARU) Bagian Catatan -->
                 <section id="notes-section" class="mb-12">
                     <h2 class="section-title" data-observe>Catatan Pelayaran</h2>
                     <div class="card notes-card" data-observe>
@@ -429,9 +419,63 @@
                                 <p class="text-sm text-gray-300 mt-1">Versi pertama dari profil kelas 9H diluncurkan dengan fitur jadwal dan struktur organisasi.</p>
                             </li>
                         </ul>
-                        <p class="text-center mt-6 text-sm text-gray-400">BUATAN M.ANDIKA<a href="https://github.com/Andikakostradnanda/Profile-9H" target="_blank" class="text-accent hover:underline">☪ Copyright By Andika™ 2025-2026</a>.</p>
                     </div>
                 </section>
+
+                <section id="interactive-section" class="mb-12">
+                    <h2 class="section-title" data-observe>Interactive Demo</h2>
+                    <div id="canvas-card" class="card relative overflow-hidden p-0 bg-black/30" data-observe style="--glass-bg: rgba(0, 0, 0, 0.3);">
+                        <canvas id="interactive-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+                        <div class="relative z-10 flex min-h-[400px] md:min-h-[450px]">
+                            <div class="w-1/3 md:w-1/4 bg-black/20 p-4 border-r border-gray-500/30 backdrop-blur-sm">
+                                <h3 class="font-bold text-lg text-white mb-6">Atomicals</h3>
+                                <ul class="space-y-2 text-sm text-gray-200">
+                                    <li><a href="#" class="flex items-center gap-3 p-2 rounded transition-colors duration-200 hover:bg-white/10"><span>🏠</span> Home</a></li>
+                                    <li><a href="#" class="flex items-center gap-3 p-2 rounded transition-colors duration-200 hover:bg-white/10"><span>📊</span> Stats</a></li>
+                                    <li><a href="#" class="flex items-center gap-3 p-2 rounded bg-white/10 font-semibold text-white"><span>🤖</span> Auto Farming</a></li>
+                                    <li><a href="#" class="flex items-center gap-3 p-2 rounded transition-colors duration-200 hover:bg-white/10"><span>🔗</span> Webhooks</a></li>
+                                    <li><a href="#" class="flex items-center gap-3 p-2 rounded transition-colors duration-200 hover:bg-white/10"><span>🔒</span> Private Server</a></li>
+                                </ul>
+                            </div>
+                            <div class="w-2/3 md:w-3/4 p-6">
+                                <h3 class="font-bold text-xl text-white mb-8 border-b border-gray-500/30 pb-3">Auto Farming</h3>
+                                <div class="space-y-5 text-sm text-gray-200">
+                                    <div class="flex justify-between items-center">
+                                        <span>Autofarm Settings</span>
+                                        <button class="text-lg p-1 rounded hover:bg-white/10">+</button>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Autofarm Jobs + Trucks</span>
+                                        <button class="text-lg p-1 rounded hover:bg-white/10">▦</button>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Start Autofarm</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                     <div class="flex justify-between items-center">
+                                        <span>Autofarm Config</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                     <div class="flex justify-between items-center">
+                                        <span>Debug Mode</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <p class="text-center mt-6 text-sm text-gray-300">BUATAN M.ANDIKA<a href="https://github.com/Andikakostradnanda/Profile-9H" target="_blank" class="text-accent hover:underline">☪ Copyright By Andika™ 2025-2026</a>.</p>
             </div>
         </main>
     
@@ -450,7 +494,7 @@
         </div>
     
         <button id="scroll-to-top" class="scroll-to-top">
-            <svg xmlns="http://www.w.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </button>
     </div>
 
@@ -487,6 +531,7 @@
                     setTimeout(() => {
                         mainPage.classList.add('show');
                         initializeMainPageEffects();
+                        initializeCanvasAnimation(); // <-- Panggil animasi canvas di sini
                         // Inisialisasi IntersectionObserver setelah elemen muncul
                         const observer = new IntersectionObserver((entries) => {
                             entries.forEach(entry => {
@@ -501,7 +546,7 @@
                 }, 500);
             });
 
-            // Data siswa untuk modal
+            // Data siswa untuk modal (DENGAN PERBAIKAN BUG)
             const studentDetails = {
                 "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru petualang yang siap menjelajah." },
                 "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg", description: "Menjaga kebugaran seluruh kru kapal." },
@@ -525,17 +570,16 @@
                 "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi", photo: "", description: "Pencatat kehadiran yang teliti." },
                 "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian", photo: "", description: "Pembimbing spiritual yang menenangkan." },
                 "Salsabila": { fullName: "SALSABILA NIZMA", gender: "Perempuan", role: "OSIS", photo: "", description: "Kru yang tenang dan fokus." },
-                "Syifa Aulia": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang berdedikasi dalam tugasnya." },
+                "SyifaAulia": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang berdedikasi dalam tugasnya." },
                 "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang kreatif dan penuh ide." },
                 "Zalfa": { fullName: "SITI ZALFA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang penuh potensi." },
                 "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang ceria dan imajinatif." },
                 "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang selalu berusaha memberikan yang terbaik." },
                 "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang rajin dan tekun." },
                 "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg", description: "Pramuka sejati yang selalu siap berpetualang." },
-                "Syifa Aulia": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru baru yang siap berkontribusi." },
                 "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang penuh semangat." },
                 "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang cerdas dan analitis." },
-                "Syifa Nurdini": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga", photo: "", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
+                "SyifaNurdini": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga", photo: "", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
             };
 
             // Logika Modal
@@ -633,8 +677,75 @@
                     floorContainer.appendChild(seaweed);
                 }
             }
+
+            // (BARU) Fungsi untuk animasi canvas
+            function initializeCanvasAnimation() {
+                const canvas = document.getElementById('interactive-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let blobs = [];
+                const blobCount = 4;
+
+                class Blob {
+                    constructor(color) {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.radius = Math.random() * 200 + 150;
+                        this.vx = (Math.random() - 0.5) * 1.5;
+                        this.vy = (Math.random() - 0.5) * 1.5;
+                        this.color = color;
+                    }
+
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        if (this.x > width + this.radius || this.x < -this.radius) this.vx *= -1;
+                        if (this.y > height + this.radius || this.y < -this.radius) this.vy *= -1;
+                    }
+
+                    draw() {
+                        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                        gradient.addColorStop(0, this.color);
+                        gradient.addColorStop(1, `${this.color}00`);
+                        ctx.fillStyle = gradient;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+                
+                function init() {
+                    const parent = canvas.parentElement;
+                    width = canvas.width = parent.offsetWidth;
+                    height = canvas.height = parent.offsetHeight;
+                    blobs = [];
+                    const colors = ['rgba(83, 13, 142, 0.6)', 'rgba(52, 17, 134, 0.6)', 'rgba(21, 15, 80, 0.6)', 'rgba(132, 28, 140, 0.6)'];
+                    for (let i = 0; i < blobCount; i++) {
+                        blobs.push(new Blob(colors[i % colors.length]));
+                    }
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    ctx.filter = 'blur(100px)';
+                    blobs.forEach(blob => {
+                        blob.update();
+                        blob.draw();
+                    });
+                    ctx.filter = 'none';
+                    requestAnimationFrame(animate);
+                }
+
+                init();
+                animate();
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(init, 250);
+                });
+            }
         });
     </script>
 </body>
 </html>
-
