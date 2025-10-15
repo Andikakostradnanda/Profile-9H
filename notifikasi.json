@@ -1,11 +1,6 @@
-<script>
-fetch('notifikasi.json')
-  .then(res => res.json())
-  .then(data => {
-    const lastSeen = localStorage.getItem('lastNotifDate');
-    if (lastSeen !== data.latest.date) {
-      showNotification(data.latest.message);
-      localStorage.setItem('lastNotifDate', data.latest.date);
-    }
-  });
-</script>
+{
+  "title": "Update Baru!",
+  "message": "File baru telah ditambahkan ke website.",
+  "date": "2025-10-15T12:00:00Z",
+  "type": "info"
+}
