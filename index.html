@@ -582,5 +582,19 @@
         });
     </script>
 </body>
+
+</body>
+    <script>
+fetch('notifikasi.json')
+  .then(res => res.json())
+  .then(data => {
+    const lastSeen = localStorage.getItem('lastNotifDate');
+    if (lastSeen !== data.latest.date) {
+      showNotification(data.latest.message);
+      localStorage.setItem('lastNotifDate', data.latest.date);
+    }
+  });
+    </script>
+</body>
 </html>
 
