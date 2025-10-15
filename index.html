@@ -11,26 +11,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset and Global Styles */
+        /* CSS Variables for Theming */
         :root {
-            --text-light: #f0f8ff;
-            --text-dark: #023047;
-            --accent: #ffb703; /* A warm yellow for contrast */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(173, 216, 230, 0.2);
+            --bg-light: #8ecae6;
+            --text-light: #023047;
+            --header-text-light: #f0f8ff;
+            --accent: #ffb703;
+            --glass-bg-light: rgba(255, 255, 255, 0.05);
+            --glass-border-light: rgba(173, 216, 230, 0.2);
+            --menu-icon-light: #023047;
+            --sea-floor-light: linear-gradient(to top, #001219, transparent);
+            --seaweed-light: rgba(2, 48, 71, 0.6);
+            --bubble-bg-light: rgba(255, 255, 255, 0.1);
+            --bubble-border-light: rgba(255, 255, 255, 0.2);
         }
 
-        html {
-            scroll-behavior: smooth;
+        html.dark {
+            --bg-light: #001219;
+            --text-light: #ade8f4;
+            --header-text-light: #ffffff;
+            --accent: #fca311;
+            --glass-bg-light: rgba(2, 22, 33, 0.1);
+            --glass-border-light: rgba(0, 180, 216, 0.2);
+            --menu-icon-light: #ffffff;
+            --sea-floor-light: linear-gradient(to top, #000000, transparent);
+            --seaweed-light: rgba(0, 119, 182, 0.6);
+            --bubble-bg-light: rgba(173, 232, 244, 0.1);
+            --bubble-border-light: rgba(173, 232, 244, 0.2);
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-family: 'Inter', sans-serif;
-            transition: background-color 1.5s ease-out;
+            transition: background-color 1s ease-out, color 1s ease-out;
             overscroll-behavior: none;
             overflow-x: hidden;
+            background-color: var(--bg-light);
+            color: var(--text-light);
         }
 
         /* --- Halaman 1: Situs Diblokir --- */
@@ -48,86 +68,32 @@
             position: relative;
             overflow: hidden;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .blood-particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: bloodFloat 10s linear infinite;
+            position: absolute; background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%; animation: bloodFloat 10s linear infinite;
         }
-
-        @keyframes bloodFloat {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
+        @keyframes bloodFloat { 0% { transform: translateY(100vh) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
         
-        .blocked-page-content {
-            padding-bottom: 4rem;
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .blocked-page-content { padding-bottom: 4rem; animation: slideUp 1s ease-out; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         /* --- Halaman 2: Konten Utama Kelas 9H --- */
-        .main-page-active {
-            font-family: 'Poppins', sans-serif;
-            background-color: #8ecae6; /* Initial sky blue */
-            color: var(--text-dark);
-        }
+        body.main-page-active { font-family: 'Poppins', sans-serif; }
 
-        /* --- Efek Background Laut Realistis --- */
-        #ocean-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden;
-        }
-        .light-ray {
-            position: absolute; top: -20%; left: 50%; width: 4px; height: 140%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent 70%);
-            transform-origin: top center; animation: slow-sway 28s ease-in-out infinite alternate; opacity: 0; transition: opacity 2s ease;
-        }
-        @keyframes slow-sway {
-            from { transform: rotate(-18deg) scale(1); }
-            to { transform: rotate(18deg) scale(1.05); }
-        }
-        .bubble {
-            position: absolute; bottom: -150px; background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; animation: float-up 30s linear infinite;
-        }
-        @keyframes float-up {
-            to { transform: translateY(-130vh) translateX(50px); opacity: 0; }
-        }
-        #sea-floor {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh;
-            z-index: -1; opacity: 0; transform: translateY(100%); transition: opacity 2s ease, transform 2s ease;
-            background: linear-gradient(to top, #001219, transparent);
-        }
-        .seaweed {
-            position: absolute; bottom: -30px; transform-origin: bottom center; animation: gentle-dance 15s ease-in-out infinite alternate;
-        }
-        @keyframes gentle-dance {
-            from { transform: rotate(10deg) scaleY(1); }
-            to { transform: rotate(-10deg) scaleY(1.05); }
-        }
-        .fish {
-            position: fixed; z-index: -1; opacity: 0.7; animation: swim linear infinite;
-        }
-        @keyframes swim {
-            0% { transform: translateX(-150px) rotateY(0deg); }
-            49.99% { transform: rotateY(0deg); }
-            50% { transform: translateX(55vw) rotateY(180deg); }
-            99.99% { transform: rotateY(180deg); }
-            100% { transform: translateX(110vw) rotateY(0deg); }
-        }
-        .coral {
-            position: absolute; bottom: 0; transform-origin: bottom center; animation: gentle-dance 25s ease-in-out infinite alternate;
-        }
+        /* --- Efek Background Laut --- */
+        #ocean-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
+        .bubble { position: absolute; bottom: -150px; background-color: var(--bubble-bg-light); border: 1px solid var(--bubble-border-light); border-radius: 50%; animation: float-up 30s linear infinite; }
+        @keyframes float-up { to { transform: translateY(-130vh) translateX(50px); opacity: 0; } }
+        
+        #sea-floor { position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh; z-index: -1; background: var(--sea-floor-light); }
+        .seaweed { position: absolute; bottom: -30px; transform-origin: bottom center; animation: gentle-dance 15s ease-in-out infinite alternate; }
+        .seaweed path { stroke: var(--seaweed-light) !important; transition: stroke 1s ease-out; }
+        @keyframes gentle-dance { from { transform: rotate(10deg) scaleY(1); } to { transform: rotate(-10deg) scaleY(1.05); } }
+        
+        .fish { position: fixed; z-index: -1; opacity: 0.7; animation: swim linear infinite; }
+        @keyframes swim { 0% { transform: translateX(-150px) rotateY(0deg); } 49.99% { transform: rotateY(0deg); } 50% { transform: translateX(55vw) rotateY(180deg); } 99.99% { transform: rotateY(180deg); } 100% { transform: translateX(110vw) rotateY(0deg); } }
 
         /* --- Styling Komponen UI --- */
         .container { position: relative; z-index: 10; padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
@@ -135,62 +101,50 @@
         .fixed-header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 0.75rem 1.5rem; z-index: 500;
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--glass-border); transition: transform 0.5s ease-out, background-color 1.5s ease;
+            background: var(--glass-bg-light); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--glass-border-light); transition: transform 0.5s ease-out, background-color 1s ease, border-color 1s ease;
         }
         .fixed-header.hide { transform: translateY(-110%); }
         .smp-logo, .class-logo { height: 50px; width: 50px; object-fit: cover; transition: transform 0.5s ease; }
         .smp-logo { border-radius: 0.5rem; }
         .class-logo { border-radius: 50%; border: 2px solid var(--accent); }
         .smp-logo:hover, .class-logo:hover { transform: scale(1.1) rotate(15deg); }
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        .menu-toggle { background: none; border: none; padding: 0.5rem; cursor: pointer; }
-        .menu-toggle svg { stroke: var(--text-dark); transition: stroke 1.5s ease, transform 0.3s ease; }
-        .menu-toggle:hover svg { transform: scale(1.2); }
+        .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+        .menu-toggle, .theme-toggle { background: none; border: none; padding: 0.5rem; cursor: pointer; }
+        .menu-toggle svg, .theme-toggle svg { stroke: var(--menu-icon-light); transition: stroke 1s ease, transform 0.3s ease; }
+        .menu-toggle:hover svg, .theme-toggle:hover svg { transform: scale(1.2); }
 
         .card, .info-box, .org-role-card, .header {
-            background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); color: var(--text-light);
-            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease; opacity: 0; transform: translateY(40px);
+            background: var(--glass-bg-light); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border-light); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); color: var(--header-text-light);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease, background-color 1s ease, border-color 1s ease; 
+            opacity: 0; transform: translateY(40px);
         }
         .card:hover, .info-box:hover, .org-role-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 16px 45px 0 rgba(0, 0, 0, 0.18); }
-        .header { text-align: center; }
         .header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 3.5rem); }
+        .header p { color: var(--text-light); }
 
-        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3rem);
-            text-align: center; margin-bottom: 2.5rem; padding-bottom: 1rem; position: relative;
-        }
-        .section-title::after {
-            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 3px; background-color: var(--accent); border-radius: 2px;
-        }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3rem); text-align: center; margin-bottom: 2.5rem; padding-bottom: 1rem; position: relative; color: var(--header-text-light); }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background-color: var(--accent); border-radius: 2px; }
 
         .day-title, .org-role-card h3, .info-box h2, .notes-card h3 {
-            font-family: 'Playfair Display', serif; font-size: 1.75rem;
-            color: var(--text-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border);
+            font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--header-text-light);
+            margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border-light);
         }
-        .quote, .org-motto { font-style: italic; opacity: 0.9; color: #e0f7fa; }
+        .quote, .org-motto { font-style: italic; color: var(--text-light); opacity: 0.9; }
         
         .student-list, .lesson-list, .dress-code-list, .org-role-card ul, .notes-list { list-style: none; padding: 0; }
-        .student-list li, .lesson-list li, .dress-code-list li, .org-role-card li, .notes-list li {
-            display: flex; align-items: flex-start; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 0.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+        .student-list li, .lesson-list li, .dress-code-list li, .org-role-card li, .notes-list li { display: flex; align-items: flex-start; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 0.5rem; transition: background-color 0.3s ease, transform 0.2s ease; }
         .student-list li[data-name], .org-role-card li[data-name] { cursor: pointer; }
         .student-list li[data-name]:hover, .org-role-card li[data-name]:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateX(5px); }
         li::before { font-size: 1.5rem; line-height: 1; margin-right: 0.75rem; flex-shrink: 0; transition: transform 0.3s ease; }
         li:hover::before { transform: rotate(360deg); }
-        .student-list li::before { content: '🐠'; }
-        .lesson-list li::before { content: '📚'; }
-        .dress-code-list li::before { content: '👕'; }
-        .org-role-card li::before { content: '⭐'; }
-        .notes-list li::before { content: '📝'; }
+        .student-list li::before { content: '🐠'; } .lesson-list li::before { content: '📚'; } .dress-code-list li::before { content: '👕'; } .org-role-card li::before { content: '⭐'; } .notes-list li::before { content: '📝'; }
+        
+        .notes-list { max-height: 350px; overflow-y: auto; padding-right: 1rem; }
         .notes-list .note-date { font-weight: bold; color: var(--accent); margin-right: 1rem; display: block; font-size: 0.9em; }
-        .notes-list .new-badge {
-            background-color: #ff4500; color: white; font-size: 0.7rem; font-weight: bold;
-            padding: 2px 6px; border-radius: 10px; margin-left: 8px; animation: pulse-badge 1.5s infinite;
-        }
+        .notes-list .new-badge { background-color: #ff4500; color: white; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: 8px; animation: pulse-badge 1.5s infinite; }
         @keyframes pulse-badge { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
 
         /* --- Modal --- */
@@ -204,64 +158,45 @@
         .modal-content {
             background: linear-gradient(145deg, #023e8a, #001219); padding: 2.5rem; border-radius: 2rem; width: 90%; max-width: 450px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6); position: relative;
-            border: 1px solid rgba(173, 216, 230, 0.4); color: var(--text-light); overflow: hidden;
+            border: 1px solid rgba(173, 216, 230, 0.4); color: #f0f8ff; overflow: hidden;
         }
         .modal-content h3 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 1.5rem; position: relative; z-index: 5; }
-        .modal-content .profile-section img {
-            width: 120px; height: 120px; border-radius: 1rem; object-fit: cover; object-position: center;
-            border: 3px solid var(--accent); box-shadow: 0 0 25px rgba(255, 183, 3, 0.4);
-        }
-        .close-button {
-            position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
-            color: var(--text-light); font-size: 2.5rem; cursor: pointer; transition: transform 0.3s ease; z-index: 10;
-        }
+        .modal-content .profile-section img { width: 120px; height: 120px; border-radius: 1rem; object-fit: cover; object-position: center; border: 3px solid var(--accent); box-shadow: 0 0 25px rgba(255, 183, 3, 0.4); }
+        .close-button { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; color: #f0f8ff; font-size: 2.5rem; cursor: pointer; transition: transform 0.3s ease; z-index: 10; }
         .close-button:hover { transform: rotate(90deg) scale(1.2); }
 
         /* --- Navigasi & Tombol Scroll --- */
-        .nav-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 18, 25, 0.95); backdrop-filter: blur(18px); z-index: 499;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+        .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 18, 25, 0.95); backdrop-filter: blur(18px); z-index: 499; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
         .nav-overlay.show { opacity: 1; visibility: visible; }
-        .nav-item {
-            font-family: 'Playfair Display', serif; color: var(--text-light); font-size: 2rem;
-            padding: 1rem 0; text-decoration: none; opacity: 0; transform: translateY(20px);
-            transition: color 0.3s ease, transform 0.5s ease, opacity 0.5s ease; position: relative;
-        }
+        .nav-item { font-family: 'Playfair Display', serif; color: #f0f8ff; font-size: 2rem; padding: 1rem 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: color 0.3s ease, transform 0.5s ease, opacity 0.5s ease; position: relative; }
         .nav-overlay.show .nav-item { opacity: 1; transform: translateY(0); }
         .nav-item:hover { color: var(--accent); }
-        .nav-item.new::after {
-            content: 'BARU'; font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: white; background-color: #ff4500;
-            padding: 2px 6px; border-radius: 10px; position: absolute; top: 50%; right: -3rem; transform: translateY(-50%);
-        }
+        .nav-item.new::after { content: 'BARU'; font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: white; background-color: #ff4500; padding: 2px 6px; border-radius: 10px; position: absolute; top: 50%; right: -3rem; transform: translateY(-50%); }
         
         .scroll-to-top {
             position: fixed; bottom: -100px; right: 20px;
-            background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
-            color: var(--text-light); border-radius: 50%; width: 50px; height: 50px;
+            background: var(--glass-bg-light); backdrop-filter: blur(10px); border: 1px solid var(--glass-border-light);
+            color: var(--header-text-light); border-radius: 50%; width: 50px; height: 50px;
             display: flex; justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 400; transition: bottom 0.5s ease, transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 400; transition: bottom 0.5s ease, transform 0.3s ease, background-color 1s ease;
         }
         .scroll-to-top.show { bottom: 20px; }
         .scroll-to-top:hover { transform: scale(1.1) rotate(360deg); }
         
-        /* --- Transisi Halaman --- */
-        .main-page-content {
-            padding-top: 80px;
-            opacity: 0;
-            display: none;
-            transition: opacity 1s ease-in;
-        }
-        .main-page-content.show {
-            opacity: 1;
-            display: block;
-        }
+        /* --- Transisi & Notifikasi --- */
+        .main-page-content { padding-top: 80px; opacity: 0; display: none; transition: opacity 1s ease-in; }
+        .main-page-content.show { opacity: 1; display: block; }
+        .reveal { opacity: 1; transform: translateY(0); }
         
-        .reveal {
-            opacity: 1; transform: translateY(0);
+        .toast-notification {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background-color: #003049; color: #fdf0d5; padding: 1rem 1.5rem;
+            border-radius: 1rem; border: 1px solid #fca311;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 2000;
+            transition: bottom 0.5s ease-in-out;
+            font-family: 'Poppins', sans-serif;
         }
+        .toast-notification.show { bottom: 20px; }
 
         /* --- Responsivitas --- */
         @media (max-width: 768px) {
@@ -281,22 +216,13 @@
     <div id="blocked-page" class="blocked-page-container">
         <div id="blood-particles"></div>
         <div class="flex flex-col items-center text-center p-6 sm:p-8 blocked-page-content">
-
             <div class="mb-8">
-                <img 
-                    src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" 
-                    alt="Logo KOMINFO" 
-                    class="w-24 h-auto sm:w-28"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                >
-                <div class="hidden bg-gray-200 w-24 h-24 sm:w-28 sm:h-28 rounded-md flex items-center justify-center text-black text-xs font-semibold">Logo Gagal Dimuat</div>
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" alt="Logo KOMINFO" class="w-24 h-auto sm:w-28" onerror="this.onerror=null;this.src='https://placehold.co/112x112/ffffff/c51b1b?text=Error';">
             </div>
-
             <div class="mb-10">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase">Situs Diblokir</h1>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-gray-200">Website Blocked</h2>
             </div>
-
             <div class="space-y-8 max-w-4xl mx-auto mb-10 text-left">
                 <div>
                     <p class="font-bold text-base md:text-lg">UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK</p>
@@ -307,31 +233,31 @@
                     <p class="text-sm md:text-base text-gray-300 italic mt-1">Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p>
                 </div>
             </div>
-            
             <div class="max-w-4xl mx-auto mb-12">
                 <p class="font-bold text-lg md:text-xl">MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA KARENA MENGANDUNG KONTEN NEGATIF YANG MELANGGAR PERATURAN PERUNDANGAN DI INDONESIA</p>
                 <p class="text-base md:text-lg text-gray-300 italic mt-2">Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law</p>
             </div>
-
             <button id="access-button" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out">
                 Lanjutkan Akses
             </button>
         </div>
     </div>
 
-    <!-- Halaman Kedua: Konten Kelas 9H (Awalnya tersembunyi) -->
+    <!-- Halaman Kedua: Konten Kelas 9H -->
     <div id="main-page" class="main-page-content">
         <div id="ocean-bg"></div>
         <div id="sea-floor"></div>
     
         <header id="fixed-header" class="fixed-header">
-            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMPN 1 Majalengka" class="smp-logo" onerror="this.src='https://placehold.co/50x50/ffffff/000000?text=SMP'"/>
+            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMPN 1 Majalengka" class="smp-logo" onerror="this.onerror=null;this.src='https://placehold.co/50x50/ffffff/000000?text=SMP'"/>
             <div class="nav-right">
-                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Logo Kelas 9H" class="class-logo" onerror="this.src='https://placehold.co/50x50/ffb703/023047?text=9H'"/>
-                <button id="menu-toggle" class="menu-toggle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Logo Kelas 9H" class="class-logo" onerror="this.onerror=null;this.src='https://placehold.co/50x50/ffb703/023047?text=9H'"/>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg id="theme-icon-sun" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    <svg id="theme-icon-moon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                </button>
+                <button id="menu-toggle" class="menu-toggle" aria-label="Open navigation menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
             </div>
         </header>
@@ -410,25 +336,34 @@
                     </div>
                 </section>
                 
-                <!-- (BARU) Bagian Catatan -->
+                <!-- Bagian Catatan -->
                 <section id="notes-section" class="mb-12">
-                    <h2 class="section-title" data-observe>Catatan Sayang😍⏬️</h2>
+                    <h2 class="section-title" data-observe>Jurnal Kapten 📝</h2>
                     <div class="card notes-card" data-observe>
-                        <h3>Informasi Fake Or Real!</h3>
+                        <h3>Informasi Penting</h3>
                         <ul class="notes-list">
                             <li>
-                                <div><span class="note-date">Terbaru</span> INFORMASI PENTING <span class="new-badge">BARU</span></div>
-                                <p class="text-sm text-gray-300 mt-1">Hari Kamis Pelajaran Sbk Bawa handuk agak besaran "Bekas" Ipa Merangkum Bab 4 Pr Ips Tentang Non Tunai </p>
-                              <li>
+                                <div><span class="note-date">15 Oktober 2025</span> Penambahan Mode Gelap & Notifikasi <span class="new-badge">BARU</span></div>
+                                <p class="text-sm text-gray-300 mt-1">Situs kini dilengkapi mode gelap untuk kenyamanan mata di malam hari. Notifikasi juga ditambahkan untuk info terbaru.</p>
+                            </li>
+                            <li>
+                                <div><span class="note-date">14 Oktober 2025</span> Tugas Kelompok</div>
+                                <p class="text-sm text-gray-300 mt-1">Hari Kamis pelajaran SBK bawa handuk bekas agak besaran. Untuk IPA, merangkum Bab 4. PR IPS tentang pembayaran non-tunai.</p>
+                            </li>
+                            <li>
                                 <div><span class="note-date">07 Oktober 2025</span> Penambahan Bagian Catatan & Perbaikan Bug</div>
                                 <p class="text-sm text-gray-300 mt-1">Situs ini sekarang memiliki bagian catatan untuk pembaruan penting. Berbagai perbaikan visual dan fungsionalitas juga telah diterapkan.</p>
+                            </li>
+                             <li>
+                                <div><span class="note-date">06 Oktober 2025</span> Jadwal Pelajaran Diperbarui</div>
+                                <p class="text-sm text-gray-300 mt-1">Ada sedikit penyesuaian pada jadwal pelajaran hari Selasa dan Rabu. Mohon untuk diperiksa kembali.</p>
                             </li>
                             <li>
                                 <div><span class="note-date">01 Oktober 2025</span> Peluncuran Awal Situs</div>
                                 <p class="text-sm text-gray-300 mt-1">Versi pertama dari profil kelas 9H diluncurkan dengan fitur jadwal dan struktur organisasi.</p>
                             </li>
                         </ul>
-                        <p class="text-center mt-6 text-sm text-gray-400">9H The Best Ketua<a href="https://github.com/Andikakostradnanda/Profile-9H" target="_blank" class="text-accent hover:underline">☪ Copyright By Andika™ 2025-2026</a>.</p>
+                        <p class="text-center mt-6 text-sm text-gray-400">Dibuat dengan ❤️ oleh <a href="https://github.com/Andikakostradnanda/Profile-9H" target="_blank" class="text-accent hover:underline">Andika™</a> | 2025-2026</p>
                     </div>
                 </section>
             </div>
@@ -449,145 +384,46 @@
         </div>
     
         <button id="scroll-to-top" class="scroll-to-top">
-            <svg xmlns="http://www.w.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </button>
+
+        <div id="toast-notification" class="toast-notification"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const blockedPage = document.getElementById('blocked-page');
-            const mainPage = document.getElementById('main-page');
-            const accessButton = document.getElementById('access-button');
-            const bloodParticles = document.getElementById('blood-particles');
-
-            // Halaman 1: Efek partikel
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'blood-particle';
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 10 + 8}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                bloodParticles.appendChild(particle);
-            }
-
-            // Logika untuk transisi ke halaman utama
-            accessButton.addEventListener('click', () => {
-                blockedPage.style.transition = 'opacity 0.5s ease-out';
-                blockedPage.style.opacity = '0';
-                setTimeout(() => {
-                    blockedPage.style.display = 'none';
-                    mainPage.style.display = 'block';
-                    document.body.classList.add('main-page-active');
-                    
-                    // Inisialisasi efek background setelah halaman ditampilkan
-                    setTimeout(() => {
-                        mainPage.classList.add('show');
-                        initializeMainPageEffects();
-                        // Inisialisasi IntersectionObserver setelah elemen muncul
-                        const observer = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    entry.target.classList.add('reveal');
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        }, { threshold: 0.1 });
-                        document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
-                    }, 50);
-                }, 500);
-            });
-
-            // Data siswa untuk modal
-            const studentDetails = {
-                "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru petualang yang siap menjelajah." },
-                "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg", description: "Menjaga kebugaran seluruh kru kapal." },
-                "Azhira": { fullName: "AZHIRA VIENOLIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi", photo: "", description: "Memastikan semua kru hadir dalam setiap pelayaran." },
-                "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Wakil Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg", description: "Juru mudi yang handal, membantu navigasi kapal." },
-                "Diana": { fullName: "DIANA WIDYAWATI RAHAYU", gender: "Perempuan", role: "Sekretaris", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg", description: "Mencatat setiap detail penting dalam jurnal kapten." },
-                "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara", photo: "", description: "Pengelola perbendaharaan ekspedisi." },
-                "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Nahkoda pemberani yang memimpin ekspedisi ini." },
-                "Rika": { fullName: "RIKA RISMAYANTI", gender: "Perempuan", role: "Sekretaris", photo: "", description: "Menyimpan semua arsip dan peta rahasia." },
-                "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara", photo: "", description: "Memastikan logistik misi selalu aman." },
-                "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan", photo: "", description: "Pengawas dek yang waspada dan bertanggung jawab." },
-                "Rizky": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan", photo: "", description: "Penjaga peta dan gulungan ilmu kuno." },
-                "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan", photo: "", description: "Menjaga ketertiban dan keharmonisan di atas kapal." },
-                "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg", description: "Top Three, Orang Yang Lawak Dan Sus." },
-                "Fazri": { fullName: "FAZRI INDRA NUGRAHA", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg", description: "Kru yang aktif dan bersemangat." },
-                "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg", description: "Kompas moral bagi seluruh kru." },
-                "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg", description: "Pemikir yang tenang dan mendalam." },
-                "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg", description: "Selalu ingin tahu dan siap belajar hal baru." },
-                "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg", description: "Pembawa energi positif bagi kru." },
-                "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg", description: "Pramuka tangguh, siap untuk misi apapun." },
-                "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi", photo: "", description: "Pencatat kehadiran yang teliti." },
-                "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian", photo: "", description: "Pembimbing spiritual yang menenangkan." },
-                "Salsabila": { fullName: "SALSABILA NIZMA", gender: "Perempuan", role: "OSIS", photo: "", description: "Kru yang tenang dan fokus." },
-                "Syifa Nurdini": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga", photo: "", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." },
-                "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang kreatif dan penuh ide." },
-                "Zalfa": { fullName: "SITI ZALFA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang penuh potensi." },
-                "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang ceria dan imajinatif." },
-                "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang selalu berusaha memberikan yang terbaik." },
-                "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang rajin dan tekun." },
-                "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg", description: "Pramuka sejati yang selalu siap berpetualang." },
-                "Syifa Aulia": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru baru yang siap berkontribusi." },
-                "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang penuh semangat." },
-                "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang cerdas dan analitis." },                
-            };
-
-            // Logika Modal
-            const modal = document.getElementById('organizationModal');
-            const openModal = (nameKey) => {
-                const data = studentDetails[nameKey] || { fullName: nameKey, gender: "Tidak Diketahui", role: "Kru", photo: "", description: "Seorang kru petualang di samudra ilmu." };
-                document.getElementById('modalStudentName').textContent = data.fullName.split(' ')[0];
-                document.getElementById('profileDescription').textContent = data.description;
-                document.getElementById('modalFullName').textContent = data.fullName;
-                document.getElementById('modalGender').textContent = data.gender;
-                document.getElementById('modalRole').textContent = data.role;
-                const profilePhoto = document.getElementById('profilePhoto');
-                profilePhoto.src = data.photo || `https://placehold.co/120x120/001219/ffffff?text=${nameKey.charAt(0)}`;
-                modal.classList.add('show');
-            };
-            const closeModal = () => modal.classList.remove('show');
-
-            document.querySelectorAll('[data-name]').forEach(item => item.addEventListener('click', () => openModal(item.dataset.name)));
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-            modal.querySelector('.close-button').addEventListener('click', closeModal);
-
-            // Efek Scroll dan Navigasi
-            const fixedHeader = document.getElementById('fixed-header');
-            const scrollToTopBtn = document.getElementById('scroll-to-top');
-            let lastScrollY = window.scrollY;
-
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                if (scrollY > lastScrollY && scrollY > 100) { fixedHeader.classList.add('hide'); } 
-                else { fixedHeader.classList.remove('hide'); }
-                lastScrollY = scrollY;
-                if (scrollY > 400) { scrollToTopBtn.classList.add('show'); } 
-                else { scrollToTopBtn.classList.remove('show'); }
-            }, { passive: true });
-
-            scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-            const menuToggle = document.getElementById('menu-toggle');
-            const navOverlay = document.getElementById('nav-overlay');
-            menuToggle.addEventListener('click', () => navOverlay.classList.toggle('show'));
-            navOverlay.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    navOverlay.classList.remove('show');
-                    const targetElement = document.querySelector(item.getAttribute('href'));
-                    if(targetElement) {
-                        const offsetPosition = targetElement.offsetTop - fixedHeader.offsetHeight - 20;
-                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                    }
-                });
-            });
             
-            // Fungsi untuk inisialisasi semua efek visual dinamis di halaman utama
-            function initializeMainPageEffects() {
+            // --- DATA ---
+            const studentDetails = { "Adi": { fullName: "ADI MUHAMAD FERDIANSYAH", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru petualang yang siap menjelajah." }, "Apri": { fullName: "APRIYANTO", gender: "Laki-laki", role: "Olahraga", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg", description: "Menjaga kebugaran seluruh kru kapal." }, "Azhira": { fullName: "AZHIRA VIENOLIA NAVISHA BILQIS", gender: "Perempuan", role: "Absensi", photo: "", description: "Memastikan semua kru hadir dalam setiap pelayaran." }, "Belva": { fullName: "BELVA RAMANIA", gender: "Perempuan", role: "Wakil Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg", description: "Juru mudi yang handal, membantu navigasi kapal." }, "Diana": { fullName: "DIANA WIDYAWATI RAHAYU", gender: "Perempuan", role: "Sekretaris", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg", description: "Mencatat setiap detail penting dalam jurnal kapten." }, "Gendis": { fullName: "GENDIS AULIA MAHARANI WIBOWO", gender: "Perempuan", role: "Bendahara", photo: "", description: "Pengelola perbendaharaan ekspedisi." }, "Andika": { fullName: "M. ANDIKA KOSTRADNANDA", gender: "Laki-laki", role: "Ketua Kelas", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg", description: "Nahkoda pemberani yang memimpin ekspedisi ini." }, "Rika": { fullName: "RIKA RISMAYANTI", gender: "Perempuan", role: "Sekretaris", photo: "", description: "Menyimpan semua arsip dan peta rahasia." }, "Zaifa": { fullName: "SITI ZAIFA ZHUFAIRAH", gender: "Perempuan", role: "Bendahara", photo: "", description: "Memastikan logistik misi selalu aman." }, "Yana": { fullName: "YANA NURYANA", gender: "Laki-laki", role: "Seksi Keamanan", photo: "", description: "Pengawas dek yang waspada dan bertanggung jawab." }, "Rizky": { fullName: "RIZKY ARIEF FADILLAH", gender: "Laki-laki", role: "Seksi Perpustakaan", photo: "", description: "Penjaga peta dan gulungan ilmu kuno." }, "Suci": { fullName: "SUCI LATIFAH OKTAVIANI", gender: "Perempuan", role: "Seksi Keamanan", photo: "", description: "Menjaga ketertiban dan keharmonisan di atas kapal." }, "Vienard": { fullName: "VIENARD CAIZHI NISAESU IRHAB", gender: "Laki-laki", role: "Seksi Perpustakaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg", description: "Top Three, Orang Yang Lawak Dan Sus." }, "Fazri": { fullName: "FAZRI INDRA NUGRAHA", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg", description: "Kru yang aktif dan bersemangat." }, "Idham": { fullName: "MUHAMMAD IDHAM AL-HAFIDZ", gender: "Laki-laki", role: "Kerohanian", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg", description: "Kompas moral bagi seluruh kru." }, "Faiq": { fullName: "MUHAMMAD AINUR OKTA FAIQ MAULANA", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg", description: "Pemikir yang tenang dan mendalam." }, "Kazril": { fullName: "KAZRIL CAHYARAHIM", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg", description: "Selalu ingin tahu dan siap belajar hal baru." }, "Rama": { fullName: "RAMA KURNIAWAN", gender: "Laki-laki", role: "Kru", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg", description: "Pembawa energi positif bagi kru." }, "Ricky": { fullName: "RICKY ADLY MAULANA", gender: "Laki-laki", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg", description: "Pramuka tangguh, siap untuk misi apapun." }, "Salma": { fullName: "SALMA NURDESTIANI", gender: "Perempuan", role: "Absensi", photo: "", description: "Pencatat kehadiran yang teliti." }, "Khayra": { fullName: "KHAYRA AZDKIA HAIFA", gender: "Perempuan", role: "Kerohanian", photo: "", description: "Pembimbing spiritual yang menenangkan." }, "Salsabila": { fullName: "SALSABILA NIZMA", gender: "Perempuan", role: "OSIS", photo: "", description: "Kru yang tenang dan fokus." }, "Syifa Nurdini": { fullName: "SYIFA NURDINI H.", gender: "Perempuan", role: "Olahraga", photo: "", description: "Pembangkit semangat olahraga, menjaga kebugaran tim." }, "Dinda": { fullName: "DINDA AULIA WINDARIS", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang kreatif dan penuh ide." }, "Zalfa": { fullName: "SITI ZALFA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang penuh potensi." }, "Geane": { fullName: "GEANNE SUKMA ANINDYA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang ceria dan imajinatif." }, "Aul": { fullName: "SRI AULIA NINGSIH", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang selalu berusaha memberikan yang terbaik." }, "Melisa": { fullName: "MELISA RAHMAYANTI ISKANDAR PUTRI", gender: "Perempuan", role: "Kru", photo: "", description: "Kru yang rajin dan tekun." }, "Nadia": { fullName: "NADIA RAMADINA", gender: "Perempuan", role: "Kepramukaan", photo: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg", description: "Pramuka sejati yang selalu siap berpetualang." }, "Syifa Aulia": { fullName: "SYIFA AULIA", gender: "Perempuan", role: "Kru", photo: "", description: "Kru baru yang siap berkontribusi." }, "M. Rizky": { fullName: "MOCHAMMAD RIZKY RAMDHANI", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang penuh semangat." }, "Nadzar": { fullName: "NADZAR FAZRI GUMELAR", gender: "Laki-laki", role: "Kru", photo: "", description: "Kru yang cerdas dan analitis." }};
+
+            // --- FUNCTIONS ---
+
+            // Menampilkan notifikasi toast
+            const showToast = (message) => {
+                const toast = document.getElementById('toast-notification');
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            };
+
+            // Inisialisasi efek partikel di halaman blokir
+            const initBlockedPage = () => {
+                const bloodParticles = document.getElementById('blood-particles');
+                if (bloodParticles.children.length === 0) {
+                    for (let i = 0; i < 30; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'blood-particle';
+                        const size = Math.random() * 5 + 2;
+                        particle.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; animation-duration:${Math.random()*10+8}s; animation-delay:${Math.random()*5}s;`;
+                        bloodParticles.appendChild(particle);
+                    }
+                }
+            };
+
+            // Inisialisasi efek visual dinamis di halaman utama
+            const initMainPageEffects = () => {
                 const bgContainer = document.getElementById('ocean-bg');
                 const floorContainer = document.getElementById('sea-floor');
                 bgContainer.innerHTML = '';
@@ -609,12 +445,7 @@
                     fish.className = 'fish';
                     const size = Math.random() * 40 + 20;
                     const speed = Math.random() * 20 + 15;
-                    fish.style.cssText = `
-                        width: ${size}px; height: ${size * 0.6}px;
-                        top: ${Math.random() * 80 + 10}%;
-                        animation-duration: ${speed}s;
-                        animation-delay: ${Math.random() * 20}s;
-                    `;
+                    fish.style.cssText = `width:${size}px; height:${size*0.6}px; top:${Math.random()*80+10}%; animation-duration:${speed}s; animation-delay:${Math.random()*20}s;`;
                     fish.innerHTML = `<svg viewBox="0 0 100 60"><path d="M99,20 C99,40 70,55 50,55 C30,55 0,40 0,20 C0,0 30,5 50,5 C70,5 99,0 99,20 Z" fill="${fishColors[i%4]}"/><path d="M70,20 L90,5 L90,35 Z" fill="${fishColors[i%4]}"/><circle cx="20" cy="20" r="3" fill="#000"/></svg>`;
                     bgContainer.appendChild(fish);
                 }
@@ -623,14 +454,141 @@
                 for (let i = 0; i < 15; i++) {
                     const seaweed = document.createElement('div');
                     seaweed.className = 'seaweed';
-                    seaweed.style.left = `${Math.random() * 95}%`;
-                    seaweed.style.height = `${Math.random() * 120 + 80}px`;
-                    seaweed.style.width = `${Math.random() * 20 + 30}px`;
-                    seaweed.style.animationDelay = `${Math.random() * 10}s`;
-                    seaweed.innerHTML = `<svg viewBox="0 0 50 150" preserveAspectRatio="none"><path d="M25 150 C ${Math.random()*30+10} 120, ${Math.random()*30+10} 90, 25 60 C ${Math.random()*30+10} 30, ${Math.random()*30+10} 10, 25 0" fill="none" stroke="rgba(2, 48, 71, 0.6)" stroke-width="8" stroke-linecap="round"/></svg>`;
+                    const pathD = `M25 150 C ${Math.random()*30+10} 120, ${Math.random()*30+10} 90, 25 60 C ${Math.random()*30+10} 30, ${Math.random()*30+10} 10, 25 0`;
+                    seaweed.style.cssText = `left:${Math.random()*95}%; height:${Math.random()*120+80}px; width:${Math.random()*20+30}px; animation-delay:${Math.random()*10}s;`;
+                    seaweed.innerHTML = `<svg viewBox="0 0 50 150" preserveAspectRatio="none"><path d="${pathD}" fill="none" stroke="var(--seaweed-light)" stroke-width="8" stroke-linecap="round"/></svg>`;
                     floorContainer.appendChild(seaweed);
                 }
-            }
+            };
+            
+            // Pengaturan transisi halaman
+            const setupPageTransition = () => {
+                const blockedPage = document.getElementById('blocked-page');
+                const mainPage = document.getElementById('main-page');
+                const accessButton = document.getElementById('access-button');
+
+                accessButton.addEventListener('click', () => {
+                    blockedPage.style.transition = 'opacity 0.5s ease-out';
+                    blockedPage.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        blockedPage.style.display = 'none';
+                        mainPage.style.display = 'block';
+                        document.body.classList.add('main-page-active');
+                        
+                        setTimeout(() => {
+                            mainPage.classList.add('show');
+                            initMainPageEffects();
+                            setupObservers();
+                            showToast("Selamat Datang! Ada catatan baru untukmu.");
+                        }, 50);
+                    }, 500);
+                });
+            };
+
+            // Pengaturan Modal
+            const setupModal = () => {
+                const modal = document.getElementById('organizationModal');
+                const openModal = (nameKey) => {
+                    const data = studentDetails[nameKey] || { fullName: nameKey, gender: "Tidak Diketahui", role: "Kru", photo: "", description: "Seorang kru petualang di samudra ilmu." };
+                    document.getElementById('modalStudentName').textContent = data.fullName.split(' ')[0];
+                    document.getElementById('profileDescription').textContent = data.description;
+                    document.getElementById('modalFullName').textContent = data.fullName;
+                    document.getElementById('modalGender').textContent = data.gender;
+                    document.getElementById('modalRole').textContent = data.role;
+                    const profilePhoto = document.getElementById('profilePhoto');
+                    profilePhoto.src = data.photo || `https://placehold.co/120x120/001219/ffffff?text=${nameKey.charAt(0)}`;
+                    profilePhoto.onerror = () => { profilePhoto.src = `https://placehold.co/120x120/001219/ffffff?text=${nameKey.charAt(0)}`; };
+                    modal.classList.add('show');
+                };
+                const closeModal = () => modal.classList.remove('show');
+
+                document.querySelectorAll('[data-name]').forEach(item => item.addEventListener('click', () => openModal(item.dataset.name)));
+                modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+                modal.querySelector('.close-button').addEventListener('click', closeModal);
+            };
+
+            // Pengaturan efek scroll dan navigasi
+            const setupScrollAndNav = () => {
+                const fixedHeader = document.getElementById('fixed-header');
+                const scrollToTopBtn = document.getElementById('scroll-to-top');
+                const menuToggle = document.getElementById('menu-toggle');
+                const navOverlay = document.getElementById('nav-overlay');
+                let lastScrollY = window.scrollY;
+
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    fixedHeader.classList.toggle('hide', scrollY > lastScrollY && scrollY > 100);
+                    lastScrollY = scrollY;
+                    scrollToTopBtn.classList.toggle('show', scrollY > 400);
+                }, { passive: true });
+
+                scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                
+                menuToggle.addEventListener('click', () => navOverlay.classList.toggle('show'));
+                
+                navOverlay.querySelectorAll('.nav-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navOverlay.classList.remove('show');
+                        const targetElement = document.querySelector(item.getAttribute('href'));
+                        if (targetElement) {
+                            const offsetPosition = targetElement.offsetTop - fixedHeader.offsetHeight - 20;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        }
+                    });
+                });
+            };
+
+            // Pengaturan Mode Gelap/Terang
+            const setupTheme = () => {
+                const themeToggle = document.getElementById('theme-toggle');
+                const sunIcon = document.getElementById('theme-icon-sun');
+                const moonIcon = document.getElementById('theme-icon-moon');
+                const htmlEl = document.documentElement;
+
+                const applyTheme = (theme) => {
+                    if (theme === 'dark') {
+                        htmlEl.classList.add('dark');
+                        sunIcon.classList.add('hidden');
+                        moonIcon.classList.remove('hidden');
+                    } else {
+                        htmlEl.classList.remove('dark');
+                        sunIcon.classList.remove('hidden');
+                        moonIcon.classList.add('hidden');
+                    }
+                };
+
+                // Terapkan tema saat halaman dimuat
+                const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                applyTheme(savedTheme);
+
+                themeToggle.addEventListener('click', () => {
+                    const newTheme = htmlEl.classList.contains('dark') ? 'light' : 'dark';
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                });
+            };
+
+            // Pengaturan Intersection Observer untuk animasi reveal
+            const setupObservers = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('reveal');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+            };
+
+            // --- INITIALIZATION ---
+            initBlockedPage();
+            setupPageTransition();
+            setupModal();
+            setupScrollAndNav();
+            setupTheme();
         });
     </script>
 </body>
