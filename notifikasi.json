@@ -1,6 +1,11 @@
-{
-  "latest": {
-    "date": "2025-10-15",
-    "message": "📸 Pemotretan kelas 9 dilanjutkan besok pukul 07.30!"
-  }
-}
+<script>
+fetch('notifikasi.json')
+  .then(res => res.json())
+  .then(data => {
+    const lastSeen = localStorage.getItem('lastNotifDate');
+    if (lastSeen !== data.latest.date) {
+      showNotification(data.latest.message);
+      localStorage.setItem('lastNotifDate', data.latest.date);
+    }
+  });
+</script>
