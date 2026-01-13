@@ -2,16 +2,21 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="content=width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Situs Kelas 9H</title>
+    
     <!-- Memuat Tailwind CSS untuk styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Memuat Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        /* CSS Reset and Global Styles */
+        /* =========================================
+           CSS Reset and Global Styles
+           ========================================= */
         :root {
             /* --- Light Mode Palette (Default Underwater Theme) --- */
             --bg-color: #8ecae6;
@@ -49,28 +54,30 @@
             -moz-osx-font-smoothing: grayscale;
             font-family: var(--font-main);
             background-color: var(--bg-color);
-            color: var(--text-color-light); /* Default text for cards */
+            color: var(--text-color-light);
             transition: background-color 1s ease, color 1s ease;
             overscroll-behavior: none;
             overflow-x: hidden;
         }
 
-        /* --- Halaman 1: Situs Diblokir (Styling tidak berubah) --- */
+        /* --- Halaman 1: Situs Diblokir (Prank Page) --- */
         .blocked-page-container {
             min-height: 100vh; background-color: #c51b1b; color: white; padding: 2rem 1.5rem;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             font-family: 'Inter', sans-serif; animation: fadeIn 1s ease-in-out; position: relative; overflow: hidden;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
         .blood-particle {
             position: absolute; background: rgba(255, 255, 255, 0.2); border-radius: 50%;
             animation: bloodFloat 10s linear infinite;
         }
         @keyframes bloodFloat { 0% { transform: translateY(100vh) scale(0.5); } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        
         .blocked-page-content { padding-bottom: 4rem; animation: slideUp 1s ease-out; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* --- Halaman 2: Efek Background Laut Realistis --- */
+        /* --- Halaman 2: Efek Background Laut --- */
         #ocean-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
         #sea-floor {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh;
@@ -82,6 +89,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; animation: float-up 30s linear infinite;
         }
         @keyframes float-up { to { transform: translateY(-130vh) translateX(50px); opacity: 0; } }
+        
         .fish { position: fixed; z-index: -1; opacity: 0.7; animation: swim linear infinite; }
         @keyframes swim {
             0% { transform: translateX(-150px) rotateY(0deg); } 49.99% { transform: rotateY(0deg); }
@@ -99,15 +107,18 @@
             border-bottom: 1px solid var(--glass-border); transition: transform 0.5s ease, background-color 1s ease, border-color 1s ease;
         }
         .fixed-header.hide { transform: translateY(-110%); }
+        
         .smp-logo, .class-logo { height: 50px; width: 50px; object-fit: cover; transition: transform 0.5s ease; }
         .smp-logo { border-radius: 0.5rem; }
         .class-logo { border-radius: 50%; border: 2px solid var(--accent-color); }
         .smp-logo:hover, .class-logo:hover { transform: scale(1.1) rotate(15deg); }
+        
         .nav-right { display: flex; align-items: center; gap: 1rem; }
         .theme-toggle, .menu-toggle { background: none; border: none; padding: 0.5rem; cursor: pointer; color: var(--text-color-light); }
         .theme-toggle svg, .menu-toggle svg { stroke: var(--text-color-light); transition: stroke 1s ease, transform 0.3s ease; }
         .theme-toggle:hover svg, .menu-toggle:hover svg { transform: scale(1.2); }
 
+        /* Card Styles */
         .card, .info-box, .org-role-card, .header {
             background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
@@ -116,6 +127,7 @@
             opacity: 0; transform: translateY(40px);
         }
         .card:hover, .info-box:hover, .org-role-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 16px 45px 0 var(--card-shadow); }
+        
         .header { text-align: center; }
         .header h1 { font-family: var(--font-display); color: var(--header-text-color); font-size: clamp(2.5rem, 6vw, 3.5rem); }
         .header p { color: var(--text-color-light); }
@@ -135,9 +147,11 @@
             margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border);
             transition: color 1s ease, border-color 1s ease;
         }
+        
         .quote, .org-motto { font-style: italic; opacity: 0.9; color: var(--text-color-light); }
         .info-box p { color: var(--text-color-light); }
         
+        /* Lists */
         .student-list, .lesson-list, .dress-code-list, .org-role-card ul, .notes-list { list-style: none; padding: 0; }
         .student-list li, .lesson-list li, .dress-code-list li, .org-role-card li, .notes-list li {
             display: flex; align-items: flex-start; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 0.5rem;
@@ -146,8 +160,11 @@
         li[data-name]:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateX(5px); cursor: pointer; }
         li::before { font-size: 1.5rem; line-height: 1; margin-right: 0.75rem; flex-shrink: 0; transition: transform 0.3s ease; }
         li:hover::before { transform: rotate(360deg); }
-        .student-list li::before { content: '🐠'; } .lesson-list li::before { content: '📚'; }
-        .dress-code-list li::before { content: '👕'; } .org-role-card li::before { content: '⭐'; }
+        
+        .student-list li::before { content: '🐠'; } 
+        .lesson-list li::before { content: '📚'; }
+        .dress-code-list li::before { content: '👕'; } 
+        .org-role-card li::before { content: '⭐'; }
         .notes-list li::before { content: '📝'; }
         
         /* --- Catatan/Notes Section --- */
@@ -234,20 +251,40 @@
 </head>
 <body data-version="1.1.0">
 
-    <!-- Halaman Pertama: Situs Diblokir -->
+    <!-- =========================================
+         HALAMAN PERTAMA: SITUS DIBLOKIR (PRANK)
+         ========================================= -->
     <div id="blocked-page" class="blocked-page-container">
-        <!-- Konten halaman blokir tidak berubah -->
         <div id="blood-particles"></div>
         <div class="flex flex-col items-center text-center p-6 sm:p-8 blocked-page-content">
-            <div class="mb-8"><img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" alt="Logo KOMINFO" class="w-24 h-auto sm:w-28"></div>
-            <div class="mb-10"><h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase">Situs Diblokir</h1><h2 class="text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-gray-200">Website Blocked</h2></div>
-            <div class="space-y-8 max-w-4xl mx-auto mb-10 text-left"><div><p class="font-bold text-base md:text-lg">UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK</p><p class="text-sm md:text-base text-gray-300 italic mt-1">Indonesian Law No.19 Year 2016 Article 40 (2a) and (2b) regarding Information and Electronic Transaction</p></div><div><p class="font-bold text-base md:text-lg">PERATURAN MENTERI KOMUNIKASI DAN INFORMATIKA NO.5 TAHUN 2020 TENTANG PENYELENGGARA SISTEM ELEKTRONIK LINGKUP PRIVAT</p><p class="text-sm md:text-base text-gray-300 italic mt-1">Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p></div></div>
-            <div class="max-w-4xl mx-auto mb-12"><p class="font-bold text-lg md:text-xl">MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA KARENA MENGANDUNG KONTEN NEGATIF YANG MELANGGAR PERATURAN PERUNDANGAN DI INDONESIA</p><p class="text-base md:text-lg text-gray-300 italic mt-2">Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law</p></div>
+            <div class="mb-8">
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" alt="Logo KOMINFO" class="w-24 h-auto sm:w-28">
+            </div>
+            <div class="mb-10">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase">Situs Diblokir</h1>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-gray-200">Website Blocked</h2>
+            </div>
+            <div class="space-y-8 max-w-4xl mx-auto mb-10 text-left">
+                <div>
+                    <p class="font-bold text-base md:text-lg">UNDANG-UNDANG NOMOR 19 TAHUN 2016 PASAL 40 (2a) dan (2b) TENTANG INFORMASI DAN TRANSAKSI ELEKTRONIK</p>
+                    <p class="text-sm md:text-base text-gray-300 italic mt-1">Indonesian Law No.19 Year 2016 Article 40 (2a) and (2b) regarding Information and Electronic Transaction</p>
+                </div>
+                <div>
+                    <p class="font-bold text-base md:text-lg">PERATURAN MENTERI KOMUNIKASI DAN INFORMATIKA NO.5 TAHUN 2020 TENTANG PENYELENGGARA SISTEM ELEKTRONIK LINGKUP PRIVAT</p>
+                    <p class="text-sm md:text-base text-gray-300 italic mt-1">Regulation of The Minister of Communications and Informatics of The Republic of Indonesia Number 5 of 2020 on Private Electronic System Operators</p>
+                </div>
+            </div>
+            <div class="max-w-4xl mx-auto mb-12">
+                <p class="font-bold text-lg md:text-xl">MAAF, AKSES KE SITUS INI DIBLOKIR OLEH PEMERINTAH INDONESIA KARENA MENGANDUNG KONTEN NEGATIF YANG MELANGGAR PERATURAN PERUNDANGAN DI INDONESIA</p>
+                <p class="text-base md:text-lg text-gray-300 italic mt-2">Sorry, access to this website has been denied by The Government of Indonesia due to negative content as it violates Indonesian Law</p>
+            </div>
             <button id="access-button" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out">Lanjutkan Akses</button>
         </div>
     </div>
 
-    <!-- Halaman Kedua: Konten Kelas 9H -->
+    <!-- =========================================
+         HALAMAN KEDUA: KONTEN KELAS 9H
+         ========================================= -->
     <div id="main-page" class="main-page-content">
         <div id="ocean-bg"></div>
         <div id="sea-floor"></div>
@@ -277,31 +314,247 @@
         <main class="container">
             <header class="header" data-observe>
                 <h1>Murid Kelas 9H</h1>
-                <p>🌊 Menyelami Samudra Pengetahuan 🌊</p>
+                <p>🌊 Kelas 9H The Best To 🌊</p>
             </header>
     
             <div class="info-box" data-observe>
-                <h2>Nakhoda Penunjuk Arah (Wali Kelas)</h2>
+                <h2> Penunjuk Arahan (Wali Kelas)</h2>
                 <p>Drs. Priyo Edy Hariyanto</p>
                 <p class="quote">"Di lautan luas pendidikan, setiap dari kalian adalah permata. Jaga kebersihan dan kejernihan hati, agar kilau kalian tak pernah pudar."</p>
             </div>
     
             <div id="content-wrapper">
-                <!-- Bagian Organisasi, Piket, Pelajaran, Pakaian (Konten tidak berubah) -->
-                <section id="organization-section" class="mb-12"><h2 class="section-title" data-observe>Struktur Kru Ekspedisi</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="org-role-card" data-observe><h3>Ketua Kelas</h3><p class="org-motto">Nahkoda yang memimpin pelayaran.</p><ul><li data-name="Andika">M. Andika Kostradnanda</li></ul></div><div class="org-role-card" data-observe><h3>Wakil Kelas</h3><p class="org-motto">Juru mudi yang menjaga arah.</p><ul><li data-name="Belva">Belva Ramania</li></ul></div><div class="org-role-card" data-observe><h3>Bendahara</h3><p class="org-motto">Penjaga peti harta karun.</p><ul><li data-name="Gendis">Gendis Aulia M. W.</li><li data-name="Zaifa">Siti Zaifa Zhufairah</li></ul></div><div class="org-role-card" data-observe><h3>Sekretaris</h3><p class="org-motto">Pencatat jurnal pelayaran.</p><ul><li data-name="Rika">Rika Rismayanti</li><li data-name="Diana">Diana Widyawati Rahayu</li></ul></div><div class="org-role-card" data-observe><h3>Seksi Keamanan</h3><p class="org-motto">Pengawas dek kapal.</p><ul><li data-name="Yana">Yana Nuryana</li><li data-name="Suci">Suci Latifah Oktaviani</li></ul></div><div class="org-role-card" data-observe><h3>Seksi Perpustakaan</h3><p class="org-motto">Penjaga peta ilmu.</p><ul><li data-name="Rizky">Rizky Arief</li><li data-name="Vienard">Vienard Caizhi N. I.</li></ul></div><div class="org-role-card" data-observe><h3>Kerohanian</h3><p class="org-motto">Kompas spiritual samudra.</p><ul><li data-name="Khayra">Khayra Azkia Haifa</li><li data-name="Idham">Muhammad Idham Al-Hafiz</li></ul></div><div class="org-role-card" data-observe><h3>Kepramukaan</h3><p class="org-motto">Navigator ahli arus & badai.</p><ul><li data-name="Nadia">Nadia Ramadina</li><li data-name="Ricky">Ricky Adly Maulana</li></ul></div><div class="org-role-card" data-observe><h3>Olahraga</h3><p class="org-motto">Penjaga stamina awak kapal.</p><ul><li data-name="Syifa Nurdini">Syifa Nurdini H.</li><li data-name="Apri">Apriyanto</li></ul></div></div></section>
-                <section id="piket-section" class="mb-12"><h2 class="section-title" data-observe>Patroli Kebersihan</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="card" data-observe><h2 class="day-title">Senin</h2><ul class="student-list"><li data-name="Azhira">Azhira</li><li data-name="Salma">Salma</li><li data-name="Khayra">Khayra</li><li data-name="Diana">Diana</li><li data-name="Rama">Rama</li><li data-name="Fazri">Fazri</li></ul></div><div class="card" data-observe><h2 class="day-title">Selasa</h2><ul class="student-list"><li data-name="Suci">Suci</li><li data-name="Gendis">Gendis</li><li data-name="Rika">Rika</li><li data-name="Salsabila">Salsabila</li><li data-name="Idham">Idham</li><li data-name="Andika">Andika</li></ul></div><div class="card" data-observe><h2 class="day-title">Rabu</h2><ul class="student-list"><li data-name="Belva">Belva</li><li data-name="Syifa Nurdini">Syifa Nurdini H</li><li data-name="Dinda">Dinda</li><li data-name="Rizky">Rizky</li><li data-name="Apri">Apri</li><li data-name="Nadzar">Nadzar</li></ul></div><div class="card" data-observe><h2 class="day-title">Kamis</h2><ul class="student-list"><li data-name="Zalfa">Zalfa</li><li data-name="Geane">Geane</li><li data-name="Aul">Sri Aulia</li><li data-name="Faiq">Faiq</li><li data-name="Adi">Adi</li><li data-name="Yana">Yana</li></ul></div><div class="card" data-observe><h2 class="day-title">Jumat</h2><ul class="student-list"><li data-name="Melisa">Melisa</li><li data-name="Nadia">Nadia</li><li data-name="Syifa Aulia">Syifa Aulia</li><li data-name="Kazril">Kazril</li><li data-name="Vienard">Vienard</li><li data-name="M. Rizky">M. Rizky</li></ul></div></div></section>
-                <section id="pelajaran-section" class="mb-12"><h2 class="section-title" data-observe>Peta Pelayaran Ilmu</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="card" data-observe><h2 class="day-title">Senin</h2><ul class="lesson-list"><li>IPA - Hj. Elis Herawati, S.Pd.</li><li>PPKn - Imas Ela N., S.H.</li><li>B. Inggris - Euis Finanjungsari, S.IP</li><li>B. Sunda - Didi Junaedi, S.Pd.</li></ul></div><div class="card" data-observe><h2 class="day-title">Selasa</h2><ul class="lesson-list"><li>BP/BK - Anceu Andriani, S.Pd.</li><li>PAI BP - Eri Laelasari P., S.Pd.I.</li><li>B. Inggris - Euis Finanjungsari, S.IP</li><li>Informatika - Hana Q. A., S.Pd., Gr.</li></ul></div><div class="card" data-observe><h2 class="day-title">Rabu</h2><ul class="lesson-list"><li>Matematika - Nonny S. K., S.Pd.</li><li>PJOK - Drs. Priyo Edy H.</li><li>IPS - Elah Siti Rumailah, S.Pd.</li><li>IPA - Hj. Elis Herawati, S.Pd.</li></ul></div><div class="card" data-observe><h2 class="day-title">Kamis</h2><ul class="lesson-list"><li>SBK - Amsor Adiwirya, S.Pd.</li><li>Matematika - Nonny S. K., S.Pd.</li><li>B. Indo - Amin, S.Pd.</li></ul></div><div class="card" data-observe><h2 class="day-title">Jumat</h2><ul class="lesson-list"><li>IPS - Elah Siti Rumailah, S.Pd.</li><li>B. Indo - Amin, S.Pd.</li></ul></div></div></section>
-                <section id="pakaian-section" class="mb-12"><h2 class="section-title" data-observe>Seragam Ekspedisi</h2><div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"><div class="card" data-observe><h2 class="day-title">Senin</h2><ul class="dress-code-list"><li>Putih Biru</li></ul></div><div class="card" data-observe><h2 class="day-title">Selasa</h2><ul class="dress-code-list"><li>Batik Putih</li></ul></div><div class="card" data-observe><h2 class="day-title">Rabu</h2><ul class="dress-code-list"><li>Batik Biru</li></ul></div><div class="card" data-observe><h2 class="day-title">Kamis</h2><ul class="dress-code-list"><li>Muslim</li></ul></div><div class="card" data-observe><h2 class="day-title">Jumat</h2><ul class="dress-code-list"><li>Pramuka</li></ul></div></div></section>
                 
-                <!-- (BARU) Bagian Catatan -->
+                <!-- BAGIAN 1: ORGANISASI KELAS -->
+                <section id="organization-section" class="mb-12">
+                    <h2 class="section-title" data-observe>Struktur Kru Ekspedisi</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="org-role-card" data-observe>
+                            <h3>Ketua Kelas🔥🔥💥</h3>
+                            <p class="org-motto">Salam Ketuaaaaa🫡.</p>
+                            <ul><li data-name="Andika">M. Andika Kostradnanda</li></ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Wakil Kelas😂</h3>
+                            <p class="org-motto">Juru mudi yang menjaga arah.</p>
+                            <ul><li data-name="Belva">Belva Ramania</li></ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Bendahara☠️</h3>
+                            <p class="org-motto">Penjaga peti harta karun.</p>
+                            <ul>
+                                <li data-name="Gendis">Gendis Aulia M. W.</li>
+                                <li data-name="Zaifa">Siti Zaifa Zhufairah</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Sekretaris😐</h3>
+                            <p class="org-motto">Pencatat jurnal pelayaran.</p>
+                            <ul>
+                                <li data-name="Rika">Rika Rismayanti</li>
+                                <li data-name="Diana">Diana Widyawati Rahayu</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Seksi Keamanan🤨</h3>
+                            <p class="org-motto">Pengawas dek kapal.</p>
+                            <ul>
+                                <li data-name="Yana">Yana Nuryana</li>
+                                <li data-name="Suci">Suci Latifah Oktaviani</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Seksi Perpustakaan😤</h3>
+                            <p class="org-motto">Penjaga peta ilmu.</p>
+                            <ul>
+                                <li data-name="Rizky">Rizky Arief</li>
+                                <li data-name="Vienard">Vienard Caizhi N. I.</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Kerohanian😢</h3>
+                            <p class="org-motto">Kompas spiritual samudra.</p>
+                            <ul>
+                                <li data-name="Khayra">Khayra Azkia Haifa</li>
+                                <li data-name="Idham">Muhammad Idham Al-Hafiz</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Kepramukaan🥱😮‍💨</h3>
+                            <p class="org-motto">Navigator ahli arus & badai.</p>
+                            <ul>
+                                <li data-name="Nadia">Nadia Ramadina</li>
+                                <li data-name="Ricky">Ricky Adly Maulana</li>
+                            </ul>
+                        </div>
+                        <div class="org-role-card" data-observe>
+                            <h3>Olahraga</h3>
+                            <p class="org-motto">Penjaga stamina awak kapal.</p>
+                            <ul>
+                                <li data-name="Syifa Nurdini">Syifa Nurdini H.</li>
+                                <li data-name="Apri">Apriyanto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN 2: JADWAL PIKET -->
+                <section id="piket-section" class="mb-12">
+                    <h2 class="section-title" data-observe>Patroli Kebersihan</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Senin</h2>
+                            <ul class="student-list">
+                                <li data-name="Azhira">Azhira</li>
+                                <li data-name="Salma">Salma</li>
+                                <li data-name="Khayra">Khayra</li>
+                                <li data-name="Diana">Diana</li>
+                                <li data-name="Rama">Rama</li>
+                                <li data-name="Fazri">Fazri</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Selasa</h2>
+                            <ul class="student-list">
+                                <li data-name="Suci">Suci</li>
+                                <li data-name="Gendis">Gendis</li>
+                                <li data-name="Rika">Rika</li>
+                                <li data-name="Salsabila">Salsabila</li>
+                                <li data-name="Idham">Idham</li>
+                                <li data-name="Andika">Andika</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Rabu</h2>
+                            <ul class="student-list">
+                                <li data-name="Belva">Belva</li>
+                                <li data-name="Syifa Nurdini">Syifa Nurdini H</li>
+                                <li data-name="Dinda">Dinda</li>
+                                <li data-name="Rizky">Rizky</li>
+                                <li data-name="Apri">Apri</li>
+                                <li data-name="Nadzar">Nadzar</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Kamis</h2>
+                            <ul class="student-list">
+                                <li data-name="Zalfa">Zalfa</li>
+                                <li data-name="Geane">Geane</li>
+                                <li data-name="Aul">Sri Aulia</li>
+                                <li data-name="Faiq">Faiq</li>
+                                <li data-name="Adi">Adi</li>
+                                <li data-name="Yana">Yana</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Jumat</h2>
+                            <ul class="student-list">
+                                <li data-name="Melisa">Melisa</li>
+                                <li data-name="Nadia">Nadia</li>
+                                <li data-name="Syifa Aulia">Syifa Aulia</li>
+                                <li data-name="Kazril">Kazril</li>
+                                <li data-name="Vienard">Vienard</li>
+                                <li data-name="M. Rizky">M. Rizky</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN 3: JADWAL PELAJARAN (UPDATE BARU 2026👾) -->
+                <section id="pelajaran-section" class="mb-12">
+                    <h2 class="section-title" data-observe>Peta Pelayaran Ilmu</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- SENIN -->
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Senin</h2>
+                            <ul class="lesson-list">
+                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
+                                <li>Bahasa Sunda — Didi Junaedi, S.Pd.</li>
+                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
+                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
+                            </ul>
+                        </div>
+                        <!-- SELASA -->
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Selasa</h2>
+                            <ul class="lesson-list">
+                                <li>PAIBP — Eri Laelasari Purnama, S.Pd.I.</li>
+                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
+                                <li>Bahasa Inggris — Amsor Adiwirya, S.Pd.🤔</li>
+                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                            </ul>
+                        </div>
+                        <!-- RABU -->
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Rabu</h2>
+                            <ul class="lesson-list">
+                                <li>Matematika — Nonny Septiana Kartika, S.Pd.</li>
+                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                                <li>PAIBP — Eri Laelasari Purnama, S.Pd.I.</li>
+                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
+                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
+                            </ul>
+                        </div>
+                        <!-- KAMIS -->
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Kamis</h2>
+                            <ul class="lesson-list">
+                                <li>Matematika — Nonny Septiana Kartika, S.Pd.</li>
+                                <li>Informatika — Didin Akbarul Rosyidin, S.Kom</li>
+                                <li>BP / BK — Anceu Andriani, S.Pd.</li>
+                                <li>IPS — Diah Siti Rumailah, S.Pd.</li>
+                            </ul>
+                        </div>
+                        <!-- JUMAT -->
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Jumat</h2>
+                            <ul class="lesson-list">
+                                <li>PJOK — Drs. Priyo Edy Hariyanto</li>
+                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN 4: JADWAL PAKAIAN -->
+                <section id="pakaian-section" class="mb-12">
+                    <h2 class="section-title" data-observe>Seragam Ekspedisi</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Senin</h2>
+                            <ul class="dress-code-list"><li>Putih Biru</li></ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Selasa</h2>
+                            <ul class="dress-code-list"><li>Batik Putih</li></ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Rabu</h2>
+                            <ul class="dress-code-list"><li>Batik Biru</li></ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Kamis</h2>
+                            <ul class="dress-code-list"><li>Muslim</li></ul>
+                        </div>
+                        <div class="card" data-observe>
+                            <h2 class="day-title">Jumat</h2>
+                            <ul class="dress-code-list"><li>Pramuka</li></ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- BAGIAN 5: CATATAN (NOTES) -->
                 <section id="notes-section" class="mb-12">
                     <h2 class="section-title" data-observe>Catatan Sayang😍⏬️</h2>
                     <div class="card notes-card" data-observe>
-                        <h3>Informasi Fake Or Real!</h3>
+                        <h3>Informasi Fake Or Real! Ketua🫠</h3>
                         <div class="notes-list-container">
                             <ul class="notes-list">
-                                <li>
-                                    <div><span class="note-date">15 Oktober 2025</span> Penambahan Fitur Baru <span class="new-badge">BARU</span></div>
+                                <li> <div><span class="note-date">13 Januari 2026🥳</span>Back To Schol <span class="new-badge">BARU</span></div>
+                                <p> Happy New Year Dan Selamat Kembali Ke Se Kolah Teman Terbaik Ku "Back To Schol" Di Taun Ini Ada Jadwal Baru Ya|Salam Dari Ketuaa🔥|</p>
+                                </li>
+                               <li>
+                                    <div><span class="note-date">15 Oktober 2025</span> Penambahan Fitur Baru</div>
                                     <p>Situs ini sekarang dilengkapi Mode Gelap,perbaikan lainnya agar lebih nyaman digunakan. Coba klik ikon matahari/bulan di pojok kanan atas!</p>
                                 </li>
                                 <li>
@@ -328,6 +581,7 @@
             </div>
         </main>
     
+        <!-- MODAL -->
         <div id="organizationModal" class="modal">
             <div class="modal-content">
                 <button class="close-button">&times;</button>
@@ -347,6 +601,7 @@
         </button>
     </div>
 
+    <!-- JAVASCRIPT UTAMA -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -368,35 +623,11 @@
             const modal = document.getElementById('organizationModal');
 
             // =========================================================================
-            // B. MANAJEMEN PENYIMPANAN (COOKIE & LOCALSTORAGE)
+            // B. MANAJEMEN PENYIMPANAN
             // =========================================================================
-            // Catatan: localStorage lebih modern dan direkomendasikan untuk menyimpan
-            // preferensi tema. Fungsi cookie disertakan untuk referensi.
             const storage = {
                 setItem: (key, value) => localStorage.setItem(key, value),
                 getItem: (key) => localStorage.getItem(key)
-            };
-            
-            // Fungsi Cookie (opsional, jika ingin digunakan)
-            const setCookie = (name, value, days) => {
-                let expires = "";
-                if (days) {
-                    const date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
-                }
-                document.cookie = name + "=" + (value || "") + expires + "; path=/";
-            };
-
-            const getCookie = (name) => {
-                const nameEQ = name + "=";
-                const ca = document.cookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-                }
-                return null;
             };
 
             // =========================================================================
@@ -420,7 +651,7 @@
                 applyTheme(currentTheme);
             };
 
-            // Inisialisasi tema saat halaman dimuat
+            // Inisialisasi tema
             applyTheme(storage.getItem('theme') || 'light');
             
             // =========================================================================
@@ -428,19 +659,14 @@
             // =========================================================================
             const handleNotifications = () => {
                 const lastVersion = storage.getItem('appVersion');
-
                 if (lastVersion !== APP_VERSION) {
-                    // Minta izin notifikasi jika belum diberikan
                     if (Notification.permission === 'default') {
                         Notification.requestPermission().then(permission => {
-                            if (permission === 'granted') {
-                                showUpdateNotification();
-                            }
+                            if (permission === 'granted') showUpdateNotification();
                         });
                     } else if (Notification.permission === 'granted') {
                         showUpdateNotification();
                     }
-                    // Simpan versi baru setelah menampilkan notif
                     storage.setItem('appVersion', APP_VERSION);
                 }
             };
@@ -453,7 +679,7 @@
             };
 
             // =========================================================================
-            // E. INISIALISASI HALAMAN UTAMA & EFEK VISUAL
+            // E. INISIALISASI HALAMAN UTAMA & EFEK
             // =========================================================================
             const initMainPage = () => {
                 blockedPage.style.transition = 'opacity 0.5s ease-out';
@@ -467,7 +693,7 @@
                         mainPage.classList.add('show');
                         initializeMainPageEffects();
                         initIntersectionObserver();
-                        handleNotifications(); // Cek notifikasi setelah halaman utama tampil
+                        handleNotifications(); 
                     }, 50);
                 }, 500);
             };
@@ -522,9 +748,42 @@
             };
             
             // =========================================================================
-            // F. LOGIKA MODAL (DATA SISWA)
+            // F. DATA SISWA & LOGIKA MODAL
             // =========================================================================
-            const studentDetails = { "Adi":{f:"ADI MUHAMAD FERDIANSYAH",g:"L",r:"Kru"},"Apri":{f:"APRIYANTO",g:"L",r:"Olahraga",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg",d:"Menjaga kebugaran seluruh kru kapal."},"Azhira":{f:"AZHIRA VIENOLIA NAVISHA BILQIS",g:"P",r:"Absensi",d:"Memastikan semua kru hadir."}, "Belva":{f:"BELVA RAMANIA",g:"P",r:"Wakil Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg",d:"Juru mudi yang handal."}, "Diana":{f:"DIANA WIDYAWATI RAHAYU",g:"P",r:"Sekretaris",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg",d:"Mencatat setiap detail penting."}, "Gendis":{f:"GENDIS AULIA MAHARANI WIBOWO",g:"P",r:"Bendahara",d:"Pengelola perbendaharaan."}, "Andika":{f:"M. ANDIKA KOSTRADNANDA",g:"L",r:"Ketua Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg",d:"Nahkoda pemberani ekspedisi."}, "Rika":{f:"RIKA RISMAYANTI",g:"P",r:"Sekretaris",d:"Menyimpan semua arsip rahasia."}, "Zaifa":{f:"SITI ZAIFA ZHUFAIRAH",g:"P",r:"Bendahara",d:"Memastikan logistik misi aman."}, "Yana":{f:"YANA NURYANA",g:"L",r:"Keamanan",d:"Pengawas dek yang waspada."}, "Rizky":{f:"RIZKY ARIEF FADILLAH",g:"L",r:"Perpustakaan",d:"Penjaga peta dan ilmu kuno."}, "Suci":{f:"SUCI LATIFAH OKTAVIANI",g:"P",r:"Keamanan",d:"Menjaga keharmonisan kapal."}, "Vienard":{f:"VIENARD CAIZHI NISAESU IRHAB",g:"L",r:"Perpustakaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg",d:"Top Three, Orang Yang Lawak Dan Sus."}, "Fazri":{f:"FAZRI INDRA NUGRAHA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg",d:"Kru yang aktif dan bersemangat."}, "Idham":{f:"MUHAMMAD IDHAM AL-HAFIDZ",g:"L",r:"Kerohanian",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg",d:"Kompas moral bagi seluruh kru."}, "Faiq":{f:"MUHAMMAD AINUR OKTA FAIQ MAULANA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg",d:"Pemikir yang tenang dan mendalam."}, "Kazril":{f:"KAZRIL CAHYARAHIM",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg",d:"Selalu ingin tahu hal baru."}, "Rama":{f:"RAMA KURNIAWAN",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg",d:"Pembawa energi positif."}, "Ricky":{f:"RICKY ADLY MAULANA",g:"L",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg",d:"Pramuka tangguh, siap misi."}, "Salma":{f:"SALMA NURDESTIANI",g:"P",r:"Absensi"}, "Khayra":{f:"KHAYRA AZDKIA HAIFA",g:"P",r:"Kerohanian"}, "Salsabila":{f:"SALSABILA NIZMA",g:"P",r:"OSIS"}, "Syifa Nurdini":{f:"SYIFA NURDINI H.",g:"P",r:"Olahraga"}, "Dinda":{f:"DINDA AULIA WINDARIS",g:"P",r:"Kru"}, "Zalfa":{f:"SITI ZALFA",g:"P",r:"Kru"}, "Geane":{f:"GEANNE SUKMA ANINDYA",g:"P",r:"Kru"}, "Aul":{f:"SRI AULIA NINGSIH",g:"P",r:"Kru"}, "Melisa":{f:"MELISA RAHMAYANTI ISKANDAR PUTRI",g:"P",r:"Kru"}, "Nadia":{f:"NADIA RAMADINA",g:"P",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg",d:"Pramuka sejati petualang."}, "Syifa Aulia":{f:"SYIFA AULIA",g:"P",r:"Kru"}, "M. Rizky":{f:"MOCHAMMAD RIZKY RAMDHANI",g:"L",r:"Kru"}, "Nadzar":{f:"NADZAR FAZRI GUMELAR",g:"L",r:"Kru"} };
+            const studentDetails = { 
+                "Adi":{f:"ADI MUHAMAD FERDIANSYAH",g:"L",r:"Kru"},
+                "Apri":{f:"APRIYANTO",g:"L",r:"Olahraga",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg",d:"Menjaga kebugaran seluruh kru kapal."},
+                "Azhira":{f:"AZHIRA VIENOLIA NAVISHA BILQIS",g:"P",r:"Absensi",d:"Memastikan semua kru hadir."}, 
+                "Belva":{f:"BELVA RAMANIA",g:"P",r:"Wakil Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg",d:"Juru mudi yang handal."}, 
+                "Diana":{f:"DIANA WIDYAWATI RAHAYU",g:"P",r:"Sekretaris",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg",d:"Mencatat setiap detail penting."}, 
+                "Gendis":{f:"GENDIS AULIA MAHARANI WIBOWO",g:"P",r:"Bendahara",d:"Pengelola perbendaharaan."}, 
+                "Andika":{f:"M. ANDIKA KOSTRADNANDA",g:"L",r:"Ketua Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg",d:"Nahkoda pemberani ekspedisi."}, 
+                "Rika":{f:"RIKA RISMAYANTI",g:"P",r:"Sekretaris",d:"Menyimpan semua arsip rahasia."}, 
+                "Zaifa":{f:"SITI ZAIFA ZHUFAIRAH",g:"P",r:"Bendahara",d:"Memastikan logistik misi aman."}, 
+                "Yana":{f:"YANA NURYANA",g:"L",r:"Keamanan",d:"Pengawas dek yang waspada."}, 
+                "Rizky":{f:"RIZKY ARIEF FADILLAH",g:"L",r:"Perpustakaan",d:"Penjaga peta dan ilmu kuno."}, 
+                "Suci":{f:"SUCI LATIFAH OKTAVIANI",g:"P",r:"Keamanan",d:"Menjaga keharmonisan kapal."}, 
+                "Vienard":{f:"VIENARD CAIZHI NISAESU IRHAB",g:"L",r:"Perpustakaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg",d:"Top Three, Orang Yang Lawak Dan Sus."}, 
+                "Fazri":{f:"FAZRI INDRA NUGRAHA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg",d:"Kru yang aktif dan bersemangat."}, 
+                "Idham":{f:"MUHAMMAD IDHAM AL-HAFIDZ",g:"L",r:"Kerohanian",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg",d:"Kompas moral bagi seluruh kru."}, 
+                "Faiq":{f:"MUHAMMAD AINUR OKTA FAIQ MAULANA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg",d:"Pemikir yang tenang dan mendalam."}, 
+                "Kazril":{f:"KAZRIL CAHYARAHIM",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg",d:"Selalu ingin tahu hal baru."}, 
+                "Rama":{f:"RAMA KURNIAWAN",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg",d:"Pembawa energi positif."}, 
+                "Ricky":{f:"RICKY ADLY MAULANA",g:"L",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg",d:"Pramuka tangguh, siap misi."}, 
+                "Salma":{f:"SALMA NURDESTIANI",g:"P",r:"Absensi"}, 
+                "Khayra":{f:"KHAYRA AZDKIA HAIFA",g:"P",r:"Kerohanian"}, 
+                "Salsabila":{f:"SALSABILA NIZMA",g:"P",r:"OSIS"}, 
+                "Syifa Nurdini":{f:"SYIFA NURDINI H.",g:"P",r:"Olahraga"}, 
+                "Dinda":{f:"DINDA AULIA WINDARIS",g:"P",r:"Kru"}, 
+                "Zalfa":{f:"SITI ZALFA",g:"P",r:"Kru"}, 
+                "Geane":{f:"GEANNE SUKMA ANINDYA",g:"P",r:"Kru"}, 
+                "Aul":{f:"SRI AULIA NINGSIH",g:"P",r:"Kru"}, 
+                "Melisa":{f:"MELISA RAHMAYANTI ISKANDAR PUTRI",g:"P",r:"Kru"}, 
+                "Nadia":{f:"NADIA RAMADINA",g:"P",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg",d:"Pramuka sejati petualang."}, 
+                "Syifa Aulia":{f:"SYIFA AULIA",g:"P",r:"Kru"}, 
+                "M. Rizky":{f:"MOCHAMMAD RIZKY RAMDHANI",g:"L",r:"Kru"}, 
+                "Nadzar":{f:"NADZAR FAZRI GUMELAR",g:"L",r:"Kru"} 
+            };
 
             const openModal = (nameKey) => {
                 const data = studentDetails[nameKey];
@@ -575,52 +834,31 @@
             modal.querySelector('.close-button').addEventListener('click', closeModal);
 
             // =========================================================================
-            // H. INISIALISASI AWAL
+            // H. MULAI
             // =========================================================================
             createBloodParticles();
-
         });
     </script>
+    
+    <!-- Script Notifikasi Eksternal -->
     <script>
-  async function getNotif() {
-    try {
-      // Ganti link ini dengan link notifikasi.json kamu sendiri
-      const response = await fetch("https://raw.githubusercontent.com/andika-kostradnanda/website/main/notifikasi.json");
-      const data = await response.json();
-
-      // Buat elemen notifikasi
-      const notifBox = document.createElement("div");
-      notifBox.id = "notif";
-      notifBox.innerHTML = `<strong>${data.title}</strong><br>${data.message}`;
-      notifBox.style.position = "fixed";
-      notifBox.style.top = "20px";
-      notifBox.style.right = "20px";
-      notifBox.style.background = "#333";
-      notifBox.style.color = "#fff";
-      notifBox.style.padding = "15px 20px";
-      notifBox.style.borderRadius = "10px";
-      notifBox.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-      notifBox.style.opacity = "0";
-      notifBox.style.transition = "opacity 0.5s ease";
-      document.body.appendChild(notifBox);
-
-      // Tampilkan notifikasi
-      setTimeout(() => {
-        notifBox.style.opacity = "1";
-      }, 100);
-
-      // Hilang otomatis setelah 5 detik
-      setTimeout(() => {
-        notifBox.style.opacity = "0";
-        setTimeout(() => notifBox.remove(), 500);
-      }, 5000);
-    } catch (error) {
-      console.error("Gagal memuat notifikasi:", error);
-    }
-  }
-
-  // Jalankan pas halaman dibuka
-  getNotif();
+        async function getNotif() {
+            try {
+                const response = await fetch("https://raw.githubusercontent.com/andika-kostradnanda/website/main/notifikasi.json");
+                const data = await response.json();
+                const notifBox = document.createElement("div");
+                notifBox.id = "notif";
+                notifBox.innerHTML = `<strong>${data.title}</strong><br>${data.message}`;
+                notifBox.style.cssText = "position:fixed; top:20px; right:20px; background:#333; color:#fff; padding:15px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.3); opacity:0; transition:opacity 0.5s ease; z-index:9999;";
+                document.body.appendChild(notifBox);
+                setTimeout(() => { notifBox.style.opacity = "1"; }, 100);
+                setTimeout(() => { 
+                    notifBox.style.opacity = "0"; 
+                    setTimeout(() => notifBox.remove(), 500); 
+                }, 5000);
+            } catch (error) { console.error("Gagal memuat notifikasi:", error); }
+        }
+        getNotif();
     </script>
 </body>
 </html>
