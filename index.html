@@ -15,7 +15,7 @@
     
     <style>
         /* =========================================
-           CSS Reset and Global Styles
+           1. CSS Reset and Global Styles
            ========================================= */
         :root {
             /* --- Light Mode Palette (Default Underwater Theme) --- */
@@ -60,7 +60,9 @@
             overflow-x: hidden;
         }
 
-        /* --- Halaman 1: Situs Diblokir (Prank Page) --- */
+        /* =========================================
+           2. Halaman 1: Situs Diblokir (Prank Page)
+           ========================================= */
         .blocked-page-container {
             min-height: 100vh; background-color: #c51b1b; color: white; padding: 2rem 1.5rem;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
@@ -77,7 +79,9 @@
         .blocked-page-content { padding-bottom: 4rem; animation: slideUp 1s ease-out; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* --- Halaman 2: Efek Background Laut --- */
+        /* =========================================
+           3. Halaman 2: Efek Background Laut
+           ========================================= */
         #ocean-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
         #sea-floor {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh;
@@ -97,7 +101,9 @@
             100% { transform: translateX(110vw) rotateY(0deg); }
         }
 
-        /* --- Styling Komponen UI --- */
+        /* =========================================
+           4. Styling Komponen UI (Header, Card, etc)
+           ========================================= */
         .container { position: relative; z-index: 10; padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
         
         .fixed-header {
@@ -167,7 +173,7 @@
         .org-role-card li::before { content: '⭐'; }
         .notes-list li::before { content: '📝'; }
         
-        /* --- Catatan/Notes Section --- */
+        /* Notes Section */
         .notes-list-container { max-height: 400px; overflow-y: auto; padding-right: 1rem; }
         .notes-list .note-date { font-weight: bold; color: var(--accent-color); margin-right: 1rem; display: block; font-size: 0.9em; transition: color 1s ease; }
         .notes-list .new-badge {
@@ -177,7 +183,7 @@
         @keyframes pulse-badge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         .notes-list p { color: var(--text-color-light); transition: color 1s ease; }
 
-        /* --- Modal --- */
+        /* Modal */
         .modal {
             position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(2, 48, 71, 0.7); backdrop-filter: blur(10px);
@@ -202,7 +208,7 @@
         .close-button:hover { transform: rotate(90deg) scale(1.2); }
         .org-detail .text-accent { color: var(--accent-color) !important; transition: color 1s ease; }
 
-        /* --- Navigasi & Tombol Scroll --- */
+        /* Navigasi & Tombol Scroll */
         .nav-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 18, 25, 0.95); backdrop-filter: blur(18px); z-index: 499;
@@ -232,14 +238,14 @@
         .scroll-to-top.show { bottom: 20px; }
         .scroll-to-top:hover { transform: scale(1.1) rotate(360deg); }
         
-        /* --- Transisi Halaman --- */
+        /* Transisi Halaman */
         .main-page-content {
             padding-top: 80px; opacity: 0; display: none; transition: opacity 1s ease-in;
         }
         .main-page-content.show { opacity: 1; display: block; }
         .reveal { opacity: 1; transform: translateY(0); }
 
-        /* --- Responsivitas --- */
+        /* Responsivitas */
         @media (max-width: 768px) {
             .header h1 { font-size: 2rem; } .section-title { font-size: 1.5rem; }
             .modal-content { padding: 1.5rem; } .grid { grid-template-columns: 1fr; }
@@ -460,7 +466,7 @@
                     </div>
                 </section>
 
-                <!-- BAGIAN 3: JADWAL PELAJARAN (UPDATE BARU 2026👾) -->
+                <!-- BAGIAN 3: JADWAL PELAJARAN (TERBARU) -->
                 <section id="pelajaran-section" class="mb-12">
                     <h2 class="section-title" data-observe>Peta Pelayaran Ilmu</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -468,31 +474,30 @@
                         <div class="card" data-observe>
                             <h2 class="day-title">Senin</h2>
                             <ul class="lesson-list">
-                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
                                 <li>Bahasa Sunda — Didi Junaedi, S.Pd.</li>
-                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
-                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
+                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                                <li>PAIBP — Eri Laelasari Purnama, S.Pd.I.</li>
+                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
                             </ul>
                         </div>
                         <!-- SELASA -->
                         <div class="card" data-observe>
                             <h2 class="day-title">Selasa</h2>
                             <ul class="lesson-list">
-                                <li>PAIBP — Eri Laelasari Purnama, S.Pd.I.</li>
-                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
-                                <li>SBK — Amsor Adiwirya, S.Pd.</li>
-                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                                <li>PJOK — Drs. Priyo Edy Hariyanto</li>
+                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
+                                <li>Matematika — Nonny Septiana Kartika, S.Pd.</li>
+                                <li>Seni Budaya — Amsor Adiwirya, S.Pd.</li>
                             </ul>
                         </div>
                         <!-- RABU -->
                         <div class="card" data-observe>
                             <h2 class="day-title">Rabu</h2>
                             <ul class="lesson-list">
-                                <li>Matematika — Nonny Septiana Kartika, S.Pd.</li>
-                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                                <li>IPA — Hj. Elis Herawati, S.Pd.</li>
+                                <li>IPS — Elah Siti Rumailah, S.Pd.</li>
+                                <li>BP / BK — Anceu Andriani, S.Pd.</li>
                                 <li>PAIBP — Eri Laelasari Purnama, S.Pd.I.</li>
-                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
-                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
                             </ul>
                         </div>
                         <!-- KAMIS -->
@@ -500,17 +505,18 @@
                             <h2 class="day-title">Kamis</h2>
                             <ul class="lesson-list">
                                 <li>Matematika — Nonny Septiana Kartika, S.Pd.</li>
+                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
                                 <li>Informatika — Didin Akbarul Rosyidin, S.Kom</li>
-                                <li>BP / BK — Anceu Andriani, S.Pd.</li>
-                                <li>IPS — Elah Siti Rumailah, S.Pd.</li>
+                                <li>Bahasa Indonesia — Amin, S.Pd.</li>
                             </ul>
                         </div>
                         <!-- JUMAT -->
                         <div class="card" data-observe>
                             <h2 class="day-title">Jumat</h2>
                             <ul class="lesson-list">
-                                <li>PJOK — Drs. Priyo Edy Hariyanto</li>
+                                <li>Pendidikan Pancasila — Imas Ela Nurlaela, S.H.</li>
                                 <li>Bahasa Indonesia — Amin, S.Pd.</li>
+                                <li>Bahasa Inggris — Euis Finanjungsari, S.IP</li>
                             </ul>
                         </div>
                     </div>
@@ -550,16 +556,19 @@
                         <h3>Informasi Fake Or Real! Ketua🫠</h3>
                         <div class="notes-list-container">
                             <ul class="notes-list">
-                                <li> <div><span class="note-date">13 Januari 2026🥳</span>Back To Schol <span class="new-badge">BARU</span></div>
-                                <p> Happy New Year Dan Selamat Kembali Ke Se Kolah Teman Terbaik Ku "Back To Schol" Di Taun Ini Ada Jadwal Baru Ya|Salam Dari Ketuaa🔥|</p>
+                                <!-- UPDATE BARU 1 Feb 2026 -->
+                                <li>
+                                    <div><span class="note-date">1 Februari 2026</span> Update Jadwal <span class="new-badge">BARU</span></div>
+                                    <p>Jadwal pelajaran telah diperbarui dengan data terbaru. Silakan cek bagian "Peta Pelayaran Ilmu". Tetap semangat!</p>
                                 </li>
-                               <li>
-                                    <div><span class="note-date">15 Oktober 2025</span> Penambahan Fitur Baru</div>
-                                    <p>Situs ini sekarang dilengkapi Mode Gelap,perbaikan lainnya agar lebih nyaman digunakan. Coba klik ikon matahari/bulan di pojok kanan atas!</p>
+                                <!-- CATATAN LAMA -->
+                                <li> 
+                                    <div><span class="note-date">13 Januari 2026</span> Back To School</div>
+                                    <p> Happy New Year Dan Selamat Kembali Ke Sekolah Teman Terbaik Ku "Back To School". Di Tahun Ini Ada Jadwal Baru Ya | Salam Dari Ketuaa🔥 |</p>
                                 </li>
                                 <li>
-                                    <div><span class="note-date">14 Oktober 2025</span> Tugas Terbaru</div>
-                                    <p>Hari Kamis Pelajaran Sbk Bawa Barang² Yang Telah Di Atur Sama Kelompok Masing² Ipa Merangkum Bab 4 Pr Ips Tentang Non Tunai .</p>
+                                    <div><span class="note-date">15 Oktober 2025</span> Penambahan Fitur Baru</div>
+                                    <p>Situs ini sekarang dilengkapi Mode Gelap, perbaikan lainnya agar lebih nyaman digunakan. Coba klik ikon matahari/bulan di pojok kanan atas!</p>
                                 </li>
                                 <li>
                                     <div><span class="note-date">07 Oktober 2025</span> Penambahan Bagian Catatan & Perbaikan Bug</div>
@@ -568,10 +577,6 @@
                                 <li>
                                     <div><span class="note-date">01 Oktober 2025</span> Peluncuran Awal Situs</div>
                                     <p>Versi pertama dari profil kelas 9H diluncurkan dengan fitur jadwal dan struktur organisasi.</p>
-                                </li>
-                                <li>
-                                    <div><span class="note-date">25 September 2025</span> Perencanaan Situs</div>
-                                    <p>Ide dan konsep awal untuk membuat website profil kelas 9H mulai direncanakan oleh Ketua Kelas.</p>
                                 </li>
                             </ul>
                         </div>
@@ -748,41 +753,209 @@
             };
             
             // =========================================================================
-            // F. DATA SISWA & LOGIKA MODAL
+            // F. DATA SISWA (DIRAPIKAN AGAR MUDAH DIEDIT)
             // =========================================================================
             const studentDetails = { 
-                "Adi":{f:"ADI MUHAMAD FERDIANSYAH",g:"L",r:"Kru"},
-                "Apri":{f:"APRIYANTO",g:"L",r:"Olahraga",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg",d:"Menjaga kebugaran seluruh kru kapal."},
-                "Azhira":{f:"AZHIRA VIENOLIA NAVISHA BILQIS",g:"P",r:"Absensi",d:"Memastikan semua kru hadir."}, 
-                "Belva":{f:"BELVA RAMANIA",g:"P",r:"Wakil Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg",d:"Juru mudi yang handal."}, 
-                "Diana":{f:"DIANA WIDYAWATI RAHAYU",g:"P",r:"Sekretaris",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg",d:"Mencatat setiap detail penting."}, 
-                "Gendis":{f:"GENDIS AULIA MAHARANI WIBOWO",g:"P",r:"Bendahara",d:"Pengelola perbendaharaan."}, 
-                "Andika":{f:"M. ANDIKA KOSTRADNANDA",g:"L",r:"Ketua Kelas",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg",d:"Nahkoda pemberani ekspedisi."}, 
-                "Rika":{f:"RIKA RISMAYANTI",g:"P",r:"Sekretaris",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/805886744907eb0c2aaf10d956bc763cf4ff2cc1/Rika.jpg" ,d:"Menyimpan semua arsip rahasia."}, 
-                "Zaifa":{f:"SITI ZAIFA ZHUFAIRAH",g:"P",r:"Bendahara",d:"Memastikan logistik misi aman."}, 
-                "Yana":{f:"YANA NURYANA",g:"L",r:"Keamanan",d:"Pengawas dek yang waspada."}, 
-                "Rizky":{f:"RIZKY ARIEF FADILLAH",g:"L",r:"Perpustakaan",d:"Penjaga peta dan ilmu kuno."}, 
-                "Suci":{f:"SUCI LATIFAH OKTAVIANI",g:"P",r:"Keamanan",d:"Menjaga keharmonisan kapal."}, 
-                "Vienard":{f:"VIENARD CAIZHI NISAESU IRHAB",g:"L",r:"Perpustakaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg",d:"Top Three, Orang Yang Lawak Dan Sus."}, 
-                "Fazri":{f:"FAZRI INDRA NUGRAHA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg",d:"Kru yang aktif dan bersemangat."}, 
-                "Idham":{f:"MUHAMMAD IDHAM AL-HAFIDZ",g:"L",r:"Kerohanian",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg",d:"Kompas moral bagi seluruh kru."}, 
-                "Faiq":{f:"MUHAMMAD AINUR OKTA FAIQ MAULANA",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg",d:"Pemikir yang tenang dan mendalam."}, 
-                "Kazril":{f:"KAZRIL CAHYARAHIM",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg",d:"Selalu ingin tahu hal baru."}, 
-                "Rama":{f:"RAMA KURNIAWAN",g:"L",r:"Kru",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg",d:"Pembawa energi positif."}, 
-                "Ricky":{f:"RICKY ADLY MAULANA",g:"L",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg",d:"Pramuka tangguh, siap misi."}, 
-                "Salma":{f:"SALMA NURDESTIANI",g:"P",r:"Absensi" ,p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/805886744907eb0c2aaf10d956bc763cf4ff2cc1/Salma.jpg" ,d:"Wejoget." }, 
-                "Khayra":{f:"KHAYRA AZDKIA HAIFA",g:"P",r:"Kerohanian"}, 
-                "Salsabila":{f:"SALSABILA NIZMA",g:"P",r:"OSIS",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Salsabila.jpg" ,d:"Osis Pertama 9H." }, 
-                "Syifa Nurdini":{f:"SYIFA NURDINI H.",g:"P",r:"Olahraga"}, 
-                "Dinda":{f:"DINDA AULIA WINDARIS",g:"P",r:"Kru"}, 
-                "Zalfa":{f:"SITI ZALFA",g:"P",r:"Kru"}, 
-                "Geane":{f:"GEANNE SUKMA ANINDYA",g:"P",r:"Kru"}, 
-                "Aul":{f:"SRI AULIA NINGSIH",g:"P",r:"Kru"}, 
-                "Melisa":{f:"MELISA RAHMAYANTI ISKANDAR PUTRI",g:"P",r:"Kru"}, 
-                "Nadia":{f:"NADIA RAMADINA",g:"P",r:"Kepramukaan",p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg",d:"Pramuka sejati petualang."}, 
-                "Syifa Aulia":{f:"SYIFA AULIA",g:"P",r:"Kru"}, 
-                "M. Rizky":{f:"MOCHAMMAD RIZKY RAMDHANI",g:"L",r:"Kru" ,p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/eac0adab63e4ca93e6585ffa99ea4577e8e01324/Mochi.jpg" ,d:"Haiyaya Yoso."}, 
-                "Nadzar":{f:"NADZAR FAZRI GUMELAR",g:"L",r:"Penikmat Film 15+!!🎬" ,p:"https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/eac0adab63e4ca93e6585ffa99ea4577e8e01324/Nadzar.jpg" ,d:"Jiwa Yang Santai😼."} 
+                "Adi": {
+                    f: "ADI MUHAMAD FERDIANSYAH",
+                    g: "L",
+                    r: "Kru"
+                },
+                "Apri": {
+                    f: "APRIYANTO",
+                    g: "L",
+                    r: "Olahraga",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Apriyanto.jpg",
+                    d: "Menjaga kebugaran seluruh kru kapal."
+                },
+                "Azhira": {
+                    f: "AZHIRA VIENOLIA NAVISHA BILQIS",
+                    g: "P",
+                    r: "Absensi",
+                    d: "Memastikan semua kru hadir."
+                }, 
+                "Belva": {
+                    f: "BELVA RAMANIA",
+                    g: "P",
+                    r: "Wakil Kelas",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Belva.jpg",
+                    d: "Juru mudi yang handal."
+                }, 
+                "Diana": {
+                    f: "DIANA WIDYAWATI RAHAYU",
+                    g: "P",
+                    r: "Sekretaris",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Diana.jpg",
+                    d: "Mencatat setiap detail penting."
+                }, 
+                "Gendis": {
+                    f: "GENDIS AULIA MAHARANI WIBOWO",
+                    g: "P",
+                    r: "Bendahara",
+                    d: "Pengelola perbendaharaan."
+                }, 
+                "Andika": {
+                    f: "M. ANDIKA KOSTRADNANDA",
+                    g: "L",
+                    r: "Ketua Kelas",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/1800ee31bfa1b6184f90cc48847ca20a502f25ab/Andika.jpg",
+                    d: "Nahkoda pemberani ekspedisi."
+                }, 
+                "Rika": {
+                    f: "RIKA RISMAYANTI",
+                    g: "P",
+                    r: "Sekretaris",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/805886744907eb0c2aaf10d956bc763cf4ff2cc1/Rika.jpg",
+                    d: "Menyimpan semua arsip rahasia."
+                }, 
+                "Zaifa": {
+                    f: "SITI ZAIFA ZHUFAIRAH",
+                    g: "P",
+                    r: "Bendahara",
+                    d: "Memastikan logistik misi aman."
+                }, 
+                "Yana": {
+                    f: "YANA NURYANA",
+                    g: "L",
+                    r: "Keamanan",
+                    d: "Pengawas dek yang waspada."
+                }, 
+                "Rizky": {
+                    f: "RIZKY ARIEF FADILLAH",
+                    g: "L",
+                    r: "Perpustakaan",
+                    d: "Penjaga peta dan ilmu kuno."
+                }, 
+                "Suci": {
+                    f: "SUCI LATIFAH OKTAVIANI",
+                    g: "P",
+                    r: "Keamanan",
+                    d: "Menjaga keharmonisan kapal."
+                }, 
+                "Vienard": {
+                    f: "VIENARD CAIZHI NISAESU IRHAB",
+                    g: "L",
+                    r: "Perpustakaan",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Vienard.jpg",
+                    d: "Top Three, Orang Yang Lawak Dan Sus."
+                }, 
+                "Fazri": {
+                    f: "FAZRI INDRA NUGRAHA",
+                    g: "L",
+                    r: "Kru",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Fazri.jpg",
+                    d: "Kru yang aktif dan bersemangat."
+                }, 
+                "Idham": {
+                    f: "MUHAMMAD IDHAM AL-HAFIDZ",
+                    g: "L",
+                    r: "Kerohanian",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/f66c7412d28d8f3cfb50ded7958c379ab8f0389f/Idham.jpg",
+                    d: "Kompas moral bagi seluruh kru."
+                }, 
+                "Faiq": {
+                    f: "MUHAMMAD AINUR OKTA FAIQ MAULANA",
+                    g: "L",
+                    r: "Kru",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/78567f1a47f6991bb37d1b191f1c7fb647f608ff/M.Ainur.jpg",
+                    d: "Pemikir yang tenang dan mendalam."
+                }, 
+                "Kazril": {
+                    f: "KAZRIL CAHYARAHIM",
+                    g: "L",
+                    r: "Kru",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Kazril.jpg",
+                    d: "Selalu ingin tahu hal baru."
+                }, 
+                "Rama": {
+                    f: "RAMA KURNIAWAN",
+                    g: "L",
+                    r: "Kru",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/76b207393ff7f08ced009f36943c4965b27a6f2c/Rama.jpg",
+                    d: "Pembawa energi positif."
+                }, 
+                "Ricky": {
+                    f: "RICKY ADLY MAULANA",
+                    g: "L",
+                    r: "Kepramukaan",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/935818a2dcdc1708098a7c6856febffb094f0016/Ricky.jpg",
+                    d: "Pramuka tangguh, siap misi."
+                }, 
+                "Salma": {
+                    f: "SALMA NURDESTIANI",
+                    g: "P",
+                    r: "Absensi",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/805886744907eb0c2aaf10d956bc763cf4ff2cc1/Salma.jpg",
+                    d: "Wejoget."
+                }, 
+                "Khayra": {
+                    f: "KHAYRA AZDKIA HAIFA",
+                    g: "P",
+                    r: "Kerohanian"
+                }, 
+                "Salsabila": {
+                    f: "SALSABILA NIZMA",
+                    g: "P",
+                    r: "OSIS",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Salsabila.jpg",
+                    d: "Osis Pertama 9H."
+                }, 
+                "Syifa Nurdini": {
+                    f: "SYIFA NURDINI H.",
+                    g: "P",
+                    r: "Olahraga"
+                }, 
+                "Dinda": {
+                    f: "DINDA AULIA WINDARIS",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "Zalfa": {
+                    f: "SITI ZALFA",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "Geane": {
+                    f: "GEANNE SUKMA ANINDYA",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "Aul": {
+                    f: "SRI AULIA NINGSIH",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "Melisa": {
+                    f: "MELISA RAHMAYANTI ISKANDAR PUTRI",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "Nadia": {
+                    f: "NADIA RAMADINA",
+                    g: "P",
+                    r: "Kepramukaan",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/747ee1377d60ee217241d30047c80eab9b574d3c/Nadia.jpg",
+                    d: "Pramuka sejati petualang."
+                }, 
+                "Syifa Aulia": {
+                    f: "SYIFA AULIA",
+                    g: "P",
+                    r: "Kru"
+                }, 
+                "M. Rizky": {
+                    f: "MOCHAMMAD RIZKY RAMDHANI",
+                    g: "L",
+                    r: "Kru",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/eac0adab63e4ca93e6585ffa99ea4577e8e01324/Mochi.jpg",
+                    d: "Haiyaya Yoso."
+                }, 
+                "Nadzar": {
+                    f: "NADZAR FAZRI GUMELAR",
+                    g: "L",
+                    r: "Penikmat Film 15+!!🎬",
+                    p: "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/eac0adab63e4ca93e6585ffa99ea4577e8e01324/Nadzar.jpg",
+                    d: "Jiwa Yang Santai😼."
+                } 
             };
 
             const openModal = (nameKey) => {
