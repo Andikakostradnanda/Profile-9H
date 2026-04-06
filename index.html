@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#023047">
+    <meta name="theme-color" content="#023047" id="meta-theme-color">
+    <meta name="description" content="Portal Kelas 9H Ultimate Edition. Ekspedisi, Jadwal, dan Utilitas Kru.">
     <title>Situs Kelas 9H | Beranda Ultimate</title>
     
     <!-- Tailwind CSS -->
@@ -12,45 +13,46 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@400;500;700;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Poppins:wght@400;500;700;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* =====================================================================
-           1. CORE VARIABLES & THEMES (ULTRA PREMIUM)
+           1. CORE VARIABLES & THEMES (ULTRA PREMIUM APPLE-STYLE GLASS)
            ===================================================================== */
         :root {
-            /* Light Theme (Ocean Breeze) */
-            --bg-color: #caf0f8;
+            --bg-color: #f0f8ff;
             --text-color: #03045e;
             --text-color-light: #023047;
             --header-text-color: #03045e;
             --accent-color: #ffb703;
-            --accent-glow: rgba(255, 183, 3, 0.5);
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-highlight: rgba(255, 255, 255, 0.8);
-            --card-shadow: rgba(3, 4, 94, 0.1);
+            --accent-glow: rgba(255, 183, 3, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-highlight: rgba(255, 255, 255, 0.9);
+            --card-shadow: rgba(3, 4, 94, 0.08);
             --ocean-floor-start: #90e0ef;
+            --danger-color: #ff006e;
+            --success-color: #06d6a0;
             
             --font-main: 'Poppins', sans-serif;
             --font-display: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-ui: 'Inter', sans-serif;
             
             --mouse-x: 50%;
             --mouse-y: 50%;
         }
 
         body.dark-mode {
-            /* Dark Theme (Abyss / Midnight) */
             --bg-color: #000814; 
             --text-color-light: #e0fbfc;
             --header-text-color: #ffffff; 
             --accent-color: #fb8500;
             --accent-glow: rgba(251, 133, 0, 0.6);
-            --glass-bg: rgba(0, 29, 61, 0.3); 
-            --glass-border: rgba(142, 202, 230, 0.15);
+            --glass-bg: rgba(0, 29, 61, 0.4); 
+            --glass-border: rgba(142, 202, 230, 0.2);
             --glass-highlight: rgba(255, 255, 255, 0.1);
-            --card-shadow: rgba(0, 0, 0, 0.6); 
+            --card-shadow: rgba(0, 0, 0, 0.8); 
             --ocean-floor-start: #000000;
         }
 
@@ -62,51 +64,56 @@
         }
 
         /* =====================================================================
-           2. GLOBAL RESETS & SCROLLBAR
+           2. GLOBAL RESETS, A11Y & SCROLLBAR
            ===================================================================== */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-main); background-color: var(--bg-color); color: var(--text-color-light);
-            transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s ease;
+            transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
             overflow-x: hidden; margin: 0; padding: 0;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23fb8500" stroke="%23ffffff" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>') 12 12, auto;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
         }
 
-        a, button, [role="button"], input[type="submit"], li.clickable, .interactive {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ff006e" stroke="%23ffffff" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>') 12 12, pointer !important;
+        /* Accessibility Focus */
+        :focus-visible { outline: 3px solid var(--accent-color); outline-offset: 3px; border-radius: 4px; }
+        
+        /* Reduce Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
         }
 
         ::selection { background-color: var(--accent-color); color: #000; }
         
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff006e; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; border: 2px solid var(--bg-color); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--danger-color); }
 
-        /* Progress Bar Modern */
         #scroll-progress {
             position: fixed; top: 0; left: 0; width: 0%; height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), #ff006e, #3a0ca3);
+            background: linear-gradient(90deg, var(--accent-color), var(--danger-color), #3a0ca3);
             z-index: 10000; transition: width 0.1s ease-out; box-shadow: 0 0 10px var(--accent-glow);
         }
 
         /* =====================================================================
            3. BACKGROUND & AMBIENT EFFECTS
            ===================================================================== */
-        #ocean-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at top, rgba(255,255,255,0.1) 0%, transparent 70%); }
+        #ocean-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at top, rgba(255,255,255,0.05) 0%, transparent 70%); }
         #sea-floor { position: fixed; bottom: 0; left: 0; width: 100%; height: 40vh; z-index: -1; background: linear-gradient(to top, var(--ocean-floor-start), transparent); pointer-events: none; }
-        #particle-canvas, #matrix-canvas { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
-        #matrix-canvas { z-index: -3; opacity: 0; transition: opacity 1s; }
+        #matrix-canvas { position: fixed; inset: 0; z-index: -3; pointer-events: none; opacity: 0; transition: opacity 1s; }
         body.matrix-mode #matrix-canvas { opacity: 0.8; }
 
-        /* Mouse Ambient Glow for Cards */
+        /* Mouse Ambient Glow */
         .ambient-glow {
-            position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; pointer-events: none;
-            background: radial-gradient(circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15), transparent 80%);
+            position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; pointer-events: none;
+            background: radial-gradient(circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2), transparent 70%);
             z-index: 0;
         }
         .glass-card:hover .ambient-glow { opacity: 1; }
+
+        /* Offline Banner */
+        #offline-banner { display: none; background: var(--danger-color); color: white; text-align: center; padding: 5px; font-size: 0.8rem; font-weight: bold; position: fixed; top: 0; width: 100%; z-index: 99999; }
 
         /* =====================================================================
            4. BLOCKED PAGE (SMOOTH BYPASS)
@@ -114,11 +121,9 @@
         .blocked-page-container {
             min-height: 100vh; background: radial-gradient(circle at center, #780000 0%, #03071e 100%); color: white; 
             padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: fixed; inset: 0; z-index: 99999;
+            position: fixed; inset: 0; z-index: 99998;
             transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
         }
-        .blocked-content { animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         /* =====================================================================
            5. HEADER & NAVIGATION
@@ -135,176 +140,215 @@
         .fixed-header.hide { transform: translateY(-100%); }
         
         .magnetic-btn { transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
-        .logo-img { height: 50px; width: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--glass-border); transition: all 0.5s; }
+        .logo-img { height: 50px; width: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--glass-border); transition: all 0.5s; cursor: pointer; }
         .logo-img:hover { transform: scale(1.1) rotate(15deg); border-color: var(--accent-color); box-shadow: 0 0 20px var(--accent-glow); }
         
-        .live-clock-container { background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 30px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
+        .live-clock-container { background: rgba(0,0,0,0.1); padding: 5px 15px; border-radius: 30px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: flex-end;}
         .live-clock { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--accent-color); letter-spacing: 1px; }
-        .live-greeting { font-size: 0.7rem; color: var(--text-color-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; text-align: right; }
+        .live-greeting { font-size: 0.65rem; color: var(--text-color-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 800; font-family: var(--font-ui);}
         
-        .icon-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 0.6rem; color: var(--text-color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .icon-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); padding: 0.6rem; color: var(--text-color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;}
         .icon-btn::before { content:''; position:absolute; inset:0; background: var(--accent-color); transform: scale(0); border-radius: 50%; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: -1; }
         .icon-btn:hover::before { transform: scale(1); }
         .icon-btn:hover svg { stroke: #000; transform: scale(1.1); }
         .icon-btn svg { stroke: var(--text-color-light); width: 22px; height: 22px; transition: all 0.3s; z-index: 1; }
 
-        /* Tooltip */
+        /* Tooltip Premium */
         [data-tooltip] { position: relative; }
         [data-tooltip]::after {
-            content: attr(data-tooltip); position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%) translateY(10px) scale(0.9);
-            background: var(--text-color); color: var(--bg-color); padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+            content: attr(data-tooltip); position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%) translateY(10px) scale(0.9);
+            background: var(--text-color); color: var(--bg-color); padding: 8px 14px; border-radius: 10px; font-size: 0.75rem; font-family: var(--font-ui); font-weight: 700;
             white-space: nowrap; z-index: 1000; pointer-events: none; opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
         }
-        [data-tooltip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+        [data-tooltip]:hover::after, [data-tooltip]:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 
         /* =====================================================================
            6. GLASS CARDS & LISTS
            ===================================================================== */
         .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px);
+            background: var(--glass-bg); backdrop-filter: blur(25px) saturate(120%); -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight);
-            border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: 0 8px 32px 0 var(--card-shadow); color: var(--text-color-light);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s, border-color 0.4s;
+            border-radius: 1.5rem; padding: 1.8rem; margin-bottom: 1.5rem;
+            box-shadow: 0 10px 40px var(--card-shadow); color: var(--text-color-light);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s, border-color 0.5s;
             position: relative; overflow: hidden; opacity: 0; transform: translateY(30px);
+            transform-style: preserve-3d;
         }
-        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--card-shadow); border-color: var(--accent-glow); z-index: 20; }
+        .glass-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 25px 50px var(--card-shadow); border-color: var(--accent-glow); z-index: 20; }
         
-        .today-highlight { border: 2px solid var(--accent-color) !important; background: linear-gradient(135deg, rgba(255, 183, 3, 0.1), transparent); box-shadow: 0 0 20px var(--accent-glow); }
+        .today-highlight { border: 2px solid var(--accent-color) !important; background: linear-gradient(135deg, rgba(255, 183, 3, 0.05), transparent); box-shadow: 0 0 25px var(--accent-glow); }
 
         .section-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 2.5rem; padding-bottom: 1rem; position: relative; color: var(--header-text-color); }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, var(--accent-color), #ff006e); border-radius: 4px; transition: width 0.4s; }
-        .section-title:hover::after { width: 160px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 5px; background: linear-gradient(90deg, var(--accent-color), var(--danger-color)); border-radius: 5px; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .section-title:hover::after { width: 150px; }
 
-        .card-title, .day-title { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;}
+        .card-title, .day-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;}
         
-        .smart-list { list-style: none; padding: 0; position: relative; z-index: 1; }
+        .smart-list { list-style: none; padding: 0; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.4rem; }
         .smart-list li {
-            display: flex; align-items: center; padding: 0.8rem 1rem; margin-bottom: 0.5rem; border-radius: 0.75rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: rgba(0,0,0,0.05); border: 1px solid transparent;
-            font-weight: 500;
+            display: flex; flex-direction: column; padding: 0.8rem 1rem; border-radius: 0.8rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: rgba(0,0,0,0.03); border: 1px solid transparent;
+            font-weight: 500; cursor: pointer;
         }
-        .smart-list li:hover { background: var(--glass-border); transform: translateX(10px) scale(1.02); border-color: var(--accent-glow); color: var(--header-text-color); }
-        .smart-list li::before { font-size: 1.2rem; margin-right: 0.8rem; transition: transform 0.4s ease; }
-        .smart-list li:hover::before { transform: rotate(15deg) scale(1.3); }
+        .smart-list li:hover { background: var(--glass-bg); transform: translateX(8px); border-color: var(--accent-glow); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         
-        .student-list li::before { content: '🎓'; } .lesson-list li::before { content: '📚'; }
+        .list-header { display: flex; align-items: center; width: 100%; font-weight: 600; color: var(--header-text-color);}
+        .list-header::before { font-size: 1.2rem; margin-right: 0.8rem; transition: transform 0.4s ease; display: inline-block; }
+        .smart-list li:hover .list-header::before { transform: rotate(15deg) scale(1.2); }
         
-        .break-time { background: linear-gradient(90deg, rgba(255,0,110,0.1), transparent) !important; border-left: 4px solid #ff006e !important; font-style: italic; opacity: 0.8; }
-        .current-lesson { background: linear-gradient(90deg, rgba(255,183,3,0.2), transparent) !important; border-left: 5px solid var(--accent-color) !important; font-weight: 800; color: var(--accent-color); transform: translateX(5px); }
+        .student-list .list-header::before { content: '🎓'; } .lesson-list .list-header::before { content: '📚'; }
+        
+        .teacher-name { font-size: 0.75rem; color: var(--text-color-light); opacity: 0.8; margin-left: 2.2rem; font-family: var(--font-ui); margin-top: 2px;}
+
+        .break-time { background: linear-gradient(90deg, rgba(255,0,110,0.05), transparent) !important; border-left: 4px solid var(--danger-color) !important; font-style: italic; opacity: 0.8; }
+        .break-time .list-header::before { content: '☕'; }
+        
+        .current-lesson { background: linear-gradient(90deg, rgba(255,183,3,0.15), transparent) !important; border-left: 5px solid var(--accent-color) !important; transform: translateX(5px); box-shadow: 0 0 15px var(--accent-glow); animation: pulse-border 2s infinite; }
+        @keyframes pulse-border { 0% { border-left-color: var(--accent-color); } 50% { border-left-color: var(--danger-color); } 100% { border-left-color: var(--accent-color); } }
 
         mark.search-highlight { background: var(--accent-color); color: #000; padding: 0 4px; border-radius: 4px; font-weight: 800; box-shadow: 0 0 10px var(--accent-glow); }
 
         /* =====================================================================
            7. TOOLBAR, SEARCH & FILTERS
            ===================================================================== */
-        .action-toolbar { display: flex; justify-content: center; margin-bottom: 3rem; position: sticky; top: 80px; z-index: 40; padding: 10px 0; }
-        .search-wrapper { position: relative; max-width: 600px; width: 100%; transition: transform 0.3s; }
+        .action-toolbar { display: flex; justify-content: center; margin-bottom: 3rem; position: sticky; top: 75px; z-index: 40; padding: 15px 0; background: linear-gradient(to bottom, var(--bg-color) 40%, transparent); }
+        .search-wrapper { position: relative; max-width: 650px; width: 100%; transition: transform 0.3s; display: flex; align-items: center;}
         .search-wrapper:focus-within { transform: scale(1.02); }
-        .search-input { width: 100%; padding: 1.2rem 1.5rem 1.2rem 3.5rem; border-radius: 3rem; border: 2px solid var(--glass-border); background: var(--glass-bg); color: var(--text-color-light); font-family: var(--font-main); font-weight: 600; backdrop-filter: blur(20px); outline: none; transition: all 0.3s ease; box-shadow: 0 10px 30px var(--card-shadow); font-size: 1.1rem; }
+        .search-input { width: 100%; padding: 1.2rem 3rem 1.2rem 3.5rem; border-radius: 3rem; border: 2px solid var(--glass-border); background: var(--glass-bg); color: var(--text-color-light); font-family: var(--font-main); font-weight: 600; backdrop-filter: blur(25px); outline: none; transition: all 0.3s ease; box-shadow: 0 15px 35px var(--card-shadow); font-size: 1.1rem; }
         .search-input:focus { border-color: var(--accent-color); background: var(--bg-color); color: var(--text-color); }
-        .search-icon { position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); opacity: 0.7; width: 24px; height: 24px; color: inherit; transition: color 0.3s; }
-        .search-input:focus + .search-icon { color: var(--accent-color); opacity: 1; }
+        .search-icon { position: absolute; left: 1.5rem; opacity: 0.7; width: 22px; height: 22px; color: inherit; transition: color 0.3s; pointer-events: none;}
+        .search-input:focus ~ .search-icon { color: var(--accent-color); opacity: 1; }
         
-        .filter-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color-light); padding: 0.6rem 1.5rem; border-radius: 2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-weight: 600; backdrop-filter: blur(10px); }
-        .filter-btn.active, .filter-btn:hover { background: var(--accent-color); color: #000; border-color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
+        .clear-search { position: absolute; right: 1.2rem; background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 28px; height: 28px; display: none; align-items: center; justify-content: center; cursor: pointer; color: var(--text-color-light); transition: all 0.2s; }
+        .clear-search:hover { background: var(--danger-color); color: white; transform: rotate(90deg); }
+
+        .search-stats { position: absolute; right: 4rem; font-size: 0.75rem; font-family: var(--font-ui); font-weight: bold; opacity: 0.6; pointer-events: none; }
+
+        .filter-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color-light); padding: 0.6rem 1.5rem; border-radius: 2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-weight: 600; backdrop-filter: blur(10px); cursor: pointer; }
+        .filter-btn.active, .filter-btn:hover { background: var(--accent-color); color: #000; border-color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 8px 20px var(--accent-glow); }
+
+        /* Empty State */
+        #empty-state { display: none; text-align: center; padding: 3rem; color: var(--text-color-light); animation: fadeIn 0.5s; }
+        #empty-state svg { width: 80px; height: 80px; margin: 0 auto 1rem; opacity: 0.5; }
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
         /* =====================================================================
            8. WIDGETS & MINI GAMES
            ===================================================================== */
-        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
         
         .quick-links-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-        .quick-link-btn { background: rgba(0,0,0,0.1); border: 1px solid var(--glass-border); padding: 0.6rem 1.2rem; border-radius: 20px; color: var(--text-color-light); font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
-        .quick-link-btn:hover { background: var(--accent-color); color: #000; transform: translateY(-3px); border-color: var(--accent-color); box-shadow: 0 5px 15px var(--accent-glow); }
+        .quick-link-btn { background: rgba(0,0,0,0.05); border: 1px solid var(--glass-border); padding: 0.7rem 1.2rem; border-radius: 20px; color: var(--text-color-light); font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;}
+        .quick-link-btn:hover { background: var(--accent-color); color: #000; transform: translateY(-3px); border-color: var(--accent-color); box-shadow: 0 8px 20px var(--accent-glow); }
 
-        .game-canvas-container { width: 100%; height: 200px; background: #000; border-radius: 1rem; border: 2px solid var(--glass-border); position: relative; overflow: hidden; cursor: crosshair; }
-        .game-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(5px); transition: opacity 0.3s; z-index: 10; }
-        
         /* Tasks */
-        .task-input { width: 100%; background: rgba(0,0,0,0.1); border: 1px solid var(--glass-border); padding: 0.8rem 1rem; border-radius: 0.8rem; color: var(--text-color-light); outline: none; margin-bottom: 1rem; font-weight: 500; }
-        .task-input:focus { border-color: var(--accent-color); }
-        .task-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 0.6rem; margin-bottom: 0.5rem; font-size: 0.9rem; transition: all 0.3s; cursor: pointer; }
+        .task-input { width: 100%; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 1rem; border-radius: 1rem; color: var(--text-color-light); outline: none; margin-bottom: 1rem; font-weight: 500; font-family: var(--font-ui); transition: border-color 0.3s;}
+        .task-input:focus { border-color: var(--accent-color); box-shadow: 0 0 15px var(--accent-glow); }
+        .task-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 0.8rem; margin-bottom: 0.6rem; font-size: 0.9rem; transition: all 0.3s; cursor: pointer; }
         .task-item:hover { border-color: var(--accent-color); transform: translateX(5px); }
-        .task-item.done { text-decoration: line-through; opacity: 0.5; background: rgba(0, 255, 0, 0.1); border-color: rgba(0, 255, 0, 0.3); }
+        .task-item.done { text-decoration: line-through; opacity: 0.5; background: rgba(6, 214, 160, 0.1); border-color: rgba(6, 214, 160, 0.3); }
 
         /* =====================================================================
-           9. MODALS, 3D PROFILES & CONTEXT MENU
+           9. MODALS, 3D PROFILES & UI COMPONENTS
            ===================================================================== */
-        .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; perspective: 1500px; }
+        .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; perspective: 1500px; }
         .modal.show { opacity: 1; display: flex; }
         
-        .modal-content { background: var(--bg-color); padding: 2.5rem; border-radius: 2rem; width: 90%; max-width: 400px; border: 1px solid var(--glass-highlight); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); transform: translateY(50px) rotateX(-10deg); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
-        .modal.show .modal-content { transform: translateY(0) rotateX(0); }
+        .modal-content { background: var(--bg-color); padding: 2.5rem; border-radius: 2rem; width: 90%; max-width: 420px; border: 1px solid var(--glass-highlight); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transform: translateY(50px) scale(0.95); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+        .modal.show .modal-content { transform: translateY(0) scale(1); }
         
-        .close-button { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,0,0,0.1); border-radius: 50%; width: 40px; height: 40px; border: none; color: var(--text-color-light); font-size: 1.5rem; display: flex; justify-content: center; align-items: center; z-index: 10; transition: all 0.3s; }
-        .close-button:hover { background: #ff006e; color: white; transform: rotate(90deg) scale(1.1); box-shadow: 0 0 15px rgba(255,0,110,0.6); }
+        .close-button { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,0,0,0.1); border-radius: 50%; width: 36px; height: 36px; border: none; color: var(--text-color-light); font-size: 1.5rem; display: flex; justify-content: center; align-items: center; z-index: 10; transition: all 0.3s; cursor: pointer;}
+        .close-button:hover { background: var(--danger-color); color: white; transform: rotate(90deg) scale(1.1); box-shadow: 0 0 15px rgba(255,0,110,0.4); }
 
         /* 3D Flip Card */
-        .flip-card { width: 100%; height: 450px; perspective: 1000px; }
+        .flip-card { width: 100%; height: 480px; perspective: 1000px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        .flip-card-front, .flip-card-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 1.5rem; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid var(--glass-border); }
-        .flip-card-front { background: linear-gradient(135deg, var(--bg-color), var(--ocean-floor-start)); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .flip-card-back { background: linear-gradient(135deg, var(--ocean-floor-start), var(--bg-color)); transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 2rem; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid var(--glass-border); }
+        .flip-card-front { background: linear-gradient(135deg, var(--bg-color), var(--ocean-floor-start)); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .flip-card-back { background: linear-gradient(135deg, var(--ocean-floor-start), var(--bg-color)); transform: rotateY(180deg); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
 
-        /* Context Menu */
-        #custom-menu { position: fixed; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10000; transform: scale(0.9); opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: top left; min-width: 220px;}
+        /* Context Menu Premium */
+        #custom-menu { position: fixed; background: rgba(0,0,0,0.7); backdrop-filter: blur(25px) saturate(200%); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); z-index: 10000; transform: scale(0.9); opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: top left; min-width: 240px; font-family: var(--font-ui);}
         #custom-menu.show { transform: scale(1); opacity: 1; pointer-events: auto; }
-        .context-item { padding: 10px 15px; border-radius: 8px; color: white; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+        .context-item { padding: 10px 15px; border-radius: 8px; color: white; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
         .context-item:hover { background: var(--accent-color); color: black; transform: translateX(5px); }
+        .context-divider { height:1px; background:rgba(255,255,255,0.1); margin: 6px 0; }
 
         /* Fullscreen Nav */
         .nav-overlay { position: fixed; inset: 0; background: var(--bg-color); z-index: 1500; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.5s ease; clip-path: circle(0% at top right); }
         .nav-overlay.show { opacity: 1; visibility: visible; clip-path: circle(150% at top right); }
-        .nav-item { font-family: var(--font-display); color: var(--text-color); font-size: clamp(2rem, 5vw, 4rem); padding: 1rem; text-decoration: none; transform: translateY(30px); opacity: 0; transition: all 0.4s; position: relative; }
+        .nav-item { font-family: var(--font-display); color: var(--text-color); font-size: clamp(2rem, 5vw, 4rem); padding: 1rem; text-decoration: none; transform: translateY(30px); opacity: 0; transition: all 0.4s; position: relative; font-weight: 900;}
         .nav-overlay.show .nav-item { transform: translateY(0); opacity: 1; }
-        .nav-item:hover { color: var(--accent-color); transform: scale(1.1); letter-spacing: 2px; }
+        .nav-item:hover { color: var(--accent-color); transform: scale(1.05); letter-spacing: 2px; }
 
-        /* Toast */
-        .toast-container { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); z-index: 9999; transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        /* Toast System */
+        .toast-container { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); z-index: 9999; transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none;}
         .toast-container.show { bottom: 30px; }
-        .toast { background: var(--text-color); color: var(--bg-color); padding: 12px 24px; border-radius: 30px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 15px 40px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px; border: 1px solid var(--glass-highlight); }
+        .toast { background: rgba(0,0,0,0.85); color: white; backdrop-filter: blur(10px); padding: 12px 24px; border-radius: 30px; font-weight: 600; font-family: var(--font-ui); font-size: 0.9rem; box-shadow: 0 15px 40px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.1); animation: slideUpToast 0.3s forwards;}
+        @keyframes slideUpToast { from{transform:translateY(20px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+
+        /* Back to top */
+        #btn-back-top { position: fixed; bottom: 30px; right: 30px; background: var(--text-color); color: var(--bg-color); width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 900; opacity: 0; transform: translateY(50px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        #btn-back-top.show { opacity: 1; transform: translateY(0); }
+        #btn-back-top:hover { background: var(--accent-color); color: black; transform: translateY(-5px) scale(1.1); }
 
         /* Utility classes */
-        .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+        .reveal { opacity: 1 !important; transform: translateY(0) !important; scale: 1 !important; }
         .main-page-content { display: none; opacity: 0; transition: opacity 1s; padding-top: 100px; }
         .main-page-content.show { display: block; opacity: 1; }
         
-        /* Stats Bar */
-        .stat-bar { height: 6px; background: rgba(0,0,0,0.2); border-radius: 3px; overflow: hidden; margin-top: 4px; }
-        .stat-fill { height: 100%; background: var(--accent-color); transition: width 1s ease-out; }
+        .stat-bar { height: 6px; background: rgba(0,0,0,0.1); border-radius: 3px; overflow: hidden; margin-top: 4px; }
+        .stat-fill { height: 100%; background: var(--accent-color); transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
 
         @media (max-width: 768px) {
             .fixed-header { padding: 0.8rem 1rem; }
             .live-clock-container { display: none; }
-            .action-toolbar { top: 60px; }
-            .search-input { font-size: 1rem; padding: 1rem 1.5rem 1rem 3rem; }
+            .action-toolbar { top: 60px; padding: 10px 0;}
+            .search-input { font-size: 1rem; padding: 1rem 2.5rem 1rem 3rem; }
+            .search-stats { display: none; }
+            .glass-card { padding: 1.2rem; }
+        }
+        
+        @media print {
+            .fixed-header, .action-toolbar, #nav-overlay, .widget-grid, #btn-back-top, #blocked-page, #particle-canvas, #matrix-canvas, #ocean-bg, #sea-floor { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .glass-card { box-shadow: none !important; border: 1px solid #ccc !important; break-inside: avoid; margin-bottom: 20px;}
+            .container { max-width: 100% !important; padding: 0 !important; }
         }
     </style>
 </head>
 <body>
+    <div id="offline-banner" role="alert" aria-live="assertive">Koneksi Terputus. Aplikasi berjalan dalam mode Offline.</div>
     <div id="scroll-progress"></div>
     <canvas id="matrix-canvas"></canvas>
-    <canvas id="particle-canvas"></canvas>
 
-    <!-- Context Menu -->
-    <div id="custom-menu">
-        <div class="context-item" onclick="location.reload()">🔄 Segarkan Sistem</div>
-        <div class="context-item" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆️ Kembali ke Atas</div>
-        <div class="context-item" onclick="document.getElementById('global-search').focus()">🔍 Pencarian Cepat</div>
-        <div class="context-item" onclick="document.getElementById('btn-theme').click()">🌓 Ganti Tema</div>
-        <div class="context-item" onclick="App.UI.printSchedule()">🖨️ Cetak Jadwal</div>
-        <div style="height:1px; background:rgba(255,255,255,0.2); margin: 5px 0;"></div>
-        <div class="context-item" style="color:#ff006e;" onclick="App.UI.simulateEarthquake()">🫨 Simulasi Gempa</div>
+    <noscript>
+        <div style="position:fixed; inset:0; background:#000; color:#fff; z-index:999999; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:2rem;">
+            <h1 style="color:#ff006e; font-size:3rem; margin-bottom:1rem;">JavaScript Dinonaktifkan</h1>
+            <p>Portal Kelas 9H Ultimate membutuhkan JavaScript untuk menjalankan fitur premium, efek glassmorphism, dan mesin pencarian.</p>
+            <p style="margin-top:1rem; opacity:0.7;">Harap aktifkan JavaScript di pengaturan browser Anda.</p>
+        </div>
+    </noscript>
+
+    <!-- Context Menu Premium -->
+    <div id="custom-menu" role="menu">
+        <div class="context-item" onclick="location.reload()" role="menuitem" tabindex="0">🔄 Segarkan Sistem</div>
+        <div class="context-item" onclick="window.scrollTo({top:0, behavior:'smooth'})" role="menuitem" tabindex="0">⬆️ Kembali ke Atas</div>
+        <div class="context-item" onclick="document.getElementById('global-search').focus()" role="menuitem" tabindex="0">🔍 Pencarian Cepat ( / )</div>
+        <div class="context-item" onclick="document.getElementById('btn-theme').click()" role="menuitem" tabindex="0">🌓 Ganti Tema ( T )</div>
+        <div class="context-item" onclick="App.UI.printSchedule()" role="menuitem" tabindex="0">🖨️ Cetak Tampilan</div>
+        <div class="context-item" onclick="App.UI.shareApp()" role="menuitem" tabindex="0">📤 Bagikan Portal</div>
+        <div class="context-divider"></div>
+        <div class="context-item" style="color:var(--danger-color);" onclick="App.UI.simulateEarthquake()" role="menuitem" tabindex="0">🫨 Simulasi Gempa</div>
     </div>
 
-    <!-- Halaman Blokir / Landing -->
+    <!-- Halaman Blokir / Landing Bypass -->
     <div id="blocked-page" class="blocked-page-container">
         <div class="blocked-content w-full max-w-3xl text-center flex flex-col items-center relative z-10">
             <div class="relative inline-block mb-8">
-                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" alt="Logo" class="w-32 rounded-3xl shadow-[0_0_50px_rgba(255,0,0,0.4)] border-2 border-red-500/50">
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/5c88bec056077d412143f883d1ce9254c7fa77db/images-1.jpeg" alt="Logo Bypass" class="w-32 rounded-3xl shadow-[0_0_50px_rgba(255,0,0,0.4)] border-2 border-red-500/50 object-cover">
                 <div class="absolute inset-0 bg-red-500 rounded-3xl animate-ping opacity-20"></div>
             </div>
             
@@ -317,7 +361,7 @@
                 <p class="font-bold text-white mb-2 leading-relaxed">Sistem mendeteksi akses ke area kelas 9H. Harap verifikasi identitas Anda untuk melanjutkan.</p>
             </div>
             
-            <button id="btn-bypass" class="group relative px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-black rounded-full overflow-hidden transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(220,38,38,0.5)]">
+            <button id="btn-bypass" class="group relative px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-black rounded-full overflow-hidden transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(220,38,38,0.5)] focus-visible">
                 <span class="relative z-10 uppercase tracking-widest text-lg">Inisialisasi Bypass</span>
                 <div class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
             </button>
@@ -326,33 +370,33 @@
 
     <!-- Konten Utama -->
     <div id="main-page" class="main-page-content">
-        <!-- Header -->
-        <header id="fixed-header" class="fixed-header">
+        <!-- Header Sticky -->
+        <header id="fixed-header" class="fixed-header" role="banner">
             <div class="flex items-center gap-4">
-                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMP" class="logo-img magnetic-btn"/>
-                <div class="live-clock-container hidden md:block">
-                    <div id="live-clock" class="live-clock">--:-- WIB</div>
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMP" class="logo-img magnetic-btn" tabindex="0" onclick="window.scrollTo(0,0)"/>
+                <div class="live-clock-container hidden md:flex">
+                    <div id="live-clock" class="live-clock" aria-live="polite">--:-- WIB</div>
                     <div id="live-greeting" class="live-greeting text-[var(--text-color)]">Memuat...</div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3">
-                <button id="btn-voice" class="icon-btn magnetic-btn" data-tooltip="Perintah Suara">
+                <button id="btn-voice" class="icon-btn magnetic-btn" data-tooltip="Pencarian Suara" aria-label="Gunakan Perintah Suara">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
                 </button>
-                <button id="btn-theme" class="icon-btn magnetic-btn" data-tooltip="Ganti Tema (T)">
+                <button id="btn-theme" class="icon-btn magnetic-btn" data-tooltip="Ganti Tema (T)" aria-label="Ganti Tema">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-                <button id="btn-menu" class="icon-btn magnetic-btn" data-tooltip="Navigasi">
+                <button id="btn-menu" class="icon-btn magnetic-btn" data-tooltip="Navigasi" aria-label="Buka Menu" aria-haspopup="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
-                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="ID Card" id="btn-idcard" class="logo-img magnetic-btn cursor-pointer ml-2" data-tooltip="Kartu Identitas"/>
+                <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Buka ID Card" id="btn-idcard" class="logo-img magnetic-btn ml-2" data-tooltip="Kartu Identitas" tabindex="0" role="button"/>
             </div>
         </header>
 
-        <!-- Overlay Menu -->
-        <nav id="nav-overlay" class="nav-overlay">
-            <button class="close-button absolute top-8 right-8" id="close-menu">&times;</button>
+        <!-- Overlay Menu Fullscreen -->
+        <nav id="nav-overlay" class="nav-overlay" role="navigation" aria-hidden="true">
+            <button class="close-button absolute top-8 right-8" id="close-menu" aria-label="Tutup Menu">&times;</button>
             <a href="#organization-section" class="nav-item">👥 Struktur Kru</a>
             <a href="#piket-section" class="nav-item">🧹 Jadwal Piket</a>
             <a href="#pelajaran-section" class="nav-item">📚 Jadwal Pelajaran</a>
@@ -360,30 +404,42 @@
             <a href="#widgets-section" class="nav-item text-[var(--accent-color)]">🎮 Pusat Utilitas</a>
         </nav>
 
-        <main class="container">
-            <!-- Hero -->
+        <main class="container" role="main">
+            <!-- Hero Section -->
             <header class="text-center mt-10 mb-16" data-observe>
                 <h1 class="font-display text-5xl md:text-7xl font-black text-[var(--header-text-color)] drop-shadow-xl tracking-tight mb-2">Ekspedisi 9H</h1>
                 <p id="hero-subtitle" class="font-bold text-[var(--accent-color)] h-6 text-lg md:text-xl tracking-widest font-mono uppercase"></p>
             </header>
 
-            <!-- Ultra Search -->
+            <!-- Ultra Search Bar -->
             <div class="action-toolbar" data-observe>
                 <div class="search-wrapper">
-                    <input type="text" id="global-search" class="search-input" placeholder="Cari nama, piket, typo tidak masalah..." autocomplete="off">
+                    <input type="text" id="global-search" class="search-input" placeholder="Cari kru, jadwal, guru (Tekan '/' untuk fokus)..." autocomplete="off" aria-label="Pencarian Global">
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span class="search-stats" id="search-count"></span>
+                    <button class="clear-search" id="clear-search" aria-label="Bersihkan pencarian">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
                 </div>
+            </div>
+
+            <!-- Empty State for Search -->
+            <div id="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
+                <h3 class="text-2xl font-bold font-display">Tidak Ditemukan</h3>
+                <p class="mt-2 opacity-80">Coba gunakan kata kunci lain atau periksa ejaan Anda.</p>
+                <button id="btn-reset-search" class="mt-4 filter-btn active">Reset Pencarian</button>
             </div>
 
             <div id="content-wrapper">
                 <!-- Organisasi -->
                 <section id="organization-section" class="mb-24 scroll-mt-32">
                     <h2 class="section-title" data-observe>Struktur Komando</h2>
-                    <div class="flex justify-center flex-wrap gap-3 mb-10" id="org-filters" data-observe>
-                        <button class="filter-btn active" data-filter="all">Semua Kru</button>
-                        <button class="filter-btn" data-filter="L">Laki-laki</button>
-                        <button class="filter-btn" data-filter="P">Perempuan</button>
-                        <button class="filter-btn" data-filter="core">Inti</button>
+                    <div class="flex justify-center flex-wrap gap-3 mb-10" id="org-filters" data-observe role="tablist">
+                        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua Kru</button>
+                        <button class="filter-btn" data-filter="L" role="tab" aria-selected="false">Laki-laki</button>
+                        <button class="filter-btn" data-filter="P" role="tab" aria-selected="false">Perempuan</button>
+                        <button class="filter-btn" data-filter="core" role="tab" aria-selected="false">Inti</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="org-grid"></div>
                 </section>
@@ -394,13 +450,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="piket-grid"></div>
                 </section>
 
-                <!-- Pelajaran -->
+                <!-- Pelajaran (Data Terbarui) -->
                 <section id="pelajaran-section" class="mb-24 scroll-mt-32">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4" data-observe>
                         <h2 class="section-title mb-0">Peta Pelajaran</h2>
-                        <button id="btn-copy-today" class="bg-[var(--accent-color)] text-black px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_20px_var(--accent-glow)]">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini
-                        </button>
+                        <div class="flex gap-2">
+                            <button id="btn-copy-today" class="bg-[var(--accent-color)] text-black px-5 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_20px_var(--accent-glow)]">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini
+                            </button>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="pelajaran-grid"></div>
                 </section>
@@ -420,7 +478,7 @@
                         <div class="glass-card flex flex-col items-center justify-center text-center" data-observe>
                             <div class="ambient-glow"></div>
                             <h3 class="card-title w-full">Tes Refleks ⚡</h3>
-                            <div id="reaction-box" class="w-full h-32 rounded-xl bg-red-500/80 flex items-center justify-center cursor-pointer transition-colors border border-white/20 mb-4">
+                            <div id="reaction-box" role="button" tabindex="0" class="w-full h-32 rounded-xl bg-[var(--danger-color)] flex items-center justify-center cursor-pointer transition-colors border border-white/20 mb-4 shadow-inner" aria-label="Mulai Tes Refleks">
                                 <span id="reaction-text" class="font-bold text-white text-lg">Klik untuk mulai</span>
                             </div>
                             <p class="text-sm text-[var(--text-color-light)]">Tunggu warna hijau, lalu klik secepatnya!</p>
@@ -430,13 +488,13 @@
                         <div class="glass-card flex flex-col" data-observe>
                             <div class="ambient-glow"></div>
                             <h3 class="card-title">Fokus Misi ⏱️</h3>
-                            <div class="flex justify-between items-center bg-[var(--bg-color)] p-4 rounded-xl border border-[var(--glass-border)] mb-4">
+                            <div class="flex justify-between items-center bg-[var(--bg-color)] p-4 rounded-xl border border-[var(--glass-border)] mb-4 shadow-inner">
                                 <span class="text-xs font-bold opacity-70">POMODORO</span>
-                                <span id="pomo-display" class="text-3xl font-mono font-black text-[var(--accent-color)]">25:00</span>
-                                <button id="btn-pomo" class="bg-[var(--text-color)] text-[var(--bg-color)] p-3 rounded-lg hover:scale-110 transition-transform">▶</button>
+                                <span id="pomo-display" class="text-3xl font-mono font-black text-[var(--accent-color)]" aria-live="timer">25:00</span>
+                                <button id="btn-pomo" class="bg-[var(--text-color)] text-[var(--bg-color)] p-3 rounded-lg hover:scale-110 transition-transform" aria-label="Mulai/Jeda Timer">▶</button>
                             </div>
-                            <input type="text" id="task-input" class="task-input" placeholder="Ketik tugas & tekan Enter...">
-                            <div id="task-list" class="flex-grow overflow-y-auto max-h-[120px] custom-scrollbar"></div>
+                            <input type="text" id="task-input" class="task-input" placeholder="Ketik tugas & tekan Enter..." aria-label="Tambah Tugas Baru">
+                            <div id="task-list" class="flex-grow overflow-y-auto max-h-[120px] pr-2 custom-scrollbar" role="list"></div>
                         </div>
 
                         <!-- Tools & Sounds -->
@@ -444,14 +502,14 @@
                             <div class="ambient-glow"></div>
                             <h3 class="card-title">Alat Bantu 🛠️</h3>
                             <div class="quick-links-grid mb-6">
-                                <a href="https://canva.com" target="_blank" class="quick-link-btn">🎨 Canva</a>
-                                <a href="https://chat.openai.com" target="_blank" class="quick-link-btn">🤖 ChatGPT</a>
-                                <button id="btn-matrix" class="quick-link-btn text-green-500 border-green-500/30">💻 Matrix Mode</button>
-                                <button id="btn-random-student" class="quick-link-btn text-[#ff006e] border-[#ff006e]/30">🎲 Acak Siswa</button>
+                                <a href="https://canva.com" target="_blank" rel="noopener noreferrer" class="quick-link-btn" aria-label="Buka Canva">🎨 Canva</a>
+                                <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="quick-link-btn" aria-label="Buka ChatGPT">🤖 ChatGPT</a>
+                                <button id="btn-matrix" class="quick-link-btn text-[var(--success-color)] border-[var(--success-color)]">💻 Matrix Mode</button>
+                                <button id="btn-random-student" class="quick-link-btn text-[var(--danger-color)] border-[var(--danger-color)]">🎲 Acak Siswa</button>
                             </div>
                             <div class="border-t border-[var(--glass-border)] pt-4">
-                                <button id="btn-ocean-sound" class="w-full bg-[var(--text-color)] text-[var(--bg-color)] py-3 rounded-xl text-sm font-bold transition-transform hover:scale-105 flex justify-center items-center gap-2 shadow-lg">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> Putar Suara Fokus (Binaural)
+                                <button id="btn-ocean-sound" class="w-full bg-[var(--text-color)] text-[var(--bg-color)] py-3 rounded-xl text-sm font-bold transition-transform hover:scale-105 flex justify-center items-center gap-2 shadow-lg" aria-pressed="false">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> <span id="text-ocean-sound">Putar Suara Fokus</span>
                                 </button>
                             </div>
                         </div>
@@ -461,36 +519,41 @@
             </div>
 
             <footer class="text-center mt-20 mb-10 text-sm font-medium opacity-70">
-                <p>9H Ultimate Edition <span class="text-[var(--accent-color)] font-bold">V7.0 Glassmorphism</span></p>
-                <p class="mt-2">Direkayasa dengan presisi. Hak Cipta Andika™</p>
+                <p>9H Ultimate Edition <span class="text-[var(--accent-color)] font-bold">V8.0 Pro Glass</span></p>
+                <p class="mt-2">Direkayasa dengan presisi tinggi.</p>
             </footer>
         </main>
 
-        <!-- Profile Modal -->
-        <div id="modal-profile" class="modal">
+        <!-- Back to Top Button -->
+        <button id="btn-back-top" aria-label="Kembali ke atas">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+
+        <!-- Profile Modal 3D -->
+        <div id="modal-profile" class="modal" role="dialog" aria-modal="true" aria-labelledby="mod-name">
             <div class="modal-content text-center">
-                <button class="close-button">&times;</button>
+                <button class="close-button" aria-label="Tutup Profil">&times;</button>
                 <div class="relative inline-block mb-4 group">
-                    <img id="mod-img" src="" alt="Foto" class="w-32 h-32 rounded-full object-cover border-4 border-[var(--accent-color)] shadow-[0_0_25px_var(--accent-glow)] transition-transform duration-500 group-hover:scale-110">
-                    <span id="mod-badge" class="absolute bottom-0 right-0 bg-red-500 text-white text-xs font-black px-3 py-1 rounded-full border-2 border-[var(--bg-color)]"></span>
+                    <img id="mod-img" src="" alt="Foto Profil" class="w-32 h-32 rounded-full object-cover border-4 border-[var(--accent-color)] shadow-[0_0_25px_var(--accent-glow)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                    <span id="mod-badge" class="absolute bottom-0 right-0 bg-[var(--danger-color)] text-white text-xs font-black px-3 py-1 rounded-full border-2 border-[var(--bg-color)] shadow-lg"></span>
                 </div>
-                <h3 id="mod-name" class="font-black text-3xl text-[var(--header-text-color)] mb-1"></h3>
-                <p id="mod-full" class="text-sm opacity-80 font-medium mb-6 uppercase tracking-widest"></p>
+                <h3 id="mod-name" class="font-black text-3xl text-[var(--header-text-color)] mb-1 font-display"></h3>
+                <p id="mod-full" class="text-sm opacity-80 font-medium mb-6 uppercase tracking-widest font-ui"></p>
                 
-                <div class="bg-[var(--glass-bg)] p-5 rounded-2xl border border-[var(--glass-border)] text-left text-sm space-y-4">
+                <div class="bg-[var(--glass-bg)] p-5 rounded-2xl border border-[var(--glass-border)] text-left text-sm space-y-4 shadow-inner">
                     <div class="flex justify-between items-center"><span class="font-bold opacity-70">Peran</span> <span id="mod-role" class="font-bold text-[var(--accent-color)] bg-[var(--text-color)] px-3 py-1 rounded-lg"></span></div>
                     
-                    <!-- Fake RPG Stats based on name -->
+                    <!-- Fake RPG Stats based on name hash -->
                     <div>
                         <div class="flex justify-between text-xs mb-1 font-bold"><span>Intelejensi</span> <span id="stat-int"></span></div>
                         <div class="stat-bar"><div id="bar-int" class="stat-fill w-0"></div></div>
                     </div>
                     <div>
                         <div class="flex justify-between text-xs mb-1 font-bold"><span>Kreativitas</span> <span id="stat-cre"></span></div>
-                        <div class="stat-bar"><div id="bar-cre" class="stat-fill w-0 bg-[#ff006e]"></div></div>
+                        <div class="stat-bar"><div id="bar-cre" class="stat-fill w-0 bg-[var(--danger-color)]"></div></div>
                     </div>
                     
-                    <button id="btn-love" class="w-full mt-4 bg-transparent border-2 border-[#ff006e] text-[#ff006e] py-2 rounded-xl font-bold hover:bg-[#ff006e] hover:text-white transition-all flex items-center justify-center gap-2">
+                    <button id="btn-love" class="w-full mt-4 bg-transparent border-2 border-[var(--danger-color)] text-[var(--danger-color)] py-2.5 rounded-xl font-bold hover:bg-[var(--danger-color)] hover:text-white transition-all flex items-center justify-center gap-2">
                         🤍 Beri Apresiasi
                     </button>
                 </div>
@@ -498,22 +561,22 @@
         </div>
 
         <!-- ID Card Modal -->
-        <div id="modal-idcard" class="modal">
+        <div id="modal-idcard" class="modal" role="dialog" aria-modal="true" aria-label="Kartu Identitas Kelas">
             <div class="w-[90%] max-w-[360px] relative">
-                <button class="close-button absolute -top-14 right-0 bg-red-500/80 hover:bg-red-500 text-white border border-white/20">&times;</button>
+                <button class="close-button absolute -top-14 right-0 bg-[var(--danger-color)] text-white border border-white/20 hover:scale-110">&times;</button>
                 <div class="flip-card" id="flip-id-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <h3 class="font-black text-2xl text-[var(--header-text-color)] tracking-widest border-b-2 border-[var(--glass-border)] pb-3 w-full uppercase">Kartu Akses</h3>
-                            <p class="text-[var(--accent-color)] text-xs mt-2 mb-8 font-bold tracking-widest bg-[var(--text-color)] px-4 py-1 rounded-full">KELAS 9H</p>
-                            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Logo" class="w-40 h-40 rounded-3xl object-cover border-4 border-[var(--accent-color)] shadow-[0_15px_35px_rgba(0,0,0,0.3)] mb-8">
-                            <button class="text-sm bg-[var(--text-color)] hover:bg-[var(--accent-color)] text-[var(--bg-color)] hover:text-black font-bold px-6 py-3 rounded-full transition-colors" onclick="document.getElementById('flip-id-card').classList.add('flipped')">Info Kontak ⤻</button>
+                            <h3 class="font-black text-2xl text-[var(--header-text-color)] tracking-widest border-b-2 border-[var(--glass-border)] pb-3 w-full uppercase font-display">Kartu Akses</h3>
+                            <p class="text-[var(--accent-color)] text-xs mt-2 mb-8 font-bold tracking-widest bg-[var(--text-color)] px-4 py-1 rounded-full shadow-lg">KELAS 9H</p>
+                            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="Logo 9H" class="w-40 h-40 rounded-3xl object-cover border-4 border-[var(--accent-color)] shadow-[0_15px_35px_rgba(0,0,0,0.3)] mb-8 transition-transform hover:scale-105">
+                            <button class="text-sm bg-[var(--text-color)] hover:bg-[var(--accent-color)] text-[var(--bg-color)] hover:text-black font-bold px-6 py-3 rounded-full transition-colors shadow-lg" onclick="document.getElementById('flip-id-card').classList.add('flipped')">Info Kontak ⤻</button>
                         </div>
                         <div class="flip-card-back">
-                            <h3 class="font-black text-xl text-[var(--header-text-color)] mb-8">Jaringan Sosial</h3>
+                            <h3 class="font-black text-xl text-[var(--header-text-color)] mb-8 font-display">Jaringan Sosial</h3>
                             <div class="w-full space-y-4">
-                                <a href="https://www.instagram.com/historycalnine_2526" target="_blank" class="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 display-flex justify-center items-center hover:scale-105 transition-transform shadow-lg block text-center">Instagram Resmi</a>
-                                <button class="w-full py-4 rounded-xl font-bold bg-[var(--text-color)] text-[var(--bg-color)] display-flex justify-center items-center hover:scale-105 transition-transform block text-center" onclick="App.UI.toast('TikTok sedang dalam pengembangan')">TikTok</button>
+                                <a href="https://www.instagram.com/historycalnine_2526" target="_blank" rel="noopener noreferrer" class="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 display-flex justify-center items-center hover:scale-105 transition-transform shadow-lg block text-center">Instagram Resmi</a>
+                                <button class="w-full py-4 rounded-xl font-bold bg-[var(--text-color)] text-[var(--bg-color)] display-flex justify-center items-center hover:scale-105 transition-transform block text-center shadow-lg" onclick="App.UI.toast('TikTok sedang dalam pengembangan')">TikTok</button>
                                 <button class="mt-8 text-sm border border-[var(--text-color)] text-[var(--text-color)] px-6 py-2 rounded-full font-bold transition-colors hover:bg-[var(--text-color)] hover:text-[var(--bg-color)]" onclick="document.getElementById('flip-id-card').classList.remove('flipped')">⤺ Kembali</button>
                             </div>
                         </div>
@@ -523,11 +586,11 @@
         </div>
 
         <!-- Toast Container -->
-        <div id="toast-container" class="toast-container"></div>
+        <div id="toast-container" class="toast-container" aria-live="polite"></div>
     </div>
 
     <!-- =====================================================================
-         JAVASCRIPT LOGIC (MODULAR & OPTIMIZED)
+         JAVASCRIPT LOGIC (MODULAR, OPTIMIZED, PREMIUM)
          ===================================================================== -->
     <script>
         const App = {
@@ -561,12 +624,13 @@
                     { hari: "Kamis", list: ["Zalfa", "Geane", "Aul", "Faiq", "Adi", "Yana"] },
                     { hari: "Jumat", list: ["Melisa", "Nadia", "SyifaA", "Kazril", "Vienard", "RizkyM"] }
                 ],
+                // Updated with requested Data
                 pelajaran: [
-                    { hari: "Senin", map: [{t:"06:30-07:30", m:"Upacara"}, {t:"07:30-09:30", m:"PJOK"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Seni Budaya"}, {t:"11:20-12:00", m:"PAIBP"}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"B. Indonesia"}] },
-                    { hari: "Selasa", map: [{t:"06:30-07:30", m:"Literasi"}, {t:"07:30-08:10", m:"Matematika"}, {t:"08:10-09:30", m:"B. Indonesia"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Pancasila"}, {t:"11:20-12:00", m:"IPA"}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPA"}] },
-                    { hari: "Rabu", map: [{t:"06:30-07:30", m:"Senam"}, {t:"07:30-08:50", m:"B. Sunda"}, {t:"08:50-09:30", m:"PAIBP"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"PAIBP"}, {t:"10:40-11:20", m:"BP/BK"}, {t:"11:20-12:00", m:"IPS"}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPS"}] },
-                    { hari: "Kamis", map: [{t:"06:30-07:30", m:"Duha"}, {t:"07:30-08:50", m:"Matematika"}, {t:"08:50-09:30", m:"B. Inggris"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"B. Inggris"}, {t:"10:40-12:00", m:"Informatika"}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPA"}] },
-                    { hari: "Jumat", map: [{t:"06:30-07:30", m:"Geber"}, {t:"07:30-08:50", m:"B. Indonesia"}, {t:"08:50-09:30", m:"Pancasila"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"B. Inggris"}, {t:"11:20-12:00", m:"Persiapan", br:true}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"Pramuka"}] }
+                    { hari: "Senin", map: [{t:"06:30-07:30", m:"Upacara", g:""}, {t:"07:30-09:30", m:"PJOK", g:"Drs. Priyo Edy Hariyanto"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Seni Budaya", g:"Amsor Adiwirya, S.Pd."}, {t:"11:20-12:00", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"Bahasa Indonesia", g:"Amin, S.Pd."}] },
+                    { hari: "Selasa", map: [{t:"06:30-07:30", m:"Literasi", g:""}, {t:"07:30-08:50", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:50-09:30", m:"Bahasa Indonesia", g:"Amin, S.Pd."}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Pendidikan Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"11:20-12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Rabu", map: [{t:"06:30-07:30", m:"Senam", g:""}, {t:"07:30-08:50", m:"Bahasa Sunda", g:"Didi Junaedi, S.Pd."}, {t:"08:50-09:30", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"BP / BK", g:"Anceu Andriani, S.Pd."}, {t:"10:40-12:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}] },
+                    { hari: "Kamis", map: [{t:"06:30-07:30", m:"Duha", g:""}, {t:"07:30-08:50", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:50-09:30", m:"Bahasa Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"Bahasa Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"10:40-12:00", m:"Informatika", g:"Didin Akbarul Rosyidin, S.Kom"}, {t:"12:00-12:40", m:"Istirahat", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Jumat", map: [{t:"06:30-07:30", m:"Rohis", g:""}, {t:"07:30-08:50", m:"Bahasa Indonesia", g:"Amin, S.Pd."}, {t:"08:50-09:30", m:"Pendidikan Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Bahasa Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"11:20-14:00", m:"Kegiatan Ekskul / Pulang", g:"", br:true}] }
                 ],
                 pakaian: ["Putih Biru", "Batik Putih", "Batik Biru", "Muslim", "Pramuka"],
                 hariIndex: new Date().getDay()
@@ -575,11 +639,10 @@
             State: { 
                 pomoTimer: null, pomoTime: 1500, isPomoRunning: false,
                 audioCtx: null, osc: null,
-                searchDebounce: null
+                searchDebounce: null, matrixInterval: null
             },
 
             Utils: {
-                // Levenshtein distance for Typo-Tolerant Search
                 levenshtein: (a, b) => {
                     if(a.length === 0) return b.length; if(b.length === 0) return a.length;
                     const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
@@ -593,120 +656,124 @@
                     }
                     return matrix[b.length][a.length];
                 },
-                // Pseudo-random string hash for stats
                 hashString: (str) => {
                     let hash = 0; for(let i=0; i<str.length; i++) hash = Math.imul(31, hash) + str.charCodeAt(i) | 0;
                     return Math.abs(hash);
                 },
-                // Storage wrapper
                 storage: {
-                    get: (k) => JSON.parse(localStorage.getItem('9h_'+k) || '[]'),
-                    set: (k, v) => localStorage.setItem('9h_'+k, JSON.stringify(v))
-                }
+                    get: (k) => { try { return JSON.parse(localStorage.getItem('9h_'+k)) || []; } catch(e) { return []; } },
+                    set: (k, v) => { try { localStorage.setItem('9h_'+k, JSON.stringify(v)); } catch(e) { console.warn("Storage quota exceeded"); } }
+                },
+                haptic: (ms = 50) => { if(navigator.vibrate) navigator.vibrate(ms); }
             },
 
             Audio: {
+                _lastOut: 0, // Fixed scope issue
                 init: () => {
-                    if(!App.State.audioCtx) App.State.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    if(!App.State.audioCtx) {
+                        try { App.State.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } 
+                        catch(e) { console.warn("Web Audio API not supported"); }
+                    }
                 },
                 playBeep: (freq = 600, type = 'sine', duration = 0.1) => {
                     if(!App.State.audioCtx) return;
-                    const osc = App.State.audioCtx.createOscillator();
-                    const gainNode = App.State.audioCtx.createGain();
-                    osc.type = type; osc.frequency.setValueAtTime(freq, App.State.audioCtx.currentTime);
-                    gainNode.gain.setValueAtTime(0.1, App.State.audioCtx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, App.State.audioCtx.currentTime + duration);
-                    osc.connect(gainNode); gainNode.connect(App.State.audioCtx.destination);
-                    osc.start(); osc.stop(App.State.audioCtx.currentTime + duration);
+                    try {
+                        const osc = App.State.audioCtx.createOscillator();
+                        const gainNode = App.State.audioCtx.createGain();
+                        osc.type = type; osc.frequency.setValueAtTime(freq, App.State.audioCtx.currentTime);
+                        gainNode.gain.setValueAtTime(0.05, App.State.audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, App.State.audioCtx.currentTime + duration);
+                        osc.connect(gainNode); gainNode.connect(App.State.audioCtx.destination);
+                        osc.start(); osc.stop(App.State.audioCtx.currentTime + duration);
+                    } catch(e) {}
                 },
                 toggleOcean: () => {
                     App.Audio.init();
                     const btn = document.getElementById('btn-ocean-sound');
+                    const text = document.getElementById('text-ocean-sound');
+                    
                     if(App.State.osc) {
-                        App.State.osc.stop(); App.State.osc = null;
-                        btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> Putar Suara Fokus`;
+                        try { App.State.osc.stop(); } catch(e){} 
+                        App.State.osc = null;
+                        text.innerText = "Putar Suara Fokus";
                         btn.classList.remove('bg-blue-600', 'text-white');
                     } else {
-                        // Create Pink Noise (Ocean-like)
-                        const bufferSize = 2 * App.State.audioCtx.sampleRate;
-                        const buffer = App.State.audioCtx.createBuffer(1, bufferSize, App.State.audioCtx.sampleRate);
-                        const output = buffer.getChannelData(0);
-                        for (let i = 0; i < bufferSize; i++) {
-                            let white = Math.random() * 2 - 1;
-                            output[i] = (lastOut + (0.02 * white)) / 1.02;
-                            lastOut = output[i];
-                            output[i] *= 3.5;
-                        }
-                        App.State.osc = App.State.audioCtx.createBufferSource();
-                        App.State.osc.buffer = buffer;
-                        App.State.osc.loop = true;
-                        
-                        // Modulate volume like waves
-                        const gainNode = App.State.audioCtx.createGain();
-                        gainNode.gain.value = 0.1;
-                        const lfo = App.State.audioCtx.createOscillator();
-                        lfo.frequency.value = 0.1; // slow wave
-                        const lfoGain = App.State.audioCtx.createGain();
-                        lfoGain.gain.value = 0.05;
-                        lfo.connect(lfoGain);
-                        lfoGain.connect(gainNode.gain);
-                        lfo.start();
-                        
-                        App.State.osc.connect(gainNode);
-                        gainNode.connect(App.State.audioCtx.destination);
-                        App.State.osc.start();
-                        
-                        btn.innerHTML = `🛑 Hentikan Suara Fokus`;
-                        btn.classList.add('bg-blue-600', 'text-white');
-                        App.UI.toast("Memutar suara gelombang binaural untuk fokus");
+                        try {
+                            const bufferSize = 2 * App.State.audioCtx.sampleRate;
+                            const buffer = App.State.audioCtx.createBuffer(1, bufferSize, App.State.audioCtx.sampleRate);
+                            const output = buffer.getChannelData(0);
+                            for (let i = 0; i < bufferSize; i++) {
+                                let white = Math.random() * 2 - 1;
+                                output[i] = (App.Audio._lastOut + (0.02 * white)) / 1.02;
+                                App.Audio._lastOut = output[i];
+                                output[i] *= 3.5;
+                            }
+                            App.State.osc = App.State.audioCtx.createBufferSource();
+                            App.State.osc.buffer = buffer;
+                            App.State.osc.loop = true;
+                            
+                            const gainNode = App.State.audioCtx.createGain();
+                            gainNode.gain.value = 0.05;
+                            const lfo = App.State.audioCtx.createOscillator();
+                            lfo.frequency.value = 0.1;
+                            const lfoGain = App.State.audioCtx.createGain();
+                            lfoGain.gain.value = 0.03;
+                            lfo.connect(lfoGain); lfoGain.connect(gainNode.gain); lfo.start();
+                            
+                            App.State.osc.connect(gainNode); gainNode.connect(App.State.audioCtx.destination);
+                            App.State.osc.start();
+                            
+                            text.innerText = "Hentikan Suara Fokus";
+                            btn.classList.add('bg-blue-600', 'text-white');
+                            App.UI.toast("Memutar gelombang binaural untuk fokus");
+                        } catch(e) { App.UI.toast("Gagal memutar audio"); }
                     }
                 }
             },
-            
-            // Variabel bantu untuk pink noise
-            __lastOut: 0,
 
             Render: {
                 init: () => {
-                    window.lastOut = 0; // for pink noise
-                    // 1. Render Organisasi
+                    // 1. Organisasi
                     const og = document.getElementById('org-grid');
                     const roles = ["Ketua Kelas", "Wakil Kelas", "Bendahara", "Sekretaris", "Keamanan", "Perpustakaan", "Kerohanian", "Kepramukaan", "Olahraga", "Absensi", "Kru"];
                     roles.forEach(role => {
                         const members = App.Data.kru.filter(k => k.role.includes(role) || (role === "Kru" && k.role === "Kru"));
                         if(!members.length) return;
                         let cat = members.map(m => m.g).join(" ") + (members.some(m => m.core) ? " core" : "");
-                        let list = members.map(m => `<li class="clickable interactive" onclick="App.UI.showProfile('${m.id}')" data-name="${m.nama}">${m.nama}</li>`).join("");
+                        let list = members.map(m => `<li tabindex="0" class="interactive" onclick="App.UI.showProfile('${m.id}')" onkeydown="if(event.key==='Enter') App.UI.showProfile('${m.id}')" data-name="${m.nama}"><span class="list-header">${m.nama}</span></li>`).join("");
                         og.innerHTML += `<div class="glass-card search-target" data-category="${cat}" data-observe><div class="ambient-glow"></div><h3 class="card-title text-[var(--accent-color)]">${role}</h3><ul class="smart-list student-list">${list}</ul></div>`;
                     });
 
-                    // 2. Render Piket
+                    // 2. Piket
                     const pg = document.getElementById('piket-grid');
                     App.Data.piket.forEach((p, i) => {
                         let isToday = (i + 1) === App.Data.hariIndex;
                         let list = p.list.map(id => {
                             let k = App.Data.kru.find(x => x.id === id);
-                            return `<li class="clickable interactive" onclick="App.UI.showProfile('${k.id}')" data-name="${k.nama}">${k.nama}</li>`;
+                            return `<li tabindex="0" class="interactive" onclick="App.UI.showProfile('${k.id}')" onkeydown="if(event.key==='Enter') App.UI.showProfile('${k.id}')" data-name="${k.nama}"><span class="list-header">${k.nama}</span></li>`;
                         }).join("");
                         pg.innerHTML += `<div class="glass-card search-target ${isToday ? 'today-highlight' : ''}" data-observe><div class="ambient-glow"></div><h2 class="day-title">${p.hari} ${isToday ? '⭐' : ''}</h2><ul class="smart-list student-list">${list}</ul></div>`;
                     });
 
-                    // 3. Render Pelajaran
+                    // 3. Pelajaran (Dengan Nama Guru)
                     const lg = document.getElementById('pelajaran-grid');
                     App.Data.pelajaran.forEach((p, i) => {
                         let isToday = (i + 1) === App.Data.hariIndex;
-                        let list = p.map.map(l => `<li class="${l.br ? 'break-time' : ''}" data-time="${l.t}">${l.t} | ${l.m}</li>`).join("");
+                        let list = p.map.map(l => `
+                            <li class="${l.br ? 'break-time' : ''}" data-time="${l.t}">
+                                <span class="list-header">${l.t} | ${l.m}</span>
+                                ${l.g ? `<span class="teacher-name">${l.g}</span>` : ''}
+                            </li>`).join("");
                         lg.innerHTML += `<div class="glass-card search-target ${isToday ? 'today-highlight' : ''}" data-observe data-day="${i+1}"><div class="ambient-glow"></div><h2 class="day-title">${p.hari}</h2><ul class="smart-list lesson-list">${list}</ul></div>`;
                     });
 
-                    // 4. Render Pakaian
+                    // 4. Pakaian
                     const clg = document.getElementById('pakaian-grid');
                     App.Data.pakaian.forEach((p, i) => {
                         let isToday = (i + 1) === App.Data.hariIndex;
                         clg.innerHTML += `<div class="glass-card search-target text-center ${isToday ? 'today-highlight' : ''}" data-observe><div class="ambient-glow"></div><h2 class="day-title justify-center mb-0 border-none">${App.Data.piket[i].hari}</h2><p class="font-black text-xl text-[var(--accent-color)] mt-2">${p}</p></div>`;
                     });
 
-                    // 5. Render Tasks
                     App.UI.renderTasks();
                 }
             },
@@ -714,54 +781,69 @@
             Search: {
                 init: () => {
                     const input = document.getElementById('global-search');
-                    input.addEventListener('input', (e) => {
-                        clearTimeout(App.State.searchDebounce);
-                        App.State.searchDebounce = setTimeout(() => {
-                            const query = e.target.value.toLowerCase().trim();
-                            const cards = document.querySelectorAll('.search-target');
+                    const clearBtn = document.getElementById('clear-search');
+                    const countSpan = document.getElementById('search-count');
+                    const emptyState = document.getElementById('empty-state');
+                    
+                    const performSearch = (query) => {
+                        let visibleCards = 0; let totalMatches = 0;
+                        const cards = document.querySelectorAll('.search-target');
+                        
+                        cards.forEach(card => {
+                            let cardScore = 0;
+                            const title = card.querySelector('.card-title, .day-title').innerText.toLowerCase();
+                            if(title.includes(query)) { cardScore += 100; totalMatches++; }
                             
-                            cards.forEach(card => {
-                                let cardScore = 0;
-                                const title = card.querySelector('.card-title, .day-title').innerText.toLowerCase();
-                                if(title.includes(query)) cardScore += 100;
+                            card.querySelectorAll('li').forEach(li => {
+                                // check both name and teacher text
+                                const text = (li.dataset.name || li.innerText).toLowerCase();
                                 
-                                card.querySelectorAll('li').forEach(li => {
-                                    const text = li.dataset.name ? li.dataset.name.toLowerCase() : li.innerText.toLowerCase();
-                                    
-                                    // 1. Exact / Partial Match
-                                    if (text.includes(query)) {
-                                        cardScore += 50; li.style.display = 'flex';
-                                        
-                                        // Simple Highlighting
-                                        if(query.length > 2) {
-                                            if(!li.dataset.orig) li.dataset.orig = li.innerHTML;
-                                            const regex = new RegExp(`(${query})`, "gi");
-                                            li.innerHTML = li.dataset.orig.replace(regex, "<mark class='search-highlight'>$1</mark>");
-                                        } else if(li.dataset.orig) { li.innerHTML = li.dataset.orig; }
-                                    } 
-                                    // 2. Typo Tolerance (Levenshtein) if query is long enough
-                                    else if (query.length > 3) {
-                                        const words = text.split(' ');
-                                        let typoMatch = false;
-                                        for(let w of words) {
-                                            if(App.Utils.levenshtein(w, query) <= 2) { typoMatch = true; break; }
-                                        }
-                                        if(typoMatch) { cardScore += 20; li.style.display = 'flex'; if(li.dataset.orig) li.innerHTML = li.dataset.orig; }
-                                        else { li.style.display = 'none'; }
-                                    } 
-                                    else {
-                                        if(query !== "") li.style.display = 'none';
-                                        else { li.style.display = 'flex'; if(li.dataset.orig) li.innerHTML = li.dataset.orig; }
-                                    }
-                                });
-
-                                if(query === "") { card.style.display = 'block'; card.style.opacity = 1; }
+                                if (text.includes(query)) {
+                                    cardScore += 50; li.style.display = 'flex'; totalMatches++;
+                                    if(query.length > 2) {
+                                        if(!li.dataset.orig) li.dataset.orig = li.innerHTML;
+                                        const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                        const regex = new RegExp(`(${safeQuery})`, "gi");
+                                        li.innerHTML = li.dataset.orig.replace(regex, "<mark class='search-highlight'>$1</mark>");
+                                    } else if(li.dataset.orig) { li.innerHTML = li.dataset.orig; }
+                                } 
+                                else if (query.length > 3) {
+                                    const words = text.split(' '); let typoMatch = false;
+                                    for(let w of words) { if(w.length > 3 && App.Utils.levenshtein(w, query) <= 1) { typoMatch = true; break; } }
+                                    if(typoMatch) { cardScore += 20; li.style.display = 'flex'; totalMatches++; if(li.dataset.orig) li.innerHTML = li.dataset.orig; }
+                                    else { li.style.display = 'none'; }
+                                } 
                                 else {
-                                    if(cardScore > 0) { card.style.display = 'block'; card.style.opacity = 1; }
-                                    else { card.style.display = 'none'; }
+                                    if(query !== "") li.style.display = 'none';
+                                    else { li.style.display = 'flex'; if(li.dataset.orig) li.innerHTML = li.dataset.orig; }
                                 }
                             });
-                        }, 150); // 150ms debounce
+
+                            if(query === "") { card.style.display = 'block'; card.style.opacity = 1; visibleCards++; }
+                            else {
+                                if(cardScore > 0) { card.style.display = 'block'; card.style.opacity = 1; visibleCards++; }
+                                else { card.style.display = 'none'; card.style.opacity = 0; }
+                            }
+                        });
+
+                        clearBtn.style.display = query ? 'flex' : 'none';
+                        countSpan.innerText = query ? `${totalMatches} hasil` : '';
+                        emptyState.style.display = (query && visibleCards === 0) ? 'block' : 'none';
+                    };
+
+                    input.addEventListener('input', (e) => {
+                        clearTimeout(App.State.searchDebounce);
+                        App.State.searchDebounce = setTimeout(() => performSearch(e.target.value.toLowerCase().trim()), 150);
+                    });
+
+                    clearBtn.addEventListener('click', () => { input.value = ''; performSearch(''); input.focus(); });
+                    document.getElementById('btn-reset-search').addEventListener('click', () => { input.value = ''; performSearch(''); input.focus(); });
+
+                    // Keyboard Shortcut '/'
+                    document.addEventListener('keydown', e => {
+                        if(e.key === '/' && document.activeElement !== input && document.activeElement.tagName !== 'INPUT') {
+                            e.preventDefault(); input.focus();
+                        }
                     });
                 }
             },
@@ -769,109 +851,107 @@
             UI: {
                 toast: (msg) => {
                     const c = document.getElementById('toast-container');
-                    const t = document.createElement('div'); t.className = 'toast';
-                    t.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> ${msg}`;
+                    const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'alert');
+                    t.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success-color)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> ${msg}`;
                     c.appendChild(t); c.classList.add('show');
-                    App.Audio.playBeep(800, 'sine', 0.1);
-                    setTimeout(() => { t.style.opacity=0; setTimeout(()=>t.remove(), 300); if(!c.children.length) c.classList.remove('show'); }, 3000);
+                    App.Audio.playBeep(800, 'sine', 0.1); App.Utils.haptic(30);
+                    setTimeout(() => { t.style.opacity=0; t.style.transform='translateY(10px)'; setTimeout(()=>t.remove(), 300); if(!c.children.length) c.classList.remove('show'); }, 3500);
                 },
                 
                 showProfile: (id) => {
-                    App.Audio.playBeep(400, 'triangle', 0.1);
+                    App.Audio.playBeep(400, 'triangle', 0.1); App.Utils.haptic(40);
                     const d = App.Data.kru.find(k => k.id === id); if(!d) return;
-                    document.getElementById('mod-img').src = d.img || `https://ui-avatars.com/api/?name=${d.nama}&background=random&color=fff&size=150`;
+                    document.getElementById('mod-img').src = d.img || `https://ui-avatars.com/api/?name=${d.nama.replace(/ /g,'+')}&background=random&color=fff&size=150`;
                     document.getElementById('mod-name').innerText = d.nama.split(' ')[0];
                     document.getElementById('mod-full').innerText = d.nama;
                     document.getElementById('mod-role').innerText = d.role;
                     document.getElementById('mod-badge').innerText = d.core ? "INTI" : "KRU";
                     
-                    // Generate Fake Stats
                     const hash = App.Utils.hashString(d.nama);
-                    const int = 60 + (hash % 40);
-                    const cre = 50 + ((hash >> 2) % 50);
-                    document.getElementById('stat-int').innerText = int;
-                    document.getElementById('stat-cre').innerText = cre;
+                    const int = 60 + (hash % 40); const cre = 50 + ((hash >> 2) % 50);
+                    document.getElementById('stat-int').innerText = int; document.getElementById('stat-cre').innerText = cre;
                     
-                    // Animate bars
                     setTimeout(() => {
                         document.getElementById('bar-int').style.width = int + '%';
                         document.getElementById('bar-cre').style.width = cre + '%';
                     }, 100);
 
-                    // Love Button Logic
                     const btnLove = document.getElementById('btn-love');
-                    let loves = App.Utils.storage.get('loves');
+                    let loves = App.Utils.storage.get('loves_v2');
                     const updateBtn = () => {
-                        if(loves.includes(d.id)) { btnLove.innerHTML = "❤️ Diapresiasi"; btnLove.classList.add('bg-[#ff006e]', 'text-white'); }
-                        else { btnLove.innerHTML = "🤍 Beri Apresiasi"; btnLove.classList.remove('bg-[#ff006e]', 'text-white'); }
+                        if(loves.includes(d.id)) { btnLove.innerHTML = "❤️ Diapresiasi"; btnLove.classList.add('bg-[var(--danger-color)]', 'text-white'); }
+                        else { btnLove.innerHTML = "🤍 Beri Apresiasi"; btnLove.classList.remove('bg-[var(--danger-color)]', 'text-white'); }
                     };
                     updateBtn();
                     btnLove.onclick = () => {
+                        App.Utils.haptic([30,50,30]);
                         if(loves.includes(d.id)) loves = loves.filter(i => i !== d.id);
-                        else { loves.push(d.id); App.UI.toast(`Mengirim apresiasi ke ${d.nama.split(' ')[0]}!`); }
-                        App.Utils.storage.set('loves', loves); updateBtn();
+                        else { loves.push(d.id); App.UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}!`); }
+                        App.Utils.storage.set('loves_v2', loves); updateBtn();
                     };
 
-                    document.getElementById('modal-profile').classList.add('show');
+                    const modal = document.getElementById('modal-profile');
+                    modal.classList.add('show');
+                    setTimeout(()=> modal.querySelector('.close-button').focus(), 100);
                 },
 
                 renderTasks: () => {
-                    const list = document.getElementById('task-list');
-                    list.innerHTML = '';
-                    const tasks = App.Utils.storage.get('tasks');
+                    const list = document.getElementById('task-list'); list.innerHTML = '';
+                    const tasks = App.Utils.storage.get('tasks_v2');
+                    if(tasks.length === 0) { list.innerHTML = '<div class="text-center opacity-50 text-sm py-4">Belum ada misi.</div>'; return; }
                     tasks.forEach((t, i) => {
                         const div = document.createElement('div');
-                        div.className = `task-item ${t.d ? 'done' : ''}`;
-                        div.innerHTML = `<span class="flex-grow">${t.txt}</span> <button class="text-red-500 hover:text-red-300 font-bold px-2">&times;</button>`;
+                        div.className = `task-item ${t.d ? 'done' : ''}`; div.tabIndex = 0;
+                        div.innerHTML = `<span class="flex-grow">${t.txt}</span> <button aria-label="Hapus Tugas" class="text-red-500 hover:text-red-300 font-bold px-2 text-lg">&times;</button>`;
                         div.onclick = (e) => {
-                            if(e.target.tagName === 'BUTTON') { tasks.splice(i,1); App.Utils.storage.set('tasks', tasks); App.UI.renderTasks(); }
-                            else { t.d = !t.d; App.Utils.storage.set('tasks', tasks); App.UI.renderTasks(); }
+                            if(e.target.tagName === 'BUTTON') { tasks.splice(i,1); App.Utils.storage.set('tasks_v2', tasks); App.UI.renderTasks(); App.Utils.haptic(20); }
+                            else { t.d = !t.d; App.Utils.storage.set('tasks_v2', tasks); App.UI.renderTasks(); App.Utils.haptic(20); }
                         };
+                        div.onkeydown = (e) => { if(e.key === 'Enter') div.click(); };
                         list.appendChild(div);
                     });
                 },
 
                 setupMagneticButtons: () => {
-                    document.querySelectorAll('.magnetic-btn').forEach(btn => {
-                        btn.addEventListener('mousemove', (e) => {
-                            const rect = btn.getBoundingClientRect();
-                            const x = e.clientX - rect.left - rect.width / 2;
-                            const y = e.clientY - rect.top - rect.height / 2;
-                            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                    if (window.matchMedia("(pointer: fine)").matches) {
+                        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                            btn.addEventListener('mousemove', (e) => {
+                                const rect = btn.getBoundingClientRect();
+                                const x = e.clientX - rect.left - rect.width / 2;
+                                const y = e.clientY - rect.top - rect.height / 2;
+                                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                            });
+                            btn.addEventListener('mouseleave', () => btn.style.transform = '');
                         });
-                        btn.addEventListener('mouseleave', () => btn.style.transform = '');
-                    });
+                    }
                 },
 
                 setupAmbientLight: () => {
-                    document.addEventListener('mousemove', e => {
-                        document.querySelectorAll('.glass-card').forEach(card => {
-                            const rect = card.getBoundingClientRect();
-                            const x = e.clientX - rect.left;
-                            const y = e.clientY - rect.top;
-                            card.style.setProperty('--mouse-x', `${x}px`);
-                            card.style.setProperty('--mouse-y', `${y}px`);
+                    if (window.matchMedia("(pointer: fine)").matches) {
+                        document.addEventListener('mousemove', e => {
+                            document.querySelectorAll('.glass-card').forEach(card => {
+                                const rect = card.getBoundingClientRect();
+                                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                            });
                         });
-                    });
+                    }
                 },
 
-                printSchedule: () => {
-                    const p = window.open('', '_blank');
-                    let html = '<html><head><title>Jadwal 9H</title><style>body{font-family:sans-serif; padding:20px;} table{width:100%; border-collapse:collapse; margin-bottom:20px;} th,td{border:1px solid #000; padding:8px; text-align:left;} th{background:#eee;}</style></head><body><h2>Jadwal Pelajaran 9H</h2>';
-                    App.Data.pelajaran.forEach(d => {
-                        html += `<h3>${d.hari}</h3><table><tr><th>Waktu</th><th>Mata Pelajaran</th></tr>`;
-                        d.map.forEach(m => html += `<tr><td>${m.t}</td><td>${m.m}</td></tr>`);
-                        html += '</table>';
-                    });
-                    html += '</body></html>';
-                    p.document.write(html); p.document.close(); p.print();
+                printSchedule: () => { window.print(); },
+                
+                shareApp: () => {
+                    if (navigator.share) {
+                        navigator.share({ title: 'Portal 9H Ultimate', text: 'Lihat jadwal dan struktur kelas 9H!', url: window.location.href })
+                        .catch(console.error);
+                    } else { App.UI.toast("Web Share API tidak didukung di browser ini."); }
                 },
 
                 simulateEarthquake: () => {
-                    App.UI.toast("PERINGATAN: Gempa Simulasi!");
+                    App.UI.toast("PERINGATAN: Gempa Simulasi!"); App.Utils.haptic([100, 50, 100, 50, 200]);
                     document.body.style.animation = "shake 0.5s infinite";
                     const s = document.createElement('style'); s.id = 'shake';
-                    s.innerHTML = `@keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }`;
+                    s.innerHTML = `@keyframes shake { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }`;
                     document.head.appendChild(s);
                     setTimeout(() => { document.body.style.animation = ''; document.getElementById('shake').remove(); }, 3000);
                 }
@@ -879,44 +959,110 @@
 
             Games: {
                 initReactionTest: () => {
-                    const box = document.getElementById('reaction-box');
-                    const text = document.getElementById('reaction-text');
+                    const box = document.getElementById('reaction-box'); const text = document.getElementById('reaction-text');
                     let state = 'idle', timer, startTime;
                     
-                    box.onclick = () => {
+                    const triggerGame = () => {
+                        App.Utils.haptic(20);
                         if(state === 'idle') {
-                            state = 'waiting'; box.className = 'w-full h-32 rounded-xl bg-red-500/80 flex items-center justify-center cursor-pointer transition-colors border border-white/20 mb-4';
-                            text.innerText = 'Tunggu warna hijau...';
-                            const waitTime = Math.random() * 3000 + 1000;
+                            state = 'waiting'; box.className = 'w-full h-32 rounded-xl bg-yellow-500 flex items-center justify-center cursor-pointer shadow-inner';
+                            text.innerText = 'Tunggu warna hijau...'; text.style.color = 'black';
+                            const waitTime = Math.random() * 3000 + 1500;
                             timer = setTimeout(() => {
-                                state = 'ready'; box.classList.replace('bg-red-500/80', 'bg-green-500/80');
-                                text.innerText = 'KLIK SEKARANG!';
-                                startTime = Date.now();
-                                App.Audio.playBeep(1000, 'square', 0.1);
+                                state = 'ready'; box.className = 'w-full h-32 rounded-xl bg-[var(--success-color)] flex items-center justify-center cursor-pointer shadow-[0_0_30px_var(--success-color)]';
+                                text.innerText = 'KLIK SEKARANG!'; text.style.color = 'white';
+                                startTime = Date.now(); App.Audio.playBeep(1000, 'square', 0.1); App.Utils.haptic(100);
                             }, waitTime);
                         } else if(state === 'waiting') {
                             clearTimeout(timer); state = 'idle';
-                            text.innerText = 'Terlalu Cepat! Klik untuk ulang.';
-                            App.Audio.playBeep(200, 'sawtooth', 0.3);
+                            box.className = 'w-full h-32 rounded-xl bg-[var(--danger-color)] flex items-center justify-center cursor-pointer';
+                            text.innerText = 'Terlalu Cepat! Coba lagi.'; text.style.color = 'white';
+                            App.Audio.playBeep(200, 'sawtooth', 0.3); App.Utils.haptic([50, 50, 50]);
                         } else if(state === 'ready') {
                             const rt = Date.now() - startTime; state = 'idle';
-                            box.classList.replace('bg-green-500/80', 'bg-blue-500/80');
-                            text.innerText = `Refleks: ${rt}ms! Klik untuk ulang.`;
+                            box.className = 'w-full h-32 rounded-xl bg-blue-500 flex items-center justify-center cursor-pointer';
+                            text.innerText = `${rt}ms! Klik untuk ulang.`;
                             App.UI.toast(`Skor Refleks Anda: ${rt}ms`);
+                            if(rt < 300) App.Audio.playBeep(1200, 'sine', 0.3); // High score beep
                         }
                     };
+                    box.onclick = triggerGame;
+                    box.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' ') triggerGame(); };
                 }
             },
 
             Core: {
-                init: () => {
-                    // Initialize Theme
-                    if(App.Utils.storage.get('theme') === 'dark') document.body.classList.add('dark-mode');
+                initMatrixCanvas: () => {
+                    const canvas = document.getElementById('matrix-canvas');
+                    const ctx = canvas.getContext('2d');
+                    let width = canvas.width = window.innerWidth;
+                    let height = canvas.height = window.innerHeight;
+                    const letters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+                    const fontSize = 14; const columns = width / fontSize;
+                    const drops = []; for(let x = 0; x < columns; x++) drops[x] = 1;
 
-                    // Bypass Landing
+                    const draw = () => {
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                        ctx.fillRect(0, 0, width, height);
+                        ctx.fillStyle = '#0F0'; ctx.font = fontSize + 'px monospace';
+                        for(let i = 0; i < drops.length; i++) {
+                            const text = letters[Math.floor(Math.random() * letters.length)];
+                            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                            if(drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                            drops[i]++;
+                        }
+                    };
+                    
+                    window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+                    return setInterval(draw, 33);
+                },
+
+                initVoiceCommand: () => {
+                    const btn = document.getElementById('btn-voice');
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if(SpeechRecognition) {
+                        const rec = new SpeechRecognition(); rec.lang = 'id-ID';
+                        rec.onstart = () => { btn.style.background = 'var(--danger-color)'; App.UI.toast("Mendengarkan..."); App.Utils.haptic(50); };
+                        rec.onresult = (e) => {
+                            const cmd = e.results[0][0].transcript.toLowerCase();
+                            App.UI.toast(`Terdeteksi: "${cmd}"`);
+                            if(cmd.includes('gelap') || cmd.includes('malam')) document.getElementById('btn-theme').click();
+                            else if(cmd.includes('jadwal')) document.getElementById('pelajaran-section').scrollIntoView();
+                            else if(cmd.includes('acak')) document.getElementById('btn-random-student').click();
+                            else { const search = document.getElementById('global-search'); search.value = cmd; search.dispatchEvent(new Event('input')); search.focus(); }
+                        };
+                        rec.onend = () => { btn.style.background = ''; };
+                        btn.onclick = () => { try{ rec.start(); }catch(e){} };
+                    } else { btn.onclick = () => App.UI.toast("Browser tidak mendukung sensor suara."); }
+                },
+
+                init: () => {
+                    // Theme Init
+                    if(App.Utils.storage.get('theme') === 'dark') {
+                        document.body.classList.add('dark-mode');
+                        document.getElementById('meta-theme-color').setAttribute('content', '#000814');
+                    }
+
+                    // Network Status Indicator
+                    window.addEventListener('offline', () => document.getElementById('offline-banner').style.display = 'block');
+                    window.addEventListener('online', () => { document.getElementById('offline-banner').style.display = 'none'; App.UI.toast("Koneksi pulih."); });
+
+                    // Matrix Mode Init
+                    document.getElementById('btn-matrix').onclick = () => {
+                        document.body.classList.toggle('matrix-mode');
+                        if(document.body.classList.contains('matrix-mode')) {
+                            App.UI.toast("Memasuki Matrix..."); App.Utils.haptic([100, 100, 100]);
+                            if(!App.State.matrixInterval) App.State.matrixInterval = App.Core.initMatrixCanvas();
+                        } else {
+                            App.UI.toast("Keluar dari Matrix");
+                        }
+                    };
+
+                    App.Core.initVoiceCommand();
+
+                    // Bypass Landing Process
                     document.getElementById('btn-bypass').onclick = () => {
-                        App.Audio.init(); // Init audio context on user gesture
-                        App.Audio.playBeep(800, 'sine', 0.2);
+                        App.Audio.init(); App.Audio.playBeep(800, 'sine', 0.2); App.Utils.haptic(100);
                         const bp = document.getElementById('blocked-page');
                         bp.style.transform = 'scale(1.2) translateY(-100%)'; bp.style.opacity = '0';
                         setTimeout(() => {
@@ -924,7 +1070,13 @@
                             document.getElementById('main-page').classList.add('show');
                             document.getElementById('hero-subtitle').innerText = "The Elite Crew of 9H";
                             
-                            // Start Animations
+                            // Auto Scroll to today's schedule if available
+                            setTimeout(() => {
+                                const todayCard = document.querySelector('.today-highlight');
+                                if(todayCard && window.innerWidth < 768) todayCard.scrollIntoView({behavior: 'smooth', block: 'center'});
+                            }, 1000);
+
+                            // Intersection Observer (Animation on scroll)
                             const observer = new IntersectionObserver(e => {
                                 e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal'); observer.unobserve(en.target); } });
                             }, { threshold: 0.1 });
@@ -932,13 +1084,16 @@
                         }, 800);
                     };
 
-                    // Header Clock & Live Status
+                    // Clock & Realtime tracker
                     setInterval(() => {
-                        const now = new Date();
-                        const h = String(now.getHours()).padStart(2,'0'), m = String(now.getMinutes()).padStart(2,'0');
+                        const now = new Date(); const h = String(now.getHours()).padStart(2,'0'), m = String(now.getMinutes()).padStart(2,'0');
                         document.getElementById('live-clock').innerHTML = `${h}<span class="animate-pulse">:</span>${m} WIB`;
                         
-                        // Lesson tracker
+                        let greet = "Selamat Malam";
+                        if(h>=5 && h<11) greet="Selamat Pagi"; else if(h>=11 && h<15) greet="Selamat Siang"; else if(h>=15 && h<18) greet="Selamat Sore";
+                        document.getElementById('live-greeting').innerText = greet;
+
+                        // Lesson Tracker Logic
                         if(App.Data.hariIndex >= 1 && App.Data.hariIndex <= 5) {
                             document.querySelectorAll('.current-lesson').forEach(e => e.classList.remove('current-lesson'));
                             const tCard = document.querySelector(`#pelajaran-section [data-day="${App.Data.hariIndex}"]`);
@@ -953,17 +1108,12 @@
                         }
                     }, 1000);
 
-                    // Context Menu Logic
+                    // Context Menu
                     const ctxMenu = document.getElementById('custom-menu');
-                    document.addEventListener('contextmenu', e => {
-                        e.preventDefault();
-                        ctxMenu.style.left = `${e.clientX}px`; ctxMenu.style.top = `${e.clientY}px`;
-                        ctxMenu.classList.add('show');
-                    });
+                    document.addEventListener('contextmenu', e => { e.preventDefault(); ctxMenu.style.left = `${e.clientX}px`; ctxMenu.style.top = `${e.clientY}px`; ctxMenu.classList.add('show'); });
                     document.addEventListener('click', e => { if(!e.target.closest('#custom-menu')) ctxMenu.classList.remove('show'); });
-                    window.addEventListener('scroll', () => ctxMenu.classList.remove('show'));
 
-                    // Menus & Modals Setup
+                    // Navigation Modals
                     document.getElementById('btn-menu').onclick = () => document.getElementById('nav-overlay').classList.add('show');
                     document.getElementById('close-menu').onclick = () => document.getElementById('nav-overlay').classList.remove('show');
                     document.querySelectorAll('.nav-item').forEach(n => n.onclick = () => document.getElementById('nav-overlay').classList.remove('show'));
@@ -971,11 +1121,15 @@
                     document.getElementById('btn-idcard').onclick = () => document.getElementById('modal-idcard').classList.add('show');
                     document.querySelectorAll('.close-button').forEach(btn => btn.onclick = function() { this.closest('.modal').classList.remove('show'); });
 
-                    // Filters
+                    // Accessibility modal closing
+                    document.addEventListener('keydown', e => { if(e.key === 'Escape') document.querySelectorAll('.modal.show, .nav-overlay.show').forEach(m => m.classList.remove('show')); });
+
+                    // Filters org
                     document.querySelectorAll('#org-filters .filter-btn').forEach(btn => {
                         btn.onclick = () => {
-                            document.querySelectorAll('#org-filters .filter-btn').forEach(b => b.classList.remove('active'));
-                            btn.classList.add('active');
+                            App.Utils.haptic(20);
+                            document.querySelectorAll('#org-filters .filter-btn').forEach(b => {b.classList.remove('active'); b.setAttribute('aria-selected', 'false');});
+                            btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
                             const f = btn.dataset.filter;
                             document.querySelectorAll('#org-grid .glass-card').forEach(card => {
                                 if(f === 'all' || card.dataset.category.includes(f)) { card.style.display = 'block'; setTimeout(()=>card.style.opacity=1, 50); }
@@ -984,24 +1138,29 @@
                         };
                     });
 
-                    // Toggles
+                    // Theme Toggle
                     document.getElementById('btn-theme').onclick = () => { 
-                        document.body.classList.toggle('dark-mode'); 
-                        App.Utils.storage.set('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+                        App.Utils.haptic(30);
+                        const isDark = document.body.classList.toggle('dark-mode'); 
+                        App.Utils.storage.set('theme', isDark ? 'dark' : 'light');
+                        document.getElementById('meta-theme-color').setAttribute('content', isDark ? '#000814' : '#f0f8ff');
+                        App.UI.toast(`Mode ${isDark ? 'Gelap' : 'Terang'} Diaktifkan`);
                     };
 
-                    // Tasks Input
+                    // Tasks Input Handling
                     document.getElementById('task-input').addEventListener('keypress', e => {
                         if(e.key === 'Enter' && e.target.value.trim()) {
-                            let tasks = App.Utils.storage.get('tasks');
+                            let tasks = App.Utils.storage.get('tasks_v2');
                             tasks.push({ txt: e.target.value.trim(), d: false });
-                            App.Utils.storage.set('tasks', tasks); App.UI.renderTasks();
-                            e.target.value = '';
+                            App.Utils.storage.set('tasks_v2', tasks); App.UI.renderTasks();
+                            e.target.value = ''; App.Utils.haptic(20);
                         }
                     });
 
-                    // Pomodoro
+                    // Pomodoro Notification & Logic
+                    if ("Notification" in window) { Notification.requestPermission(); }
                     document.getElementById('btn-pomo').onclick = () => {
+                        App.Utils.haptic(30);
                         if(App.State.isPomoRunning) {
                             clearInterval(App.State.pomoTimer); App.State.isPomoRunning = false;
                             document.getElementById('btn-pomo').innerHTML = '▶';
@@ -1013,36 +1172,49 @@
                                 document.getElementById('pomo-display').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
                                 if(App.State.pomoTime <= 0) { 
                                     clearInterval(App.State.pomoTimer); App.State.isPomoRunning = false;
-                                    App.UI.toast("Waktu Fokus Selesai!"); App.Audio.playBeep(1000, 'sine', 1);
+                                    App.UI.toast("Waktu Fokus Selesai!"); App.Audio.playBeep(1000, 'sine', 1); App.Utils.haptic([200, 100, 200, 100, 500]);
+                                    if(Notification.permission === 'granted') new Notification("Fokus Selesai", {body: "Waktu istirahat!"});
+                                    App.State.pomoTime = 1500; document.getElementById('btn-pomo').innerHTML = '▶';
                                 }
                             }, 1000);
                         }
                     };
 
-                    // Copy Schedule
+                    // Copy Content
                     document.getElementById('btn-copy-today').onclick = () => {
+                        App.Utils.haptic(30);
                         const d = App.Data.pelajaran[App.Data.hariIndex - 1];
                         if(!d) return App.UI.toast("Tidak ada jadwal hari ini.");
-                        const text = `*JADWAL 9H (${d.hari})*\n` + d.map.map(m => `- ${m.t}: ${m.m}`).join('\n');
-                        navigator.clipboard.writeText(text).then(() => App.UI.toast("Jadwal disalin ke clipboard!"));
+                        const text = `*JADWAL 9H (${d.hari})*\n` + d.map.map(m => `- ${m.t}: ${m.m} ${m.g ? '('+m.g+')' : ''}`).join('\n');
+                        navigator.clipboard.writeText(text).then(() => App.UI.toast("Jadwal disalin ke papan klip!"));
                     };
 
-                    // Utilities
-                    document.getElementById('btn-ocean-sound').onclick = App.Audio.toggleOcean;
+                    // Randomizer
                     document.getElementById('btn-random-student').onclick = () => {
-                        const s = App.Data.kru[Math.floor(Math.random() * App.Data.kru.length)];
-                        App.UI.toast(`🎲 Terpilih: ${s.nama}`); App.UI.showProfile(s.id);
+                        let count = 0; const interval = setInterval(() => {
+                            const s = App.Data.kru[Math.floor(Math.random() * App.Data.kru.length)];
+                            App.UI.toast(`Mengacak... ${s.nama.split(' ')[0]}`); App.Audio.playBeep(600+count*50, 'square', 0.05);
+                            count++; if(count > 10) { clearInterval(interval); App.UI.showProfile(s.id); App.UI.toast(`🎲 Terpilih: ${s.nama}`); }
+                        }, 100);
                     };
 
-                    // Scroll Logic
+                    // Scroll Features (Header Hide & Back to Top)
                     window.addEventListener('scroll', () => {
                         requestAnimationFrame(() => {
                             let sy = window.scrollY, max = document.body.scrollHeight - window.innerHeight;
                             document.getElementById('scroll-progress').style.width = `${(sy/max)*100}%`;
-                            document.getElementById('fixed-header').classList.toggle('hide', sy > window.lastScrollY && sy > 100);
+                            
+                            const header = document.getElementById('fixed-header');
+                            if(sy > 100 && sy > window.lastScrollY) header.classList.add('hide'); else header.classList.remove('hide');
+                            
+                            const btnTop = document.getElementById('btn-back-top');
+                            if(sy > 500) btnTop.classList.add('show'); else btnTop.classList.remove('show');
+                            
                             window.lastScrollY = sy;
                         });
-                    });
+                    }, {passive: true});
+
+                    document.getElementById('btn-back-top').onclick = () => { window.scrollTo({top:0, behavior:'smooth'}); App.Utils.haptic(20); };
 
                     // Panic Button (Double Esc)
                     let escCount = 0, escTimer;
@@ -1057,7 +1229,7 @@
             }
         };
 
-        // Initialize Everything
+        // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
             App.Render.init();
             App.Search.init();
@@ -1065,7 +1237,9 @@
             App.UI.setupAmbientLight();
             App.Games.initReactionTest();
             App.Core.init();
+            console.log("%cPortal 9H Ultimate", "color: #ff006e; font-size: 24px; font-weight: bold;");
         });
     </script>
 </body>
 </html>
+
