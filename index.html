@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
@@ -14,136 +13,184 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Poppins:wght@400;500;700;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Poppins:wght@400;500;600;700;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* =====================================================================
            1. CORE VARIABLES & PREMIUM OCEAN GLASSMORPHISM
            ===================================================================== */
         :root {
+            /* Light Theme (Ocean) */
             --bg-color: #e0f2fe; 
-            --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
-            --text-primary: #0c4a6e; --text-secondary: #0369a1;
-            --accent: #0ea5e9; --accent-glow: rgba(14, 165, 233, 0.5);
+            --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #bae6fd 100%);
+            --text-primary: #082f49; 
+            --text-secondary: #0369a1;
+            --accent: #0ea5e9; 
+            --accent-glow: rgba(14, 165, 233, 0.4);
             --accent-hover: #0284c7;
             --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6;
             
-            --glass-bg: rgba(255, 255, 255, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.7);
-            --glass-shadow: 0 15px 35px rgba(3, 105, 161, 0.15);
-            --glass-highlight: rgba(255, 255, 255, 0.9);
+            /* Premium Glass */
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 10px 40px rgba(3, 105, 161, 0.08);
+            --glass-highlight: inset 1px 1px 0px rgba(255, 255, 255, 0.9);
             
-            --font-main: 'Poppins', sans-serif; --font-display: 'Playfair Display', serif;
-            --font-mono: 'JetBrains Mono', monospace; --font-ui: 'Inter', sans-serif;
+            --font-main: 'Poppins', sans-serif; 
+            --font-display: 'Playfair Display', serif;
+            --font-mono: 'JetBrains Mono', monospace; 
+            --font-ui: 'Inter', sans-serif;
             --base-font-size: 16px;
         }
 
         body.dark-mode {
+            /* Dark Theme (Deep Sea) */
             --bg-color: #0f172a; 
             --bg-gradient: linear-gradient(135deg, #020617 0%, #081126 50%, #0f172a 100%);
-            --text-primary: #f8fafc; --text-secondary: #bae6fd;
-            --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.4);
+            --text-primary: #f8fafc; 
+            --text-secondary: #bae6fd;
+            --accent: #38bdf8; 
+            --accent-glow: rgba(56, 189, 248, 0.3);
             --accent-hover: #7dd3fc;
+            
+            /* Dark Premium Glass */
             --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            --glass-highlight: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            --glass-highlight: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
         }
+
+        /* Zen Mode (Focus) */
+        body.zen-mode {
+            --bg-gradient: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+        }
+        body.zen-mode.dark-mode {
+            --bg-gradient: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+            --glass-bg: rgba(20, 20, 20, 0.9);
+        }
+        body.zen-mode #ocean-ecosystem { display: none !important; }
 
         /* =====================================================================
            2. GLOBAL RESETS & BASE STYLES
            ===================================================================== */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; font-size: var(--base-font-size); }
+        html { scroll-behavior: smooth; font-size: var(--base-font-size); scrollbar-gutter: stable; }
         body {
             font-family: var(--font-main); background: var(--bg-color); background-image: var(--bg-gradient); 
-            background-attachment: fixed; color: var(--text-secondary); transition: background 0.8s ease, color 0.8s ease;
+            background-attachment: fixed; color: var(--text-secondary); transition: background 0.6s ease, color 0.6s ease;
             overflow-x: hidden; margin: 0; padding: 0; min-height: 100vh;
             -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
         }
         ::selection { background-color: var(--accent); color: #fff; }
+        
+        /* Premium Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background-color: var(--text-primary); }
+        ::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        body.dark-mode ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--success));
+            z-index: 9999; width: 0%; transition: width 0.1s; pointer-events: none;
+        }
         
         /* 3D Global Tilt Class */
-        .tilt-element { transform-style: preserve-3d; transform: perspective(1000px); will-change: transform; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .tilt-element { transform-style: preserve-3d; transform: perspective(1000px); will-change: transform; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
         
-        /* Reduce Motion */
-        body.reduce-motion * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        /* Accessibility: Reduce Motion */
+        body.reduce-motion * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 
         /* =====================================================================
-           3. 3D ECOSYSTEM (RICH ANIMATED SEA CREATURES)
+           3. 3D ECOSYSTEM (OPTIMIZED)
            ===================================================================== */
         #ocean-ecosystem { position: fixed; inset: 0; z-index: -5; pointer-events: none; overflow: hidden; perspective: 1000px; }
-        .sea-creature { position: absolute; font-size: 2rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); will-change: transform, opacity; user-select: none; }
+        .sea-creature { position: absolute; font-size: 2rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); will-change: transform; user-select: none; }
         .bioluminescent { filter: drop-shadow(0 0 15px var(--accent)) drop-shadow(0 0 5px #fff); }
         
-        /* Depth Layers */
-        .depth-bg { z-index: -10; opacity: 0.3; transform: scale(0.6) translateZ(-500px); filter: blur(3px); }
-        .depth-mid { z-index: -5; opacity: 0.6; transform: scale(0.85) translateZ(-200px); filter: blur(1px); }
-        .depth-fg { z-index: 0; opacity: 1; transform: scale(1.1) translateZ(0); }
+        .depth-bg { z-index: -10; opacity: 0.2; transform: scale(0.6) translateZ(-500px); filter: blur(4px); }
+        .depth-mid { z-index: -5; opacity: 0.5; transform: scale(0.85) translateZ(-200px); filter: blur(2px); }
+        .depth-fg { z-index: 0; opacity: 0.8; transform: scale(1.1) translateZ(0); }
 
-        /* Complex Motions */
         .swim-slow { animation: swimLR 45s linear infinite; }
         .swim-fast { animation: swimRL 20s linear infinite; }
-        .float-bob { animation: floatUpBob 25s ease-in-out infinite; }
-        .crawl-bottom { animation: crawl 60s linear infinite; bottom: 2%; }
         .jelly-swim { animation: jellyMove 25s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
         
         @keyframes swimLR { 0% { transform: translateX(-15vw) scaleX(-1) translateY(0) rotate(-5deg); } 50% { transform: translateX(115vw) scaleX(-1) translateY(-30px) rotate(5deg); } 50.1% { transform: translateX(115vw) scaleX(1) translateY(-30px) rotate(-5deg); } 100% { transform: translateX(-15vw) scaleX(1) translateY(0) rotate(5deg); } }
         @keyframes swimRL { 0% { transform: translateX(115vw) translateY(0); } 100% { transform: translateX(-15vw) translateY(40px); } }
-        @keyframes floatUpBob { 0% { transform: translateY(110vh) scale(0.8) rotate(0deg); opacity:0; } 10% { opacity:0.6; } 90% { opacity:0.6; } 100% { transform: translateY(-10vh) scale(1.3) rotate(20deg); opacity:0; } }
-        @keyframes crawl { 0% { transform: translateX(-10vw) rotate(0deg); } 50% {transform: translateX(50vw) rotate(5deg);} 100% { transform: translateX(110vw) rotate(0deg); } }
         @keyframes jellyMove { 0% { transform: translateY(110vh) scale(0.9); opacity:0;} 15% { opacity:0.8; transform: translateY(90vh) scale(1.1); } 30% { transform: translateY(85vh) scale(0.9); } 45% { transform: translateY(65vh) scale(1.1); } 100% { transform: translateY(-20vh) scale(1); opacity:0; } }
 
-        /* Light Rays */
-        .light-ray { position: absolute; top: -20%; width: 60%; height: 150%; background: linear-gradient(to bottom, var(--glass-highlight) 0%, transparent 80%); transform: rotate(25deg); pointer-events: none; mix-blend-mode: overlay; animation: raySway 15s ease-in-out infinite alternate; filter: blur(25px); opacity: 0.4;}
+        /* Elegant Light Rays */
+        .light-ray { position: absolute; top: -20%; width: 50%; height: 150%; background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 80%); transform: rotate(25deg); pointer-events: none; mix-blend-mode: overlay; animation: raySway 15s ease-in-out infinite alternate; filter: blur(30px);}
+        body.dark-mode .light-ray { background: linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 0%, transparent 80%); }
         @keyframes raySway { 0% { transform: rotate(20deg) translateX(-10%); } 100% { transform: rotate(35deg) translateX(10%); } }
 
         /* =====================================================================
-           4. PREMIUM UI COMPONENTS (GLASS, CARDS, BUTTONS)
+           4. PREMIUM UI COMPONENTS
            ===================================================================== */
         .glass-panel {
             background: var(--glass-bg); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight);
-            box-shadow: var(--glass-shadow); border-radius: 1.5rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow), var(--glass-highlight);
+            border-radius: 1.5rem; transition: all 0.3s ease;
         }
+        
         .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: var(--glass-bg); backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%);
             border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: var(--glass-shadow); color: var(--text-secondary);
-            opacity: 0; transform: translateY(40px);
+            box-shadow: var(--glass-shadow), var(--glass-highlight); color: var(--text-secondary);
+            opacity: 0; transform: translateY(30px); will-change: transform, opacity;
+            position: relative; overflow: hidden;
         }
+        /* Hover Reflection Effect */
+        .glass-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg); transition: 0.5s; pointer-events: none;
+        }
+        .glass-card:hover::after { left: 150%; }
         .glass-card.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .glass-card:hover { border-color: var(--accent-glow); box-shadow: 0 20px 40px var(--accent-glow); z-index: 10; }
+        .glass-card:hover { border-color: var(--accent-glow); box-shadow: 0 15px 35px var(--accent-glow), var(--glass-highlight); z-index: 10; }
         
-        .section-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 2rem; color: var(--text-primary); font-weight: 900; text-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; transform-style: preserve-3d; perspective: 500px;}
-        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 5px; background: linear-gradient(90deg, var(--accent), var(--success)); border-radius: 5px; transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .section-title:hover::after { width: 120px; }
-
-        .btn-interactive { position: relative; overflow: hidden; outline: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; transform-style: preserve-3d;}
-        .btn-interactive:active { transform: scale(0.92); }
-        
-        /* Smart Lists with Hover Depth */
-        .smart-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
-        .smart-list li {
-            display: flex; flex-direction: column; padding: 0.8rem 1.2rem; border-radius: 1rem; background: rgba(0,0,0,0.03);
-            border: 1px solid transparent; font-weight: 600; cursor: pointer; transition: all 0.3s ease; position: relative;
+        .section-title { 
+            font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); text-align: center; 
+            margin-bottom: 2rem; color: var(--text-primary); font-weight: 900; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; 
         }
-        body.dark-mode .smart-list li { background: rgba(255,255,255,0.03); }
-        .smart-list li:hover { background: var(--glass-bg); transform: translateX(8px) scale(1.02); border-color: var(--accent-glow); box-shadow: 0 8px 20px rgba(0,0,0,0.08); z-index: 2;}
-        .list-header { display: flex; align-items: center; color: var(--text-primary); font-size: 0.95rem; }
-        .list-header::before { content: '✨'; margin-right: 12px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0.7; font-size: 1.1rem;}
-        .smart-list li:hover .list-header::before { transform: rotate(25deg) scale(1.3); opacity: 1; text-shadow: 0 0 10px var(--accent); }
+        .section-title::after { 
+            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); 
+            width: 50px; height: 4px; background: linear-gradient(90deg, var(--accent), var(--success)); 
+            border-radius: 4px; transition: width 0.3s ease; 
+        }
+        .section-title:hover::after { width: 100px; }
 
-        /* Dynamic Highlights */
-        .today-highlight { border: 2px solid var(--accent) !important; background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), transparent); box-shadow: 0 0 30px var(--accent-glow); }
+        .btn-interactive { position: relative; outline: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; user-select: none; }
+        .btn-interactive:active { transform: scale(0.95) !important; }
+        .btn-interactive:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        
+        /* Smart Lists */
+        .smart-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .smart-list li {
+            display: flex; flex-direction: column; padding: 0.75rem 1rem; border-radius: 1rem; 
+            background: rgba(0,0,0,0.02); border: 1px solid transparent; font-weight: 600; 
+            cursor: pointer; transition: all 0.2s ease; position: relative;
+        }
+        body.dark-mode .smart-list li { background: rgba(255,255,255,0.02); }
+        .smart-list li:hover { 
+            background: var(--glass-bg); transform: translateX(5px); 
+            border-color: var(--accent-glow); box-shadow: 0 5px 15px rgba(0,0,0,0.05); z-index: 2;
+        }
+        .list-header { display: flex; align-items: center; color: var(--text-primary); font-size: 0.9rem; }
+        .list-header::before { content: '✨'; margin-right: 10px; transition: transform 0.3s; opacity: 0.5; font-size: 1rem;}
+        .smart-list li:hover .list-header::before { transform: rotate(20deg) scale(1.2); opacity: 1; text-shadow: 0 0 8px var(--accent); }
+
+        /* Highlights */
+        .today-highlight { border: 2px solid var(--accent) !important; background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent); }
         .current-lesson { 
-            background: linear-gradient(90deg, rgba(14, 165, 233, 0.15), transparent) !important; 
-            border-left: 5px solid var(--accent) !important; transform: translateX(8px) scale(1.02) !important; 
-            box-shadow: 0 5px 15px var(--accent-glow); animation: pulseLive 2s infinite; 
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.1), transparent) !important; 
+            border-left: 4px solid var(--accent) !important; 
+            box-shadow: 0 4px 10px var(--accent-glow); animation: pulseLive 2s infinite; 
         }
         @keyframes pulseLive { 0%, 100% { border-left-color: var(--accent); } 50% { border-left-color: var(--success); } }
 
@@ -153,275 +200,305 @@
         .fixed-header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 0.8rem 1.5rem; z-index: 500;
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--glass-bg); backdrop-filter: blur(30px) saturate(200%); border-bottom: 1px solid var(--glass-border);
-            transition: transform 0.4s cubic-bezier(0.3, 0, 0.2, 1); box-shadow: var(--glass-shadow);
+            background: var(--glass-bg); backdrop-filter: blur(30px) saturate(200%); -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, background 0.3s;
         }
         .fixed-header.hide { transform: translateY(-100%); }
         
-        .logo-img { height: 42px; width: 42px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .logo-img:hover { transform: scale(1.15) rotate(15deg); border-color: var(--accent); box-shadow: 0 0 25px var(--accent-glow); }
+        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .logo-img:hover { transform: scale(1.1) rotate(10deg); border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         
-        .icon-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.5rem; border-radius: 50%; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; width: 42px; height: 42px; }
-        .icon-btn:hover { background: var(--accent); color: white; transform: translateY(-3px) translateZ(10px); box-shadow: 0 8px 20px var(--accent-glow); border-color: var(--accent); }
-        .icon-btn svg { width: 22px; height: 22px; transition: transform 0.3s; }
-        .icon-btn:hover svg { transform: scale(1.1); }
+        .icon-btn { background: rgba(0,0,0,0.03); border: 1px solid var(--glass-border); border-radius: 50%; color: var(--text-primary); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; transition: all 0.2s; }
+        body.dark-mode .icon-btn { background: rgba(255,255,255,0.05); }
+        .icon-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-glow); border-color: var(--accent); }
+        .icon-btn svg { width: 20px; height: 20px; transition: transform 0.2s; }
 
-        /* Dashboard Panel (XP/Level/Pearls) */
-        #dashboard-panel { margin-top: 90px; margin-bottom: 2rem; padding: 1rem; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; }
-        .dash-card { flex: 0 0 calc(50% - 0.5rem); min-width: 160px; padding: 1.2rem; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden;}
+        /* Dashboard */
+        #dashboard-panel { margin-top: 85px; margin-bottom: 1.5rem; padding: 0.5rem 1rem; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        #dashboard-panel::-webkit-scrollbar { display: none; }
+        .dash-card { flex: 0 0 calc(50% - 0.5rem); min-width: 150px; padding: 1rem; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden;}
         @media(min-width: 768px) { .dash-card { flex: 1; } }
-        .dash-icon { position: absolute; right: -10px; bottom: -10px; font-size: 5rem; opacity: 0.1; transform: rotate(-15deg); pointer-events: none;}
-
-        .progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 4px; overflow: hidden; border: 1px solid var(--glass-border); margin-top: 8px;}
-        body.dark-mode .progress-bar { background: rgba(255,255,255,0.05); }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px;}
+        
+        .progress-bar { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 3px; overflow: hidden; margin-top: 8px;}
+        body.dark-mode .progress-bar { background: rgba(255,255,255,0.1); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);}
 
         /* =====================================================================
-           6. ADVANCED SEARCH, QUICK NAV & FILTERS
+           6. ADVANCED SEARCH, COMMAND PALETTE & NAVIGATION
            ===================================================================== */
-        .search-wrapper { position: relative; max-width: 650px; margin: 0 auto 2.5rem; z-index: 40; perspective: 1000px; }
-        .search-input { width: 100%; padding: 1.2rem 3rem 1.2rem 3.5rem; border-radius: 2rem; border: 2px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); font-family: var(--font-main); font-weight: 600; font-size: 1.05rem; backdrop-filter: blur(25px); outline: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: var(--glass-shadow); }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 15px 40px var(--accent-glow); background: var(--bg-color); transform: translateY(-2px) translateZ(10px);}
-        .search-icon { position: absolute; left: 1.4rem; top: 1.3rem; color: var(--text-primary); opacity: 0.5; width: 24px; height: 24px; pointer-events: none; transition: all 0.3s; }
-        .search-input:focus ~ .search-icon { color: var(--accent); opacity: 1; transform: scale(1.1); }
-        .search-clear { position: absolute; right: 1.4rem; top: 1.3rem; color: var(--danger); cursor: pointer; width: 24px; height: 24px; opacity: 0; pointer-events: none; transition: all 0.3s; }
+        .search-wrapper { position: relative; max-width: 600px; margin: 0 auto 2rem; z-index: 40; }
+        .search-input { width: 100%; padding: 1rem 3rem 1rem 3rem; border-radius: 2rem; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); font-family: var(--font-main); font-weight: 500; font-size: 1rem; box-shadow: var(--glass-shadow), inset 0 2px 4px rgba(0,0,0,0.02); outline: none; transition: all 0.3s ease; }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); background: var(--bg-color); transform: translateY(-2px);}
+        .search-icon { position: absolute; left: 1.2rem; top: 1.1rem; color: var(--text-primary); opacity: 0.5; width: 20px; height: 20px; pointer-events: none; }
+        .search-clear { position: absolute; right: 1.2rem; top: 1.1rem; color: var(--danger); cursor: pointer; width: 20px; height: 20px; opacity: 0; pointer-events: none; transition: 0.2s; }
         .search-input:not(:placeholder-shown) ~ .search-clear { opacity: 1; pointer-events: auto; }
         
-        .nav-pill { padding: 0.7rem 1.8rem; border-radius: 2rem; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-secondary); white-space: nowrap; display: flex; align-items: center; gap: 8px;}
-        .nav-pill.active, .nav-pill:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-4px) translateZ(10px); box-shadow: 0 10px 25px var(--accent-glow); }
+        /* Auto Suggest Box */
+        .search-suggest { position: absolute; top: 110%; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 1rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-10px); transition: all 0.2s; z-index: 50; max-height: 250px; overflow-y: auto;}
+        .search-suggest.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .suggest-item { padding: 12px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        body.dark-mode .suggest-item { border-bottom-color: rgba(255,255,255,0.05); }
+        .suggest-item:hover { background: rgba(14, 165, 233, 0.1); color: var(--accent); padding-left: 25px; transition: 0.2s;}
+        
+        .nav-pill { padding: 0.6rem 1.5rem; border-radius: 2rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-secondary); white-space: nowrap; display: flex; align-items: center; gap: 6px;}
+        .nav-pill.active, .nav-pill:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
 
         /* =====================================================================
-           7. SECTIONS: UTILITIES, QUICK ACCESS & PLAY ZONE
+           7. UTILITIES & GAMES
            ===================================================================== */
-        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
         
         .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-        .quick-link-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.8rem; border-radius: 1rem; color: var(--text-primary); font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
-        .quick-link-btn:hover { background: var(--accent); color: white; transform: translateY(-3px) translateZ(5px); box-shadow: 0 8px 20px var(--accent-glow); border-color: var(--accent);}
+        .quick-link-btn { background: rgba(0,0,0,0.02); border: 1px solid var(--glass-border); padding: 0.8rem; border-radius: 1rem; color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;}
+        body.dark-mode .quick-link-btn { background: rgba(255,255,255,0.02); }
+        .quick-link-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); border-color: var(--accent);}
 
-        /* Games Grid */
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.2rem; }
-        .game-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 150px; position: relative; overflow: hidden; transform-style: preserve-3d;}
-        .game-card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at top right, var(--glass-highlight), transparent 70%); opacity:0; transition:opacity 0.3s; pointer-events:none;}
-        .game-card:hover { border-color: var(--accent); background: var(--bg-color); transform: translateY(-8px) scale(1.05) translateZ(20px); box-shadow: 0 20px 40px var(--accent-glow); z-index: 5;}
-        .game-card:hover::before { opacity: 1; }
-        .game-icon { font-size: 3rem; margin-bottom: 0.8rem; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.15)); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .game-card:hover .game-icon { transform: scale(1.25) rotate(8deg) translateZ(30px); }
-        .game-title { font-weight: 800; font-size: 0.9rem; color: var(--text-primary); line-height: 1.3; transform: translateZ(10px);}
-        .game-badge { position: absolute; top: 8px; right: 8px; font-size: 0.65rem; padding: 3px 8px; border-radius: 10px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transform: translateZ(15px);}
+        /* Games Grid & Skeletons */
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+        .game-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; position: relative; overflow: hidden; box-shadow: var(--glass-highlight); }
+        .game-card:hover { border-color: var(--accent); background: var(--bg-color); transform: translateY(-5px); box-shadow: 0 15px 30px var(--accent-glow); z-index: 5;}
+        .game-icon { font-size: 2.5rem; margin-bottom: 0.5rem; transition: transform 0.3s; }
+        .game-card:hover .game-icon { transform: scale(1.2) rotate(5deg); }
+        .game-title { font-weight: 700; font-size: 0.85rem; color: var(--text-primary); line-height: 1.2;}
+        .game-badge { position: absolute; top: 8px; right: 8px; font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase;}
         .badge-solo { background: var(--accent); } .badge-multi { background: var(--warning); } .badge-bot { background: var(--danger); } .badge-coop { background: var(--purple); }
 
+        .skeleton { background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%); background-size: 200% 100%; animation: skeletonLoad 1.5s infinite; border-radius: 1rem; }
+        body.dark-mode .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%); background-size: 200% 100%; }
+        @keyframes skeletonLoad { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
         /* =====================================================================
-           8. TRUE 3D MODALS, CONTEXT MENU, ID CARD & TOASTS
+           8. MODALS, BOTTOM SHEET, ID CARD & TOASTS
            ===================================================================== */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; perspective: 2000px; }
-        .modal-overlay.show { opacity: 1; display: flex; }
-        .modal-content { background: var(--bg-color); background-image: var(--bg-gradient); padding: 2rem; border-radius: 2rem; width: 90%; max-width: 500px; border: 1px solid var(--glass-border); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.4); transform: translateY(60px) rotateX(-15deg) scale(0.9); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; overflow-y: auto; transform-style: preserve-3d; }
-        .modal-overlay.show .modal-content { transform: translateY(0) rotateX(0) scale(1); }
-        .btn-close { position: absolute; top: 1.2rem; right: 1.2rem; width: 36px; height: 36px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: var(--danger); border: none; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); outline: none; z-index: 10; transform: translateZ(20px);}
-        .btn-close:hover { background: var(--danger); color: white; transform: rotate(90deg) scale(1.1) translateZ(30px); box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.show { opacity: 1; pointer-events: auto; }
+        .modal-content { background: var(--bg-color); background-image: var(--bg-gradient); padding: 2rem; border-radius: 1.5rem; width: 90%; max-width: 450px; border: 1px solid var(--glass-border); position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3), var(--glass-highlight); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); max-height: 90vh; overflow-y: auto; }
+        .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
+        .btn-close { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.05); color: var(--text-primary); border: none; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; cursor: pointer; transition: all 0.2s; z-index: 10;}
+        body.dark-mode .btn-close { background: rgba(255,255,255,0.1); }
+        .btn-close:hover { background: var(--danger); color: white; transform: rotate(90deg); }
 
-        /* 3D ID CARD Premium Profile Data */
-        .id-card-perspective { perspective: 2000px; width: 90%; max-width: 380px; }
-        .id-card-tilt { transform-style: preserve-3d; transition: transform 0.1s ease-out; position: relative; transform: rotateX(0) rotateY(0); }
-        .id-card-tilt.reset { transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: rotateX(0) rotateY(0) !important; }
-        .id-card-body { background: var(--glass-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight); border-radius: 2rem; padding: 2.5rem 1.5rem; box-shadow: 0 25px 50px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.2); text-align: center; transform: translateZ(30px); transform-style: preserve-3d;}
-        .id-card-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); margin: 0 auto 1rem; box-shadow: 0 15px 30px var(--accent-glow); transform: translateZ(60px); transition: transform 0.3s; background: white;}
-        .id-card-tilt:hover .id-card-img { transform: translateZ(80px) scale(1.05); }
+        /* 3D ID CARD Premium */
+        .id-card-perspective { perspective: 1500px; width: 90%; max-width: 350px; }
+        .id-card-tilt { transform-style: preserve-3d; transition: transform 0.1s; position: relative; }
+        .id-card-tilt.reset { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform: rotateX(0) rotateY(0) !important; }
+        .id-card-body { background: var(--glass-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2), var(--glass-highlight); text-align: center; transform: translateZ(20px); overflow: hidden;}
+        .id-card-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 1rem; box-shadow: 0 10px 20px var(--accent-glow); transform: translateZ(40px); background: white;}
         
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 0.8rem; border-radius: 1rem; font-weight: 700; color: white; transition: all 0.3s; transform: translateZ(25px); text-decoration: none; margin-top: 0.8rem; border: 1px solid rgba(255,255,255,0.2);}
-        .social-btn.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .social-btn.tiktok { background: #000000; border-color: #25F4EE; text-shadow: 1px 1px 0px #FE2C55, -1px -1px 0px #25F4EE;}
-        .social-btn:hover { transform: translateZ(40px) translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        /* Mobile Bottom Sheet (Context Menu) */
+        #context-menu { position: fixed; background: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 1.5rem 1.5rem 0 0; padding: 1.5rem 1rem 2rem; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); z-index: 2500; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); bottom: 0; left: 0; right: 0; max-width: 500px; margin: 0 auto;}
+        @media(min-width: 640px) {
+            #context-menu { border-radius: 1rem; top: 70px; right: 20px; left: auto; bottom: auto; transform: scale(0.9) translateY(-20px); opacity: 0; pointer-events: none; padding: 0.5rem; width: 250px; }
+            #context-menu.show { transform: scale(1) translateY(0); opacity: 1; pointer-events: auto; }
+        }
+        #context-menu.show-mobile { transform: translateY(0); }
+        .ctx-item { padding: 12px 16px; border-radius: 0.8rem; color: var(--text-primary); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; margin-bottom: 4px;}
+        .ctx-item:hover { background: var(--accent); color: white; padding-left: 20px; }
+        
+        /* Toasts */
+        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; align-items: flex-end; }
+        @media(max-width: 640px) { .toast-container { left: 20px; bottom: 80px; align-items: stretch; } }
+        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent); color: var(--text-primary); padding: 12px 20px; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .toast.error { border-left-color: var(--danger); } .toast.success { border-left-color: var(--success); }
+        @keyframes slideIn { from{transform:translateY(20px) scale(0.9); opacity:0;} to{transform:translateY(0) scale(1); opacity:1;} }
+        @keyframes fadeOut { to{transform:translateY(-20px) scale(0.9); opacity:0;} }
 
-        /* Context Menu (Titik 3 / Right Click) */
-        #context-menu { position: fixed; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 0.5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 10000; transform: scale(0.95); opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: top right; min-width: 230px; font-family: var(--font-ui);}
-        #context-menu.show { transform: scale(1); opacity: 1; pointer-events: auto; }
-        .ctx-item { padding: 10px 14px; border-radius: 0.5rem; color: #f8fafc; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
-        .ctx-item:hover { background: var(--accent); color: #000; padding-left: 20px; }
-        .ctx-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 5px 0; }
-
-        /* Game Engine Modal */
-        #game-engine-modal .modal-content { max-width: 650px; height: 85vh; display: flex; flex-direction: column; padding: 1.5rem; background: var(--bg-color);}
-        #game-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 1rem; }
-        #game-stage { flex: 1; position: relative; border-radius: 1.5rem; overflow: hidden; background: rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px inset var(--glass-border); box-shadow: inset 0 0 30px rgba(0,0,0,0.1);}
-        body.dark-mode #game-stage { background: rgba(0,0,0,0.4); box-shadow: inset 0 0 30px rgba(0,0,0,0.5); }
-
-        /* Toast Modern */
-        .toast-container { position: fixed; bottom: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; align-items: flex-end; }
-        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent); color: var(--text-primary); padding: 14px 24px; border-radius: 1rem; font-weight: 700; font-size: 0.95rem; box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 12px; animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: right center;}
-        .toast.error { border-left-color: var(--danger); }
-        .toast.success { border-left-color: var(--success); }
-        @keyframes slideInRight { from{transform:translateX(100px) scale(0.9); opacity:0;} to{transform:translateX(0) scale(1); opacity:1;} }
-        @keyframes fadeOutRight { to{transform:translateX(100px) scale(0.9); opacity:0;} }
-
-        /* Floating Action Buttons */
-        .fab-container { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 400; transition: transform 0.4s ease; transform: translateY(150px);}
+        /* FABs */
+        .fab-container { position: fixed; bottom: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 400; transition: transform 0.3s; transform: translateY(150px);}
         .fab-container.show { transform: translateY(0); }
-        .fab-btn { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: var(--glass-shadow); font-weight: 900; font-size: 0.7rem; text-align: center;}
-        .fab-btn:hover { transform: scale(1.15) translateY(-5px); background: var(--accent); color: white; border-color: transparent; box-shadow: 0 10px 25px var(--accent-glow); }
-        
+        .fab-btn { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--glass-shadow); font-weight: 800; font-size: 0.65rem; text-align: center;}
+        .fab-btn:hover { transform: scale(1.1) translateY(-3px); background: var(--accent); color: white; border-color: transparent; }
+
     </style>
 </head>
 <body>
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
 
-    <!-- 3D Ecosystem (Animals & Particles) -->
+    <!-- 3D Ecosystem -->
     <div id="ocean-ecosystem" aria-hidden="true">
         <div class="depth-bg" id="layer-bg"></div>
         <div class="depth-mid" id="layer-mid"></div>
         <div class="depth-fg" id="layer-fg"></div>
         <div class="light-ray"></div>
-        <div class="light-ray" style="left:50%; animation-delay:-7s; opacity: 0.3; width: 60%;"></div>
+        <div class="light-ray" style="left:40%; animation-delay:-5s; opacity: 0.5; width: 40%;"></div>
     </div>
 
     <!-- Header Navigation -->
-    <header id="fixed-header" class="fixed-header tilt-element">
+    <header id="fixed-header" class="fixed-header glass-panel rounded-none border-t-0 border-x-0">
         <div class="flex items-center gap-3">
             <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMP" class="logo-img btn-interactive" id="btn-home" title="Kembali ke atas" />
-            <div class="hidden md:flex flex-col">
-                <span class="font-display font-black text-xl text-[var(--text-primary)] leading-tight tracking-wide">Portal 9H</span>
-                <span class="font-mono text-[0.7rem] font-bold tracking-widest text-[var(--accent)] uppercase">Ultimate Premium</span>
+            <div class="flex flex-col">
+                <span class="font-display font-black text-lg md:text-xl text-[var(--text-primary)] leading-tight">Portal 9H</span>
+                <div class="flex items-center gap-2">
+                    <span class="font-mono text-[0.6rem] font-bold tracking-widest text-[var(--accent)] uppercase" id="header-clock">00:00</span>
+                    <span class="w-1 h-1 rounded-full bg-[var(--glass-border)]"></span>
+                    <span class="font-mono text-[0.6rem] font-bold tracking-widest text-[var(--success)] uppercase hidden md:inline" id="header-status">Online</span>
+                </div>
             </div>
         </div>
-        <div class="flex items-center gap-3 relative">
-            <button class="icon-btn btn-interactive" id="btn-settings" title="Pengaturan">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <div class="flex items-center gap-2 md:gap-3">
+            <button class="icon-btn btn-interactive hidden md:flex" id="btn-command" title="Command Palette (Ctrl+K)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </button>
-            
-            <!-- TOMBOL TITIK 3 POJOK KANAN ATAS (DI-REQUEST KHUSUS) -->
+            <button class="icon-btn btn-interactive" id="btn-settings" title="Pengaturan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
             <button class="icon-btn btn-interactive" id="btn-context-toggle" title="Menu Cepat">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg>
             </button>
-
-            <!-- Menu Context Titik 3 -->
-            <div id="context-menu">
-                <div class="ctx-item btn-interactive" data-action="search">🔍 Pencarian Super</div>
-                <div class="ctx-item btn-interactive" data-action="theme">🌓 Ganti Tema Layar</div>
-                <div class="ctx-item btn-interactive" data-action="zen">📖 Mode Baca (Zen)</div>
-                <div class="ctx-item btn-interactive" data-action="copy">📋 Salin Tautan</div>
-                <div class="ctx-divider"></div>
-                <div class="ctx-item btn-interactive" style="color:var(--danger);" data-action="shake">🫨 Simulasi Gempa</div>
-            </div>
-
-            <!-- Tombol Default ID Card -->
-            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="ID Card 9H" id="btn-idcard-global" class="logo-img btn-interactive border-[var(--accent)] border-2 shadow-[0_0_15px_var(--accent-glow)]" title="Kartu Identitas Kru 9H" />
+            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="ID Card 9H" id="btn-idcard-global" class="logo-img btn-interactive border-[var(--accent)] ml-1" title="Kartu Identitas Kru 9H" />
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6">
+    <!-- Context Menu / Bottom Sheet -->
+    <div id="context-menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[2400] hidden opacity-0 transition-opacity"></div>
+    <div id="context-menu">
+        <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4 sm:hidden"></div>
+        <div class="ctx-item btn-interactive" data-action="search">🔍 Pencarian Super</div>
+        <div class="ctx-item btn-interactive" data-action="theme">🌓 Ganti Tema Layar</div>
+        <div class="ctx-item btn-interactive" data-action="zen">📖 Mode Fokus (Zen)</div>
+        <div class="ctx-item btn-interactive" data-action="copy">📋 Salin Tautan Portal</div>
+        <div class="h-px bg-[var(--glass-border)] my-2 opacity-50"></div>
+        <div class="ctx-item btn-interactive text-[var(--danger)]" data-action="shake">🫨 Simulasi Gempa</div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4">
         
         <!-- Dashboard Atas -->
         <div id="dashboard-panel" class="custom-scrollbar tilt-element">
             <div class="glass-panel dash-card btn-interactive">
-                <div class="dash-icon">⭐</div>
-                <span class="text-xs font-bold uppercase tracking-widest opacity-80">Level Ekspedisi</span>
-                <span class="text-4xl font-black text-[var(--accent)] mt-1" id="ui-level">1</span>
-                <div class="progress-bar w-full mt-3"><div class="progress-fill" id="ui-xp-bar"></div></div>
-                <span class="text-[0.6rem] font-bold mt-1 opacity-70"><span id="ui-xp-text">0</span> / 100 XP</span>
+                <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Level Ekspedisi</span>
+                <span class="text-3xl font-black text-[var(--accent)]" id="ui-level">1</span>
+                <div class="progress-bar"><div class="progress-fill" id="ui-xp-bar"></div></div>
+                <span class="text-[0.6rem] font-bold mt-2 opacity-70"><span id="ui-xp-text">0</span>/100 XP</span>
             </div>
             <div class="glass-panel dash-card btn-interactive">
-                <div class="dash-icon">🐚</div>
-                <span class="text-xs font-bold uppercase tracking-widest opacity-80">Harta Karun</span>
-                <span class="text-4xl font-black text-[var(--warning)] mt-1 flex items-center justify-center gap-2">🐚 <span id="ui-pearls">0</span></span>
-                <span class="text-[0.65rem] font-bold mt-2 opacity-70 bg-[var(--warning)] text-white px-2 py-1 rounded-full bg-opacity-80">Dari Mini Games</span>
+                <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Harta Karun</span>
+                <span class="text-3xl font-black text-[var(--warning)] flex items-center justify-center gap-1">🐚<span id="ui-pearls">0</span></span>
+                <span class="text-[0.6rem] font-bold mt-2 opacity-70">Aset Mini Games</span>
             </div>
             <div class="glass-panel dash-card btn-interactive">
-                <div class="dash-icon">🔥</div>
-                <span class="text-xs font-bold uppercase tracking-widest opacity-80">Cek Login</span>
-                <span class="text-4xl font-black text-[var(--danger)] mt-1 flex items-center justify-center gap-2">🔥 <span id="ui-streak">0</span></span>
-                <span class="text-[0.65rem] font-bold mt-2 opacity-70">Login harian untuk XP!</span>
+                <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Login Harian</span>
+                <span class="text-3xl font-black text-[var(--danger)] flex items-center justify-center gap-1">🔥<span id="ui-streak">0</span></span>
+                <span class="text-[0.6rem] font-bold mt-2 opacity-70">Konsistensi Kru</span>
             </div>
         </div>
 
-        <header class="text-center mb-12 tilt-element">
-            <h1 class="font-display text-5xl md:text-7xl font-black text-[var(--text-primary)] mb-3 drop-shadow-md tracking-tight">Ekspedisi 9H</h1>
-            <p class="font-mono text-sm md:text-base font-bold text-[var(--accent)] uppercase tracking-[0.2em] bg-[var(--glass-bg)] inline-block px-4 py-1 rounded-full border border-[var(--glass-border)]">Portal Navigasi & Hiburan</p>
+        <header class="text-center mb-10 tilt-element">
+            <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black text-[var(--text-primary)] mb-2 drop-shadow-sm tracking-tight">Ekspedisi 9H</h1>
+            <p class="font-mono text-xs md:text-sm font-bold text-[var(--accent)] uppercase tracking-[0.2em] bg-[var(--glass-bg)] inline-block px-4 py-1.5 rounded-full border border-[var(--glass-border)] shadow-sm">Portal Utama Premium</p>
         </header>
 
         <!-- Advanced Super Search -->
-        <div class="search-wrapper tilt-element">
-            <input type="text" id="global-search" class="search-input" placeholder="Cari kru, hari piket, pelajaran, atau utilitas..." autocomplete="off">
+        <div class="search-wrapper tilt-element relative">
+            <input type="text" id="global-search" class="search-input" placeholder="Cari kru, jadwal, tugas, atau utilitas..." autocomplete="off">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <svg class="search-clear" id="search-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg class="search-clear" id="search-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            
+            <div id="search-suggest" class="search-suggest">
+                <div class="px-4 py-2 text-xs font-bold opacity-60 uppercase tracking-widest border-b border-[var(--glass-border)] flex justify-between">
+                    <span>Riwayat & Sugesti</span>
+                    <span id="clear-history" class="cursor-pointer hover:text-[var(--danger)]">Hapus</span>
+                </div>
+                <div id="suggest-list"></div>
+            </div>
+            <div id="empty-state" class="hidden text-center p-6 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-2xl mt-4">
+                <span class="text-4xl block mb-2">🏝️</span>
+                <h3 class="font-bold text-[var(--text-primary)]">Tidak ditemukan</h3>
+                <p class="text-sm opacity-70">Coba kata kunci lain atau periksa ejaan.</p>
+            </div>
         </div>
 
         <!-- Quick Nav Pills -->
-        <div class="flex gap-3 overflow-x-auto custom-scrollbar pb-6 mb-8 justify-start md:justify-center px-2">
-            <button class="nav-pill active btn-interactive" data-target="semua">🌊 Semua Panel</button>
-            <button class="nav-pill btn-interactive" data-target="organization-section">👥 Struktur</button>
-            <button class="nav-pill btn-interactive" data-target="piket-section">🧹 Piket</button>
-            <button class="nav-pill btn-interactive" data-target="pelajaran-section">📘 Pelajaran</button>
-            <button class="nav-pill btn-interactive" data-target="pakaian-section">👔 Seragam</button>
-            <button class="nav-pill btn-interactive" data-target="utilities-section">🛠️ Utilitas</button>
-            <button class="nav-pill btn-interactive border-[var(--warning)] text-[var(--warning)]" data-target="play-zone-section">🎮 Play Zone (Fake)</button>
+        <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-4 mb-8 justify-start md:justify-center px-1 snap-x">
+            <button class="nav-pill active btn-interactive snap-start" data-target="semua">🌊 Semua Panel</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="organization-section">👥 Struktur</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="piket-section">🧹 Piket</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="pelajaran-section">📘 Pelajaran</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="pakaian-section">👔 Seragam</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="utilities-section">🛠️ Utilitas</button>
+            <button class="nav-pill btn-interactive snap-start border-[var(--warning)] text-[var(--warning)]" data-target="play-zone-section">🎮 Play Zone</button>
         </div>
 
         <div id="content-container">
             <!-- Struktur Organisasi -->
-            <section id="organization-section" class="mb-20 scroll-mt-32 content-section">
+            <section id="organization-section" class="mb-16 scroll-mt-24 content-section">
                 <h2 class="section-title tilt-element">Struktur Komando</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 perspective-container" id="org-grid"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="org-grid"></div>
             </section>
 
             <!-- Jadwal Piket -->
-            <section id="piket-section" class="mb-20 scroll-mt-32 content-section">
+            <section id="piket-section" class="mb-16 scroll-mt-24 content-section">
                 <h2 class="section-title tilt-element">Rotasi Kebersihan</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container" id="piket-grid"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="piket-grid"></div>
             </section>
 
             <!-- Jadwal Pelajaran -->
-            <section id="pelajaran-section" class="mb-20 scroll-mt-32 content-section">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 tilt-element">
+            <section id="pelajaran-section" class="mb-16 scroll-mt-24 content-section">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 tilt-element">
                     <h2 class="section-title mb-0">Peta Akademik</h2>
-                    <button id="btn-copy-today" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] px-5 py-2.5 rounded-full font-bold text-sm hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-all flex items-center gap-2 shadow-sm btn-interactive">
+                    <button id="btn-copy-today" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] px-4 py-2 rounded-full font-bold text-sm hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-all flex items-center gap-2 shadow-sm btn-interactive">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini
                     </button>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container" id="pelajaran-grid"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="pelajaran-grid"></div>
             </section>
 
             <!-- Pakaian -->
-            <section id="pakaian-section" class="mb-20 scroll-mt-32 content-section">
+            <section id="pakaian-section" class="mb-16 scroll-mt-24 content-section">
                 <h2 class="section-title tilt-element">Protokol Atribut</h2>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-5 perspective-container" id="pakaian-grid"></div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="pakaian-grid"></div>
             </section>
 
-            <!-- Utilitas Lama yang Tidak Dihapus -->
-            <section id="utilities-section" class="mb-20 scroll-mt-32 content-section">
-                <h2 class="section-title tilt-element">Pusat Utilitas Kru</h2>
-                <div class="widget-grid perspective-container">
+            <!-- Utilitas -->
+            <section id="utilities-section" class="mb-16 scroll-mt-24 content-section">
+                <h2 class="section-title tilt-element">Pusat Utilitas</h2>
+                <div class="widget-grid">
                     
                     <!-- Pomodoro & Tugas -->
                     <div class="glass-card flex flex-col tilt-element">
-                        <h3 class="font-display text-xl mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)]">Fokus Misi ⏱️</h3>
-                        <div class="flex justify-between items-center bg-black/10 p-4 rounded-xl border border-[var(--glass-border)] mb-4 shadow-inner">
-                            <span class="text-xs font-bold opacity-80">POMODORO</span>
-                            <span id="pomo-display" class="text-3xl font-mono font-black text-[var(--accent)]">25:00</span>
-                            <button id="btn-pomo" class="bg-[var(--text-primary)] text-[var(--bg-color)] w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform btn-interactive">▶</button>
+                        <div class="flex justify-between items-center mb-4 border-b border-[var(--glass-border)] pb-2">
+                            <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Fokus Misi ⏱️</h3>
+                            <span class="text-xs font-bold opacity-70 bg-black/5 px-2 py-1 rounded-md">25 Menit</span>
                         </div>
-                        <input type="text" id="task-input" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl color-[var(--text-primary)] outline-none mb-3 font-semibold text-sm" placeholder="Ketik tugas & Enter...">
-                        <div id="task-list" class="flex-grow overflow-y-auto max-h-[120px] custom-scrollbar space-y-2"></div>
+                        <div class="flex justify-between items-center bg-[var(--glass-bg)] p-4 rounded-xl border border-[var(--glass-border)] mb-4 shadow-inner relative overflow-hidden">
+                            <div id="pomo-progress" class="absolute left-0 bottom-0 top-0 bg-[var(--accent)] opacity-10 w-0 transition-all duration-1000"></div>
+                            <span class="text-xs font-bold opacity-80 relative z-10">POMODORO</span>
+                            <span id="pomo-display" class="text-3xl font-mono font-black text-[var(--accent)] relative z-10">25:00</span>
+                            <button id="btn-pomo" class="bg-[var(--text-primary)] text-[var(--bg-color)] w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform btn-interactive relative z-10 shadow-md">▶</button>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="task-input" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 pr-10 rounded-xl text-[var(--text-primary)] outline-none mb-3 font-medium text-sm transition-colors focus:border-[var(--accent)]" placeholder="Ketik tugas & Enter...">
+                            <span class="absolute right-3 top-3 text-xs opacity-50 font-bold hidden md:block">↵</span>
+                        </div>
+                        <div id="task-list" class="flex-grow overflow-y-auto max-h-[140px] custom-scrollbar space-y-2 pr-1"></div>
                     </div>
 
                     <!-- Personal Notepad -->
                     <div class="glass-card flex flex-col tilt-element">
-                        <h3 class="font-display text-xl mb-2 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex justify-between items-center">
-                            Jurnal Pribadi 📝
-                            <span id="save-status" class="text-[0.6rem] bg-[var(--success)] text-white px-2 py-1 rounded-full font-bold">Lokal</span>
-                        </h3>
-                        <textarea id="personal-note" class="w-full flex-grow min-h-[150px] bg-black/5 border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar" placeholder="Ketik catatan rahasia di sini... tersimpan otomatis."></textarea>
+                        <div class="flex justify-between items-center mb-3 border-b border-[var(--glass-border)] pb-2">
+                            <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Jurnal Lokal 📝</h3>
+                            <span id="save-status" class="text-[0.65rem] bg-[var(--success)] text-white px-2 py-1 rounded-full font-bold shadow-sm">Tersimpan</span>
+                        </div>
+                        <textarea id="personal-note" class="w-full flex-grow min-h-[160px] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar transition-colors focus:border-[var(--accent)]" placeholder="Ketik catatan rahasia di sini... tersimpan otomatis di perangkat ini."></textarea>
+                        <div class="flex justify-between items-center mt-2 px-1">
+                            <span class="text-[0.65rem] font-bold opacity-50" id="note-length">0 Karakter</span>
+                            <button id="btn-copy-note" class="text-[0.65rem] font-bold text-[var(--accent)] hover:underline btn-interactive">Salin Teks</button>
+                        </div>
                     </div>
 
                     <!-- Quick Links & Tools -->
                     <div class="glass-card flex flex-col tilt-element">
-                        <h3 class="font-display text-xl mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)]">Akses Ekstra 🚀</h3>
+                        <h3 class="font-display text-xl mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] font-bold">Akses Ekstra 🚀</h3>
                         <div class="quick-links-grid mb-4">
-                            <a href="https://canva.com" target="_blank" class="quick-link-btn btn-interactive">🎨 Canva</a>
-                            <a href="https://chatgpt.com" target="_blank" class="quick-link-btn btn-interactive">🤖 ChatGPT</a>
-                            <button id="btn-random" class="quick-link-btn btn-interactive text-[var(--danger)] border-[var(--danger)]">🎲 Gacha Kru</button>
-                            <button id="btn-zen" class="quick-link-btn btn-interactive text-[var(--success)] border-[var(--success)]">📖 Zen Mode</button>
+                            <a href="https://canva.com" target="_blank" rel="noopener" class="quick-link-btn btn-interactive">🎨 Canva</a>
+                            <a href="https://chatgpt.com" target="_blank" rel="noopener" class="quick-link-btn btn-interactive">🤖 ChatGPT</a>
+                            <button id="btn-random" class="quick-link-btn btn-interactive text-[var(--purple)] border-[var(--purple)] border-opacity-30">🎲 Gacha Kru</button>
+                            <button id="btn-share" class="quick-link-btn btn-interactive text-[var(--accent)] border-[var(--accent)] border-opacity-30">📤 Bagikan</button>
                         </div>
-                        <button id="btn-ocean-sound" class="w-full mt-auto py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-xl font-bold hover:scale-[1.02] transition-transform btn-interactive flex justify-center items-center gap-2">
+                        <button id="btn-ocean-sound" class="w-full mt-auto py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-xl font-bold hover:scale-[1.02] transition-transform btn-interactive flex justify-center items-center gap-2 shadow-md">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> <span id="text-ocean-sound">Putar Binaural Ombak</span>
                         </button>
                     </div>
@@ -429,127 +506,140 @@
                 </div>
             </section>
             
-            <!-- PLAY ZONE (Fake) -->
-            <section id="play-zone-section" class="mb-24 scroll-mt-32 content-section">
-                <div class="flex flex-col items-center mb-10 glass-panel p-8 text-center relative overflow-hidden tilt-element">
-                    <div class="absolute inset-0 bg-[var(--warning)] opacity-10"></div>
-                    <h2 class="font-display text-4xl md:text-5xl font-black mb-3" style="color: var(--warning); text-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);">🎮 Zona Arcade 9H</h2>
-                    <p class="text-sm md:text-base font-bold opacity-90 max-w-2xl text-[var(--text-primary)]">Koleksi <span class="text-[var(--warning)] text-xl mx-1">66</span> Mini-Games Bertema Laut untuk mengumpulkan Mutiara!</p>
+            <!-- PLAY ZONE -->
+            <section id="play-zone-section" class="mb-20 scroll-mt-24 content-section">
+                <div class="flex flex-col items-center mb-8 glass-panel p-6 text-center relative overflow-hidden tilt-element rounded-3xl">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[var(--warning)] to-[var(--danger)] opacity-10"></div>
+                    <h2 class="font-display text-3xl md:text-5xl font-black mb-2 text-[var(--text-primary)] drop-shadow-sm">🎮 Zona Arcade 9H</h2>
+                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Mainkan <span class="text-[var(--warning)] text-lg mx-1">66</span> Mini-Games ringan untuk rileks dan kumpulkan Mutiara!</p>
                 </div>
                 
-                <div class="flex gap-3 mb-8 justify-center flex-wrap" id="game-filters">
-                    <button class="nav-pill px-5 py-2 text-sm active filter-btn-game" data-filter="all">Semua Mode</button>
-                    <button class="nav-pill px-5 py-2 text-sm filter-btn-game" data-filter="solo">👤 Solo</button>
-                    <button class="nav-pill px-5 py-2 text-sm filter-btn-game" data-filter="bot">🤖 Lawan Bot</button>
-                    <button class="nav-pill px-5 py-2 text-sm filter-btn-game" data-filter="multi">⚔️ Multiplayer</button>
-                    <button class="nav-pill px-5 py-2 text-sm filter-btn-game" data-filter="coop">🤝 Co-op</button>
+                <div class="flex gap-2 mb-6 justify-start md:justify-center overflow-x-auto pb-2 custom-scrollbar px-1 snap-x" id="game-filters">
+                    <button class="nav-pill px-4 py-1.5 text-xs active filter-btn-game snap-start" data-filter="all">Semua</button>
+                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="solo">👤 Solo</button>
+                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="bot">🤖 Vs Bot</button>
+                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="multi">⚔️ Multi</button>
+                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="coop">🤝 Co-op</button>
+                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start text-[var(--danger)] border-[var(--danger)]" data-filter="fav">❤️ Favorit</button>
                 </div>
 
-                <div class="game-grid perspective-container" id="play-zone-grid"></div>
+                <!-- Skeletons before render -->
+                <div id="game-skeleton" class="game-grid mb-6">
+                    <div class="skeleton h-32"></div><div class="skeleton h-32"></div><div class="skeleton h-32"></div><div class="skeleton h-32"></div>
+                </div>
+
+                <div class="game-grid hidden" id="play-zone-grid"></div>
             </section>
         </div>
     </main>
 
-    <!-- FAB KIRI BAWAH (HARI INI & ATAS) -->
+    <!-- FAB KIRI BAWAH -->
     <div class="fab-container" id="fab-left-container">
-        <button id="fab-today" class="fab-btn border-[var(--warning)] text-[var(--warning)]" title="Lompat ke Jadwal Hari Ini">HARI<br>INI</button>
-        <button id="fab-top" class="fab-btn" title="Kembali ke Atas"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+        <button id="fab-today" class="fab-btn text-[var(--warning)]" title="Lompat ke Hari Ini">HARI<br>INI</button>
+        <button id="fab-top" class="fab-btn" title="Kembali ke Atas"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
     </div>
 
     <!-- =====================================================================
-         MODALS & 3D ID CARDS (DINAMIS SESUAI DATA)
+         MODALS & 3D ID CARDS 
          ===================================================================== -->
 
-    <!-- NEW: 3D ID CARD PREMIUM (Dinamis dari JS) -->
+    <!-- ID CARD PREMIUM -->
     <div id="modal-idcard-3d" class="modal-overlay">
         <div class="id-card-perspective">
             <div class="id-card-tilt" id="main-id-card">
                 <button class="btn-close" id="btn-close-id3d">&times;</button>
                 <div class="id-card-body">
-                    <!-- Decor Blur Glow -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)] rounded-full blur-[50px] opacity-20 -z-10"></div>
-                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-[var(--danger)] rounded-full blur-[50px] opacity-20 -z-10"></div>
+                    <!-- Decor Backgrounds -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)] rounded-full blur-[40px] opacity-20 -z-10"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-[var(--purple)] rounded-full blur-[40px] opacity-20 -z-10"></div>
                     
-                    <span class="absolute top-5 left-5 text-xs font-black tracking-widest opacity-60 uppercase" id="idcard-badge">Official ID</span>
-                    <span class="absolute top-4 right-5 text-2xl drop-shadow-md">X</span>
+                    <span class="absolute top-4 left-5 text-[0.65rem] font-black tracking-widest opacity-60 uppercase bg-black/5 px-2 py-1 rounded-md" id="idcard-badge">Official ID</span>
+                    <button id="btn-copy-id" class="absolute top-4 right-12 text-xs opacity-50 hover:opacity-100 hover:text-[var(--accent)] transition-colors btn-interactive" title="Salin Info">📋</button>
 
-                    <img id="idcard-img" src="" class="id-card-img" alt="Profile">
+                    <img id="idcard-img" src="" class="id-card-img" alt="Profile" loading="lazy">
                     
-                    <h2 id="idcard-name" class="font-display text-3xl font-black text-[var(--text-primary)] mb-1" style="transform: translateZ(40px);">Nama</h2>
-                    <p id="idcard-role" class="text-sm font-bold text-[var(--accent)] uppercase tracking-widest mb-6" style="transform: translateZ(30px);">Peran</p>
+                    <h2 id="idcard-name" class="font-display text-2xl font-black text-[var(--text-primary)] mb-1" style="transform: translateZ(30px);">Nama</h2>
+                    <p id="idcard-role" class="text-xs font-bold text-[var(--accent)] uppercase tracking-widest mb-5" style="transform: translateZ(20px);">Peran</p>
                     
-                    <div class="flex justify-around mb-5 text-center border-t border-b border-[var(--glass-border)] py-3 bg-black/5 rounded-xl" style="transform: translateZ(25px);">
+                    <div class="flex justify-around mb-5 text-center border-t border-b border-[var(--glass-border)] py-2 bg-[var(--glass-bg)] rounded-xl" style="transform: translateZ(15px);">
                         <div>
-                            <p class="text-[0.65rem] opacity-70 uppercase font-bold">Kecerdasan</p>
-                            <p class="text-xl font-black text-[var(--text-primary)]" id="idcard-int">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold">Kecerdasan</p>
+                            <p class="text-lg font-black text-[var(--text-primary)]" id="idcard-int">0</p>
                         </div>
                         <div class="border-l border-[var(--glass-border)]"></div>
                         <div>
-                            <p class="text-[0.65rem] opacity-70 uppercase font-bold">Kreativitas</p>
-                            <p class="text-xl font-black text-[var(--warning)]" id="idcard-cre">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold">Kreativitas</p>
+                            <p class="text-lg font-black text-[var(--warning)]" id="idcard-cre">0</p>
                         </div>
                     </div>
 
-                    <button id="btn-love-3d" class="w-full py-3 rounded-xl border-2 border-[var(--danger)] text-[var(--danger)] font-black hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4" style="transform: translateZ(35px);">🤍 Beri Apresiasi</button>
+                    <button id="btn-love-3d" class="w-full py-2.5 rounded-xl border border-[var(--danger)] text-[var(--danger)] font-bold text-sm hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4 bg-white/30" style="transform: translateZ(25px);">🤍 Beri Apresiasi</button>
                     
-                    <p class="text-[0.65rem] font-bold opacity-50 mb-2 uppercase tracking-widest" style="transform: translateZ(20px);">Jaringan 9H</p>
-                    <a href="https://www.instagram.com/historycalnine_2526" target="_blank" class="social-btn ig btn-interactive">
-                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram 9H
-                    </a>
+                    <div class="space-y-2" style="transform: translateZ(10px);">
+                        <a href="https://www.instagram.com/historycalnine_2526?igsh=dWh6NWNjeHM3dW1m" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-md">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram 9H
+                        </a>
+                        <button class="flex items-center justify-center gap-2 w-full py-2 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-black shadow-md border border-[#25F4EE] opacity-80 cursor-not-allowed">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a8 8 0 0 1-5-2.32V16a7 7 0 1 1-7-7v3a4 4 0 0 0 4 4z"></path></svg> TikTok (Segera)
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- GAME ENGINE MODAL (66 Games) -->
+    <!-- GAME ENGINE MODAL -->
     <div id="game-engine-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div id="game-header">
+        <div class="modal-content !max-w-2xl h-[85vh] flex flex-col p-4 md:p-6">
+            <div class="flex justify-between items-start border-b border-[var(--glass-border)] pb-3 mb-4">
                 <div>
                     <div class="flex items-center gap-2 mb-1">
-                        <span id="engine-badge" class="game-badge relative top-0 right-0">SOLO</span>
-                        <h3 id="engine-title" class="font-display text-2xl md:text-3xl font-black text-[var(--text-primary)]">Judul</h3>
+                        <span id="engine-badge" class="game-badge relative top-0 right-0 !text-[0.6rem]">SOLO</span>
+                        <h3 id="engine-title" class="font-display text-xl md:text-2xl font-black text-[var(--text-primary)]">Judul</h3>
+                        <button id="btn-fav-game" class="text-xl opacity-50 hover:opacity-100 transition-opacity btn-interactive">🤍</button>
                     </div>
-                    <p id="engine-desc" class="text-sm font-bold opacity-80">Deskripsi</p>
+                    <p id="engine-desc" class="text-xs md:text-sm font-medium opacity-70">Deskripsi</p>
                 </div>
-                <button class="btn-close" style="position:static; margin-left:1rem; transform:none;" onclick="App.Games.Engine.close()">&times;</button>
+                <button class="btn-close !relative !top-0 !right-0" onclick="App.Games.Engine.close()">&times;</button>
             </div>
             
-            <div id="game-hud" class="flex justify-between w-full px-5 py-3 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl text-sm font-black mb-4 hidden shadow-inner">
-                <span class="text-[var(--accent)] flex items-center gap-2">🏆 <span id="game-score">0</span></span>
-                <span class="text-[var(--danger)] flex items-center gap-2">⏱️ <span id="game-time">15</span>s</span>
+            <div id="game-hud" class="flex justify-between w-full px-4 py-2 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl text-sm font-black mb-4 hidden shadow-sm">
+                <span class="text-[var(--accent)] flex items-center gap-1">🏆 <span id="game-score">0</span></span>
+                <span class="text-[var(--danger)] flex items-center gap-1">⏱️ <span id="game-time">15</span>s</span>
             </div>
             
-            <div id="game-stage"></div>
+            <div id="game-stage" class="flex-1 relative rounded-xl overflow-hidden bg-black/5 dark:bg-black/40 border border-[var(--glass-border)] flex flex-col items-center justify-center shadow-inner select-none touch-none"></div>
         </div>
     </div>
 
     <!-- SETTINGS MODAL -->
     <div id="modal-settings" class="modal-overlay">
-        <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-content !max-w-sm">
             <button class="btn-close">&times;</button>
-            <h3 class="font-display text-2xl font-black mb-6 border-b border-[var(--glass-border)] pb-3 text-[var(--text-primary)] flex items-center gap-2">⚙️ Pengaturan</h3>
-            <div class="space-y-3 text-sm font-bold">
-                <div class="flex justify-between items-center p-4 glass-panel btn-interactive">
+            <h3 class="font-display text-xl font-black mb-5 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex items-center gap-2">⚙️ Pengaturan</h3>
+            <div class="space-y-2 text-sm font-semibold">
+                <div class="flex justify-between items-center p-3 glass-panel rounded-lg hover:bg-[var(--glass-bg)] transition-colors">
                     <span>🎨 Tema Tampilan</span>
-                    <select id="sel-theme" class="bg-[var(--bg-color)] border border-[var(--glass-border)] rounded-lg px-2 py-1 outline-none text-[var(--text-primary)] cursor-pointer">
+                    <select id="sel-theme" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-md px-2 py-1 outline-none text-[var(--text-primary)] cursor-pointer text-xs font-bold">
                         <option value="light">Ocean Light</option>
                         <option value="dark">Deep Sea Dark</option>
                     </select>
                 </div>
-                <div class="flex justify-between items-center p-4 glass-panel btn-interactive" onclick="document.getElementById('toggle-sound').click()">
+                <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
                     <span>🔊 Efek Suara UI</span>
-                    <input type="checkbox" id="toggle-sound" class="w-5 h-5 accent-[var(--accent)] cursor-pointer" checked onclick="event.stopPropagation()">
-                </div>
-                <div class="flex justify-between items-center p-4 glass-panel btn-interactive" onclick="document.getElementById('toggle-haptic').click()">
+                    <input type="checkbox" id="toggle-sound" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
+                </label>
+                <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
                     <span>📳 Getaran (Haptic)</span>
-                    <input type="checkbox" id="toggle-haptic" class="w-5 h-5 accent-[var(--accent)] cursor-pointer" checked onclick="event.stopPropagation()">
+                    <input type="checkbox" id="toggle-haptic" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
+                </label>
+                <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
+                    <span>🐟 Animasi Laut (Performa)</span>
+                    <input type="checkbox" id="toggle-motion" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
+                </label>
+                <div class="pt-4 mt-2 border-t border-[var(--glass-border)]">
+                    <button id="btn-clear-data" class="w-full py-2.5 text-[var(--danger)] border border-[var(--danger)] rounded-lg font-bold text-xs hover:bg-[var(--danger)] hover:text-white transition-colors flex justify-center items-center gap-2 btn-interactive">⚠️ Reset Progress & Cache</button>
                 </div>
-                <div class="flex justify-between items-center p-4 glass-panel btn-interactive" onclick="document.getElementById('toggle-motion').click()">
-                    <span>🐟 Animasi Hewan Laut</span>
-                    <input type="checkbox" id="toggle-motion" class="w-5 h-5 accent-[var(--accent)] cursor-pointer" checked onclick="event.stopPropagation()">
-                </div>
-                <button id="btn-clear-data" class="w-full py-4 mt-6 text-[var(--danger)] border-2 border-[var(--danger)] rounded-xl font-black hover:bg-[var(--danger)] hover:text-white transition-colors flex justify-center items-center gap-2 btn-interactive">⚠️ Reset Progress & Level</button>
             </div>
         </div>
     </div>
@@ -557,16 +647,16 @@
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <!-- =====================================================================
-         JAVASCRIPT LOGIC (MODULAR, ROBUST, CLEAN)
+         JAVASCRIPT LOGIC (MODULAR & OPTIMIZED)
          ===================================================================== -->
     <script>
-        const App = {
-            // ================= DATA =================
-            Data: {
+        const App = (() => {
+            // --- DATA ---
+            const Data = {
                 kru: [
-                    { id: "Andika", nama: "M. Andika Kostradnanda", g: "L", role: "Ketua Kelas" }, { id: "Belva", nama: "Belva Ramania", g: "P", role: "Wakil Kelas" },
-                    { id: "Gendis", nama: "Gendis Aulia Maharani", g: "P", role: "Bendahara" }, { id: "Zaifa", nama: "Siti Zaifa Zhufairah", g: "P", role: "Bendahara" },
-                    { id: "Rika", nama: "Rika Rismayanti", g: "P", role: "Sekretaris" }, { id: "Diana", nama: "Diana Widyawati R.", g: "P", role: "Sekretaris" },
+                    { id: "Andika", nama: "M. Andika Kostradnanda", g: "L", role: "Ketua Kelas", core: true }, { id: "Belva", nama: "Belva Ramania", g: "P", role: "Wakil Kelas", core: true },
+                    { id: "Gendis", nama: "Gendis Aulia Maharani", g: "P", role: "Bendahara", core: true }, { id: "Zaifa", nama: "Siti Zaifa Zhufairah", g: "P", role: "Bendahara", core: true },
+                    { id: "Rika", nama: "Rika Rismayanti", g: "P", role: "Sekretaris", core: true }, { id: "Diana", nama: "Diana Widyawati R.", g: "P", role: "Sekretaris", core: true },
                     { id: "Yana", nama: "Yana Nuryana", g: "L", role: "Keamanan" }, { id: "Suci", nama: "Suci Latifah O.", g: "P", role: "Keamanan" },
                     { id: "Rizky", nama: "Rizky Arief Fadillah", g: "L", role: "Perpustakaan" }, { id: "Vienard", nama: "Vienard Caizhi N.I.", g: "L", role: "Perpustakaan" },
                     { id: "Idham", nama: "M. Idham Al-Hafidz", g: "L", role: "Kerohanian" }, { id: "Khayra", nama: "Khayra Azdkia Haifa", g: "P", role: "Kerohanian" },
@@ -597,109 +687,66 @@
                 ],
                 pakaian: ["Putih Biru + Dasi", "Batik Putih", "Batik Biru", "Baju Muslim", "Seragam Pramuka"],
                 hariIndex: new Date().getDay()
-            },
+            };
 
-            // ================= STATE =================
-            State: {
-                level: 1, xp: 0, pearls: 0, streak: 0, lastCheckin: "",
-                soundOn: true, motionOn: true, hapticOn: true,
-                audioCtx: null, pomoTimer: null, pomoTime: 1500, isPomoRunning: false
-            },
+            // --- STATE & STORAGE ---
+            const Storage = {
+                get: (k, d) => { try{ const v=localStorage.getItem('9h_v2_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
+                set: (k, v) => { try{ localStorage.setItem('9h_v2_'+k, JSON.stringify(v)); }catch(e){} }
+            };
 
-            // ================= STORAGE =================
-            Storage: {
-                get: (k, d) => { try{ const v=localStorage.getItem('9h_u9_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
-                set: (k, v) => { try{ localStorage.setItem('9h_u9_'+k, JSON.stringify(v)); }catch(e){} }
-            },
+            const State = {
+                level: Storage.get('lvl', 1), xp: Storage.get('xp', 0), pearls: Storage.get('prl', 0), 
+                streak: Storage.get('strk', 0), lastCheckin: Storage.get('lck', ""),
+                soundOn: Storage.get('snd', true), hapticOn: Storage.get('hpt', true), motionOn: Storage.get('mtn', true),
+                audioCtx: null, oscOcean: null, isOnline: navigator.onLine,
+                searchHistory: Storage.get('shist', [])
+            };
 
-            // ================= AUDIO & HAPTIC =================
-            Audio: {
-                init: () => { if(!App.State.audioCtx && App.State.soundOn){ try{App.State.audioCtx = new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } },
+            // --- AUDIO & HAPTIC ---
+            const Audio = {
+                init: () => { if(!State.audioCtx && State.soundOn){ try{State.audioCtx = new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } },
                 play: (type) => {
-                    if(!App.State.soundOn || !App.State.audioCtx) return;
-                    if(App.State.audioCtx.state === 'suspended') App.State.audioCtx.resume();
-                    const osc = App.State.audioCtx.createOscillator(); const gain = App.State.audioCtx.createGain();
-                    osc.connect(gain); gain.connect(App.State.audioCtx.destination); const now = App.State.audioCtx.currentTime;
+                    if(!State.soundOn || !State.audioCtx) return;
+                    if(State.audioCtx.state === 'suspended') State.audioCtx.resume();
+                    const osc = State.audioCtx.createOscillator(); const gain = State.audioCtx.createGain();
+                    osc.connect(gain); gain.connect(State.audioCtx.destination); const now = State.audioCtx.currentTime;
                     
-                    if(type==='click'){ osc.type='sine'; osc.frequency.setValueAtTime(600,now); osc.frequency.exponentialRampToValueAtTime(900,now+0.05); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.05); osc.start(now); osc.stop(now+0.05); }
-                    else if(type==='pop'){ osc.type='triangle'; osc.frequency.setValueAtTime(300,now); osc.frequency.exponentialRampToValueAtTime(600,now+0.1); gain.gain.setValueAtTime(0.15,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.1); osc.start(now); osc.stop(now+0.1); }
-                    else if(type==='success'){ osc.type='square'; osc.frequency.setValueAtTime(400,now); osc.frequency.setValueAtTime(600,now+0.1); osc.frequency.setValueAtTime(800,now+0.2); gain.gain.setValueAtTime(0.05,now); gain.gain.linearRampToValueAtTime(0,now+0.4); osc.start(now); osc.stop(now+0.4); }
-                    else if(type==='error'){ osc.type='sawtooth'; osc.frequency.setValueAtTime(250,now); osc.frequency.setValueAtTime(150,now+0.15); gain.gain.setValueAtTime(0.05,now); gain.gain.linearRampToValueAtTime(0,now+0.3); osc.start(now); osc.stop(now+0.3); }
-                    else if(type==='bubble'){ osc.type='sine'; osc.frequency.setValueAtTime(300,now); osc.frequency.exponentialRampToValueAtTime(500,now+0.15); gain.gain.setValueAtTime(0.05,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.15); osc.start(now); osc.stop(now+0.15); }
+                    if(type==='click'){ osc.type='sine'; osc.frequency.setValueAtTime(600,now); osc.frequency.exponentialRampToValueAtTime(900,now+0.05); gain.gain.setValueAtTime(0.05,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.05); osc.start(now); osc.stop(now+0.05); }
+                    else if(type==='pop'){ osc.type='triangle'; osc.frequency.setValueAtTime(300,now); osc.frequency.exponentialRampToValueAtTime(500,now+0.1); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.1); osc.start(now); osc.stop(now+0.1); }
+                    else if(type==='success'){ osc.type='square'; osc.frequency.setValueAtTime(400,now); osc.frequency.setValueAtTime(600,now+0.1); osc.frequency.setValueAtTime(800,now+0.2); gain.gain.setValueAtTime(0.03,now); gain.gain.linearRampToValueAtTime(0,now+0.4); osc.start(now); osc.stop(now+0.4); }
+                    else if(type==='error'){ osc.type='sawtooth'; osc.frequency.setValueAtTime(250,now); osc.frequency.setValueAtTime(150,now+0.15); gain.gain.setValueAtTime(0.03,now); gain.gain.linearRampToValueAtTime(0,now+0.3); osc.start(now); osc.stop(now+0.3); }
                 },
-                haptic: (pattern) => { if(App.State.hapticOn && navigator.vibrate) { try{ navigator.vibrate(pattern); }catch(e){} } },
+                haptic: (pattern) => { if(State.hapticOn && navigator.vibrate) { try{ navigator.vibrate(pattern); }catch(e){} } },
                 toggleOcean: () => {
-                    App.Audio.init();
-                    const btnText = document.getElementById('text-ocean-sound');
-                    if(App.State.oscOcean) {
-                        try{ App.State.oscOcean.stop(); }catch(e){} App.State.oscOcean = null;
-                        btnText.innerText = "Putar Binaural Ombak";
+                    Audio.init(); const btnText = document.getElementById('text-ocean-sound');
+                    if(State.oscOcean) {
+                        try{ State.oscOcean.stop(); }catch(e){} State.oscOcean = null;
+                        btnText.innerText = "Putar Binaural Ombak"; UI.toast("Suara ombak dihentikan");
                     } else {
                         try {
-                            const bufferSize = 2 * App.State.audioCtx.sampleRate;
-                            const buffer = App.State.audioCtx.createBuffer(1, bufferSize, App.State.audioCtx.sampleRate);
+                            const bufferSize = 2 * State.audioCtx.sampleRate;
+                            const buffer = State.audioCtx.createBuffer(1, bufferSize, State.audioCtx.sampleRate);
                             const output = buffer.getChannelData(0);
                             let lastOut = 0;
                             for (let i = 0; i < bufferSize; i++) {
                                 let white = Math.random() * 2 - 1;
-                                output[i] = (lastOut + (0.02 * white)) / 1.02; lastOut = output[i]; output[i] *= 3.5;
+                                output[i] = (lastOut + (0.02 * white)) / 1.02; lastOut = output[i]; output[i] *= 3.0;
                             }
-                            App.State.oscOcean = App.State.audioCtx.createBufferSource();
-                            App.State.oscOcean.buffer = buffer; App.State.oscOcean.loop = true;
-                            const gainNode = App.State.audioCtx.createGain(); gainNode.gain.value = 0.03;
-                            const lfo = App.State.audioCtx.createOscillator(); lfo.frequency.value = 0.1;
-                            const lfoGain = App.State.audioCtx.createGain(); lfoGain.gain.value = 0.02;
+                            State.oscOcean = State.audioCtx.createBufferSource(); State.oscOcean.buffer = buffer; State.oscOcean.loop = true;
+                            const gainNode = State.audioCtx.createGain(); gainNode.gain.value = 0.02;
+                            const lfo = State.audioCtx.createOscillator(); lfo.frequency.value = 0.1;
+                            const lfoGain = State.audioCtx.createGain(); lfoGain.gain.value = 0.015;
                             lfo.connect(lfoGain); lfoGain.connect(gainNode.gain); lfo.start();
-                            App.State.oscOcean.connect(gainNode); gainNode.connect(App.State.audioCtx.destination);
-                            App.State.oscOcean.start();
-                            btnText.innerText = "Hentikan Suara Ombak";
-                            App.UI.toast("Memutar gelombang laut binaural...", "success");
-                        } catch(e) { App.UI.toast("Gagal memutar audio.", "error"); }
+                            State.oscOcean.connect(gainNode); gainNode.connect(State.audioCtx.destination);
+                            State.oscOcean.start(); btnText.innerText = "Hentikan Suara Ombak"; UI.toast("Memutar gelombang laut...", "info");
+                        } catch(e) { UI.toast("Gagal memutar audio", "error"); }
                     }
                 }
-            },
+            };
 
-            // ================= 3D ECOSYSTEM =================
-            Ecosystem: {
-                creatures: [
-                    {c:'🐟', t:'swim-fast', l:'mid'}, {c:'🦈', t:'swim-slow', l:'bg'}, {c:'🐬', t:'swim-fast', l:'fg'}, 
-                    {c:'🐋', t:'swim-slow', l:'bg'}, {c:'🐢', t:'swim-slow', l:'mid'}, {c:'🐙', t:'jelly-swim', l:'mid'}, 
-                    {c:'🪼', t:'jelly-swim', l:'fg'}, {c:'🦀', t:'crawl-bottom', l:'fg'}, {c:'🦞', t:'crawl-bottom', l:'mid'}, 
-                    {c:'⭐', t:'crawl-bottom', l:'bg'}, {c:'🐡', t:'swim-slow', l:'mid'}, {c:'🐚', t:'crawl-bottom', l:'fg'},
-                    {c:'🦑', t:'jelly-swim', l:'bg'}, {c:'🦐', t:'crawl-bottom', l:'mid'}, {c:'🫏', t:'swim-fast', l:'mid'}
-                ],
-                maxEntities: 20,
-                spawn: () => {
-                    if(!App.State.motionOn) return;
-                    const eco = document.getElementById('ocean-ecosystem');
-                    const currentCount = document.querySelectorAll('.sea-creature').length;
-                    if(currentCount >= App.Ecosystem.maxEntities) return;
-
-                    const data = App.Ecosystem.creatures[Math.floor(Math.random()*App.Ecosystem.creatures.length)];
-                    const el = document.createElement('div');
-                    el.className = `sea-creature ${data.t}`; el.innerText = data.c;
-                    
-                    if(data.c==='🪼' || Math.random()>0.85) el.classList.add('bioluminescent');
-                    if(data.t.includes('swim')) el.style.top = `${10 + Math.random()*70}vh`;
-                    else if(data.t.includes('jelly')) el.style.left = `${Math.random()*90}vw`;
-
-                    document.getElementById(`layer-${data.l}`).appendChild(el);
-                    
-                    // Hover efek hewan 3D
-                    el.addEventListener('mouseover', () => { el.style.transform += ' scale(1.3) translateZ(20px)'; App.Audio.play('bubble'); });
-                    el.addEventListener('mouseout', () => { el.style.transform = el.style.transform.replace(' scale(1.3) translateZ(20px)',''); });
-
-                    const duration = data.t==='swim-slow'?45000 : (data.t==='swim-fast'?20000 : (data.t==='crawl-bottom'?60000 : 25000));
-                    setTimeout(() => { if(el.parentNode) el.remove(); }, duration);
-                },
-                init: () => { 
-                    setInterval(App.Ecosystem.spawn, 2000); 
-                    for(let i=0;i<8;i++) setTimeout(App.Ecosystem.spawn, i*300); 
-                }
-            },
-
-            // ================= UI & LOGIC =================
-            UI: {
+            // --- UI SYSTEM ---
+            const UI = {
                 toast: (msg, type='info') => {
                     const c = document.getElementById('toast-container');
                     const t = document.createElement('div'); t.className = `toast ${type}`; 
@@ -707,483 +754,577 @@
                     t.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
                     c.appendChild(t); 
                     
-                    if(type==='success') { App.Audio.play('success'); App.Audio.haptic([30,50,30]); }
-                    else if(type==='error') { App.Audio.play('error'); App.Audio.haptic([50,100,50]); }
-                    else { App.Audio.play('pop'); App.Audio.haptic(30); }
+                    if(type==='success') { Audio.play('success'); Audio.haptic([30,50,30]); }
+                    else if(type==='error') { Audio.play('error'); Audio.haptic([50,100,50]); }
+                    else { Audio.play('pop'); Audio.haptic(20); }
                     
-                    setTimeout(() => { t.style.animation = 'fadeOutRight 0.4s forwards'; setTimeout(()=>t.remove(), 400); }, 3000);
+                    setTimeout(() => { t.style.animation = 'fadeOut 0.3s forwards'; setTimeout(()=>t.remove(), 300); }, 3000);
                 },
-                
                 addXP: (amt) => {
-                    App.State.xp += amt; 
-                    let leveledUp = false;
-                    while(App.State.xp >= 100) { App.State.level++; App.State.xp -= 100; leveledUp = true; }
-                    if(leveledUp) { App.UI.toast(`🌟 LEVEL UP! Selamat datang di Level ${App.State.level}`, 'success'); }
-                    
-                    const pearlGain = Math.floor(amt/2);
-                    App.State.pearls += pearlGain;
-                    
-                    App.Storage.set('xp', App.State.xp); App.Storage.set('lvl', App.State.level); App.Storage.set('prl', App.State.pearls);
-                    App.UI.updateDash();
+                    State.xp += amt; let leveledUp = false;
+                    while(State.xp >= 100) { State.level++; State.xp -= 100; leveledUp = true; }
+                    if(leveledUp) UI.toast(`🌟 LEVEL UP! Selamat datang di Level ${State.level}`, 'success');
+                    State.pearls += Math.floor(amt/2);
+                    Storage.set('xp', State.xp); Storage.set('lvl', State.level); Storage.set('prl', State.pearls);
+                    UI.updateDash();
                 },
-                
                 updateDash: () => {
-                    document.getElementById('ui-level').innerText = App.State.level;
-                    document.getElementById('ui-xp-bar').style.width = `${App.State.xp}%`;
-                    document.getElementById('ui-xp-text').innerText = App.State.xp;
-                    document.getElementById('ui-pearls').innerText = App.State.pearls;
-                    document.getElementById('ui-streak').innerText = App.State.streak;
+                    document.getElementById('ui-level').innerText = State.level;
+                    document.getElementById('ui-xp-bar').style.width = `${State.xp}%`;
+                    document.getElementById('ui-xp-text').innerText = State.xp;
+                    document.getElementById('ui-pearls').innerText = State.pearls;
+                    document.getElementById('ui-streak').innerText = State.streak;
                 },
-
-                // Logic 3D Tilt Universal
                 setup3DTilt: () => {
-                    if(window.matchMedia("(pointer: fine)").matches) {
+                    if(window.matchMedia("(pointer: fine)").matches && State.motionOn) {
                         document.addEventListener('mousemove', (e) => {
-                            if(!App.State.motionOn) return;
                             document.querySelectorAll('.tilt-element:hover').forEach(el => {
                                 const rect = el.getBoundingClientRect();
-                                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                                const centerX = rect.width / 2; const centerY = rect.height / 2;
-                                const rotateX = ((y - centerY) / centerY) * -5; // Intensitas Tilt
-                                const rotateY = ((x - centerX) / centerX) * 5;
-                                el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                                const x = e.clientX - rect.left, y = e.clientY - rect.top;
+                                const centerX = rect.width/2, centerY = rect.height/2;
+                                // Batasi rotasi max 8 derajat agar aman
+                                const rotateX = Math.max(-8, Math.min(8, ((y - centerY) / centerY) * -5)); 
+                                const rotateY = Math.max(-8, Math.min(8, ((x - centerX) / centerX) * 5));
+                                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
                             });
                         });
                         document.addEventListener('mouseout', (e) => {
                             const el = e.target.closest('.tilt-element');
-                            if(el) el.style.transform = `rotateX(0) rotateY(0) translateZ(0)`;
+                            if(el) el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) translateZ(0)`;
                         });
                         
-                        // ID Card 3D Tilt (Lebih ekstrem)
+                        // ID Card Khusus (Matematika lebih presisi)
                         const idCard = document.getElementById('main-id-card');
                         idCard.addEventListener('mousemove', (e) => {
-                            if(!App.State.motionOn) return;
                             idCard.classList.remove('reset');
                             const rect = idCard.getBoundingClientRect();
-                            const rotateX = (((e.clientY - rect.top) - (rect.height/2)) / (rect.height/2)) * -15;
-                            const rotateY = (((e.clientX - rect.left) - (rect.width/2)) / (rect.width/2)) * 15;
+                            const rotateX = Math.max(-15, Math.min(15, (((e.clientY - rect.top) - (rect.height/2)) / (rect.height/2)) * -10));
+                            const rotateY = Math.max(-15, Math.min(15, (((e.clientX - rect.left) - (rect.width/2)) / (rect.width/2)) * 10));
                             idCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                         });
                         idCard.addEventListener('mouseleave', () => { idCard.classList.add('reset'); idCard.style.transform = `rotateX(0) rotateY(0)`; });
                     }
                 },
-
-                // Modals
                 showModal: (id) => { 
-                    App.Audio.play('pop'); App.Audio.haptic(20);
-                    const m = document.getElementById(id);
-                    if(m) m.classList.add('show'); 
+                    Audio.play('pop'); Audio.haptic(20);
+                    const m = document.getElementById(id); if(m) m.classList.add('show'); 
                 },
                 closeModals: () => { 
                     document.querySelectorAll('.modal-overlay.show').forEach(m => {
-                        m.classList.remove('show'); App.Audio.play('click');
+                        m.classList.remove('show'); Audio.play('click');
                     }); 
                 },
-
-                // Profile 3D ID Card Populator
                 showProfileIDCard: (id) => {
-                    const d = App.Data.kru.find(k => k.id === id); if(!d) return;
-                    // Populate ID Card
+                    const d = Data.kru.find(k => k.id === id); if(!d) return;
                     document.getElementById('idcard-img').src = `https://ui-avatars.com/api/?name=${d.nama.replace(/ /g,'+')}&background=0ea5e9&color=fff&size=200&bold=true`;
                     document.getElementById('idcard-name').innerText = d.nama.split(' ')[0];
                     document.getElementById('idcard-role').innerText = d.role;
                     document.getElementById('idcard-badge').innerText = d.core ? "INTI KAPAL" : "KRU DEK";
                     
-                    // Generate pseudo-stats
                     const hash = (d.nama.charCodeAt(0) * d.nama.length * 7) % 40; 
                     document.getElementById('idcard-int').innerText = 60 + hash;
                     document.getElementById('idcard-cre').innerText = 100 - hash;
 
                     const btnLove = document.getElementById('btn-love-3d');
-                    let loves = App.Storage.get('loves_v3', []);
-                    if(loves.includes(d.id)) { btnLove.innerHTML="❤️ Diapresiasi"; btnLove.classList.add('bg-[var(--danger)]','text-white'); }
-                    else { btnLove.innerHTML="🤍 Beri Apresiasi"; btnLove.classList.remove('bg-[var(--danger)]','text-white'); }
+                    let loves = Storage.get('loves_v3', []);
+                    const isLoved = loves.includes(d.id);
+                    btnLove.innerHTML = isLoved ? "❤️ Diapresiasi" : "🤍 Beri Apresiasi";
+                    btnLove.className = `w-full py-2.5 rounded-xl border border-[var(--danger)] font-bold text-sm transition-all btn-interactive flex justify-center items-center gap-2 mb-4 ${isLoved ? 'bg-[var(--danger)] text-white' : 'text-[var(--danger)] bg-white/30 hover:bg-[var(--danger)] hover:text-white'}`;
+                    btnLove.style.transform = 'translateZ(25px)';
 
                     btnLove.onclick = () => {
                         if(loves.includes(d.id)) loves = loves.filter(x=>x!==d.id);
-                        else { loves.push(d.id); App.UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}`, 'success'); }
-                        App.Storage.set('loves_v3', loves);
-                        if(loves.includes(d.id)) { btnLove.innerHTML="❤️ Diapresiasi"; btnLove.classList.add('bg-[var(--danger)]','text-white'); }
-                        else { btnLove.innerHTML="🤍 Beri Apresiasi"; btnLove.classList.remove('bg-[var(--danger)]','text-white'); }
+                        else { loves.push(d.id); UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}`, 'success'); }
+                        Storage.set('loves_v3', loves);
+                        UI.showProfileIDCard(id); // re-render
                     };
 
-                    App.UI.showModal('modal-idcard-3d');
+                    document.getElementById('btn-copy-id').onclick = () => {
+                        navigator.clipboard.writeText(`ID 9H: ${d.nama} | ${d.role}`).then(()=> UI.toast("Info disalin", "success"));
+                    };
+
+                    UI.showModal('modal-idcard-3d');
                 },
+                updateClock: () => {
+                    const now = new Date();
+                    document.getElementById('header-clock').innerText = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                }
+            };
 
+            // --- SEARCH LOGIC (Auto-suggest & Fuzzy) ---
+            const Search = {
                 init: () => {
-                    // Load State
-                    App.State.level = App.Storage.get('lvl', 1); App.State.xp = App.Storage.get('xp', 0);
-                    App.State.pearls = App.Storage.get('prl', 0); App.State.streak = App.Storage.get('strk', 0);
-                    App.State.lastCheckin = App.Storage.get('lck', "");
-                    
-                    App.State.soundOn = App.Storage.get('snd', true); document.getElementById('toggle-sound').checked = App.State.soundOn;
-                    App.State.hapticOn = App.Storage.get('hpt', true); document.getElementById('toggle-haptic').checked = App.State.hapticOn;
-                    App.State.motionOn = App.Storage.get('mtn', true); document.getElementById('toggle-motion').checked = App.State.motionOn;
-                    
-                    // Theme
-                    const theme = App.Storage.get('thm', 'light');
-                    if(theme==='dark') document.body.classList.add('dark-mode');
-                    document.getElementById('sel-theme').value = theme;
+                    const input = document.getElementById('global-search');
+                    const suggest = document.getElementById('search-suggest');
+                    const list = document.getElementById('suggest-list');
+                    const emptyState = document.getElementById('empty-state');
+                    let debounceTimer;
 
-                    // Daily Login Streak
-                    const today = new Date().toDateString();
-                    if(App.State.lastCheckin !== today) {
-                        App.State.streak++; App.State.lastCheckin = today; 
-                        App.Storage.set('strk', App.State.streak); App.Storage.set('lck', today);
-                        setTimeout(() => { App.UI.addXP(20); App.UI.toast("🎁 Bonus Harian: +20 XP & +10 Mutiara!", "success"); }, 2000);
+                    const renderSuggest = (query) => {
+                        list.innerHTML = '';
+                        if(query === '') {
+                            State.searchHistory.forEach(h => {
+                                list.innerHTML += `<div class="suggest-item" data-val="${h}">🕒 ${h}</div>`;
+                            });
+                        } else {
+                            // Find matching sections or names
+                            const matches = [];
+                            document.querySelectorAll('.search-target').forEach(el => {
+                                const text = el.innerText.toLowerCase();
+                                if(text.includes(query) && matches.length < 5) {
+                                    const title = el.querySelector('h2, h3').innerText;
+                                    matches.push(`<div class="suggest-item" data-val="${title}">🔎 ${title}</div>`);
+                                }
+                            });
+                            list.innerHTML = matches.join('');
+                        }
+                    };
+
+                    input.addEventListener('focus', () => { suggest.classList.add('active'); renderSuggest(input.value.trim().toLowerCase()); });
+                    document.addEventListener('click', (e) => { if(!e.target.closest('.search-wrapper')) suggest.classList.remove('active'); });
+
+                    input.addEventListener('input', (e) => {
+                        clearTimeout(debounceTimer);
+                        const q = e.target.value.toLowerCase().trim();
+                        suggest.classList.add('active'); renderSuggest(q);
+                        
+                        debounceTimer = setTimeout(() => {
+                            let found = false;
+                            document.querySelectorAll('.search-target').forEach(card => {
+                                if(card.innerText.toLowerCase().includes(q) || q==='') { 
+                                    card.style.display = 'block'; setTimeout(()=>card.style.opacity=1, 10); found = true;
+                                } else { 
+                                    card.style.opacity = 0; setTimeout(()=>card.style.display = 'none', 300); 
+                                }
+                            });
+                            
+                            if(!found && q!=='') emptyState.classList.remove('hidden');
+                            else emptyState.classList.add('hidden');
+                        }, 300);
+                    });
+
+                    input.addEventListener('keypress', (e) => {
+                        if(e.key === 'Enter' && input.value.trim()) {
+                            const val = input.value.trim();
+                            if(!State.searchHistory.includes(val)) {
+                                State.searchHistory.unshift(val);
+                                if(State.searchHistory.length > 5) State.searchHistory.pop();
+                                Storage.set('shist', State.searchHistory);
+                            }
+                            suggest.classList.remove('active'); input.blur();
+                        }
+                    });
+
+                    list.addEventListener('click', (e) => {
+                        const item = e.target.closest('.suggest-item');
+                        if(item) { input.value = item.dataset.val; input.dispatchEvent(new Event('input')); suggest.classList.remove('active'); }
+                    });
+
+                    document.getElementById('search-clear').onclick = () => { input.value=''; input.dispatchEvent(new Event('input')); input.focus(); };
+                    document.getElementById('clear-history').onclick = (e) => { e.stopPropagation(); State.searchHistory = []; Storage.set('shist', []); renderSuggest(''); };
+                }
+            };
+
+            // --- GAMES ENGINE ---
+            const Games = {
+                list: [], favorites: Storage.get('fav_games', []), activeInterval: null, score: 0,
+                generate: () => {
+                    const mechs = ['clicker', 'reaction', 'mash', 'memory'];
+                    const modes = ['solo', 'bot', 'multi', 'coop'];
+                    const icons = ['🦈','🐋','🐢','🐙','🪼','🦀','⭐','🫏','🐚','🐟','🪸','🫧'];
+                    const adjs = ['Ganas', 'Biru', 'Misteri', 'Cepat', 'Dalam', 'Emas', 'Pintar', 'Liar', 'Gelap', 'Ajaib', 'Besi', 'Mistik'];
+
+                    for(let i=0; i<66; i++) {
+                        Games.list.push({
+                            id: `g_${i}`, title: `Ocean ${icons[i % icons.length]} ${adjs[Math.floor(i/icons.length) % adjs.length]}`,
+                            desc: `Game mode ${mechs[i%mechs.length]}. Kumpulkan mutiara!`, icon: icons[i % icons.length],
+                            mode: modes[i%modes.length], mech: mechs[i%mechs.length]
+                        });
                     }
-                    App.UI.updateDash();
+                },
+                render: () => {
+                    const grid = document.getElementById('play-zone-grid'); grid.innerHTML = '';
+                    Games.list.forEach(g => {
+                        const bClass = g.mode==='solo'?'badge-solo':(g.mode==='bot'?'badge-bot':(g.mode==='multi'?'badge-multi':'badge-coop'));
+                        const isFav = Games.favorites.includes(g.id);
+                        grid.innerHTML += `
+                            <div class="game-card tilt-element btn-interactive" data-mode="${g.mode}" data-id="${g.id}" onclick="App.Games.open('${g.id}')">
+                                ${isFav ? '<div class="absolute top-2 left-2 text-xs">❤️</div>' : ''}
+                                <span class="game-badge ${bClass}">${g.mode}</span>
+                                <div class="game-icon">${g.icon}</div>
+                                <h4 class="game-title">${g.title}</h4>
+                            </div>
+                        `;
+                    });
 
-                    // ================= RENDER DATA KE HTML =================
+                    // Hide skeleton, show grid
+                    setTimeout(() => {
+                        document.getElementById('game-skeleton').style.display = 'none';
+                        grid.classList.remove('hidden');
+                    }, 800);
+
+                    // Filters
+                    document.querySelectorAll('.filter-btn-game').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            document.querySelectorAll('.filter-btn-game').forEach(b=>b.classList.remove('active')); e.target.classList.add('active');
+                            const filter = e.target.dataset.filter;
+                            document.querySelectorAll('.game-card').forEach(card => {
+                                const show = filter === 'all' || card.dataset.mode === filter || (filter === 'fav' && Games.favorites.includes(card.dataset.id));
+                                if(show) { card.style.display = 'flex'; setTimeout(()=>card.style.opacity=1,10); }
+                                else { card.style.opacity=0; setTimeout(()=>card.style.display='none',300); }
+                            });
+                        });
+                    });
+                },
+                open: (id) => {
+                    const g = Games.list.find(x => x.id === id); if(!g) return;
+                    Audio.play('pop');
+                    document.getElementById('engine-title').innerText = g.title; document.getElementById('engine-desc').innerText = g.desc;
+                    document.getElementById('engine-badge').innerText = g.mode;
                     
-                    // 1. Organisasi
+                    const btnFav = document.getElementById('btn-fav-game');
+                    btnFav.innerText = Games.favorites.includes(id) ? '❤️' : '🤍';
+                    btnFav.onclick = () => {
+                        if(Games.favorites.includes(id)) Games.favorites = Games.favorites.filter(x=>x!==id);
+                        else Games.favorites.push(id);
+                        Storage.set('fav_games', Games.favorites);
+                        btnFav.innerText = Games.favorites.includes(id) ? '❤️' : '🤍';
+                        Games.render(); // Re-render to show/hide heart on grid
+                    };
+
+                    document.getElementById('game-hud').classList.add('hidden');
+                    document.getElementById('game-stage').innerHTML = `
+                        <div class="text-6xl mb-6 animate-bounce">${g.icon}</div>
+                        <button id="btn-start-game" class="px-6 py-3 bg-[var(--accent)] text-white rounded-xl font-black text-lg hover:scale-105 transition-transform btn-interactive shadow-lg">MULAI MAIN</button>
+                    `;
+                    document.getElementById('btn-start-game').onclick = () => Games.start(g);
+                    UI.showModal('game-engine-modal');
+                },
+                close: () => { clearInterval(Games.activeInterval); document.getElementById('game-engine-modal').classList.remove('show'); },
+                start: (g) => {
+                    Audio.play('success'); Audio.haptic([50,50]);
+                    document.getElementById('game-hud').classList.remove('hidden');
+                    Games.score = 0; document.getElementById('game-score').innerText = 0;
+                    let time = 10; document.getElementById('game-time').innerText = time;
+                    const stage = document.getElementById('game-stage'); stage.innerHTML = '';
+                    
+                    if(g.mech === 'clicker' || g.mech === 'mash') {
+                        Games.activeInterval = setInterval(() => {
+                            time--; document.getElementById('game-time').innerText = time;
+                            if(time <= 0) Games.end();
+                            else if(Math.random() > 0.2) {
+                                const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform drop-shadow-md';
+                                btn.style.left = `${10 + Math.random() * 70}%`; btn.style.top = `${10 + Math.random() * 70}%`;
+                                btn.onpointerdown = (e) => { e.preventDefault(); Audio.play('bubble'); Games.score+=10; document.getElementById('game-score').innerText = Games.score; btn.remove(); };
+                                stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode)btn.remove()}, 900);
+                            }
+                        }, 800);
+                    } else {
+                        stage.innerHTML = `<div class="text-center p-4"><div class="text-6xl mb-4 animate-pulse">${g.icon}</div><p class="font-bold opacity-70 text-sm">Tap berulang kali!</p></div>`;
+                        stage.onpointerdown = (e) => { e.preventDefault(); Games.score+=5; document.getElementById('game-score').innerText = Games.score; Audio.play('pop'); };
+                        Games.activeInterval = setInterval(() => {
+                            time--; document.getElementById('game-time').innerText = time;
+                            if(time <= 0) Games.end();
+                        }, 1000);
+                    }
+                },
+                end: () => {
+                    clearInterval(Games.activeInterval); document.getElementById('game-stage').onpointerdown = null;
+                    Audio.play('success'); Audio.haptic([100,50,100]);
+                    const xpGain = Math.floor(Games.score / 15) + 5;
+                    document.getElementById('game-stage').innerHTML = `
+                        <div class="text-center p-6 bg-black/10 w-full h-full flex flex-col justify-center items-center">
+                            <h2 class="text-3xl font-black text-[var(--accent)] mb-2">SELESAI</h2>
+                            <p class="text-lg font-black mb-4">Skor: ${Games.score}</p>
+                            <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-3 mb-6 w-full max-w-[180px]">
+                                <div class="flex justify-between font-bold text-xs"><span class="opacity-70">XP</span><span class="text-[var(--success)]">+${xpGain}</span></div>
+                                <div class="flex justify-between font-bold text-xs mt-1"><span class="opacity-70">Mutiara</span><span class="text-[var(--warning)]">+${Math.floor(xpGain/2)}</span></div>
+                            </div>
+                            <button onclick="App.Games.close()" class="px-6 py-2 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold btn-interactive">TUTUP</button>
+                        </div>
+                    `;
+                    UI.addXP(xpGain);
+                }
+            };
+
+            // --- INITIALIZATION & BINDINGS ---
+            const Init = () => {
+                // Apply Settings
+                if(Storage.get('thm', 'light') === 'dark') document.body.classList.add('dark-mode');
+                document.getElementById('sel-theme').value = Storage.get('thm', 'light');
+                document.getElementById('toggle-sound').checked = State.soundOn;
+                document.getElementById('toggle-haptic').checked = State.hapticOn;
+                document.getElementById('toggle-motion').checked = State.motionOn;
+                if(!State.motionOn) document.body.classList.add('reduce-motion');
+
+                // Network Status
+                window.addEventListener('online', () => { State.isOnline=true; document.getElementById('header-status').innerText='Online'; document.getElementById('header-status').className='font-mono text-[0.6rem] font-bold tracking-widest text-[var(--success)] uppercase hidden md:inline'; UI.toast('Koneksi pulih', 'success'); });
+                window.addEventListener('offline', () => { State.isOnline=false; document.getElementById('header-status').innerText='Offline'; document.getElementById('header-status').className='font-mono text-[0.6rem] font-bold tracking-widest text-[var(--danger)] uppercase hidden md:inline'; UI.toast('Anda sedang offline', 'error'); });
+
+                // Daily Check-in
+                const today = new Date().toDateString();
+                if(State.lastCheckin !== today) {
+                    State.streak++; State.lastCheckin = today; 
+                    Storage.set('strk', State.streak); Storage.set('lck', today);
+                    setTimeout(() => { UI.addXP(20); UI.toast("🎁 Bonus Harian: +20 XP & +10 Mutiara!", "success"); }, 1500);
+                }
+                UI.updateDash(); UI.updateClock(); setInterval(UI.updateClock, 60000);
+
+                // Render Data to HTML
+                const renderData = () => {
+                    // Org
                     const og = document.getElementById('org-grid');
                     const roles = ["Ketua Kelas", "Wakil Kelas", "Bendahara", "Sekretaris", "Keamanan", "Perpustakaan", "Kerohanian", "Kepramukaan", "Olahraga", "Absensi", "Kru", "OSIS"];
                     roles.forEach(role => {
-                        const members = App.Data.kru.filter(k => k.role.includes(role) || (role === "Kru" && k.role === "Kru"));
+                        const members = Data.kru.filter(k => k.role.includes(role) || (role === "Kru" && k.role === "Kru"));
                         if(!members.length) return;
                         let list = members.map(m => `<li tabindex="0" onclick="App.UI.showProfileIDCard('${m.id}')" class="btn-interactive"><span class="list-header">${m.nama}</span></li>`).join("");
-                        og.innerHTML += `<div class="glass-card tilt-element search-target" data-category="${m=>m.g}"><h3 class="font-display font-bold text-xl text-[var(--accent)] mb-4 border-b border-[var(--glass-border)] pb-2">${role}</h3><ul class="smart-list">${list}</ul></div>`;
+                        og.innerHTML += `<div class="glass-card tilt-element search-target" data-category="${members[0].g}"><h3 class="font-display font-bold text-lg text-[var(--text-primary)] mb-3 border-b border-[var(--glass-border)] pb-2">${role}</h3><ul class="smart-list">${list}</ul></div>`;
                     });
 
-                    // 2. Piket
+                    // Piket
                     const pg = document.getElementById('piket-grid');
-                    App.Data.piket.forEach((p, i) => {
-                        let list = p.list.map(id => { let k = App.Data.kru.find(x => x.id === id); return `<li onclick="App.UI.showProfileIDCard('${k.id}')" class="btn-interactive"><span class="list-header">${k.nama}</span></li>`; }).join("");
-                        let isToday = (i+1 === App.Data.hariIndex) && (App.Data.hariIndex <= 5);
-                        pg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h2 class="font-display font-bold text-xl mb-4 border-b border-[var(--glass-border)] pb-2 flex justify-between"><span>${p.hari}</span> ${isToday?'<span class="text-[var(--accent)] animate-pulse">Hari Ini</span>':''}</h2><ul class="smart-list">${list}</ul></div>`;
+                    Data.piket.forEach((p, i) => {
+                        let list = p.list.map(id => { let k = Data.kru.find(x => x.id === id); return `<li onclick="App.UI.showProfileIDCard('${k.id}')" class="btn-interactive"><span class="list-header">${k.nama}</span></li>`; }).join("");
+                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
+                        pg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 flex justify-between text-[var(--text-primary)]"><span>${p.hari}</span> ${isToday?'<span class="text-[var(--accent)] text-xs uppercase flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping"></span> Hari Ini</span>':''}</h3><ul class="smart-list">${list}</ul></div>`;
                     });
 
-                    // 3. Pelajaran & Cek Live (Jam)
+                    // Pelajaran
                     const lg = document.getElementById('pelajaran-grid');
-                    const now = new Date(); const h = String(now.getHours()).padStart(2,'0'), m = String(now.getMinutes()).padStart(2,'0'); const tm = `${h}:${m}`;
-                    
-                    App.Data.pelajaran.forEach((p, i) => {
-                        let isToday = (i+1 === App.Data.hariIndex) && (App.Data.hariIndex <= 5);
+                    const now = new Date(); const tm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                    Data.pelajaran.forEach((p, i) => {
+                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
                         let list = p.list.map(l => {
                             let isLive = isToday && (tm >= l.t.split('-')[0] && tm < l.t.split('-')[1]);
-                            return `<li class="${l.br?'break-time':''} ${isLive?'current-lesson':''}"><span class="list-header text-sm">${l.t} | ${l.m}</span></li>`;
+                            return `<li class="${l.br?'opacity-60':''} ${isLive?'current-lesson':''}"><span class="list-header text-xs md:text-sm"><span class="opacity-70 mr-2 font-mono">${l.t}</span> ${l.m}</span></li>`;
                         }).join("");
-                        lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h2 class="font-display font-bold text-xl mb-4 border-b border-[var(--glass-border)] pb-2">${p.hari}</h2><ul class="smart-list">${list}</ul></div>`;
+                        lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)]">${p.hari}</h3><ul class="smart-list">${list}</ul></div>`;
                     });
 
-                    // 4. Pakaian
+                    // Pakaian
                     const clg = document.getElementById('pakaian-grid');
-                    App.Data.pakaian.forEach((p, i) => {
-                        let isToday = (i+1 === App.Data.hariIndex) && (App.Data.hariIndex <= 5);
-                        clg.innerHTML += `<div class="glass-card tilt-element search-target text-center flex flex-col justify-center ${isToday?'today-highlight scale-105':''}"><p class="text-xs font-bold opacity-70 mb-2">${App.Data.piket[i].hari}</p><p class="font-black text-lg text-[var(--accent)] leading-tight">${p}</p></div>`;
+                    Data.pakaian.forEach((p, i) => {
+                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
+                        clg.innerHTML += `<div class="glass-card tilt-element search-target text-center flex flex-col justify-center p-4 ${isToday?'today-highlight ring-2 ring-[var(--accent)]':''}"><p class="text-[0.65rem] font-bold opacity-70 mb-1 uppercase tracking-widest">${Data.piket[i].hari}</p><p class="font-black text-sm md:text-base text-[var(--text-primary)] leading-tight">${p}</p></div>`;
                     });
+                };
+                renderData();
 
-                    // ================= EVENT LISTENERS =================
-
-                    // Global Click Audio
-                    document.addEventListener('click', (e) => { 
-                        if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON' || e.target.tagName==='A') {
-                            App.Audio.init(); App.Audio.play('click'); 
-                        }
-                    });
-
-                    // Modals
-                    document.querySelectorAll('.btn-close').forEach(b => b.addEventListener('click', App.UI.closeModals));
-                    document.querySelectorAll('.modal-overlay').forEach(m => { m.addEventListener('click', (e) => { if(e.target === m) App.UI.closeModals(); }); });
-                    document.getElementById('btn-settings').addEventListener('click', () => App.UI.showModal('modal-settings'));
-                    
-                    // Context Menu (Titik 3 & Right Click)
-                    const ctxMenu = document.getElementById('context-menu');
-                    const toggleCtx = (e) => {
-                        e.preventDefault(); e.stopPropagation();
-                        if(ctxMenu.classList.contains('show')) { ctxMenu.classList.remove('show'); return; }
-                        // Jika via tombol titik 3, munculkan di bawah tombol
-                        if(e.target.closest('#btn-context-toggle')) {
-                            const rect = document.getElementById('btn-context-toggle').getBoundingClientRect();
-                            ctxMenu.style.top = `${rect.bottom + 10}px`; ctxMenu.style.right = `20px`; ctxMenu.style.left = 'auto';
-                        } else {
-                            // Jika via klik kanan
-                            ctxMenu.style.top = `${e.clientY}px`; ctxMenu.style.left = `${e.clientX}px`; ctxMenu.style.right = 'auto';
-                        }
-                        ctxMenu.classList.add('show'); App.Audio.play('pop'); App.Audio.haptic(20);
+                // Ecosystem
+                if(State.motionOn) {
+                    const spawnEco = () => {
+                        if(document.querySelectorAll('.sea-creature').length > 15 || document.hidden) return;
+                        const eco = document.getElementById('ocean-ecosystem');
+                        const creatures = [{c:'🐟', t:'swim-fast', l:'mid'}, {c:'🦈', t:'swim-slow', l:'bg'}, {c:'🪼', t:'jelly-swim', l:'fg'}, {c:'🫧', t:'float-bob', l:'mid'}];
+                        const d = creatures[Math.floor(Math.random()*creatures.length)];
+                        const el = document.createElement('div'); el.className = `sea-creature ${d.t}`; el.innerText = d.c;
+                        if(d.c==='🪼') el.classList.add('bioluminescent');
+                        if(d.t.includes('swim')) el.style.top = `${10 + Math.random()*70}vh`; else el.style.left = `${Math.random()*90}vw`;
+                        document.getElementById(`layer-${d.l}`).appendChild(el);
+                        setTimeout(() => { if(el.parentNode) el.remove(); }, 30000);
                     };
-                    document.getElementById('btn-context-toggle').addEventListener('click', toggleCtx);
-                    document.addEventListener('contextmenu', (e) => { if(!e.target.closest('input, textarea')) toggleCtx(e); });
-                    document.addEventListener('click', () => ctxMenu.classList.remove('show'));
-
-                    // Context Menu Actions
-                    document.querySelectorAll('.ctx-item').forEach(item => {
-                        item.addEventListener('click', (e) => {
-                            const act = e.target.dataset.action;
-                            if(act==='search') document.getElementById('global-search').focus();
-                            if(act==='theme') document.getElementById('sel-theme').value = document.body.classList.contains('dark-mode')?'light':'dark'; document.getElementById('sel-theme').dispatchEvent(new Event('change'));
-                            if(act==='zen') { document.body.classList.toggle('zen-mode'); App.UI.toast("Mode Zen Toggled"); }
-                            if(act==='copy') { navigator.clipboard.writeText(location.href); App.UI.toast("URL Disalin", "success"); }
-                            if(act==='shake') {
-                                document.body.style.animation = "shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite";
-                                const s = document.createElement('style'); s.id = "shake-anim";
-                                s.innerHTML = `@keyframes shake { 10%, 90% { transform: translate3d(-2px, 2px, 0); } 20%, 80% { transform: translate3d(4px, -2px, 0); } 30%, 50%, 70% { transform: translate3d(-8px, 4px, 0); } 40%, 60% { transform: translate3d(8px, -4px, 0); } }`;
-                                document.head.appendChild(s); App.UI.toast("⚠️ SIMULASI GEMPA!!!"); App.Audio.haptic([100,50,100,50,200]);
-                                setTimeout(() => { document.body.style.animation=''; document.getElementById('shake-anim').remove(); }, 3000);
-                            }
-                        });
-                    });
-
-                    // ID Card Kanan Atas -> Default ke Ketua Kelas atau Profil Global
-                    document.getElementById('btn-idcard-global').addEventListener('click', () => {
-                        App.UI.showProfileIDCard('Andika'); // Memakai data asli dari array
-                        document.getElementById('idcard-badge').innerText = "GLOBAL ACCESS";
-                    });
-
-                    // Utilitas: Notes
-                    const note = document.getElementById('personal-note');
-                    note.value = App.Storage.get('note', '');
-                    note.addEventListener('input', e => { 
-                        App.Storage.set('note', e.target.value); 
-                        document.getElementById('save-status').innerText = "Menyimpan...";
-                        clearTimeout(window.saveTmr); window.saveTmr = setTimeout(()=> document.getElementById('save-status').innerText = "Lokal", 800);
-                    });
-
-                    // Utilitas: Tasks
-                    const tInput = document.getElementById('task-input');
-                    const tList = document.getElementById('task-list');
-                    const renderTasks = () => {
-                        tList.innerHTML = ''; const tasks = App.Storage.get('tasks', []);
-                        tasks.forEach((t, i) => {
-                            const div = document.createElement('div'); div.className = `flex justify-between items-center p-2 rounded-lg bg-black/10 border border-[var(--glass-border)] ${t.d?'opacity-50 line-through':''}`;
-                            div.innerHTML = `<span class="font-medium text-sm cursor-pointer flex-grow">${t.t}</span> <button class="text-red-500 font-bold px-2 hover:bg-red-500 hover:text-white rounded transition-colors">&times;</button>`;
-                            div.onclick = (e) => {
-                                App.Audio.play('pop'); App.Audio.haptic(10);
-                                if(e.target.tagName==='BUTTON') tasks.splice(i,1); else t.d = !t.d;
-                                App.Storage.set('tasks', tasks); renderTasks();
-                            };
-                            tList.appendChild(div);
-                        });
-                    };
-                    renderTasks();
-                    tInput.addEventListener('keypress', e => {
-                        if(e.key === 'Enter' && e.target.value.trim()) {
-                            let tasks = App.Storage.get('tasks', []); tasks.push({t: e.target.value.trim(), d: false});
-                            App.Storage.set('tasks', tasks); renderTasks(); e.target.value = ''; App.Audio.play('success');
-                        }
-                    });
-
-                    // Utilitas: Pomodoro
-                    document.getElementById('btn-pomo').onclick = () => {
-                        App.Audio.play('click');
-                        if(App.State.isPomoRunning) { clearInterval(App.State.pomoTimer); App.State.isPomoRunning = false; document.getElementById('btn-pomo').innerHTML = '▶'; }
-                        else {
-                            App.State.isPomoRunning = true; document.getElementById('btn-pomo').innerHTML = '⏸';
-                            App.State.pomoTimer = setInterval(() => {
-                                App.State.pomoTime--; let m = Math.floor(App.State.pomoTime/60), s = App.State.pomoTime%60;
-                                document.getElementById('pomo-display').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-                                if(App.State.pomoTime <= 0) {
-                                    clearInterval(App.State.pomoTimer); App.State.isPomoRunning = false; App.UI.toast("Fokus Selesai!", "success"); App.Audio.play('success'); App.Audio.haptic(500);
-                                    App.State.pomoTime = 1500; document.getElementById('btn-pomo').innerHTML = '▶';
-                                }
-                            }, 1000);
-                        }
-                    };
-
-                    // Utilitas: Copy Jadwal
-                    document.getElementById('btn-copy-today').onclick = () => {
-                        if(App.Data.hariIndex<1||App.Data.hariIndex>5) return App.UI.toast("Hari ini libur!", "error");
-                        const p = App.Data.pelajaran[App.Data.hariIndex-1];
-                        const text = `*JADWAL 9H (${p.hari})*\n` + p.list.map(m => `- ${m.t}: ${m.m}`).join('\n');
-                        navigator.clipboard.writeText(text).then(() => App.UI.toast("Disalin!", "success"));
-                    };
-
-                    // Utilitas: Gacha Kru
-                    document.getElementById('btn-random').onclick = () => {
-                        App.Audio.play('click'); let c=0; const i = setInterval(()=>{
-                            const s = App.Data.kru[Math.floor(Math.random()*App.Data.kru.length)]; App.Audio.play('pop');
-                            c++; if(c>15){ clearInterval(i); App.Audio.play('success'); App.UI.showProfileIDCard(s.id); App.UI.toast(`Terpilih: ${s.nama}`, 'success'); }
-                        }, 80);
-                    };
-
-                    // Utilitas: Zen & Ocean Sound
-                    document.getElementById('btn-zen').onclick = () => { document.body.classList.toggle('zen-mode'); App.UI.toast("Mode Zen Diubah"); };
-                    document.getElementById('btn-ocean-sound').onclick = App.Audio.toggleOcean;
-
-                    // Pengaturan
-                    document.getElementById('sel-theme').onchange = (e) => {
-                        const v = e.target.value; App.Storage.set('thm', v);
-                        if(v==='dark') document.body.classList.add('dark-mode'); else document.body.classList.remove('dark-mode');
-                    };
-                    document.getElementById('toggle-sound').onchange = (e) => { App.State.soundOn = e.target.checked; App.Storage.set('snd', App.State.soundOn); };
-                    document.getElementById('toggle-haptic').onchange = (e) => { App.State.hapticOn = e.target.checked; App.Storage.set('hpt', App.State.hapticOn); };
-                    document.getElementById('toggle-motion').onchange = (e) => { App.State.motionOn = e.target.checked; App.Storage.set('mtn', App.State.motionOn); if(!App.State.motionOn) document.getElementById('ocean-ecosystem').innerHTML = ''; };
-                    document.getElementById('btn-clear-data').onclick = () => { if(confirm("Reset Data?")) { localStorage.clear(); location.reload(); } };
-
-                    // Advanced Search (Fuzzy Logic)
-                    const searchInput = document.getElementById('global-search');
-                    searchInput.addEventListener('input', (e) => {
-                        const q = e.target.value.toLowerCase().trim();
-                        document.querySelectorAll('.search-target').forEach(card => {
-                            const text = card.innerText.toLowerCase();
-                            // Jika query ada di dalam teks card, tampilkan
-                            if(text.includes(q) || q==='') { card.style.display = 'block'; setTimeout(()=>card.style.opacity=1, 10); } 
-                            else { card.style.opacity = 0; setTimeout(()=>card.style.display = 'none', 300); }
-                        });
-                    });
-                    document.getElementById('search-clear').onclick = () => { searchInput.value=''; searchInput.dispatchEvent(new Event('input')); searchInput.focus(); };
-
-                    // Nav Pills (Tabs)
-                    document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(b=>b.classList.remove('active'));
-                            e.currentTarget.classList.add('active');
-                            const target = e.currentTarget.dataset.target;
-                            
-                            document.querySelectorAll('.content-section').forEach(s => s.style.display='none');
-                            if(target === 'semua') { document.querySelectorAll('.content-section').forEach(s => s.style.display='block'); }
-                            else { document.getElementById(target).style.display = 'block'; }
-                            window.scrollTo({top: 0, behavior: 'smooth'});
-                        });
-                    });
-
-                    // FAB Jumper (HARI INI) & Atas
-                    document.getElementById('fab-today').onclick = () => {
-                        const h = document.querySelector('.today-highlight');
-                        if(h) window.scrollTo({top: h.offsetTop - 120, behavior: 'smooth'});
-                        else App.UI.toast("Hari ini libur!", "error");
-                    };
-                    document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-
-                    // Intersection Observer
-                    const obs = new IntersectionObserver(e => { e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal'); obs.unobserve(en.target); } }); }, { threshold: 0.1 });
-                    document.querySelectorAll('.glass-card').forEach(el => obs.observe(el));
-
-                    // Hide header on scroll
-                    window.addEventListener('scroll', () => {
-                        requestAnimationFrame(() => {
-                            let sy = window.scrollY;
-                            if(sy > 100 && sy > (window.lastScrollY||0)) document.getElementById('fixed-header').classList.add('hide'); 
-                            else document.getElementById('fixed-header').classList.remove('hide');
-                            window.lastScrollY = sy;
-                        });
-                    }, {passive:true});
-
-                    App.UI.setup3DTilt();
+                    setInterval(spawnEco, 3000); for(let i=0;i<5;i++) spawnEco();
                 }
-            },
 
-            // ================= 66 GAMES ENGINE =================
-            Games: {
-                list: [],
-                Engine: {
-                    activeInterval: null, score: 0,
-                    generateList: () => {
-                        const mechs = ['clicker', 'reaction', 'mash', 'memory'];
-                        const modes = ['solo', 'bot', 'multi', 'coop'];
-                        const icons = ['🦈','🐋','🐢','🐙','🪼','🦀','⭐','🫏','🐚','🐟','🪸','🫧'];
-                        const adjs = ['Ganas', 'Biru', 'Misteri', 'Cepat', 'Dalam', 'Emas', 'Pintar', 'Liar', 'Gelap', 'Ajaib', 'Besi', 'Mistik'];
-
-                        for(let i=0; i<66; i++) {
-                            const icon = icons[i % icons.length];
-                            const adj = adjs[Math.floor(i/icons.length) % adjs.length];
-                            App.Games.list.push({
-                                id: `game_${i}`, title: `Ocean ${icon} ${adj}`, desc: `Kumpulkan mutiara dengan mode ${mechs[i%mechs.length]}.`,
-                                icon: icon, mode: modes[i%modes.length], mech: mechs[i%mechs.length]
-                            });
-                        }
-                    },
-                    renderGrid: () => {
-                        const grid = document.getElementById('play-zone-grid'); grid.innerHTML = '';
-                        App.Games.list.forEach(g => {
-                            const bClass = g.mode==='solo'?'badge-solo':(g.mode==='bot'?'badge-bot':(g.mode==='multi'?'badge-multi':'badge-coop'));
-                            grid.innerHTML += `
-                                <div class="game-card tilt-element btn-interactive" data-mode="${g.mode}" onclick="App.Games.Engine.open('${g.id}')">
-                                    <span class="game-badge ${bClass}">${g.mode}</span>
-                                    <div class="game-icon">${g.icon}</div>
-                                    <h4 class="game-title">${g.title}</h4>
-                                </div>
-                            `;
-                        });
-
-                        document.querySelectorAll('.filter-btn-game').forEach(btn => {
-                            btn.addEventListener('click', (e) => {
-                                document.querySelectorAll('.filter-btn-game').forEach(b=>b.classList.remove('active')); e.target.classList.add('active');
-                                const filter = e.target.dataset.filter;
-                                document.querySelectorAll('.game-card').forEach(card => {
-                                    if(filter === 'all' || card.dataset.mode === filter) { card.style.display = 'flex'; setTimeout(()=>card.style.opacity=1,10); }
-                                    else { card.style.opacity=0; setTimeout(()=>card.style.display='none',300); }
-                                });
-                            });
-                        });
-                    },
-                    open: (id) => {
-                        const g = App.Games.list.find(x => x.id === id); if(!g) return;
-                        App.Audio.play('pop');
-                        document.getElementById('engine-title').innerText = g.title; document.getElementById('engine-desc').innerText = g.desc;
-                        document.getElementById('engine-badge').innerText = g.mode; document.getElementById('engine-badge').className = `game-badge relative top-0 right-0 ${g.mode==='solo'?'badge-solo':(g.mode==='bot'?'badge-bot':(g.mode==='multi'?'badge-multi':'badge-coop'))}`;
-                        document.getElementById('game-hud').classList.add('hidden');
-                        
-                        document.getElementById('game-stage').innerHTML = `
-                            <div class="text-7xl mb-6 animate-bounce">${g.icon}</div>
-                            <button id="btn-start-game" class="px-8 py-4 bg-[var(--accent)] text-black rounded-full font-black text-xl hover:scale-105 transition-transform btn-interactive">MULAI MAIN</button>
-                        `;
-                        document.getElementById('btn-start-game').onclick = () => App.Games.Engine.start(g);
-                        App.UI.showModal('game-engine-modal');
-                    },
-                    close: () => { clearInterval(App.Games.Engine.activeInterval); document.getElementById('game-engine-modal').classList.remove('show'); },
-                    start: (g) => {
-                        App.Audio.play('success'); App.Audio.haptic([50,50]);
-                        document.getElementById('game-hud').classList.remove('hidden');
-                        App.Games.Engine.score = 0; document.getElementById('game-score').innerText = 0;
-                        let time = 15; document.getElementById('game-time').innerText = time;
-                        const stage = document.getElementById('game-stage'); stage.innerHTML = '';
-                        
-                        if(g.mech === 'clicker' || g.mech === 'mash') {
-                            App.Games.Engine.activeInterval = setInterval(() => {
-                                time--; document.getElementById('game-time').innerText = time;
-                                if(time <= 0) App.Games.Engine.end();
-                                else if(Math.random() > 0.3) {
-                                    const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform';
-                                    btn.style.left = `${10 + Math.random() * 70}%`; btn.style.top = `${10 + Math.random() * 70}%`;
-                                    btn.onmousedown = () => { App.Audio.play('bubble'); App.Games.Engine.score+=10; document.getElementById('game-score').innerText = App.Games.Engine.score; btn.remove(); };
-                                    stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode)btn.remove()}, 1000);
-                                }
-                            }, 800);
-                        } else {
-                            // Reaction & Memory Simulation
-                            stage.innerHTML = `<div class="text-center p-6"><div class="text-7xl mb-6 animate-pulse">${g.icon}</div><p class="font-bold opacity-70">Klik berulang kali secepat mungkin!</p></div>`;
-                            stage.onmousedown = () => { App.Games.Engine.score+=5; document.getElementById('game-score').innerText = App.Games.Engine.score; App.Audio.play('pop'); };
-                            App.Games.Engine.activeInterval = setInterval(() => {
-                                time--; document.getElementById('game-time').innerText = time;
-                                if(time <= 0) App.Games.Engine.end();
-                            }, 1000);
-                        }
-                    },
-                    end: () => {
-                        clearInterval(App.Games.Engine.activeInterval); document.getElementById('game-stage').onmousedown = null;
-                        App.Audio.play('success'); App.Audio.haptic([100,50,100]);
-                        const xpGain = Math.floor(App.Games.Engine.score / 10) + 5;
-                        document.getElementById('game-stage').innerHTML = `
-                            <div class="text-center p-6 bg-black/10 w-full h-full flex flex-col justify-center items-center">
-                                <h2 class="text-4xl font-black text-[var(--accent)] mb-2">GAME OVER</h2>
-                                <p class="text-xl font-black mb-6">Skor Akhir: ${App.Games.Engine.score}</p>
-                                <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-2xl p-4 mb-6 w-full max-w-[200px]">
-                                    <div class="flex justify-between font-bold text-sm"><span class="opacity-70">XP</span><span class="text-[var(--success)]">+${xpGain}</span></div>
-                                    <div class="flex justify-between font-bold text-sm mt-1"><span class="opacity-70">Mutiara</span><span class="text-[var(--warning)]">+${Math.floor(xpGain/2)}</span></div>
-                                </div>
-                                <button onclick="App.Games.Engine.close()" class="px-8 py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-black btn-interactive">KEMBALI</button>
-                            </div>
-                        `;
-                        App.UI.addXP(xpGain);
+                // Global Events
+                document.addEventListener('click', (e) => { 
+                    if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON' || e.target.tagName==='A') {
+                        Audio.init(); Audio.play('click'); 
                     }
-                },
-                init: () => { App.Games.Engine.generateList(); App.Games.Engine.renderGrid(); }
-            },
+                });
 
-            Init: () => {
-                App.UI.init(); App.Ecosystem.init(); App.Games.init();
-                // Init Audio on first interaction
-                document.body.addEventListener('click', () => { App.Audio.init(); }, {once:true});
-                document.body.addEventListener('touchstart', () => { App.Audio.init(); }, {once:true, passive:true});
-            }
-        };
+                // Context Menu / Bottom Sheet
+                const ctxMenu = document.getElementById('context-menu');
+                const ctxOverlay = document.getElementById('context-menu-overlay');
+                const toggleCtx = (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    const isDesktop = window.innerWidth >= 640;
+                    if(ctxMenu.classList.contains('show') || ctxMenu.classList.contains('show-mobile')) { 
+                        ctxMenu.classList.remove('show', 'show-mobile'); ctxOverlay.classList.replace('opacity-100', 'opacity-0'); setTimeout(()=>ctxOverlay.classList.add('hidden'), 300); return; 
+                    }
+                    if(isDesktop && !e.target.closest('#btn-context-toggle')) { ctxMenu.style.top = `${e.clientY}px`; ctxMenu.style.left = `${e.clientX}px`; ctxMenu.style.right = 'auto'; } 
+                    else { ctxMenu.style.top = ''; ctxMenu.style.left = ''; ctxMenu.style.right = ''; }
+                    
+                    ctxOverlay.classList.remove('hidden'); setTimeout(()=>ctxOverlay.classList.replace('opacity-0', 'opacity-100'), 10);
+                    if(isDesktop) ctxMenu.classList.add('show'); else ctxMenu.classList.add('show-mobile');
+                    Audio.play('pop'); Audio.haptic(20);
+                };
+                document.getElementById('btn-context-toggle').addEventListener('click', toggleCtx);
+                document.addEventListener('contextmenu', (e) => { if(!e.target.closest('input, textarea')) toggleCtx(e); });
+                ctxOverlay.addEventListener('click', toggleCtx);
+                
+                // Context Actions
+                document.querySelectorAll('.ctx-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const act = e.currentTarget.dataset.action;
+                        if(act==='search') { document.getElementById('global-search').focus(); window.scrollTo({top:0}); }
+                        if(act==='theme') { const nt = document.body.classList.contains('dark-mode')?'light':'dark'; document.getElementById('sel-theme').value=nt; document.getElementById('sel-theme').dispatchEvent(new Event('change')); }
+                        if(act==='zen') { document.body.classList.toggle('zen-mode'); UI.toast("Mode Fokus Diubah", "success"); }
+                        if(act==='copy') { navigator.clipboard.writeText(location.href); UI.toast("Tautan disalin", "success"); }
+                        if(act==='shake') {
+                            document.body.style.animation = "shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite";
+                            const s = document.createElement('style'); s.id = "shake-anim";
+                            s.innerHTML = `@keyframes shake { 10%, 90% { transform: translate3d(-2px, 2px, 0); } 20%, 80% { transform: translate3d(4px, -2px, 0); } 30%, 50%, 70% { transform: translate3d(-8px, 4px, 0); } 40%, 60% { transform: translate3d(8px, -4px, 0); } }`;
+                            document.head.appendChild(s); UI.toast("⚠️ SIMULASI GEMPA!"); Audio.haptic([100,50,100,50,200]);
+                            setTimeout(() => { document.body.style.animation=''; document.getElementById('shake-anim').remove(); }, 3000);
+                        }
+                        ctxOverlay.click(); // close menu
+                    });
+                });
 
-        // Bootstrap App
+                // Shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById('btn-command').click(); }
+                    if(e.key === 'Escape') UI.closeModals();
+                    if(e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') { e.preventDefault(); document.getElementById('global-search').focus(); }
+                });
+                document.getElementById('btn-command').onclick = () => { document.getElementById('global-search').focus(); window.scrollTo({top:0, behavior:'smooth'}); };
+
+                // Utilities: Notes
+                const note = document.getElementById('personal-note'); const len = document.getElementById('note-length');
+                note.value = Storage.get('note', ''); len.innerText = `${note.value.length} Karakter`;
+                note.addEventListener('input', e => { 
+                    Storage.set('note', e.target.value); len.innerText = `${e.target.value.length} Karakter`;
+                    document.getElementById('save-status').innerText = "Menyimpan...";
+                    clearTimeout(window.saveTmr); window.saveTmr = setTimeout(()=> document.getElementById('save-status').innerText = "Tersimpan", 800);
+                });
+                document.getElementById('btn-copy-note').onclick = () => { navigator.clipboard.writeText(note.value); UI.toast("Catatan disalin","success"); };
+
+                // Utilities: Tasks
+                const tInput = document.getElementById('task-input'); const tList = document.getElementById('task-list');
+                const renderTasks = () => {
+                    tList.innerHTML = ''; const tasks = Storage.get('tasks', []);
+                    tasks.forEach((t, i) => {
+                        const div = document.createElement('div'); div.className = `flex justify-between items-center p-2 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] transition-opacity ${t.d?'opacity-50 line-through':''}`;
+                        div.innerHTML = `<span class="font-medium text-xs cursor-pointer flex-grow pl-1">${t.t}</span> <button class="text-[var(--danger)] font-bold px-2 py-1 rounded hover:bg-[var(--danger)] hover:text-white transition-colors text-xs">&times;</button>`;
+                        div.onclick = (e) => {
+                            Audio.play('pop'); Audio.haptic(10);
+                            if(e.target.tagName==='BUTTON') tasks.splice(i,1); else t.d = !t.d;
+                            Storage.set('tasks', tasks); renderTasks();
+                        };
+                        tList.appendChild(div);
+                    });
+                };
+                renderTasks();
+                tInput.addEventListener('keypress', e => {
+                    if(e.key === 'Enter' && e.target.value.trim()) {
+                        let tasks = Storage.get('tasks', []); tasks.push({t: e.target.value.trim(), d: false});
+                        Storage.set('tasks', tasks); renderTasks(); e.target.value = ''; Audio.play('success');
+                    }
+                });
+
+                // Utilities: Pomodoro
+                let pomoTimer, pomoTime = 1500, isPomoRunning = false;
+                document.getElementById('btn-pomo').onclick = () => {
+                    Audio.play('click'); const bar = document.getElementById('pomo-progress');
+                    if(isPomoRunning) { clearInterval(pomoTimer); isPomoRunning = false; document.getElementById('btn-pomo').innerHTML = '▶'; bar.style.transition = 'none'; bar.style.width='0%'; }
+                    else {
+                        isPomoRunning = true; document.getElementById('btn-pomo').innerHTML = '⏸';
+                        bar.style.transition = 'width 1s linear';
+                        pomoTimer = setInterval(() => {
+                            pomoTime--; let m = Math.floor(pomoTime/60), s = pomoTime%60;
+                            document.getElementById('pomo-display').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+                            bar.style.width = `${((1500-pomoTime)/1500)*100}%`;
+                            if(pomoTime <= 0) {
+                                clearInterval(pomoTimer); isPomoRunning = false; UI.toast("Fokus Selesai!", "success"); Audio.play('success'); Audio.haptic([500,200,500]);
+                                pomoTime = 1500; document.getElementById('btn-pomo').innerHTML = '▶'; bar.style.width='0%';
+                            }
+                        }, 1000);
+                    }
+                };
+
+                // Quick Links
+                document.getElementById('btn-share').onclick = async () => {
+                    if(navigator.share) { try{ await navigator.share({title: 'Portal 9H', text: 'Cek Portal Ekspedisi 9H Ultimate!', url: window.location.href}); }catch(e){} }
+                    else { navigator.clipboard.writeText(window.location.href); UI.toast("Link disalin!", "success"); }
+                };
+                document.getElementById('btn-copy-today').onclick = () => {
+                    if(Data.hariIndex<1||Data.hariIndex>5) return UI.toast("Hari ini libur/weekend!", "error");
+                    const p = Data.pelajaran[Data.hariIndex-1];
+                    const text = `*JADWAL 9H (${p.hari})*\n` + p.list.map(m => `- ${m.t}: ${m.m}`).join('\n');
+                    navigator.clipboard.writeText(text).then(() => {
+                        UI.toast("Jadwal disalin!", "success"); 
+                        document.getElementById('btn-copy-today').innerHTML = '✅ Tersalin'; 
+                        setTimeout(()=>document.getElementById('btn-copy-today').innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini', 2000);
+                    });
+                };
+                document.getElementById('btn-random').onclick = () => {
+                    Audio.play('click'); let c=0; const i = setInterval(()=>{
+                        const s = Data.kru[Math.floor(Math.random()*Data.kru.length)]; Audio.play('pop');
+                        c++; if(c>15){ clearInterval(i); Audio.play('success'); UI.showProfileIDCard(s.id); UI.toast(`Terpilih: ${s.nama}`, 'success'); }
+                    }, 80);
+                };
+                document.getElementById('btn-ocean-sound').onclick = Audio.toggleOcean;
+                document.getElementById('btn-idcard-global').addEventListener('click', () => { UI.showProfileIDCard('Andika'); document.getElementById('idcard-badge').innerText = "GLOBAL ACCESS"; });
+
+                // Settings Modals
+                document.querySelectorAll('.btn-close').forEach(b => b.addEventListener('click', UI.closeModals));
+                document.querySelectorAll('.modal-overlay').forEach(m => { m.addEventListener('mousedown', (e) => { if(e.target === m) UI.closeModals(); }); });
+                document.getElementById('btn-settings').addEventListener('click', () => UI.showModal('modal-settings'));
+                
+                document.getElementById('sel-theme').onchange = (e) => {
+                    const v = e.target.value; Storage.set('thm', v);
+                    if(v==='dark') document.body.classList.add('dark-mode'); else document.body.classList.remove('dark-mode');
+                };
+                document.getElementById('toggle-sound').onchange = (e) => { State.soundOn = e.target.checked; Storage.set('snd', State.soundOn); };
+                document.getElementById('toggle-haptic').onchange = (e) => { State.hapticOn = e.target.checked; Storage.set('hpt', State.hapticOn); };
+                document.getElementById('toggle-motion').onchange = (e) => { 
+                    State.motionOn = e.target.checked; Storage.set('mtn', State.motionOn); 
+                    if(!State.motionOn) { document.getElementById('ocean-ecosystem').innerHTML = ''; document.body.classList.add('reduce-motion'); } 
+                    else { document.body.classList.remove('reduce-motion'); window.location.reload(); }
+                };
+                document.getElementById('btn-clear-data').onclick = () => { 
+                    const div = document.createElement('div'); div.className = 'fixed inset-0 bg-black/60 z-[3000] flex items-center justify-center backdrop-blur-sm';
+                    div.innerHTML = `<div class="bg-[var(--bg-color)] p-6 rounded-2xl border border-[var(--glass-border)] max-w-sm w-full text-center shadow-2xl mx-4"><h3 class="text-xl font-bold mb-2">Reset Data?</h3><p class="text-sm opacity-80 mb-6">Level, XP, dan catatan akan hilang. Tidak bisa dikembalikan.</p><div class="flex gap-3"><button class="flex-1 py-2 rounded-lg font-bold bg-[var(--glass-bg)] border border-[var(--glass-border)]" onclick="this.parentElement.parentElement.parentElement.remove()">Batal</button><button class="flex-1 py-2 rounded-lg font-bold bg-[var(--danger)] text-white" onclick="localStorage.clear();location.reload()">Ya, Reset</button></div></div>`;
+                    document.body.appendChild(div);
+                };
+
+                // Nav Pills & Scroll
+                document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(b=>b.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                        const target = e.currentTarget.dataset.target;
+                        document.querySelectorAll('.content-section').forEach(s => s.style.display='none');
+                        if(target === 'semua') document.querySelectorAll('.content-section').forEach(s => s.style.display='block');
+                        else document.getElementById(target).style.display = 'block';
+                        window.scrollTo({top: 0, behavior: 'smooth'}); e.currentTarget.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+                    });
+                });
+
+                document.getElementById('fab-today').onclick = () => {
+                    const h = document.querySelector('.today-highlight');
+                    if(h) window.scrollTo({top: h.offsetTop - 100, behavior: 'smooth'});
+                    else UI.toast("Hari ini libur!", "error");
+                };
+                document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+                // Scroll Events (Header & Progress & Reveal)
+                const obs = new IntersectionObserver(e => { e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal'); obs.unobserve(en.target); } }); }, { threshold: 0.1 });
+                document.querySelectorAll('.glass-card').forEach(el => obs.observe(el));
+
+                const progBar = document.getElementById('scroll-progress');
+                const header = document.getElementById('fixed-header');
+                window.addEventListener('scroll', () => {
+                    requestAnimationFrame(() => {
+                        let sy = window.scrollY;
+                        let docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        progBar.style.width = `${(sy / docH) * 100}%`;
+                        
+                        if(sy > 100 && sy > (window.lastScrollY||0)) header.classList.add('hide'); 
+                        else header.classList.remove('hide');
+                        window.lastScrollY = sy;
+                    });
+                }, {passive:true});
+
+                Search.init(); Games.generate(); Games.render(); UI.setup3DTilt();
+            };
+
+            return { Init, UI, Games };
+        })();
+
         document.addEventListener('DOMContentLoaded', App.Init);
     </script>
 </body>
 </html>
-
-```
