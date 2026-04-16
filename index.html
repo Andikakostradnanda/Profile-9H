@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0369a1" id="meta-theme-color">
-    <meta name="description" content="Portal Kelas 9H Ultimate Edition. Ekspedisi, Jadwal, Utilitas Kru, dan Play Zone.">
+    <meta name="description" content="Portal Kelas 9H Ultimate Edition. Ekspedisi, Jadwal, Utilitas Kru, Play Zone, Galeri, Toko, dan Kalender.">
     <title>Situs Kelas 9H | Beranda Ultimate</title>
     
     <!-- Tailwind CSS -->
@@ -20,7 +21,6 @@
            1. CORE VARIABLES & PREMIUM OCEAN GLASSMORPHISM
            ===================================================================== */
         :root {
-            /* Light Theme (Ocean) */
             --bg-color: #e0f2fe; 
             --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #bae6fd 100%);
             --text-primary: #082f49; 
@@ -30,7 +30,6 @@
             --accent-hover: #0284c7;
             --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6;
             
-            /* Premium Glass */
             --glass-bg: rgba(255, 255, 255, 0.55);
             --glass-border: rgba(255, 255, 255, 0.8);
             --glass-shadow: 0 10px 40px rgba(3, 105, 161, 0.08);
@@ -39,28 +38,23 @@
             --font-main: 'Poppins', sans-serif; 
             --font-display: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace; 
-            --font-ui: 'Inter', sans-serif;
             --base-font-size: 16px;
         }
 
         body.dark-mode {
-            /* Dark Theme (Deep Sea) */
             --bg-color: #0f172a; 
             --bg-gradient: linear-gradient(135deg, #020617 0%, #081126 50%, #0f172a 100%);
             --text-primary: #f8fafc; 
             --text-secondary: #bae6fd;
             --accent: #38bdf8; 
             --accent-glow: rgba(56, 189, 248, 0.3);
-            --accent-hover: #7dd3fc;
             
-            /* Dark Premium Glass */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             --glass-highlight: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
         }
 
-        /* Zen Mode (Focus) */
         body.zen-mode {
             --bg-gradient: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
             --glass-bg: rgba(255, 255, 255, 0.9);
@@ -80,31 +74,26 @@
             font-family: var(--font-main); background: var(--bg-color); background-image: var(--bg-gradient); 
             background-attachment: fixed; color: var(--text-secondary); transition: background 0.6s ease, color 0.6s ease;
             overflow-x: hidden; margin: 0; padding: 0; min-height: 100vh;
-            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
         }
         ::selection { background-color: var(--accent); color: #fff; }
         
-        /* Premium Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
         body.dark-mode ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
 
-        /* Scroll Progress Bar */
         #scroll-progress {
             position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--success));
             z-index: 9999; width: 0%; transition: width 0.1s; pointer-events: none;
         }
         
-        /* 3D Global Tilt Class */
         .tilt-element { transform-style: preserve-3d; transform: perspective(1000px); will-change: transform; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        
-        /* Accessibility: Reduce Motion */
         body.reduce-motion * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 
         /* =====================================================================
-           3. 3D ECOSYSTEM (OPTIMIZED)
+           3. 3D ECOSYSTEM
            ===================================================================== */
         #ocean-ecosystem { position: fixed; inset: 0; z-index: -5; pointer-events: none; overflow: hidden; perspective: 1000px; }
         .sea-creature { position: absolute; font-size: 2rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); will-change: transform; user-select: none; }
@@ -122,7 +111,6 @@
         @keyframes swimRL { 0% { transform: translateX(115vw) translateY(0); } 100% { transform: translateX(-15vw) translateY(40px); } }
         @keyframes jellyMove { 0% { transform: translateY(110vh) scale(0.9); opacity:0;} 15% { opacity:0.8; transform: translateY(90vh) scale(1.1); } 30% { transform: translateY(85vh) scale(0.9); } 45% { transform: translateY(65vh) scale(1.1); } 100% { transform: translateY(-20vh) scale(1); opacity:0; } }
 
-        /* Elegant Light Rays */
         .light-ray { position: absolute; top: -20%; width: 50%; height: 150%; background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 80%); transform: rotate(25deg); pointer-events: none; mix-blend-mode: overlay; animation: raySway 15s ease-in-out infinite alternate; filter: blur(30px);}
         body.dark-mode .light-ray { background: linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 0%, transparent 80%); }
         @keyframes raySway { 0% { transform: rotate(20deg) translateX(-10%); } 100% { transform: rotate(35deg) translateX(10%); } }
@@ -143,7 +131,6 @@
             opacity: 0; transform: translateY(30px); will-change: transform, opacity;
             position: relative; overflow: hidden;
         }
-        /* Hover Reflection Effect */
         .glass-card::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
@@ -167,9 +154,7 @@
 
         .btn-interactive { position: relative; outline: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; user-select: none; }
         .btn-interactive:active { transform: scale(0.95) !important; }
-        .btn-interactive:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
         
-        /* Smart Lists */
         .smart-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
         .smart-list li {
             display: flex; flex-direction: column; padding: 0.75rem 1rem; border-radius: 1rem; 
@@ -185,17 +170,17 @@
         .list-header::before { content: '✨'; margin-right: 10px; transition: transform 0.3s; opacity: 0.5; font-size: 1rem;}
         .smart-list li:hover .list-header::before { transform: rotate(20deg) scale(1.2); opacity: 1; text-shadow: 0 0 8px var(--accent); }
 
-        /* Highlights */
         .today-highlight { border: 2px solid var(--accent) !important; background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent); }
         .current-lesson { 
-            background: linear-gradient(90deg, rgba(14, 165, 233, 0.1), transparent) !important; 
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.15), transparent) !important; 
             border-left: 4px solid var(--accent) !important; 
-            box-shadow: 0 4px 10px var(--accent-glow); animation: pulseLive 2s infinite; 
+            box-shadow: 0 4px 15px var(--accent-glow); animation: pulseLive 2s infinite; 
+            transform: scale(1.02); z-index: 5;
         }
         @keyframes pulseLive { 0%, 100% { border-left-color: var(--accent); } 50% { border-left-color: var(--success); } }
 
         /* =====================================================================
-           5. HEADER & TOP DASHBOARD
+           5. HEADER & TOP DASHBOARD 
            ===================================================================== */
         .fixed-header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 0.8rem 1.5rem; z-index: 500;
@@ -206,7 +191,7 @@
         }
         .fixed-header.hide { transform: translateY(-100%); }
         
-        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s; background: white; }
         .logo-img:hover { transform: scale(1.1) rotate(10deg); border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         
         .icon-btn { background: rgba(0,0,0,0.03); border: 1px solid var(--glass-border); border-radius: 50%; color: var(--text-primary); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; transition: all 0.2s; }
@@ -214,7 +199,6 @@
         .icon-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-glow); border-color: var(--accent); }
         .icon-btn svg { width: 20px; height: 20px; transition: transform 0.2s; }
 
-        /* Dashboard */
         #dashboard-panel { margin-top: 85px; margin-bottom: 1.5rem; padding: 0.5rem 1rem; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
         #dashboard-panel::-webkit-scrollbar { display: none; }
         .dash-card { flex: 0 0 calc(50% - 0.5rem); min-width: 150px; padding: 1rem; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden;}
@@ -225,7 +209,7 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);}
 
         /* =====================================================================
-           6. ADVANCED SEARCH, COMMAND PALETTE & NAVIGATION
+           6. ADVANCED SEARCH & NAVIGATION
            ===================================================================== */
         .search-wrapper { position: relative; max-width: 600px; margin: 0 auto 2rem; z-index: 40; }
         .search-input { width: 100%; padding: 1rem 3rem 1rem 3rem; border-radius: 2rem; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); font-family: var(--font-main); font-weight: 500; font-size: 1rem; box-shadow: var(--glass-shadow), inset 0 2px 4px rgba(0,0,0,0.02); outline: none; transition: all 0.3s ease; }
@@ -234,8 +218,7 @@
         .search-clear { position: absolute; right: 1.2rem; top: 1.1rem; color: var(--danger); cursor: pointer; width: 20px; height: 20px; opacity: 0; pointer-events: none; transition: 0.2s; }
         .search-input:not(:placeholder-shown) ~ .search-clear { opacity: 1; pointer-events: auto; }
         
-        /* Auto Suggest Box */
-        .search-suggest { position: absolute; top: 110%; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 1rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-10px); transition: all 0.2s; z-index: 50; max-height: 250px; overflow-y: auto;}
+        .search-suggest { position: absolute; top: 110%; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 1rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-10px); transition: all 0.2s; z-index: 50; max-height: 300px; overflow-y: auto;}
         .search-suggest.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .suggest-item { padding: 12px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; display: flex; align-items: center; gap: 10px; }
         body.dark-mode .suggest-item { border-bottom-color: rgba(255,255,255,0.05); }
@@ -245,23 +228,44 @@
         .nav-pill.active, .nav-pill:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
 
         /* =====================================================================
-           7. UTILITIES & GAMES
+           7. GALLERY, CALENDAR, SHOP & GAMES
            ===================================================================== */
-        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-        
-        .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-        .quick-link-btn { background: rgba(0,0,0,0.02); border: 1px solid var(--glass-border); padding: 0.8rem; border-radius: 1rem; color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;}
-        body.dark-mode .quick-link-btn { background: rgba(255,255,255,0.02); }
-        .quick-link-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); border-color: var(--accent);}
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+        @media(min-width: 640px){ .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+        .gallery-item { position: relative; border-radius: 1rem; overflow: hidden; aspect-ratio: 1; border: 1px solid var(--glass-border); cursor: pointer; background: var(--glass-bg); display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; }
+        .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; position: absolute; inset: 0; z-index: 1;}
+        .gallery-item:hover .gallery-img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1rem; z-index: 2;}
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-title { color: white; font-weight: 600; font-size: 0.85rem; transform: translateY(10px); transition: transform 0.3s; width: 100%;}
+        .gallery-item:hover .gallery-title { transform: translateY(0); }
 
-        /* Games Grid & Skeletons */
+        .calendar-wrapper { width: 100%; }
+        .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+        .cal-day-name { font-weight: 800; font-size: 0.75rem; color: var(--text-secondary); padding: 0.5rem 0; opacity: 0.8; }
+        .cal-day { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0.5rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; position: relative; }
+        .cal-day:hover:not(.empty) { background: var(--glass-bg); border-color: var(--accent); transform: scale(1.1); z-index: 2; box-shadow: var(--glass-shadow); }
+        .cal-day.empty { visibility: hidden; }
+        .cal-day.today { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 10px var(--accent-glow); }
+        .cal-day.today-red { background: var(--danger); color: white; border-color: var(--danger); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); }
+        .cal-day.weekend { color: var(--danger); }
+        .cal-day.holiday { color: white; background: var(--danger); }
+        .cal-day.holiday:hover { background: #b91c1c; }
+        .holiday-dot { width: 4px; height: 4px; background: currentColor; border-radius: 50%; margin-top: 2px; }
+
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .shop-item { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
+        .shop-item:hover { transform: translateY(-5px); border-color: var(--warning); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
+        .shop-icon { font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+        
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
         .game-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; position: relative; overflow: hidden; box-shadow: var(--glass-highlight); }
         .game-card:hover { border-color: var(--accent); background: var(--bg-color); transform: translateY(-5px); box-shadow: 0 15px 30px var(--accent-glow); z-index: 5;}
         .game-icon { font-size: 2.5rem; margin-bottom: 0.5rem; transition: transform 0.3s; }
         .game-card:hover .game-icon { transform: scale(1.2) rotate(5deg); }
         .game-title { font-weight: 700; font-size: 0.85rem; color: var(--text-primary); line-height: 1.2;}
-        .game-badge { position: absolute; top: 8px; right: 8px; font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase;}
+        .game-badge { position: absolute; top: 8px; right: 8px; font-size: 0.55rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; letter-spacing: 0.5px;}
         .badge-solo { background: var(--accent); } .badge-multi { background: var(--warning); } .badge-bot { background: var(--danger); } .badge-coop { background: var(--purple); }
 
         .skeleton { background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%); background-size: 200% 100%; animation: skeletonLoad 1.5s infinite; border-radius: 1rem; }
@@ -269,7 +273,7 @@
         @keyframes skeletonLoad { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         /* =====================================================================
-           8. MODALS, BOTTOM SHEET, ID CARD & TOASTS
+           8. MODALS, BOTTOM SHEET, ID CARD, TOASTS & FABs
            ===================================================================== */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-overlay.show { opacity: 1; pointer-events: auto; }
@@ -279,14 +283,12 @@
         body.dark-mode .btn-close { background: rgba(255,255,255,0.1); }
         .btn-close:hover { background: var(--danger); color: white; transform: rotate(90deg); }
 
-        /* 3D ID CARD Premium */
         .id-card-perspective { perspective: 1500px; width: 90%; max-width: 350px; }
         .id-card-tilt { transform-style: preserve-3d; transition: transform 0.1s; position: relative; }
         .id-card-tilt.reset { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform: rotateX(0) rotateY(0) !important; }
         .id-card-body { background: var(--glass-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2), var(--glass-highlight); text-align: center; transform: translateZ(20px); overflow: hidden;}
         .id-card-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 1rem; box-shadow: 0 10px 20px var(--accent-glow); transform: translateZ(40px); background: white;}
         
-        /* Mobile Bottom Sheet (Context Menu) */
         #context-menu { position: fixed; background: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 1.5rem 1.5rem 0 0; padding: 1.5rem 1rem 2rem; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); z-index: 2500; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); bottom: 0; left: 0; right: 0; max-width: 500px; margin: 0 auto;}
         @media(min-width: 640px) {
             #context-menu { border-radius: 1rem; top: 70px; right: 20px; left: auto; bottom: auto; transform: scale(0.9) translateY(-20px); opacity: 0; pointer-events: none; padding: 0.5rem; width: 250px; }
@@ -296,27 +298,24 @@
         .ctx-item { padding: 12px 16px; border-radius: 0.8rem; color: var(--text-primary); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; margin-bottom: 4px;}
         .ctx-item:hover { background: var(--accent); color: white; padding-left: 20px; }
         
-        /* Toasts */
         .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; align-items: flex-end; }
         @media(max-width: 640px) { .toast-container { left: 20px; bottom: 80px; align-items: stretch; } }
         .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent); color: var(--text-primary); padding: 12px 20px; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .toast.error { border-left-color: var(--danger); } .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--danger); } .toast.success { border-left-color: var(--success); } .toast.warning { border-left-color: var(--warning); }
         @keyframes slideIn { from{transform:translateY(20px) scale(0.9); opacity:0;} to{transform:translateY(0) scale(1); opacity:1;} }
         @keyframes fadeOut { to{transform:translateY(-20px) scale(0.9); opacity:0;} }
 
-        /* FABs */
+        /* Enhanced FABs */
         .fab-container { position: fixed; bottom: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 400; transition: transform 0.3s; transform: translateY(150px);}
         .fab-container.show { transform: translateY(0); }
-        .fab-btn { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--glass-shadow); font-weight: 800; font-size: 0.65rem; text-align: center;}
+        .fab-btn { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--glass-shadow); font-weight: 800; font-size: 0.65rem; text-align: center; line-height: 1.1;}
         .fab-btn:hover { transform: scale(1.1) translateY(-3px); background: var(--accent); color: white; border-color: transparent; }
 
     </style>
 </head>
 <body>
-    <!-- Scroll Progress -->
     <div id="scroll-progress"></div>
 
-    <!-- 3D Ecosystem -->
     <div id="ocean-ecosystem" aria-hidden="true">
         <div class="depth-bg" id="layer-bg"></div>
         <div class="depth-mid" id="layer-mid"></div>
@@ -325,10 +324,10 @@
         <div class="light-ray" style="left:40%; animation-delay:-5s; opacity: 0.5; width: 40%;"></div>
     </div>
 
-    <!-- Header Navigation -->
+    <!-- HEADER (Aman) -->
     <header id="fixed-header" class="fixed-header glass-panel rounded-none border-t-0 border-x-0">
         <div class="flex items-center gap-3">
-            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/206a82645cf816c1df6dbdd5b3b3babc77465363/Logo%20Smp.png" alt="Logo SMP" class="logo-img btn-interactive" id="btn-home" title="Kembali ke atas" />
+            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo SMP" class="logo-img btn-interactive" id="btn-home" title="Kembali ke atas" onerror="this.src='https://ui-avatars.com/api/?name=SMP&background=0ea5e9&color=fff'" />
             <div class="flex flex-col">
                 <span class="font-display font-black text-lg md:text-xl text-[var(--text-primary)] leading-tight">Portal 9H</span>
                 <div class="flex items-center gap-2">
@@ -348,11 +347,11 @@
             <button class="icon-btn btn-interactive" id="btn-context-toggle" title="Menu Cepat">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg>
             </button>
-            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/cd8f29d5a0e132e7ae1ee3569fdd04e2aedda2ae/Logo%209H.jpg" alt="ID Card 9H" id="btn-idcard-global" class="logo-img btn-interactive border-[var(--accent)] ml-1" title="Kartu Identitas Kru 9H" />
+            <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%209H.jpg" alt="ID Card 9H" id="btn-idcard-global" class="logo-img btn-interactive border-[var(--accent)] ml-1" title="Kartu Identitas Kru 9H" onerror="this.src='https://ui-avatars.com/api/?name=9H&background=0ea5e9&color=fff'" />
         </div>
     </header>
 
-    <!-- Context Menu / Bottom Sheet -->
+    <!-- Context Menu Mobile -->
     <div id="context-menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[2400] hidden opacity-0 transition-opacity"></div>
     <div id="context-menu">
         <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4 sm:hidden"></div>
@@ -364,22 +363,21 @@
         <div class="ctx-item btn-interactive text-[var(--danger)]" data-action="shake">🫨 Simulasi Gempa</div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 pb-20">
         
-        <!-- Dashboard Atas -->
         <div id="dashboard-panel" class="custom-scrollbar tilt-element">
-            <div class="glass-panel dash-card btn-interactive">
+            <div class="glass-panel dash-card btn-interactive" title="Level Ekspedisi Anda">
                 <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Level Ekspedisi</span>
                 <span class="text-3xl font-black text-[var(--accent)]" id="ui-level">1</span>
                 <div class="progress-bar"><div class="progress-fill" id="ui-xp-bar"></div></div>
                 <span class="text-[0.6rem] font-bold mt-2 opacity-70"><span id="ui-xp-text">0</span>/100 XP</span>
             </div>
-            <div class="glass-panel dash-card btn-interactive">
+            <div class="glass-panel dash-card btn-interactive" onclick="document.querySelector('[data-target=\'shop-section\']').click()" title="Mata uang untuk Toko">
                 <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Harta Karun</span>
                 <span class="text-3xl font-black text-[var(--warning)] flex items-center justify-center gap-1">🐚<span id="ui-pearls">0</span></span>
-                <span class="text-[0.6rem] font-bold mt-2 opacity-70">Aset Mini Games</span>
+                <span class="text-[0.6rem] font-bold mt-2 opacity-70">Belanja di Toko</span>
             </div>
-            <div class="glass-panel dash-card btn-interactive">
+            <div class="glass-panel dash-card btn-interactive" title="Hari berturut-turut online">
                 <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Login Harian</span>
                 <span class="text-3xl font-black text-[var(--danger)] flex items-center justify-center gap-1">🔥<span id="ui-streak">0</span></span>
                 <span class="text-[0.6rem] font-bold mt-2 opacity-70">Konsistensi Kru</span>
@@ -388,10 +386,9 @@
 
         <header class="text-center mb-10 tilt-element">
             <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black text-[var(--text-primary)] mb-2 drop-shadow-sm tracking-tight">Ekspedisi 9H</h1>
-            <p class="font-mono text-xs md:text-sm font-bold text-[var(--accent)] uppercase tracking-[0.2em] bg-[var(--glass-bg)] inline-block px-4 py-1.5 rounded-full border border-[var(--glass-border)] shadow-sm">Portal Utama Premium</p>
+            <p class="font-mono text-xs md:text-sm font-bold text-[var(--accent)] uppercase tracking-[0.2em] bg-[var(--glass-bg)] inline-block px-4 py-1.5 rounded-full border border-[var(--glass-border)] shadow-sm">Portal Utama Ultimate</p>
         </header>
 
-        <!-- Advanced Super Search -->
         <div class="search-wrapper tilt-element relative">
             <input type="text" id="global-search" class="search-input" placeholder="Cari kru, jadwal, tugas, atau utilitas..." autocomplete="off">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -411,96 +408,152 @@
             </div>
         </div>
 
-        <!-- Quick Nav Pills -->
-        <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-4 mb-8 justify-start md:justify-center px-1 snap-x">
+        <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-4 mb-8 justify-start md:justify-center px-1 snap-x" id="main-nav">
             <button class="nav-pill active btn-interactive snap-start" data-target="semua">🌊 Semua Panel</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="organization-section">👥 Struktur</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="piket-section">🧹 Piket</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="pelajaran-section">📘 Pelajaran</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="pakaian-section">👔 Seragam</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="pelajaran-section">📘 Jadwal</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="organization-section">👥 Struktur & Piket</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="calendar-section">📅 Kalender</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="gallery-section">📸 Galeri</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="shop-section">🛍️ Toko</button>
             <button class="nav-pill btn-interactive snap-start" data-target="utilities-section">🛠️ Utilitas</button>
             <button class="nav-pill btn-interactive snap-start border-[var(--warning)] text-[var(--warning)]" data-target="play-zone-section">🎮 Play Zone</button>
         </div>
 
         <div id="content-container">
-            <!-- Struktur Organisasi -->
-            <section id="organization-section" class="mb-16 scroll-mt-24 content-section">
-                <h2 class="section-title tilt-element">Struktur Komando</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="org-grid"></div>
-            </section>
-
-            <!-- Jadwal Piket -->
-            <section id="piket-section" class="mb-16 scroll-mt-24 content-section">
-                <h2 class="section-title tilt-element">Rotasi Kebersihan</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="piket-grid"></div>
-            </section>
-
-            <!-- Jadwal Pelajaran -->
+            
+            <!-- Jadwal Pelajaran (Tata Letak Kembali Seperti Lama) -->
             <section id="pelajaran-section" class="mb-16 scroll-mt-24 content-section">
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 tilt-element">
                     <h2 class="section-title mb-0">Peta Akademik</h2>
-                    <button id="btn-copy-today" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] px-4 py-2 rounded-full font-bold text-sm hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-all flex items-center gap-2 shadow-sm btn-interactive">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini
-                    </button>
+                    <div class="flex gap-2">
+                        <button id="btn-jump-today" class="bg-[var(--accent)] text-white px-4 py-2 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shadow-md btn-interactive">
+                            📍 Hari Ini
+                        </button>
+                        <button id="btn-copy-today" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] px-4 py-2 rounded-full font-bold text-sm hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all flex items-center gap-2 shadow-sm btn-interactive">
+                            📋 Salin
+                        </button>
+                    </div>
                 </div>
+                <div class="mb-6 text-center text-sm font-bold opacity-80" id="live-indicator-text">
+                    <span class="w-2 h-2 inline-block rounded-full bg-[var(--success)] animate-pulse mr-1"></span> Sinkronisasi Jadwal Aktif
+                </div>
+                <!-- Tempat rendering jadwal (Disesuaikan ke gaya lama) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="pelajaran-grid"></div>
             </section>
 
-            <!-- Pakaian -->
-            <section id="pakaian-section" class="mb-16 scroll-mt-24 content-section">
-                <h2 class="section-title tilt-element">Protokol Atribut</h2>
+            <!-- Struktur, Piket, Seragam -->
+            <section id="organization-section" class="mb-16 scroll-mt-24 content-section">
+                <h2 class="section-title tilt-element" id="struktur-anchor">Struktur Komando</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10" id="org-grid"></div>
+                
+                <h2 class="section-title tilt-element" id="piket-anchor">Rotasi Kebersihan</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10" id="piket-grid"></div>
+
+                <h2 class="section-title tilt-element" id="pakaian-anchor">Protokol Atribut</h2>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="pakaian-grid"></div>
+            </section>
+
+            <!-- Kalender Realtime -->
+            <section id="calendar-section" class="mb-16 scroll-mt-24 content-section">
+                <h2 class="section-title tilt-element">Kalender <span id="cal-main-year">2026</span></h2>
+                <div class="glass-card tilt-element !p-6 max-w-4xl mx-auto search-target">
+                    <div class="flex justify-between items-center mb-6">
+                        <button class="icon-btn btn-interactive" id="btn-cal-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+                        <h3 class="font-display text-2xl md:text-3xl font-black text-[var(--text-primary)]" id="cal-month-title">Bulan Tahun</h3>
+                        <button class="icon-btn btn-interactive" id="btn-cal-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+                    </div>
+                    
+                    <div class="cal-grid mb-2 border-b border-[var(--glass-border)] pb-2">
+                        <div class="cal-day-name text-[var(--danger)]">Min</div><div class="cal-day-name">Sen</div><div class="cal-day-name">Sel</div>
+                        <div class="cal-day-name">Rab</div><div class="cal-day-name">Kam</div><div class="cal-day-name">Jum</div><div class="cal-day-name">Sab</div>
+                    </div>
+                    <div class="cal-grid" id="calendar-grid"></div>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4 text-xs font-bold justify-center opacity-80 border-t border-[var(--glass-border)] pt-4">
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--danger)]"></span> Libur/Tanggal Merah</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--accent)]"></span> Hari Ini (Biru)</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--danger)] shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span> Hari Ini (Libur)</span>
+                    </div>
+                    <div id="cal-event-detail" class="mt-4 text-center text-sm font-bold text-[var(--danger)] min-h-[20px]"></div>
+                </div>
+            </section>
+
+            <!-- Galeri Bersih (Hanya Official/Placeholder yang Aman) -->
+            <section id="gallery-section" class="mb-16 scroll-mt-24 content-section">
+                <div class="flex justify-between items-center mb-6 tilt-element">
+                    <h2 class="section-title mb-0">Galeri 9H</h2>
+                    <span class="text-xs font-bold bg-[var(--glass-bg)] border border-[var(--glass-border)] px-3 py-1 rounded-full">Album Resmi</span>
+                </div>
+                <div class="gallery-grid search-target" id="gallery-grid">
+                    <!-- JS Injected -->
+                </div>
+            </section>
+
+            <!-- Toko -->
+            <section id="shop-section" class="mb-16 scroll-mt-24 content-section">
+                <div class="flex flex-col items-center mb-8 glass-panel p-6 text-center relative overflow-hidden tilt-element rounded-3xl border border-[var(--warning)] border-opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--warning)] to-transparent opacity-10"></div>
+                    <h2 class="font-display text-3xl md:text-5xl font-black mb-2 text-[var(--warning)] drop-shadow-sm">Pasar Mutiara 🛍️</h2>
+                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Tukarkan Mutiara (<span class="text-[var(--warning)] text-lg mx-1">🐚</span>) untuk Badge Spesial dan Multiplier XP!</p>
+                </div>
+                
+                <div class="flex gap-2 mb-6 justify-start md:justify-center overflow-x-auto pb-2 custom-scrollbar px-1 snap-x">
+                    <button class="nav-pill active filter-shop snap-start" data-filter="all">Semua</button>
+                    <button class="nav-pill filter-shop snap-start" data-filter="badge">🏅 Badges</button>
+                    <button class="nav-pill filter-shop snap-start" data-filter="boost">🚀 Boosters</button>
+                </div>
+
+                <div class="shop-grid" id="shop-grid"></div>
             </section>
 
             <!-- Utilitas -->
             <section id="utilities-section" class="mb-16 scroll-mt-24 content-section">
                 <h2 class="section-title tilt-element">Pusat Utilitas</h2>
-                <div class="widget-grid">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Pomodoro & Tugas -->
-                    <div class="glass-card flex flex-col tilt-element">
+                    <div class="glass-card flex flex-col tilt-element search-target h-full">
                         <div class="flex justify-between items-center mb-4 border-b border-[var(--glass-border)] pb-2">
                             <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Fokus Misi ⏱️</h3>
                             <span class="text-xs font-bold opacity-70 bg-black/5 px-2 py-1 rounded-md">25 Menit</span>
                         </div>
                         <div class="flex justify-between items-center bg-[var(--glass-bg)] p-4 rounded-xl border border-[var(--glass-border)] mb-4 shadow-inner relative overflow-hidden">
-                            <div id="pomo-progress" class="absolute left-0 bottom-0 top-0 bg-[var(--accent)] opacity-10 w-0 transition-all duration-1000"></div>
-                            <span class="text-xs font-bold opacity-80 relative z-10">POMODORO</span>
-                            <span id="pomo-display" class="text-3xl font-mono font-black text-[var(--accent)] relative z-10">25:00</span>
-                            <button id="btn-pomo" class="bg-[var(--text-primary)] text-[var(--bg-color)] w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform btn-interactive relative z-10 shadow-md">▶</button>
+                            <div id="pomo-progress" class="absolute left-0 bottom-0 top-0 bg-[var(--accent)] opacity-20 w-0 transition-all duration-1000"></div>
+                            <span class="text-xs font-bold opacity-80 relative z-10 uppercase tracking-wider">Pomodoro</span>
+                            <span id="pomo-display" class="text-4xl font-mono font-black text-[var(--accent)] relative z-10 drop-shadow-sm">25:00</span>
+                            <button id="btn-pomo" class="bg-[var(--text-primary)] text-[var(--bg-color)] w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform btn-interactive relative z-10 shadow-lg text-xl">▶</button>
                         </div>
                         <div class="relative">
-                            <input type="text" id="task-input" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 pr-10 rounded-xl text-[var(--text-primary)] outline-none mb-3 font-medium text-sm transition-colors focus:border-[var(--accent)]" placeholder="Ketik tugas & Enter...">
+                            <input type="text" id="task-input" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 pr-10 rounded-xl text-[var(--text-primary)] outline-none mb-3 font-medium text-sm transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik tugas & Enter...">
                             <span class="absolute right-3 top-3 text-xs opacity-50 font-bold hidden md:block">↵</span>
                         </div>
-                        <div id="task-list" class="flex-grow overflow-y-auto max-h-[140px] custom-scrollbar space-y-2 pr-1"></div>
+                        <div id="task-list" class="flex-grow overflow-y-auto max-h-[160px] custom-scrollbar space-y-2 pr-1"></div>
                     </div>
 
-                    <!-- Personal Notepad -->
-                    <div class="glass-card flex flex-col tilt-element">
+                    <div class="glass-card flex flex-col tilt-element search-target h-full">
                         <div class="flex justify-between items-center mb-3 border-b border-[var(--glass-border)] pb-2">
                             <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Jurnal Lokal 📝</h3>
                             <span id="save-status" class="text-[0.65rem] bg-[var(--success)] text-white px-2 py-1 rounded-full font-bold shadow-sm">Tersimpan</span>
                         </div>
-                        <textarea id="personal-note" class="w-full flex-grow min-h-[160px] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar transition-colors focus:border-[var(--accent)]" placeholder="Ketik catatan rahasia di sini... tersimpan otomatis di perangkat ini."></textarea>
-                        <div class="flex justify-between items-center mt-2 px-1">
+                        <textarea id="personal-note" class="w-full flex-grow min-h-[200px] bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik catatan rahasia di sini... tersimpan aman di perangkat."></textarea>
+                        <div class="flex justify-between items-center mt-3 px-1">
                             <span class="text-[0.65rem] font-bold opacity-50" id="note-length">0 Karakter</span>
-                            <button id="btn-copy-note" class="text-[0.65rem] font-bold text-[var(--accent)] hover:underline btn-interactive">Salin Teks</button>
+                            <button id="btn-copy-note" class="text-[0.7rem] font-bold text-[var(--bg-color)] bg-[var(--text-primary)] px-3 py-1 rounded-full hover:scale-105 btn-interactive shadow-sm">Salin Teks</button>
                         </div>
                     </div>
 
-                    <!-- Quick Links & Tools -->
-                    <div class="glass-card flex flex-col tilt-element">
+                    <div class="glass-card flex flex-col tilt-element search-target h-full">
                         <h3 class="font-display text-xl mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] font-bold">Akses Ekstra 🚀</h3>
-                        <div class="quick-links-grid mb-4">
-                            <a href="https://canva.com" target="_blank" rel="noopener" class="quick-link-btn btn-interactive">🎨 Canva</a>
-                            <a href="https://chatgpt.com" target="_blank" rel="noopener" class="quick-link-btn btn-interactive">🤖 ChatGPT</a>
-                            <button id="btn-random" class="quick-link-btn btn-interactive text-[var(--purple)] border-[var(--purple)] border-opacity-30">🎲 Gacha Kru</button>
-                            <button id="btn-share" class="quick-link-btn btn-interactive text-[var(--accent)] border-[var(--accent)] border-opacity-30">📤 Bagikan</button>
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <a href="https://canva.com" target="_blank" rel="noopener" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-center font-bold text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all hover:-translate-y-1 shadow-sm btn-interactive">🎨 Canva</a>
+                            <a href="https://chatgpt.com" target="_blank" rel="noopener" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-center font-bold text-sm hover:border-[var(--success)] hover:text-[var(--success)] transition-all hover:-translate-y-1 shadow-sm btn-interactive">🤖 ChatGPT</a>
+                            <button id="btn-random" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-center font-bold text-sm hover:border-[var(--purple)] hover:text-[var(--purple)] transition-all hover:-translate-y-1 shadow-sm btn-interactive text-[var(--purple)]">🎲 Gacha Kru</button>
+                            <button id="btn-share" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-center font-bold text-sm transition-all hover:-translate-y-1 shadow-sm btn-interactive text-white bg-[var(--accent)] border-transparent">📤 Bagikan</button>
                         </div>
-                        <button id="btn-ocean-sound" class="w-full mt-auto py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-xl font-bold hover:scale-[1.02] transition-transform btn-interactive flex justify-center items-center gap-2 shadow-md">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> <span id="text-ocean-sound">Putar Binaural Ombak</span>
-                        </button>
+                        <div class="mt-auto pt-4 border-t border-[var(--glass-border)]">
+                            <button id="btn-ocean-sound" class="w-full py-3 bg-gradient-to-r from-[var(--text-secondary)] to-[var(--text-primary)] text-white rounded-xl font-bold hover:shadow-lg transition-all btn-interactive flex justify-center items-center gap-2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> <span id="text-ocean-sound">Putar Binaural Ombak</span>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -509,9 +562,9 @@
             <!-- PLAY ZONE -->
             <section id="play-zone-section" class="mb-20 scroll-mt-24 content-section">
                 <div class="flex flex-col items-center mb-8 glass-panel p-6 text-center relative overflow-hidden tilt-element rounded-3xl">
-                    <div class="absolute inset-0 bg-gradient-to-r from-[var(--warning)] to-[var(--danger)] opacity-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--purple)] opacity-10"></div>
                     <h2 class="font-display text-3xl md:text-5xl font-black mb-2 text-[var(--text-primary)] drop-shadow-sm">🎮 Zona Arcade 9H</h2>
-                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Mainkan <span class="text-[var(--warning)] text-lg mx-1">66</span> Mini-Games ringan untuk rileks dan kumpulkan Mutiara!</p>
+                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Mainkan <span class="text-[var(--accent)] text-lg mx-1">64</span> Mini-Games ringan untuk rileks dan kumpulkan Mutiara!</p>
                 </div>
                 
                 <div class="flex gap-2 mb-6 justify-start md:justify-center overflow-x-auto pb-2 custom-scrollbar px-1 snap-x" id="game-filters">
@@ -519,13 +572,12 @@
                     <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="solo">👤 Solo</button>
                     <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="bot">🤖 Vs Bot</button>
                     <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="multi">⚔️ Multi</button>
-                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="coop">🤝 Co-op</button>
                     <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start text-[var(--danger)] border-[var(--danger)]" data-filter="fav">❤️ Favorit</button>
                 </div>
 
-                <!-- Skeletons before render -->
                 <div id="game-skeleton" class="game-grid mb-6">
-                    <div class="skeleton h-32"></div><div class="skeleton h-32"></div><div class="skeleton h-32"></div><div class="skeleton h-32"></div>
+                    <div class="skeleton h-36"></div><div class="skeleton h-36"></div><div class="skeleton h-36"></div><div class="skeleton h-36"></div>
+                    <div class="skeleton h-36"></div><div class="skeleton h-36"></div><div class="skeleton h-36"></div><div class="skeleton h-36"></div>
                 </div>
 
                 <div class="game-grid hidden" id="play-zone-grid"></div>
@@ -533,55 +585,51 @@
         </div>
     </main>
 
-    <!-- FAB KIRI BAWAH -->
+    <!-- FABs -->
     <div class="fab-container" id="fab-left-container">
-        <button id="fab-today" class="fab-btn text-[var(--warning)]" title="Lompat ke Hari Ini">HARI<br>INI</button>
+        <button id="fab-today" class="fab-btn text-[var(--warning)] border-[var(--warning)] border-opacity-50" title="Klik 1x: Jadwal | 2x: Piket | 3x: Seragam">HARI<br>INI</button>
         <button id="fab-top" class="fab-btn" title="Kembali ke Atas"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+        <button id="fab-bottom" class="fab-btn" title="Gulir ke Bawah"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
     </div>
 
-    <!-- =====================================================================
-         MODALS & 3D ID CARDS 
-         ===================================================================== -->
-
-    <!-- ID CARD PREMIUM -->
+    <!-- MODALS -->
     <div id="modal-idcard-3d" class="modal-overlay">
         <div class="id-card-perspective">
             <div class="id-card-tilt" id="main-id-card">
                 <button class="btn-close" id="btn-close-id3d">&times;</button>
                 <div class="id-card-body">
-                    <!-- Decor Backgrounds -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)] rounded-full blur-[40px] opacity-20 -z-10"></div>
-                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-[var(--purple)] rounded-full blur-[40px] opacity-20 -z-10"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)] rounded-full blur-[50px] opacity-20 -z-10"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-[var(--purple)] rounded-full blur-[50px] opacity-20 -z-10"></div>
                     
-                    <span class="absolute top-4 left-5 text-[0.65rem] font-black tracking-widest opacity-60 uppercase bg-black/5 px-2 py-1 rounded-md" id="idcard-badge">Official ID</span>
+                    <span class="absolute top-4 left-5 text-[0.6rem] font-black tracking-widest opacity-80 uppercase bg-black/5 px-2 py-1 rounded-md border border-[var(--glass-border)]" id="idcard-badge">Official ID</span>
                     <button id="btn-copy-id" class="absolute top-4 right-12 text-xs opacity-50 hover:opacity-100 hover:text-[var(--accent)] transition-colors btn-interactive" title="Salin Info">📋</button>
 
-                    <img id="idcard-img" src="" class="id-card-img" alt="Profile" loading="lazy">
+                    <img id="idcard-img" src="" class="id-card-img" alt="Profile" loading="lazy" onerror="this.src='https://ui-avatars.com/api/?name=9H&background=0ea5e9&color=fff'">
                     
-                    <h2 id="idcard-name" class="font-display text-2xl font-black text-[var(--text-primary)] mb-1" style="transform: translateZ(30px);">Nama</h2>
-                    <p id="idcard-role" class="text-xs font-bold text-[var(--accent)] uppercase tracking-widest mb-5" style="transform: translateZ(20px);">Peran</p>
+                    <div class="flex justify-center items-center gap-2 mb-1" style="transform: translateZ(30px);">
+                        <h2 id="idcard-name" class="font-display text-2xl font-black text-[var(--text-primary)]">Nama</h2>
+                        <span id="idcard-shop-badge" class="text-sm hidden" title="Badge Toko"></span>
+                    </div>
+                    <p id="idcard-role" class="text-[0.65rem] font-bold text-[var(--accent)] uppercase tracking-[0.2em] mb-5" style="transform: translateZ(20px);">Peran</p>
                     
-                    <div class="flex justify-around mb-5 text-center border-t border-b border-[var(--glass-border)] py-2 bg-[var(--glass-bg)] rounded-xl" style="transform: translateZ(15px);">
+                    <div class="flex justify-around mb-5 text-center border-t border-b border-[var(--glass-border)] py-3 bg-[var(--glass-bg)] rounded-xl" style="transform: translateZ(15px);">
                         <div>
-                            <p class="text-[0.6rem] opacity-70 uppercase font-bold">Kecerdasan</p>
-                            <p class="text-lg font-black text-[var(--text-primary)]" id="idcard-int">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Kecerdasan</p>
+                            <p class="text-xl font-black text-[var(--text-primary)]" id="idcard-int">0</p>
                         </div>
                         <div class="border-l border-[var(--glass-border)]"></div>
                         <div>
-                            <p class="text-[0.6rem] opacity-70 uppercase font-bold">Kreativitas</p>
-                            <p class="text-lg font-black text-[var(--warning)]" id="idcard-cre">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Kreativitas</p>
+                            <p class="text-xl font-black text-[var(--warning)]" id="idcard-cre">0</p>
                         </div>
                     </div>
 
-                    <button id="btn-love-3d" class="w-full py-2.5 rounded-xl border border-[var(--danger)] text-[var(--danger)] font-bold text-sm hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4 bg-white/30" style="transform: translateZ(25px);">🤍 Beri Apresiasi</button>
+                    <button id="btn-love-3d" class="w-full py-3 rounded-xl border border-[var(--danger)] text-[var(--danger)] font-bold text-sm hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4 bg-white/30" style="transform: translateZ(25px);">🤍 Beri Apresiasi</button>
                     
                     <div class="space-y-2" style="transform: translateZ(10px);">
-                        <a href="https://www.instagram.com/historycalnine_2526?igsh=dWh6NWNjeHM3dW1m" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-md">
+                        <a href="https://www.instagram.com/historycalnine_2526?igsh=dWh6NWNjeHM3dW1m" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-md border border-transparent hover:border-white/50">
                             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram 9H
                         </a>
-                        <button class="flex items-center justify-center gap-2 w-full py-2 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-black shadow-md border border-[#25F4EE] opacity-80 cursor-not-allowed">
-                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a8 8 0 0 1-5-2.32V16a7 7 0 1 1-7-7v3a4 4 0 0 0 4 4z"></path></svg> TikTok (Segera)
-                        </button>
                     </div>
                 </div>
             </div>
@@ -590,25 +638,25 @@
 
     <!-- GAME ENGINE MODAL -->
     <div id="game-engine-modal" class="modal-overlay">
-        <div class="modal-content !max-w-2xl h-[85vh] flex flex-col p-4 md:p-6">
+        <div class="modal-content !max-w-2xl h-[85vh] flex flex-col p-4 md:p-6 bg-[var(--bg-color)]">
             <div class="flex justify-between items-start border-b border-[var(--glass-border)] pb-3 mb-4">
                 <div>
                     <div class="flex items-center gap-2 mb-1">
-                        <span id="engine-badge" class="game-badge relative top-0 right-0 !text-[0.6rem]">SOLO</span>
+                        <span id="engine-badge" class="game-badge relative top-0 right-0 !text-[0.6rem] !px-2 !py-0.5">SOLO</span>
                         <h3 id="engine-title" class="font-display text-xl md:text-2xl font-black text-[var(--text-primary)]">Judul</h3>
                         <button id="btn-fav-game" class="text-xl opacity-50 hover:opacity-100 transition-opacity btn-interactive">🤍</button>
                     </div>
                     <p id="engine-desc" class="text-xs md:text-sm font-medium opacity-70">Deskripsi</p>
                 </div>
-                <button class="btn-close !relative !top-0 !right-0" onclick="App.Games.Engine.close()">&times;</button>
+                <button class="btn-close !relative !top-0 !right-0" onclick="App.Games.close()">&times;</button>
             </div>
             
-            <div id="game-hud" class="flex justify-between w-full px-4 py-2 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl text-sm font-black mb-4 hidden shadow-sm">
-                <span class="text-[var(--accent)] flex items-center gap-1">🏆 <span id="game-score">0</span></span>
-                <span class="text-[var(--danger)] flex items-center gap-1">⏱️ <span id="game-time">15</span>s</span>
+            <div id="game-hud" class="flex justify-between w-full px-5 py-3 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl text-sm font-black mb-4 hidden shadow-sm">
+                <span class="text-[var(--accent)] flex items-center gap-2 text-lg">🏆 <span id="game-score">0</span></span>
+                <span class="text-[var(--danger)] flex items-center gap-2 text-lg">⏱️ <span id="game-time">15</span>s</span>
             </div>
             
-            <div id="game-stage" class="flex-1 relative rounded-xl overflow-hidden bg-black/5 dark:bg-black/40 border border-[var(--glass-border)] flex flex-col items-center justify-center shadow-inner select-none touch-none"></div>
+            <div id="game-stage" class="flex-1 relative rounded-xl overflow-hidden bg-white/40 dark:bg-black/40 border border-[var(--glass-border)] flex flex-col items-center justify-center shadow-inner select-none touch-none"></div>
         </div>
     </div>
 
@@ -634,24 +682,31 @@
                     <input type="checkbox" id="toggle-haptic" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
                 </label>
                 <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
-                    <span>🐟 Animasi Laut (Performa)</span>
+                    <span>🐟 Animasi Laut</span>
                     <input type="checkbox" id="toggle-motion" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
                 </label>
-                <div class="pt-4 mt-2 border-t border-[var(--glass-border)]">
-                    <button id="btn-clear-data" class="w-full py-2.5 text-[var(--danger)] border border-[var(--danger)] rounded-lg font-bold text-xs hover:bg-[var(--danger)] hover:text-white transition-colors flex justify-center items-center gap-2 btn-interactive">⚠️ Reset Progress & Cache</button>
-                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHOP CONFIRM MODAL -->
+    <div id="modal-shop-confirm" class="modal-overlay">
+        <div class="modal-content !max-w-xs text-center p-6">
+            <div class="text-5xl mb-4" id="shop-confirm-icon">🛍️</div>
+            <h3 class="font-display text-xl font-black mb-1 text-[var(--text-primary)]" id="shop-confirm-title">Item Name</h3>
+            <p class="text-xs font-bold opacity-70 mb-4" id="shop-confirm-desc">Description</p>
+            <div class="text-lg font-black text-[var(--warning)] mb-6 flex justify-center items-center gap-1">Harga: 🐚<span id="shop-confirm-price">0</span></div>
+            <div class="flex gap-3">
+                <button class="flex-1 py-2 rounded-xl font-bold border border-[var(--glass-border)] hover:bg-[var(--glass-bg)] btn-interactive" onclick="App.UI.closeModals()">Batal</button>
+                <button class="flex-1 py-2 rounded-xl font-bold bg-[var(--warning)] text-white hover:scale-105 transition-transform shadow-md btn-interactive" id="btn-confirm-buy">Beli</button>
             </div>
         </div>
     </div>
 
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-    <!-- =====================================================================
-         JAVASCRIPT LOGIC (MODULAR & OPTIMIZED)
-         ===================================================================== -->
     <script>
         const App = (() => {
-            // --- DATA ---
             const Data = {
                 kru: [
                     { id: "Andika", nama: "M. Andika Kostradnanda", g: "L", role: "Ketua Kelas", core: true }, { id: "Belva", nama: "Belva Ramania", g: "P", role: "Wakil Kelas", core: true },
@@ -679,31 +734,29 @@
                     { hari: "Jumat", list: ["Melisa", "Nadia", "SyifaA", "Kazril", "Vienard", "RizkyM"] }
                 ],
                 pelajaran: [
-                    { hari: "Senin", list: [{t:"06:30-07:30", m:"Upacara"}, {t:"07:30-09:30", m:"PJOK"}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"Seni Budaya"}, {t:"11:20-12:00", m:"PAIBP"}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"B. Indonesia"}] },
-                    { hari: "Selasa", list: [{t:"06:30-07:30", m:"Literasi"}, {t:"07:30-08:50", m:"Matematika"}, {t:"08:50-09:30", m:"B. Indonesia"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"Pend. Pancasila"}, {t:"11:20-12:00", m:"IPA"}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA"}] },
-                    { hari: "Rabu", list: [{t:"06:30-07:30", m:"Senam"}, {t:"07:30-08:50", m:"B. Sunda"}, {t:"08:50-09:30", m:"PAIBP"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"BP/BK"}, {t:"10:40-12:00", m:"IPS"}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPS"}] },
-                    { hari: "Kamis", list: [{t:"06:30-07:30", m:"Duha"}, {t:"07:30-08:50", m:"Matematika"}, {t:"08:50-09:30", m:"B. Inggris"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-10:40", m:"B. Inggris"}, {t:"10:40-12:00", m:"Informatika"}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA"}] },
-                    { hari: "Jumat", list: [{t:"06:30-07:30", m:"Gerakan Kebersihan"}, {t:"07:30-08:50", m:"B. Indonesia"}, {t:"08:50-09:30", m:"Pend. Pancasila"}, {t:"09:30-10:00", m:"Istirahat", br:true}, {t:"10:00-11:20", m:"B. Inggris"}, {t:"11:20-14:00", m:"Pulang", br:true}] }
+                    { hari: "Senin", list: [{t:"06:30-06:50", m:"Upacara / Pembiasaan", g:""}, {t:"06:50-08:10", m:"PJOK", g:"Drs. Priyo Edy Hariyanto"}, {t:"08:10-09:30", m:"Seni Budaya", g:"Amsor Adiwirya, S.Pd."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"11:20-12:00", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"B. Indonesia", g:"Amin, S.Pd."}] },
+                    { hari: "Selasa", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10-09:30", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"Pend. Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"11:20-12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Rabu", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"B. Sunda", g:"Didi Junaedi, S.Pd."}, {t:"08:10-09:30", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-10:40", m:"BP / BK", g:"Anceu Andriani, S.Pd."}, {t:"10:40-12:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}] },
+                    { hari: "Kamis", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10-09:30", m:"B. Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"Informatika", g:"Didin Akbarul Rosyidin, S.Kom"}, {t:"11:20-12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Jumat", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"08:10-09:30", m:"Pend. Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"B. Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"11:20-12:00", m:"Pulang", br:true}] }
                 ],
                 pakaian: ["Putih Biru + Dasi", "Batik Putih", "Batik Biru", "Baju Muslim", "Seragam Pramuka"],
                 hariIndex: new Date().getDay()
             };
 
-            // --- STATE & STORAGE ---
             const Storage = {
-                get: (k, d) => { try{ const v=localStorage.getItem('9h_v2_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
-                set: (k, v) => { try{ localStorage.setItem('9h_v2_'+k, JSON.stringify(v)); }catch(e){} }
+                get: (k, d) => { try{ const v=localStorage.getItem('9h_v4_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
+                set: (k, v) => { try{ localStorage.setItem('9h_v4_'+k, JSON.stringify(v)); }catch(e){} }
             };
 
             const State = {
-                level: Storage.get('lvl', 1), xp: Storage.get('xp', 0), pearls: Storage.get('prl', 0), 
+                level: Storage.get('lvl', 1), xp: Storage.get('xp', 0), pearls: Storage.get('prl', 50), 
                 streak: Storage.get('strk', 0), lastCheckin: Storage.get('lck', ""),
                 soundOn: Storage.get('snd', true), hapticOn: Storage.get('hpt', true), motionOn: Storage.get('mtn', true),
-                audioCtx: null, oscOcean: null, isOnline: navigator.onLine,
-                searchHistory: Storage.get('shist', [])
+                audioCtx: null, oscOcean: null, searchHistory: Storage.get('shist', []),
+                inventory: Storage.get('inv', []), activeBadge: Storage.get('abadge', null), xpMultiplier: Storage.get('xpm', 1)
             };
 
-            // --- AUDIO & HAPTIC ---
             const Audio = {
                 init: () => { if(!State.audioCtx && State.soundOn){ try{State.audioCtx = new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } },
                 play: (type) => {
@@ -718,53 +771,28 @@
                     else if(type==='error'){ osc.type='sawtooth'; osc.frequency.setValueAtTime(250,now); osc.frequency.setValueAtTime(150,now+0.15); gain.gain.setValueAtTime(0.03,now); gain.gain.linearRampToValueAtTime(0,now+0.3); osc.start(now); osc.stop(now+0.3); }
                 },
                 haptic: (pattern) => { if(State.hapticOn && navigator.vibrate) { try{ navigator.vibrate(pattern); }catch(e){} } },
-                toggleOcean: () => {
-                    Audio.init(); const btnText = document.getElementById('text-ocean-sound');
-                    if(State.oscOcean) {
-                        try{ State.oscOcean.stop(); }catch(e){} State.oscOcean = null;
-                        btnText.innerText = "Putar Binaural Ombak"; UI.toast("Suara ombak dihentikan");
-                    } else {
-                        try {
-                            const bufferSize = 2 * State.audioCtx.sampleRate;
-                            const buffer = State.audioCtx.createBuffer(1, bufferSize, State.audioCtx.sampleRate);
-                            const output = buffer.getChannelData(0);
-                            let lastOut = 0;
-                            for (let i = 0; i < bufferSize; i++) {
-                                let white = Math.random() * 2 - 1;
-                                output[i] = (lastOut + (0.02 * white)) / 1.02; lastOut = output[i]; output[i] *= 3.0;
-                            }
-                            State.oscOcean = State.audioCtx.createBufferSource(); State.oscOcean.buffer = buffer; State.oscOcean.loop = true;
-                            const gainNode = State.audioCtx.createGain(); gainNode.gain.value = 0.02;
-                            const lfo = State.audioCtx.createOscillator(); lfo.frequency.value = 0.1;
-                            const lfoGain = State.audioCtx.createGain(); lfoGain.gain.value = 0.015;
-                            lfo.connect(lfoGain); lfoGain.connect(gainNode.gain); lfo.start();
-                            State.oscOcean.connect(gainNode); gainNode.connect(State.audioCtx.destination);
-                            State.oscOcean.start(); btnText.innerText = "Hentikan Suara Ombak"; UI.toast("Memutar gelombang laut...", "info");
-                        } catch(e) { UI.toast("Gagal memutar audio", "error"); }
-                    }
-                }
             };
 
-            // --- UI SYSTEM ---
             const UI = {
                 toast: (msg, type='info') => {
                     const c = document.getElementById('toast-container');
                     const t = document.createElement('div'); t.className = `toast ${type}`; 
-                    const icon = type==='error'?'❌':(type==='success'?'✅':'💡');
+                    const icon = type==='error'?'❌':(type==='success'?'✅':(type==='warning'?'⚠️':'💡'));
                     t.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
                     c.appendChild(t); 
                     
                     if(type==='success') { Audio.play('success'); Audio.haptic([30,50,30]); }
-                    else if(type==='error') { Audio.play('error'); Audio.haptic([50,100,50]); }
+                    else if(type==='error' || type==='warning') { Audio.play('error'); Audio.haptic([50,100,50]); }
                     else { Audio.play('pop'); Audio.haptic(20); }
                     
                     setTimeout(() => { t.style.animation = 'fadeOut 0.3s forwards'; setTimeout(()=>t.remove(), 300); }, 3000);
                 },
                 addXP: (amt) => {
-                    State.xp += amt; let leveledUp = false;
+                    const finalAmt = Math.floor(amt * State.xpMultiplier);
+                    State.xp += finalAmt; let leveledUp = false;
                     while(State.xp >= 100) { State.level++; State.xp -= 100; leveledUp = true; }
-                    if(leveledUp) UI.toast(`🌟 LEVEL UP! Selamat datang di Level ${State.level}`, 'success');
-                    State.pearls += Math.floor(amt/2);
+                    if(leveledUp) UI.toast(`🌟 LEVEL UP! Level ${State.level}`, 'success');
+                    State.pearls += Math.floor(finalAmt/2);
                     Storage.set('xp', State.xp); Storage.set('lvl', State.level); Storage.set('prl', State.pearls);
                     UI.updateDash();
                 },
@@ -782,10 +810,9 @@
                                 const rect = el.getBoundingClientRect();
                                 const x = e.clientX - rect.left, y = e.clientY - rect.top;
                                 const centerX = rect.width/2, centerY = rect.height/2;
-                                // Batasi rotasi max 8 derajat agar aman
-                                const rotateX = Math.max(-8, Math.min(8, ((y - centerY) / centerY) * -5)); 
-                                const rotateY = Math.max(-8, Math.min(8, ((x - centerX) / centerX) * 5));
-                                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+                                const rotateX = Math.max(-6, Math.min(6, ((y - centerY) / centerY) * -4)); 
+                                const rotateY = Math.max(-6, Math.min(6, ((x - centerX) / centerX) * 4));
+                                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(2px)`;
                             });
                         });
                         document.addEventListener('mouseout', (e) => {
@@ -793,7 +820,6 @@
                             if(el) el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) translateZ(0)`;
                         });
                         
-                        // ID Card Khusus (Matematika lebih presisi)
                         const idCard = document.getElementById('main-id-card');
                         idCard.addEventListener('mousemove', (e) => {
                             idCard.classList.remove('reset');
@@ -816,11 +842,21 @@
                 },
                 showProfileIDCard: (id) => {
                     const d = Data.kru.find(k => k.id === id); if(!d) return;
-                    document.getElementById('idcard-img').src = `https://ui-avatars.com/api/?name=${d.nama.replace(/ /g,'+')}&background=0ea5e9&color=fff&size=200&bold=true`;
+                    
+                    const imgEl = document.getElementById('idcard-img');
+                    if(id === "Andika") imgEl.src = "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%209H.jpg";
+                    else imgEl.src = `https://ui-avatars.com/api/?name=${d.nama.replace(/ /g,'+')}&background=0ea5e9&color=fff&size=200&bold=true`;
+
                     document.getElementById('idcard-name').innerText = d.nama.split(' ')[0];
                     document.getElementById('idcard-role').innerText = d.role;
                     document.getElementById('idcard-badge').innerText = d.core ? "INTI KAPAL" : "KRU DEK";
                     
+                    const badgeEl = document.getElementById('idcard-shop-badge');
+                    if(id === "Andika" && State.activeBadge) {
+                        const item = Shop.items.find(i=>i.id===State.activeBadge);
+                        if(item) { badgeEl.innerText = item.icon; badgeEl.classList.remove('hidden'); }
+                    } else { badgeEl.classList.add('hidden'); }
+
                     const hash = (d.nama.charCodeAt(0) * d.nama.length * 7) % 40; 
                     document.getElementById('idcard-int').innerText = 60 + hash;
                     document.getElementById('idcard-cre').innerText = 100 - hash;
@@ -829,14 +865,14 @@
                     let loves = Storage.get('loves_v3', []);
                     const isLoved = loves.includes(d.id);
                     btnLove.innerHTML = isLoved ? "❤️ Diapresiasi" : "🤍 Beri Apresiasi";
-                    btnLove.className = `w-full py-2.5 rounded-xl border border-[var(--danger)] font-bold text-sm transition-all btn-interactive flex justify-center items-center gap-2 mb-4 ${isLoved ? 'bg-[var(--danger)] text-white' : 'text-[var(--danger)] bg-white/30 hover:bg-[var(--danger)] hover:text-white'}`;
+                    btnLove.className = `w-full py-3 rounded-xl border border-[var(--danger)] text-[var(--danger)] font-bold text-sm hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4 ${isLoved ? 'bg-[var(--danger)] text-white' : 'text-[var(--danger)] bg-white/30 hover:bg-[var(--danger)] hover:text-white'}`;
                     btnLove.style.transform = 'translateZ(25px)';
 
                     btnLove.onclick = () => {
                         if(loves.includes(d.id)) loves = loves.filter(x=>x!==d.id);
                         else { loves.push(d.id); UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}`, 'success'); }
                         Storage.set('loves_v3', loves);
-                        UI.showProfileIDCard(id); // re-render
+                        UI.showProfileIDCard(id); 
                     };
 
                     document.getElementById('btn-copy-id').onclick = () => {
@@ -851,94 +887,218 @@
                 }
             };
 
-            // --- SEARCH LOGIC (Auto-suggest & Fuzzy) ---
-            const Search = {
-                init: () => {
-                    const input = document.getElementById('global-search');
-                    const suggest = document.getElementById('search-suggest');
-                    const list = document.getElementById('suggest-list');
-                    const emptyState = document.getElementById('empty-state');
-                    let debounceTimer;
-
-                    const renderSuggest = (query) => {
-                        list.innerHTML = '';
-                        if(query === '') {
-                            State.searchHistory.forEach(h => {
-                                list.innerHTML += `<div class="suggest-item" data-val="${h}">🕒 ${h}</div>`;
-                            });
-                        } else {
-                            // Find matching sections or names
-                            const matches = [];
-                            document.querySelectorAll('.search-target').forEach(el => {
-                                const text = el.innerText.toLowerCase();
-                                if(text.includes(query) && matches.length < 5) {
-                                    const title = el.querySelector('h2, h3').innerText;
-                                    matches.push(`<div class="suggest-item" data-val="${title}">🔎 ${title}</div>`);
-                                }
-                            });
-                            list.innerHTML = matches.join('');
-                        }
-                    };
-
-                    input.addEventListener('focus', () => { suggest.classList.add('active'); renderSuggest(input.value.trim().toLowerCase()); });
-                    document.addEventListener('click', (e) => { if(!e.target.closest('.search-wrapper')) suggest.classList.remove('active'); });
-
-                    input.addEventListener('input', (e) => {
-                        clearTimeout(debounceTimer);
-                        const q = e.target.value.toLowerCase().trim();
-                        suggest.classList.add('active'); renderSuggest(q);
-                        
-                        debounceTimer = setTimeout(() => {
-                            let found = false;
-                            document.querySelectorAll('.search-target').forEach(card => {
-                                if(card.innerText.toLowerCase().includes(q) || q==='') { 
-                                    card.style.display = 'block'; setTimeout(()=>card.style.opacity=1, 10); found = true;
-                                } else { 
-                                    card.style.opacity = 0; setTimeout(()=>card.style.display = 'none', 300); 
-                                }
-                            });
-                            
-                            if(!found && q!=='') emptyState.classList.remove('hidden');
-                            else emptyState.classList.add('hidden');
-                        }, 300);
-                    });
-
-                    input.addEventListener('keypress', (e) => {
-                        if(e.key === 'Enter' && input.value.trim()) {
-                            const val = input.value.trim();
-                            if(!State.searchHistory.includes(val)) {
-                                State.searchHistory.unshift(val);
-                                if(State.searchHistory.length > 5) State.searchHistory.pop();
-                                Storage.set('shist', State.searchHistory);
+            // --- JADWAL RENDERER (Kembali ke Tata Letak Lama) ---
+            const renderSchedule = () => {
+                const lg = document.getElementById('pelajaran-grid'); 
+                if(!lg) return;
+                lg.innerHTML = '';
+                const now = new Date(); 
+                const tm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                
+                Data.pelajaran.forEach((p, i) => {
+                    let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
+                    let listHtml = p.list.map(l => {
+                        let isLive = false; 
+                        try {
+                            const times = l.t.split('-');
+                            if (isToday && tm >= times[0] && tm < times[1]) { 
+                                isLive = true; 
                             }
-                            suggest.classList.remove('active'); input.blur();
+                        } catch(e) {}
+                        
+                        // Layout dikembalikan seperti lama: List sederhana, tapi tetap mempertahankan info guru dengan rapi
+                        return `<li class="${l.br?'opacity-60 bg-[var(--glass-bg)] border-dashed border border-[var(--glass-border)]':''} ${isLive?'current-lesson':''}">
+                            <div class="flex flex-col">
+                                <span class="list-header text-xs md:text-sm"><span class="opacity-70 mr-2 font-mono">${l.t}</span> ${l.m}</span>
+                                ${l.g ? `<span class="text-[0.6rem] font-bold opacity-50 ml-[4.5rem] md:ml-[5.5rem] block -mt-1 tracking-wide">${l.g}</span>` : ''}
+                            </div>
+                        </li>`;
+                    }).join("");
+                    
+                    lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight ring-2 ring-[var(--accent)] ring-opacity-50':''}">
+                        <h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex justify-between items-center">
+                            <span>${p.hari}</span> 
+                            ${isToday?'<span class="text-[0.65rem] font-bold tracking-wider bg-[var(--accent)] text-white px-2 py-1 rounded-md shadow-md">HARI INI</span>':''}
+                        </h3>
+                        <ul class="smart-list gap-1.5">${listHtml}</ul>
+                    </div>`;
+                });
+            };
+
+            // --- GALLERY ENGINE ---
+            const Gallery = {
+                init: () => {
+                    const grid = document.getElementById('gallery-grid');
+                    const images = [
+                        { src: 'https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%209H.jpg', t: 'Logo Kebesaran 9H' },
+                        { src: 'https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png', t: 'Logo SMP' },
+                        { src: 'https://ui-avatars.com/api/?name=Foto+Kelas&background=0ea5e9&color=fff&size=400&bold=true&font-size=0.15', t: 'Foto Kelas (Segera)' },
+                        { src: 'https://ui-avatars.com/api/?name=Kegiatan+Kru&background=8b5cf6&color=fff&size=400&bold=true&font-size=0.15', t: 'Kegiatan (Segera)' }
+                    ];
+
+                    grid.innerHTML = images.map(img => `
+                        <div class="gallery-item tilt-element" onclick="window.open('${img.src}', '_blank')">
+                            <img src="${img.src}" class="gallery-img" alt="${img.t}" loading="lazy" onerror="this.src='https://ui-avatars.com/api/?name=9H&background=0ea5e9&color=fff'">
+                            <div class="gallery-overlay">
+                                <span class="gallery-title">${img.t}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            };
+
+            // --- CALENDAR ENGINE (Realtime Bulan & Tahun Saat Ini) ---
+            const Calendar = {
+                currMonth: new Date().getMonth(), year: new Date().getFullYear(),
+                holidays: {
+                    "1-1": "Tahun Baru Masehi", "2-18": "Isra Mikraj", "3-3": "Hari Raya Nyepi", "3-20": "Idul Fitri 1447 H", "3-21": "Cuti Bersama Idul Fitri", "4-3": "Wafat Isa Al Masih",
+                    "5-1": "Hari Buruh", "5-14": "Kenaikan Isa Al Masih", "5-27": "Idul Adha 1447 H", "6-1": "Hari Lahir Pancasila", "6-17": "Tahun Baru Islam", "8-17": "Hari Kemerdekaan RI",
+                    "9-25": "Maulid Nabi", "12-25": "Hari Raya Natal"
+                },
+                init: () => {
+                    document.getElementById('cal-main-year').innerText = Calendar.year;
+                    document.getElementById('btn-cal-prev').onclick = () => { if(Calendar.currMonth > 0) { Calendar.currMonth--; Calendar.render(); } };
+                    document.getElementById('btn-cal-next').onclick = () => { if(Calendar.currMonth < 11) { Calendar.currMonth++; Calendar.render(); } };
+                    Calendar.render();
+                },
+                render: () => {
+                    const grid = document.getElementById('calendar-grid');
+                    const title = document.getElementById('cal-month-title');
+                    const detail = document.getElementById('cal-event-detail');
+                    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                    
+                    title.innerText = `${months[Calendar.currMonth]} ${Calendar.year}`;
+                    grid.innerHTML = ''; detail.innerText = '';
+                    
+                    const firstDay = new Date(Calendar.year, Calendar.currMonth, 1).getDay();
+                    const daysInMonth = new Date(Calendar.year, Calendar.currMonth + 1, 0).getDate();
+                    const today = new Date();
+                    const isCurrentMonthYear = today.getFullYear() === Calendar.year && today.getMonth() === Calendar.currMonth;
+
+                    let dayHtml = '';
+                    for (let i = 0; i < firstDay; i++) { dayHtml += `<div class="cal-day empty"></div>`; }
+                    
+                    let monthHolidays = [];
+
+                    for (let d = 1; d <= daysInMonth; d++) {
+                        const dateStr = `${Calendar.currMonth + 1}-${d}`;
+                        const dayOfWeek = new Date(Calendar.year, Calendar.currMonth, d).getDay();
+                        const isWeekend = dayOfWeek === 0; // Minggu
+                        const isHoliday = Calendar.holidays[dateStr];
+                        const isToday = isCurrentMonthYear && today.getDate() === d;
+                        
+                        let classes = 'cal-day';
+                        let isRedDay = isHoliday || isWeekend;
+
+                        // Logika Highlight Realtime
+                        if (isToday) {
+                            if (isRedDay) {
+                                classes += ' today-red'; // Jika hari ini dan merah, highlight merah
+                            } else {
+                                classes += ' today'; // Jika hari ini biasa, highlight biru
+                            }
+                        } else {
+                            if (isWeekend && !isHoliday) classes += ' weekend';
+                            if (isHoliday) classes += ' holiday';
                         }
-                    });
 
-                    list.addEventListener('click', (e) => {
-                        const item = e.target.closest('.suggest-item');
-                        if(item) { input.value = item.dataset.val; input.dispatchEvent(new Event('input')); suggest.classList.remove('active'); }
-                    });
+                        if (isHoliday) { 
+                            if(isToday) {
+                                monthHolidays.push(`${d} ${months[Calendar.currMonth]}: ${isHoliday} (HARI INI)`);
+                            } else {
+                                monthHolidays.push(`${d} ${months[Calendar.currMonth]}: ${isHoliday}`);
+                            }
+                        }
 
-                    document.getElementById('search-clear').onclick = () => { input.value=''; input.dispatchEvent(new Event('input')); input.focus(); };
-                    document.getElementById('clear-history').onclick = (e) => { e.stopPropagation(); State.searchHistory = []; Storage.set('shist', []); renderSuggest(''); };
+                        dayHtml += `
+                            <div class="${classes}" title="${isHoliday ? isHoliday : ''}">
+                                ${d}
+                                ${isHoliday ? '<div class="holiday-dot"></div>' : ''}
+                            </div>
+                        `;
+                    }
+                    grid.innerHTML = dayHtml;
+                    if(monthHolidays.length > 0) detail.innerHTML = monthHolidays.join('<br>');
+                }
+            };
+
+            // --- SHOP ENGINE ---
+            const Shop = {
+                items: [
+                    { id: 'b_king', type: 'badge', name: 'Badge Raja', desc: 'Mahkota di ID Card', price: 100, icon: '👑' },
+                    { id: 'b_star', type: 'badge', name: 'Badge Bintang', desc: 'Bintang Terang', price: 50, icon: '⭐' },
+                    { id: 'b_ninja', type: 'badge', name: 'Badge Ninja', desc: 'Siluman Laut', price: 150, icon: '🥷' },
+                    { id: 'm_xp2', type: 'boost', name: 'XP Booster x2', desc: 'XP Game x2 (Permanen)', price: 300, icon: '🚀' },
+                    { id: 'm_xp3', type: 'boost', name: 'XP Booster x3', desc: 'XP Game x3 (Permanen)', price: 800, icon: '🔥' },
+                ],
+                init: () => { Shop.render(); },
+                render: () => {
+                    const grid = document.getElementById('shop-grid'); grid.innerHTML = '';
+                    Shop.items.forEach(item => {
+                        const isOwned = State.inventory.includes(item.id);
+                        const isBoostOwned = (item.id==='m_xp2' && State.xpMultiplier>=2) || (item.id==='m_xp3' && State.xpMultiplier>=3);
+                        let btnHtml = '';
+                        
+                        if(isOwned || isBoostOwned) {
+                            if(item.type === 'badge') {
+                                const isActive = State.activeBadge === item.id;
+                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs ${isActive ? 'bg-[var(--success)] text-white' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)]'}" onclick="App.Shop.equip('${item.id}')">${isActive ? 'Terpakai' : 'Pakai'}</button>`;
+                            } else {
+                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] opacity-50 cursor-not-allowed">Dimiliki</button>`;
+                            }
+                        } else {
+                            btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--warning)] text-white hover:scale-105 transition-transform" onclick="App.Shop.confirmBuy('${item.id}')">Beli 🐚${item.price}</button>`;
+                        }
+
+                        grid.innerHTML += `<div class="shop-item search-target tilt-element" data-type="${item.type}"><div class="shop-icon">${item.icon}</div><h4 class="font-bold text-[var(--text-primary)] text-sm">${item.name}</h4><p class="text-[0.65rem] opacity-70 mb-2">${item.desc}</p>${btnHtml}</div>`;
+                    });
+                },
+                confirmBuy: (id) => {
+                    const item = Shop.items.find(i=>i.id===id); if(!item) return;
+                    document.getElementById('shop-confirm-icon').innerText = item.icon;
+                    document.getElementById('shop-confirm-title').innerText = item.name;
+                    document.getElementById('shop-confirm-desc').innerText = item.desc;
+                    document.getElementById('shop-confirm-price').innerText = item.price;
+                    
+                    const btn = document.getElementById('btn-confirm-buy');
+                    btn.onclick = () => Shop.buy(id);
+                    
+                    if(State.pearls < item.price) { btn.classList.replace('bg-[var(--warning)]', 'bg-gray-400'); btn.innerText = 'Mutiara Kurang'; btn.disabled=true; }
+                    else { btn.classList.replace('bg-gray-400', 'bg-[var(--warning)]'); btn.innerText = 'Beli Sekarang'; btn.disabled=false; }
+                    
+                    UI.showModal('modal-shop-confirm');
+                },
+                buy: (id) => {
+                    const item = Shop.items.find(i=>i.id===id); if(!item || State.pearls < item.price) return;
+                    State.pearls -= item.price; State.inventory.push(id);
+                    if(item.id === 'm_xp2') State.xpMultiplier = 2;
+                    if(item.id === 'm_xp3') State.xpMultiplier = 3;
+                    
+                    Storage.set('prl', State.pearls); Storage.set('inv', State.inventory); Storage.set('xpm', State.xpMultiplier);
+                    UI.updateDash(); UI.closeModals(); Audio.play('success'); UI.toast(`Berhasil membeli ${item.name}!`, 'success'); Shop.render();
+                },
+                equip: (id) => {
+                    Audio.play('pop');
+                    if(State.activeBadge === id) State.activeBadge = null; else State.activeBadge = id;
+                    Storage.set('abadge', State.activeBadge); Shop.render(); UI.toast("Badge diperbarui", "success");
                 }
             };
 
             // --- GAMES ENGINE ---
             const Games = {
-                list: [], favorites: Storage.get('fav_games', []), activeInterval: null, score: 0,
+                list: [], favorites: Storage.get('fav_games', []), activeInterval: null, score: 0, currentMech: null,
                 generate: () => {
-                    const mechs = ['clicker', 'reaction', 'mash', 'memory'];
+                    const mechs = ['clicker', 'reaction', 'math', 'memory'];
                     const modes = ['solo', 'bot', 'multi', 'coop'];
-                    const icons = ['🦈','🐋','🐢','🐙','🪼','🦀','⭐','🫏','🐚','🐟','🪸','🫧'];
+                    const icons = ['🦈','🐋','🐢','🐙','🪼','🦀','⭐','🫏','🐚','🐟','🪸','🫧','⛵','⚓','🏴‍☠️','🏝️'];
                     const adjs = ['Ganas', 'Biru', 'Misteri', 'Cepat', 'Dalam', 'Emas', 'Pintar', 'Liar', 'Gelap', 'Ajaib', 'Besi', 'Mistik'];
 
-                    for(let i=0; i<66; i++) {
+                    for(let i=0; i<64; i++) {
+                        let mech = mechs[i%mechs.length];
                         Games.list.push({
                             id: `g_${i}`, title: `Ocean ${icons[i % icons.length]} ${adjs[Math.floor(i/icons.length) % adjs.length]}`,
-                            desc: `Game mode ${mechs[i%mechs.length]}. Kumpulkan mutiara!`, icon: icons[i % icons.length],
-                            mode: modes[i%modes.length], mech: mechs[i%mechs.length]
+                            desc: mech === 'math' ? 'Selesaikan hitungan cepat!' : (mech==='memory' ? 'Ingat polanya!' : `Game ketangkasan ringan.`),
+                            icon: icons[i % icons.length], mode: modes[i%modes.length], mech: mech
                         });
                     }
                 },
@@ -957,13 +1117,8 @@
                         `;
                     });
 
-                    // Hide skeleton, show grid
-                    setTimeout(() => {
-                        document.getElementById('game-skeleton').style.display = 'none';
-                        grid.classList.remove('hidden');
-                    }, 800);
+                    setTimeout(() => { document.getElementById('game-skeleton').style.display = 'none'; grid.classList.remove('hidden'); }, 800);
 
-                    // Filters
                     document.querySelectorAll('.filter-btn-game').forEach(btn => {
                         btn.addEventListener('click', (e) => {
                             document.querySelectorAll('.filter-btn-game').forEach(b=>b.classList.remove('active')); e.target.classList.add('active');
@@ -989,13 +1144,13 @@
                         else Games.favorites.push(id);
                         Storage.set('fav_games', Games.favorites);
                         btnFav.innerText = Games.favorites.includes(id) ? '❤️' : '🤍';
-                        Games.render(); // Re-render to show/hide heart on grid
+                        Games.render();
                     };
 
                     document.getElementById('game-hud').classList.add('hidden');
                     document.getElementById('game-stage').innerHTML = `
-                        <div class="text-6xl mb-6 animate-bounce">${g.icon}</div>
-                        <button id="btn-start-game" class="px-6 py-3 bg-[var(--accent)] text-white rounded-xl font-black text-lg hover:scale-105 transition-transform btn-interactive shadow-lg">MULAI MAIN</button>
+                        <div class="text-7xl mb-8 animate-bounce filter drop-shadow-lg">${g.icon}</div>
+                        <button id="btn-start-game" class="px-8 py-4 bg-[var(--accent)] text-white rounded-2xl font-black text-xl hover:scale-105 transition-transform btn-interactive shadow-xl tracking-wider">MULAI MAIN</button>
                     `;
                     document.getElementById('btn-start-game').onclick = () => Games.start(g);
                     UI.showModal('game-engine-modal');
@@ -1005,51 +1160,73 @@
                     Audio.play('success'); Audio.haptic([50,50]);
                     document.getElementById('game-hud').classList.remove('hidden');
                     Games.score = 0; document.getElementById('game-score').innerText = 0;
-                    let time = 10; document.getElementById('game-time').innerText = time;
+                    let time = 15; document.getElementById('game-time').innerText = time;
                     const stage = document.getElementById('game-stage'); stage.innerHTML = '';
+                    Games.currentMech = g.mech;
+
+                    Games.activeInterval = setInterval(() => {
+                        time--; document.getElementById('game-time').innerText = time;
+                        if(time <= 0) Games.end();
+                    }, 1000);
                     
-                    if(g.mech === 'clicker' || g.mech === 'mash') {
-                        Games.activeInterval = setInterval(() => {
-                            time--; document.getElementById('game-time').innerText = time;
-                            if(time <= 0) Games.end();
-                            else if(Math.random() > 0.2) {
-                                const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform drop-shadow-md';
-                                btn.style.left = `${10 + Math.random() * 70}%`; btn.style.top = `${10 + Math.random() * 70}%`;
-                                btn.onpointerdown = (e) => { e.preventDefault(); Audio.play('bubble'); Games.score+=10; document.getElementById('game-score').innerText = Games.score; btn.remove(); };
-                                stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode)btn.remove()}, 900);
-                            }
-                        }, 800);
+                    if(g.mech === 'clicker') {
+                        const spawn = () => {
+                            if(time<=0) return;
+                            const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform drop-shadow-md';
+                            btn.style.left = `${10 + Math.random() * 70}%`; btn.style.top = `${10 + Math.random() * 70}%`;
+                            btn.onpointerdown = (e) => { e.preventDefault(); Audio.play('bubble'); Games.score+=10; document.getElementById('game-score').innerText = Games.score; btn.remove(); spawn();};
+                            stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode){btn.remove(); spawn();}}, 1200);
+                        };
+                        spawn(); spawn();
+                    } else if(g.mech === 'math') {
+                        const genMath = () => {
+                            if(time<=0) return;
+                            const a = Math.floor(Math.random()*20)+1; const b = Math.floor(Math.random()*20)+1;
+                            const ops = ['+','-']; const op = ops[Math.floor(Math.random()*ops.length)];
+                            const ans = op==='+'?a+b:a-b;
+                            stage.innerHTML = `<div class="text-4xl font-black mb-6 bg-[var(--glass-bg)] p-4 rounded-xl border border-[var(--glass-border)]">${a} ${op} ${b} = ?</div><div class="grid grid-cols-2 gap-4 w-full max-w-xs" id="math-opts"></div>`;
+                            
+                            const opts = [ans, ans+Math.floor(Math.random()*5)+1, ans-Math.floor(Math.random()*5)-1, ans+10].sort(()=>Math.random()-0.5);
+                            opts.forEach(o => {
+                                const btn = document.createElement('button'); btn.className = 'p-4 bg-[var(--accent)] text-white rounded-xl font-bold text-xl hover:bg-[var(--accent-hover)] btn-interactive shadow-md'; btn.innerText = o;
+                                btn.onclick = () => {
+                                    if(o === ans) { Audio.play('success'); Games.score+=20; document.getElementById('game-score').innerText=Games.score; genMath(); }
+                                    else { Audio.play('error'); time-=2; document.getElementById('game-time').innerText=Math.max(0,time); }
+                                };
+                                document.getElementById('math-opts').appendChild(btn);
+                            });
+                        };
+                        genMath();
                     } else {
-                        stage.innerHTML = `<div class="text-center p-4"><div class="text-6xl mb-4 animate-pulse">${g.icon}</div><p class="font-bold opacity-70 text-sm">Tap berulang kali!</p></div>`;
-                        stage.onpointerdown = (e) => { e.preventDefault(); Games.score+=5; document.getElementById('game-score').innerText = Games.score; Audio.play('pop'); };
-                        Games.activeInterval = setInterval(() => {
-                            time--; document.getElementById('game-time').innerText = time;
-                            if(time <= 0) Games.end();
-                        }, 1000);
+                        stage.innerHTML = `<div class="text-center p-4 w-full h-full flex justify-center items-center"><div class="text-8xl mb-4 animate-pulse btn-interactive cursor-pointer select-none" id="mash-btn">${g.icon}</div></div>`;
+                        document.getElementById('mash-btn').onpointerdown = (e) => { e.preventDefault(); Games.score+=5; document.getElementById('game-score').innerText = Games.score; Audio.play('pop'); document.getElementById('mash-btn').style.transform='scale(0.9)'; setTimeout(()=>document.getElementById('mash-btn').style.transform='scale(1)',50);};
                     }
                 },
                 end: () => {
                     clearInterval(Games.activeInterval); document.getElementById('game-stage').onpointerdown = null;
                     Audio.play('success'); Audio.haptic([100,50,100]);
                     const xpGain = Math.floor(Games.score / 15) + 5;
+                    const multGain = Math.floor(xpGain * State.xpMultiplier);
+                    const pearlGain = Math.floor(multGain/2);
+                    
                     document.getElementById('game-stage').innerHTML = `
                         <div class="text-center p-6 bg-black/10 w-full h-full flex flex-col justify-center items-center">
                             <h2 class="text-3xl font-black text-[var(--accent)] mb-2">SELESAI</h2>
                             <p class="text-lg font-black mb-4">Skor: ${Games.score}</p>
-                            <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-3 mb-6 w-full max-w-[180px]">
-                                <div class="flex justify-between font-bold text-xs"><span class="opacity-70">XP</span><span class="text-[var(--success)]">+${xpGain}</span></div>
-                                <div class="flex justify-between font-bold text-xs mt-1"><span class="opacity-70">Mutiara</span><span class="text-[var(--warning)]">+${Math.floor(xpGain/2)}</span></div>
+                            <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 mb-6 w-full max-w-[200px] shadow-sm">
+                                <div class="flex justify-between font-bold text-sm mb-2 pb-2 border-b border-[var(--glass-border)]"><span class="opacity-70">Multiplier</span><span class="text-[var(--purple)]">x${State.xpMultiplier}</span></div>
+                                <div class="flex justify-between font-bold text-sm"><span class="opacity-70">XP</span><span class="text-[var(--success)]">+${multGain}</span></div>
+                                <div class="flex justify-between font-bold text-sm mt-1"><span class="opacity-70">Mutiara</span><span class="text-[var(--warning)]">+${pearlGain}</span></div>
                             </div>
-                            <button onclick="App.Games.close()" class="px-6 py-2 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold btn-interactive">TUTUP</button>
+                            <button onclick="App.Games.close()" class="px-8 py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold btn-interactive shadow-md">TUTUP</button>
                         </div>
                     `;
                     UI.addXP(xpGain);
                 }
             };
 
-            // --- INITIALIZATION & BINDINGS ---
+            // --- INITIALIZATION ---
             const Init = () => {
-                // Apply Settings
                 if(Storage.get('thm', 'light') === 'dark') document.body.classList.add('dark-mode');
                 document.getElementById('sel-theme').value = Storage.get('thm', 'light');
                 document.getElementById('toggle-sound').checked = State.soundOn;
@@ -1057,11 +1234,6 @@
                 document.getElementById('toggle-motion').checked = State.motionOn;
                 if(!State.motionOn) document.body.classList.add('reduce-motion');
 
-                // Network Status
-                window.addEventListener('online', () => { State.isOnline=true; document.getElementById('header-status').innerText='Online'; document.getElementById('header-status').className='font-mono text-[0.6rem] font-bold tracking-widest text-[var(--success)] uppercase hidden md:inline'; UI.toast('Koneksi pulih', 'success'); });
-                window.addEventListener('offline', () => { State.isOnline=false; document.getElementById('header-status').innerText='Offline'; document.getElementById('header-status').className='font-mono text-[0.6rem] font-bold tracking-widest text-[var(--danger)] uppercase hidden md:inline'; UI.toast('Anda sedang offline', 'error'); });
-
-                // Daily Check-in
                 const today = new Date().toDateString();
                 if(State.lastCheckin !== today) {
                     State.streak++; State.lastCheckin = today; 
@@ -1070,9 +1242,8 @@
                 }
                 UI.updateDash(); UI.updateClock(); setInterval(UI.updateClock, 60000);
 
-                // Render Data to HTML
+                // Render Data
                 const renderData = () => {
-                    // Org
                     const og = document.getElementById('org-grid');
                     const roles = ["Ketua Kelas", "Wakil Kelas", "Bendahara", "Sekretaris", "Keamanan", "Perpustakaan", "Kerohanian", "Kepramukaan", "Olahraga", "Absensi", "Kru", "OSIS"];
                     roles.forEach(role => {
@@ -1082,7 +1253,6 @@
                         og.innerHTML += `<div class="glass-card tilt-element search-target" data-category="${members[0].g}"><h3 class="font-display font-bold text-lg text-[var(--text-primary)] mb-3 border-b border-[var(--glass-border)] pb-2">${role}</h3><ul class="smart-list">${list}</ul></div>`;
                     });
 
-                    // Piket
                     const pg = document.getElementById('piket-grid');
                     Data.piket.forEach((p, i) => {
                         let list = p.list.map(id => { let k = Data.kru.find(x => x.id === id); return `<li onclick="App.UI.showProfileIDCard('${k.id}')" class="btn-interactive"><span class="list-header">${k.nama}</span></li>`; }).join("");
@@ -1090,200 +1260,33 @@
                         pg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 flex justify-between text-[var(--text-primary)]"><span>${p.hari}</span> ${isToday?'<span class="text-[var(--accent)] text-xs uppercase flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping"></span> Hari Ini</span>':''}</h3><ul class="smart-list">${list}</ul></div>`;
                     });
 
-                    // Pelajaran
-                    const lg = document.getElementById('pelajaran-grid');
-                    const now = new Date(); const tm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-                    Data.pelajaran.forEach((p, i) => {
-                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
-                        let list = p.list.map(l => {
-                            let isLive = isToday && (tm >= l.t.split('-')[0] && tm < l.t.split('-')[1]);
-                            return `<li class="${l.br?'opacity-60':''} ${isLive?'current-lesson':''}"><span class="list-header text-xs md:text-sm"><span class="opacity-70 mr-2 font-mono">${l.t}</span> ${l.m}</span></li>`;
-                        }).join("");
-                        lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)]">${p.hari}</h3><ul class="smart-list">${list}</ul></div>`;
-                    });
-
-                    // Pakaian
                     const clg = document.getElementById('pakaian-grid');
                     Data.pakaian.forEach((p, i) => {
                         let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
                         clg.innerHTML += `<div class="glass-card tilt-element search-target text-center flex flex-col justify-center p-4 ${isToday?'today-highlight ring-2 ring-[var(--accent)]':''}"><p class="text-[0.65rem] font-bold opacity-70 mb-1 uppercase tracking-widest">${Data.piket[i].hari}</p><p class="font-black text-sm md:text-base text-[var(--text-primary)] leading-tight">${p}</p></div>`;
                     });
                 };
-                renderData();
-
-                // Ecosystem
-                if(State.motionOn) {
-                    const spawnEco = () => {
-                        if(document.querySelectorAll('.sea-creature').length > 15 || document.hidden) return;
-                        const eco = document.getElementById('ocean-ecosystem');
-                        const creatures = [{c:'🐟', t:'swim-fast', l:'mid'}, {c:'🦈', t:'swim-slow', l:'bg'}, {c:'🪼', t:'jelly-swim', l:'fg'}, {c:'🫧', t:'float-bob', l:'mid'}];
-                        const d = creatures[Math.floor(Math.random()*creatures.length)];
-                        const el = document.createElement('div'); el.className = `sea-creature ${d.t}`; el.innerText = d.c;
-                        if(d.c==='🪼') el.classList.add('bioluminescent');
-                        if(d.t.includes('swim')) el.style.top = `${10 + Math.random()*70}vh`; else el.style.left = `${Math.random()*90}vw`;
-                        document.getElementById(`layer-${d.l}`).appendChild(el);
-                        setTimeout(() => { if(el.parentNode) el.remove(); }, 30000);
-                    };
-                    setInterval(spawnEco, 3000); for(let i=0;i<5;i++) spawnEco();
-                }
-
-                // Global Events
-                document.addEventListener('click', (e) => { 
-                    if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON' || e.target.tagName==='A') {
-                        Audio.init(); Audio.play('click'); 
-                    }
-                });
-
-                // Context Menu / Bottom Sheet
-                const ctxMenu = document.getElementById('context-menu');
-                const ctxOverlay = document.getElementById('context-menu-overlay');
-                const toggleCtx = (e) => {
-                    e.preventDefault(); e.stopPropagation();
-                    const isDesktop = window.innerWidth >= 640;
-                    if(ctxMenu.classList.contains('show') || ctxMenu.classList.contains('show-mobile')) { 
-                        ctxMenu.classList.remove('show', 'show-mobile'); ctxOverlay.classList.replace('opacity-100', 'opacity-0'); setTimeout(()=>ctxOverlay.classList.add('hidden'), 300); return; 
-                    }
-                    if(isDesktop && !e.target.closest('#btn-context-toggle')) { ctxMenu.style.top = `${e.clientY}px`; ctxMenu.style.left = `${e.clientX}px`; ctxMenu.style.right = 'auto'; } 
-                    else { ctxMenu.style.top = ''; ctxMenu.style.left = ''; ctxMenu.style.right = ''; }
-                    
-                    ctxOverlay.classList.remove('hidden'); setTimeout(()=>ctxOverlay.classList.replace('opacity-0', 'opacity-100'), 10);
-                    if(isDesktop) ctxMenu.classList.add('show'); else ctxMenu.classList.add('show-mobile');
-                    Audio.play('pop'); Audio.haptic(20);
-                };
-                document.getElementById('btn-context-toggle').addEventListener('click', toggleCtx);
-                document.addEventListener('contextmenu', (e) => { if(!e.target.closest('input, textarea')) toggleCtx(e); });
-                ctxOverlay.addEventListener('click', toggleCtx);
                 
-                // Context Actions
-                document.querySelectorAll('.ctx-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        const act = e.currentTarget.dataset.action;
-                        if(act==='search') { document.getElementById('global-search').focus(); window.scrollTo({top:0}); }
-                        if(act==='theme') { const nt = document.body.classList.contains('dark-mode')?'light':'dark'; document.getElementById('sel-theme').value=nt; document.getElementById('sel-theme').dispatchEvent(new Event('change')); }
-                        if(act==='zen') { document.body.classList.toggle('zen-mode'); UI.toast("Mode Fokus Diubah", "success"); }
-                        if(act==='copy') { navigator.clipboard.writeText(location.href); UI.toast("Tautan disalin", "success"); }
-                        if(act==='shake') {
-                            document.body.style.animation = "shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite";
-                            const s = document.createElement('style'); s.id = "shake-anim";
-                            s.innerHTML = `@keyframes shake { 10%, 90% { transform: translate3d(-2px, 2px, 0); } 20%, 80% { transform: translate3d(4px, -2px, 0); } 30%, 50%, 70% { transform: translate3d(-8px, 4px, 0); } 40%, 60% { transform: translate3d(8px, -4px, 0); } }`;
-                            document.head.appendChild(s); UI.toast("⚠️ SIMULASI GEMPA!"); Audio.haptic([100,50,100,50,200]);
-                            setTimeout(() => { document.body.style.animation=''; document.getElementById('shake-anim').remove(); }, 3000);
-                        }
-                        ctxOverlay.click(); // close menu
-                    });
+                renderData();
+                renderSchedule();
+                setInterval(renderSchedule, 60000); 
+
+                // Event Listeners
+                document.addEventListener('click', (e) => { 
+                    if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON' || e.target.tagName==='A') { Audio.init(); Audio.play('click'); }
                 });
 
-                // Shortcuts
-                document.addEventListener('keydown', (e) => {
-                    if((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById('btn-command').click(); }
-                    if(e.key === 'Escape') UI.closeModals();
-                    if(e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') { e.preventDefault(); document.getElementById('global-search').focus(); }
-                });
-                document.getElementById('btn-command').onclick = () => { document.getElementById('global-search').focus(); window.scrollTo({top:0, behavior:'smooth'}); };
-
-                // Utilities: Notes
-                const note = document.getElementById('personal-note'); const len = document.getElementById('note-length');
-                note.value = Storage.get('note', ''); len.innerText = `${note.value.length} Karakter`;
-                note.addEventListener('input', e => { 
-                    Storage.set('note', e.target.value); len.innerText = `${e.target.value.length} Karakter`;
-                    document.getElementById('save-status').innerText = "Menyimpan...";
-                    clearTimeout(window.saveTmr); window.saveTmr = setTimeout(()=> document.getElementById('save-status').innerText = "Tersimpan", 800);
-                });
-                document.getElementById('btn-copy-note').onclick = () => { navigator.clipboard.writeText(note.value); UI.toast("Catatan disalin","success"); };
-
-                // Utilities: Tasks
-                const tInput = document.getElementById('task-input'); const tList = document.getElementById('task-list');
-                const renderTasks = () => {
-                    tList.innerHTML = ''; const tasks = Storage.get('tasks', []);
-                    tasks.forEach((t, i) => {
-                        const div = document.createElement('div'); div.className = `flex justify-between items-center p-2 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] transition-opacity ${t.d?'opacity-50 line-through':''}`;
-                        div.innerHTML = `<span class="font-medium text-xs cursor-pointer flex-grow pl-1">${t.t}</span> <button class="text-[var(--danger)] font-bold px-2 py-1 rounded hover:bg-[var(--danger)] hover:text-white transition-colors text-xs">&times;</button>`;
-                        div.onclick = (e) => {
-                            Audio.play('pop'); Audio.haptic(10);
-                            if(e.target.tagName==='BUTTON') tasks.splice(i,1); else t.d = !t.d;
-                            Storage.set('tasks', tasks); renderTasks();
-                        };
-                        tList.appendChild(div);
-                    });
-                };
-                renderTasks();
-                tInput.addEventListener('keypress', e => {
-                    if(e.key === 'Enter' && e.target.value.trim()) {
-                        let tasks = Storage.get('tasks', []); tasks.push({t: e.target.value.trim(), d: false});
-                        Storage.set('tasks', tasks); renderTasks(); e.target.value = ''; Audio.play('success');
-                    }
-                });
-
-                // Utilities: Pomodoro
-                let pomoTimer, pomoTime = 1500, isPomoRunning = false;
-                document.getElementById('btn-pomo').onclick = () => {
-                    Audio.play('click'); const bar = document.getElementById('pomo-progress');
-                    if(isPomoRunning) { clearInterval(pomoTimer); isPomoRunning = false; document.getElementById('btn-pomo').innerHTML = '▶'; bar.style.transition = 'none'; bar.style.width='0%'; }
-                    else {
-                        isPomoRunning = true; document.getElementById('btn-pomo').innerHTML = '⏸';
-                        bar.style.transition = 'width 1s linear';
-                        pomoTimer = setInterval(() => {
-                            pomoTime--; let m = Math.floor(pomoTime/60), s = pomoTime%60;
-                            document.getElementById('pomo-display').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-                            bar.style.width = `${((1500-pomoTime)/1500)*100}%`;
-                            if(pomoTime <= 0) {
-                                clearInterval(pomoTimer); isPomoRunning = false; UI.toast("Fokus Selesai!", "success"); Audio.play('success'); Audio.haptic([500,200,500]);
-                                pomoTime = 1500; document.getElementById('btn-pomo').innerHTML = '▶'; bar.style.width='0%';
-                            }
-                        }, 1000);
-                    }
-                };
-
-                // Quick Links
-                document.getElementById('btn-share').onclick = async () => {
-                    if(navigator.share) { try{ await navigator.share({title: 'Portal 9H', text: 'Cek Portal Ekspedisi 9H Ultimate!', url: window.location.href}); }catch(e){} }
-                    else { navigator.clipboard.writeText(window.location.href); UI.toast("Link disalin!", "success"); }
-                };
-                document.getElementById('btn-copy-today').onclick = () => {
-                    if(Data.hariIndex<1||Data.hariIndex>5) return UI.toast("Hari ini libur/weekend!", "error");
-                    const p = Data.pelajaran[Data.hariIndex-1];
-                    const text = `*JADWAL 9H (${p.hari})*\n` + p.list.map(m => `- ${m.t}: ${m.m}`).join('\n');
-                    navigator.clipboard.writeText(text).then(() => {
-                        UI.toast("Jadwal disalin!", "success"); 
-                        document.getElementById('btn-copy-today').innerHTML = '✅ Tersalin'; 
-                        setTimeout(()=>document.getElementById('btn-copy-today').innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Salin Hari Ini', 2000);
-                    });
-                };
                 document.getElementById('btn-random').onclick = () => {
                     Audio.play('click'); let c=0; const i = setInterval(()=>{
                         const s = Data.kru[Math.floor(Math.random()*Data.kru.length)]; Audio.play('pop');
                         c++; if(c>15){ clearInterval(i); Audio.play('success'); UI.showProfileIDCard(s.id); UI.toast(`Terpilih: ${s.nama}`, 'success'); }
                     }, 80);
                 };
-                document.getElementById('btn-ocean-sound').onclick = Audio.toggleOcean;
-                document.getElementById('btn-idcard-global').addEventListener('click', () => { UI.showProfileIDCard('Andika'); document.getElementById('idcard-badge').innerText = "GLOBAL ACCESS"; });
 
-                // Settings Modals
-                document.querySelectorAll('.btn-close').forEach(b => b.addEventListener('click', UI.closeModals));
-                document.querySelectorAll('.modal-overlay').forEach(m => { m.addEventListener('mousedown', (e) => { if(e.target === m) UI.closeModals(); }); });
-                document.getElementById('btn-settings').addEventListener('click', () => UI.showModal('modal-settings'));
-                
-                document.getElementById('sel-theme').onchange = (e) => {
-                    const v = e.target.value; Storage.set('thm', v);
-                    if(v==='dark') document.body.classList.add('dark-mode'); else document.body.classList.remove('dark-mode');
-                };
-                document.getElementById('toggle-sound').onchange = (e) => { State.soundOn = e.target.checked; Storage.set('snd', State.soundOn); };
-                document.getElementById('toggle-haptic').onchange = (e) => { State.hapticOn = e.target.checked; Storage.set('hpt', State.hapticOn); };
-                document.getElementById('toggle-motion').onchange = (e) => { 
-                    State.motionOn = e.target.checked; Storage.set('mtn', State.motionOn); 
-                    if(!State.motionOn) { document.getElementById('ocean-ecosystem').innerHTML = ''; document.body.classList.add('reduce-motion'); } 
-                    else { document.body.classList.remove('reduce-motion'); window.location.reload(); }
-                };
-                document.getElementById('btn-clear-data').onclick = () => { 
-                    const div = document.createElement('div'); div.className = 'fixed inset-0 bg-black/60 z-[3000] flex items-center justify-center backdrop-blur-sm';
-                    div.innerHTML = `<div class="bg-[var(--bg-color)] p-6 rounded-2xl border border-[var(--glass-border)] max-w-sm w-full text-center shadow-2xl mx-4"><h3 class="text-xl font-bold mb-2">Reset Data?</h3><p class="text-sm opacity-80 mb-6">Level, XP, dan catatan akan hilang. Tidak bisa dikembalikan.</p><div class="flex gap-3"><button class="flex-1 py-2 rounded-lg font-bold bg-[var(--glass-bg)] border border-[var(--glass-border)]" onclick="this.parentElement.parentElement.parentElement.remove()">Batal</button><button class="flex-1 py-2 rounded-lg font-bold bg-[var(--danger)] text-white" onclick="localStorage.clear();location.reload()">Ya, Reset</button></div></div>`;
-                    document.body.appendChild(div);
-                };
-
-                // Nav Pills & Scroll
-                document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(btn => {
+                // Nav & Tabs
+                document.querySelectorAll('.nav-pill:not(.filter-btn-game):not(.filter-shop)').forEach(btn => {
                     btn.addEventListener('click', (e) => {
-                        document.querySelectorAll('.nav-pill:not(.filter-btn-game)').forEach(b=>b.classList.remove('active'));
+                        document.querySelectorAll('#main-nav .nav-pill').forEach(b=>b.classList.remove('active'));
                         e.currentTarget.classList.add('active');
                         const target = e.currentTarget.dataset.target;
                         document.querySelectorAll('.content-section').forEach(s => s.style.display='none');
@@ -1293,16 +1296,42 @@
                     });
                 });
 
-                document.getElementById('fab-today').onclick = () => {
-                    const h = document.querySelector('.today-highlight');
-                    if(h) window.scrollTo({top: h.offsetTop - 100, behavior: 'smooth'});
-                    else UI.toast("Hari ini libur!", "error");
-                };
-                document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+                // FAB Multi Click Logic
+                const fabToday = document.getElementById('fab-today');
+                let todayClicks = 0;
+                let todayTimeout;
 
-                // Scroll Events (Header & Progress & Reveal)
+                fabToday.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    todayClicks++;
+                    
+                    let msg = "";
+                    if(todayClicks===1) msg = "1x Klik: Membuka Jadwal";
+                    if(todayClicks===2) msg = "2x Klik: Membuka Piket";
+                    if(todayClicks>=3) msg = "3x Klik: Membuka Seragam";
+                    UI.toast(msg, 'info');
+
+                    clearTimeout(todayTimeout);
+                    todayTimeout = setTimeout(() => {
+                        if(todayClicks === 1) {
+                            document.querySelector('[data-target="pelajaran-section"]').click();
+                            setTimeout(() => { document.getElementById('pelajaran-section').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
+                        } else if(todayClicks === 2) {
+                            document.querySelector('[data-target="organization-section"]').click();
+                            setTimeout(() => { document.getElementById('piket-anchor').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
+                        } else if(todayClicks >= 3) {
+                            document.querySelector('[data-target="organization-section"]').click();
+                            setTimeout(() => { document.getElementById('pakaian-anchor').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
+                        }
+                        todayClicks = 0; 
+                    }, 400); 
+                });
+
+                document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+                document.getElementById('fab-bottom').onclick = () => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+
                 const obs = new IntersectionObserver(e => { e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal'); obs.unobserve(en.target); } }); }, { threshold: 0.1 });
-                document.querySelectorAll('.glass-card').forEach(el => obs.observe(el));
+                document.querySelectorAll('.glass-card, .shop-item, .game-card, .gallery-item').forEach(el => obs.observe(el));
 
                 const progBar = document.getElementById('scroll-progress');
                 const header = document.getElementById('fixed-header');
@@ -1318,13 +1347,15 @@
                     });
                 }, {passive:true});
 
-                Search.init(); Games.generate(); Games.render(); UI.setup3DTilt();
+                Gallery.init(); Calendar.init(); Shop.init(); Games.generate(); Games.render(); UI.setup3DTilt();
             };
 
-            return { Init, UI, Games };
+            return { Init, UI, Games, Shop };
         })();
 
         document.addEventListener('DOMContentLoaded', App.Init);
     </script>
 </body>
 </html>
+
+```
