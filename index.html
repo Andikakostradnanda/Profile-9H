@@ -1,11 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0369a1" id="meta-theme-color">
-    <meta name="description" content="Portal Kelas 9H Ultimate Edition. Ekspedisi, Jadwal, Utilitas Kru, Play Zone, Galeri, Toko, dan Kalender.">
+    <meta name="description" content="Portal Kelas 9H Ultimate Edition. Ekspedisi, Jadwal Realtime, Utilitas Kru, Play Zone, Galeri, Toko, dan Kalender 2026.">
     <title>Situs Kelas 9H | Beranda Ultimate</title>
     
     <!-- Tailwind CSS -->
@@ -30,15 +29,14 @@
             --accent-hover: #0284c7;
             --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6;
             
-            --glass-bg: rgba(255, 255, 255, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.9);
             --glass-shadow: 0 10px 40px rgba(3, 105, 161, 0.08);
             --glass-highlight: inset 1px 1px 0px rgba(255, 255, 255, 0.9);
             
             --font-main: 'Poppins', sans-serif; 
             --font-display: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace; 
-            --base-font-size: 16px;
         }
 
         body.dark-mode {
@@ -49,7 +47,7 @@
             --accent: #38bdf8; 
             --accent-glow: rgba(56, 189, 248, 0.3);
             
-            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-bg: rgba(15, 23, 42, 0.7);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             --glass-highlight: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
@@ -57,11 +55,7 @@
 
         body.zen-mode {
             --bg-gradient: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-            --glass-bg: rgba(255, 255, 255, 0.9);
-        }
-        body.zen-mode.dark-mode {
-            --bg-gradient: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
-            --glass-bg: rgba(20, 20, 20, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.95);
         }
         body.zen-mode #ocean-ecosystem { display: none !important; }
 
@@ -69,7 +63,7 @@
            2. GLOBAL RESETS & BASE STYLES
            ===================================================================== */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; font-size: var(--base-font-size); scrollbar-gutter: stable; }
+        html { scroll-behavior: smooth; font-size: 16px; scrollbar-gutter: stable; }
         body {
             font-family: var(--font-main); background: var(--bg-color); background-image: var(--bg-gradient); 
             background-attachment: fixed; color: var(--text-secondary); transition: background 0.6s ease, color 0.6s ease;
@@ -82,7 +76,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-        body.dark-mode ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
 
         #scroll-progress {
             position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--success));
@@ -93,25 +86,21 @@
         body.reduce-motion * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 
         /* =====================================================================
-           3. 3D ECOSYSTEM
+           3. 3D ECOSYSTEM (Optimized)
            ===================================================================== */
         #ocean-ecosystem { position: fixed; inset: 0; z-index: -5; pointer-events: none; overflow: hidden; perspective: 1000px; }
-        .sea-creature { position: absolute; font-size: 2rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); will-change: transform; user-select: none; }
-        .bioluminescent { filter: drop-shadow(0 0 15px var(--accent)) drop-shadow(0 0 5px #fff); }
+        .sea-creature { position: absolute; font-size: 2rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); user-select: none; }
         
         .depth-bg { z-index: -10; opacity: 0.2; transform: scale(0.6) translateZ(-500px); filter: blur(4px); }
-        .depth-mid { z-index: -5; opacity: 0.5; transform: scale(0.85) translateZ(-200px); filter: blur(2px); }
         .depth-fg { z-index: 0; opacity: 0.8; transform: scale(1.1) translateZ(0); }
 
         .swim-slow { animation: swimLR 45s linear infinite; }
-        .swim-fast { animation: swimRL 20s linear infinite; }
         .jelly-swim { animation: jellyMove 25s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
         
-        @keyframes swimLR { 0% { transform: translateX(-15vw) scaleX(-1) translateY(0) rotate(-5deg); } 50% { transform: translateX(115vw) scaleX(-1) translateY(-30px) rotate(5deg); } 50.1% { transform: translateX(115vw) scaleX(1) translateY(-30px) rotate(-5deg); } 100% { transform: translateX(-15vw) scaleX(1) translateY(0) rotate(5deg); } }
-        @keyframes swimRL { 0% { transform: translateX(115vw) translateY(0); } 100% { transform: translateX(-15vw) translateY(40px); } }
-        @keyframes jellyMove { 0% { transform: translateY(110vh) scale(0.9); opacity:0;} 15% { opacity:0.8; transform: translateY(90vh) scale(1.1); } 30% { transform: translateY(85vh) scale(0.9); } 45% { transform: translateY(65vh) scale(1.1); } 100% { transform: translateY(-20vh) scale(1); opacity:0; } }
+        @keyframes swimLR { 0% { transform: translateX(-15vw) scaleX(-1) translateY(0); } 50% { transform: translateX(115vw) scaleX(-1) translateY(-30px); } 50.1% { transform: translateX(115vw) scaleX(1) translateY(-30px); } 100% { transform: translateX(-15vw) scaleX(1) translateY(0); } }
+        @keyframes jellyMove { 0% { transform: translateY(110vh) scale(0.9); opacity:0;} 15% { opacity:0.6; transform: translateY(90vh) scale(1.1); } 45% { transform: translateY(65vh) scale(1.1); } 100% { transform: translateY(-20vh) scale(1); opacity:0; } }
 
-        .light-ray { position: absolute; top: -20%; width: 50%; height: 150%; background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 80%); transform: rotate(25deg); pointer-events: none; mix-blend-mode: overlay; animation: raySway 15s ease-in-out infinite alternate; filter: blur(30px);}
+        .light-ray { position: absolute; top: -20%; width: 50%; height: 150%; background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, transparent 80%); transform: rotate(25deg); pointer-events: none; mix-blend-mode: overlay; animation: raySway 15s ease-in-out infinite alternate; filter: blur(30px);}
         body.dark-mode .light-ray { background: linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 0%, transparent 80%); }
         @keyframes raySway { 0% { transform: rotate(20deg) translateX(-10%); } 100% { transform: rotate(35deg) translateX(10%); } }
 
@@ -128,15 +117,8 @@
             background: var(--glass-bg); backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%);
             border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem;
             box-shadow: var(--glass-shadow), var(--glass-highlight); color: var(--text-secondary);
-            opacity: 0; transform: translateY(30px); will-change: transform, opacity;
-            position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(30px); will-change: transform, opacity; position: relative; overflow: hidden;
         }
-        .glass-card::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-20deg); transition: 0.5s; pointer-events: none;
-        }
-        .glass-card:hover::after { left: 150%; }
         .glass-card.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .glass-card:hover { border-color: var(--accent-glow); box-shadow: 0 15px 35px var(--accent-glow), var(--glass-highlight); z-index: 10; }
         
@@ -147,37 +129,39 @@
         }
         .section-title::after { 
             content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); 
-            width: 50px; height: 4px; background: linear-gradient(90deg, var(--accent), var(--success)); 
+            width: 60px; height: 5px; background: linear-gradient(90deg, var(--accent), var(--success)); 
             border-radius: 4px; transition: width 0.3s ease; 
         }
-        .section-title:hover::after { width: 100px; }
+        .section-title:hover::after { width: 120px; }
 
         .btn-interactive { position: relative; outline: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; user-select: none; }
         .btn-interactive:active { transform: scale(0.95) !important; }
         
+        /* Schedule Smart List */
         .smart-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
         .smart-list li {
             display: flex; flex-direction: column; padding: 0.75rem 1rem; border-radius: 1rem; 
             background: rgba(0,0,0,0.02); border: 1px solid transparent; font-weight: 600; 
-            cursor: pointer; transition: all 0.2s ease; position: relative;
+            transition: all 0.2s ease; position: relative; overflow: hidden;
         }
-        body.dark-mode .smart-list li { background: rgba(255,255,255,0.02); }
-        .smart-list li:hover { 
+        body.dark-mode .smart-list li { background: rgba(255,255,255,0.03); }
+        .smart-list li:hover:not(.empty-slot) { 
             background: var(--glass-bg); transform: translateX(5px); 
             border-color: var(--accent-glow); box-shadow: 0 5px 15px rgba(0,0,0,0.05); z-index: 2;
         }
-        .list-header { display: flex; align-items: center; color: var(--text-primary); font-size: 0.9rem; }
-        .list-header::before { content: '✨'; margin-right: 10px; transition: transform 0.3s; opacity: 0.5; font-size: 1rem;}
-        .smart-list li:hover .list-header::before { transform: rotate(20deg) scale(1.2); opacity: 1; text-shadow: 0 0 8px var(--accent); }
 
-        .today-highlight { border: 2px solid var(--accent) !important; background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent); }
-        .current-lesson { 
+        /* Lesson Status Highlights */
+        .status-badge { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; position: absolute; right: 1rem; top: 1rem; }
+        .lesson-done { opacity: 0.5; filter: grayscale(100%); }
+        .lesson-current { 
             background: linear-gradient(90deg, rgba(14, 165, 233, 0.15), transparent) !important; 
             border-left: 4px solid var(--accent) !important; 
-            box-shadow: 0 4px 15px var(--accent-glow); animation: pulseLive 2s infinite; 
-            transform: scale(1.02); z-index: 5;
+            box-shadow: 0 4px 15px var(--accent-glow); transform: scale(1.02); z-index: 5;
         }
-        @keyframes pulseLive { 0%, 100% { border-left-color: var(--accent); } 50% { border-left-color: var(--success); } }
+        .lesson-current::before { content: ''; position: absolute; left: -4px; top: 0; height: 100%; width: 4px; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulseLive 2s infinite; }
+        .lesson-next { border-left: 4px solid var(--warning) !important; background: linear-gradient(90deg, rgba(245, 158, 11, 0.05), transparent) !important;}
+        
+        @keyframes pulseLive { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* =====================================================================
            5. HEADER & TOP DASHBOARD 
@@ -191,13 +175,12 @@
         }
         .fixed-header.hide { transform: translateY(-100%); }
         
-        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s; background: white; }
+        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--glass-border); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s; background: white; cursor: pointer; }
         .logo-img:hover { transform: scale(1.1) rotate(10deg); border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         
         .icon-btn { background: rgba(0,0,0,0.03); border: 1px solid var(--glass-border); border-radius: 50%; color: var(--text-primary); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; transition: all 0.2s; }
         body.dark-mode .icon-btn { background: rgba(255,255,255,0.05); }
         .icon-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-glow); border-color: var(--accent); }
-        .icon-btn svg { width: 20px; height: 20px; transition: transform 0.2s; }
 
         #dashboard-panel { margin-top: 85px; margin-bottom: 1.5rem; padding: 0.5rem 1rem; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
         #dashboard-panel::-webkit-scrollbar { display: none; }
@@ -221,7 +204,6 @@
         .search-suggest { position: absolute; top: 110%; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 1rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(-10px); transition: all 0.2s; z-index: 50; max-height: 300px; overflow-y: auto;}
         .search-suggest.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .suggest-item { padding: 12px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        body.dark-mode .suggest-item { border-bottom-color: rgba(255,255,255,0.05); }
         .suggest-item:hover { background: rgba(14, 165, 233, 0.1); color: var(--accent); padding-left: 25px; transition: 0.2s;}
         
         .nav-pill { padding: 0.6rem 1.5rem; border-radius: 2rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-secondary); white-space: nowrap; display: flex; align-items: center; gap: 6px;}
@@ -240,15 +222,13 @@
         .gallery-title { color: white; font-weight: 600; font-size: 0.85rem; transform: translateY(10px); transition: transform 0.3s; width: 100%;}
         .gallery-item:hover .gallery-title { transform: translateY(0); }
 
-        .calendar-wrapper { width: 100%; }
-        .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        /* Full 2026 Calendar Styling */
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
         .cal-day-name { font-weight: 800; font-size: 0.75rem; color: var(--text-secondary); padding: 0.5rem 0; opacity: 0.8; }
         .cal-day { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0.5rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; position: relative; }
         .cal-day:hover:not(.empty) { background: var(--glass-bg); border-color: var(--accent); transform: scale(1.1); z-index: 2; box-shadow: var(--glass-shadow); }
         .cal-day.empty { visibility: hidden; }
         .cal-day.today { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 10px var(--accent-glow); }
-        .cal-day.today-red { background: var(--danger); color: white; border-color: var(--danger); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); }
         .cal-day.weekend { color: var(--danger); }
         .cal-day.holiday { color: white; background: var(--danger); }
         .cal-day.holiday:hover { background: #b91c1c; }
@@ -257,7 +237,6 @@
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .shop-item { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
         .shop-item:hover { transform: translateY(-5px); border-color: var(--warning); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
-        .shop-icon { font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
         
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
         .game-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.2rem; padding: 1.2rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; position: relative; overflow: hidden; box-shadow: var(--glass-highlight); }
@@ -266,10 +245,9 @@
         .game-card:hover .game-icon { transform: scale(1.2) rotate(5deg); }
         .game-title { font-weight: 700; font-size: 0.85rem; color: var(--text-primary); line-height: 1.2;}
         .game-badge { position: absolute; top: 8px; right: 8px; font-size: 0.55rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; color: white; text-transform: uppercase; letter-spacing: 0.5px;}
-        .badge-solo { background: var(--accent); } .badge-multi { background: var(--warning); } .badge-bot { background: var(--danger); } .badge-coop { background: var(--purple); }
+        .badge-solo { background: var(--accent); } .badge-multi { background: var(--warning); } .badge-bot { background: var(--danger); }
 
         .skeleton { background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%); background-size: 200% 100%; animation: skeletonLoad 1.5s infinite; border-radius: 1rem; }
-        body.dark-mode .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%); background-size: 200% 100%; }
         @keyframes skeletonLoad { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         /* =====================================================================
@@ -280,7 +258,6 @@
         .modal-content { background: var(--bg-color); background-image: var(--bg-gradient); padding: 2rem; border-radius: 1.5rem; width: 90%; max-width: 450px; border: 1px solid var(--glass-border); position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3), var(--glass-highlight); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); max-height: 90vh; overflow-y: auto; }
         .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
         .btn-close { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.05); color: var(--text-primary); border: none; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; cursor: pointer; transition: all 0.2s; z-index: 10;}
-        body.dark-mode .btn-close { background: rgba(255,255,255,0.1); }
         .btn-close:hover { background: var(--danger); color: white; transform: rotate(90deg); }
 
         .id-card-perspective { perspective: 1500px; width: 90%; max-width: 350px; }
@@ -300,10 +277,9 @@
         
         .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; align-items: flex-end; }
         @media(max-width: 640px) { .toast-container { left: 20px; bottom: 80px; align-items: stretch; } }
-        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent); color: var(--text-primary); padding: 12px 20px; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .toast { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-left: 4px solid var(--accent); color: var(--text-primary); padding: 12px 20px; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; pointer-events: auto;}
         .toast.error { border-left-color: var(--danger); } .toast.success { border-left-color: var(--success); } .toast.warning { border-left-color: var(--warning); }
         @keyframes slideIn { from{transform:translateY(20px) scale(0.9); opacity:0;} to{transform:translateY(0) scale(1); opacity:1;} }
-        @keyframes fadeOut { to{transform:translateY(-20px) scale(0.9); opacity:0;} }
 
         /* Enhanced FABs */
         .fab-container { position: fixed; bottom: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 400; transition: transform 0.3s; transform: translateY(150px);}
@@ -316,15 +292,15 @@
 <body>
     <div id="scroll-progress"></div>
 
+    <!-- 3D Background Ecosystem -->
     <div id="ocean-ecosystem" aria-hidden="true">
         <div class="depth-bg" id="layer-bg"></div>
-        <div class="depth-mid" id="layer-mid"></div>
         <div class="depth-fg" id="layer-fg"></div>
         <div class="light-ray"></div>
         <div class="light-ray" style="left:40%; animation-delay:-5s; opacity: 0.5; width: 40%;"></div>
     </div>
 
-    <!-- HEADER (Aman) -->
+    <!-- HEADER (Aman - Sesuai Aturan) -->
     <header id="fixed-header" class="fixed-header glass-panel rounded-none border-t-0 border-x-0">
         <div class="flex items-center gap-3">
             <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo SMP" class="logo-img btn-interactive" id="btn-home" title="Kembali ke atas" onerror="this.src='https://ui-avatars.com/api/?name=SMP&background=0ea5e9&color=fff'" />
@@ -338,7 +314,7 @@
             </div>
         </div>
         <div class="flex items-center gap-2 md:gap-3">
-            <button class="icon-btn btn-interactive hidden md:flex" id="btn-command" title="Command Palette (Ctrl+K)">
+            <button class="icon-btn btn-interactive hidden md:flex" id="btn-command" title="Pencarian (Cepat)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </button>
             <button class="icon-btn btn-interactive" id="btn-settings" title="Pengaturan">
@@ -351,7 +327,7 @@
         </div>
     </header>
 
-    <!-- Context Menu Mobile -->
+    <!-- Context Menu -->
     <div id="context-menu-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[2400] hidden opacity-0 transition-opacity"></div>
     <div id="context-menu">
         <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4 sm:hidden"></div>
@@ -365,6 +341,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 pb-20">
         
+        <!-- Dashboard Atas -->
         <div id="dashboard-panel" class="custom-scrollbar tilt-element">
             <div class="glass-panel dash-card btn-interactive" title="Level Ekspedisi Anda">
                 <span class="text-[0.65rem] font-bold uppercase tracking-widest opacity-80 mb-1">Level Ekspedisi</span>
@@ -384,82 +361,76 @@
             </div>
         </div>
 
+        <!-- Hero / Judul Singkat -->
         <header class="text-center mb-10 tilt-element">
             <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black text-[var(--text-primary)] mb-2 drop-shadow-sm tracking-tight">Ekspedisi 9H</h1>
             <p class="font-mono text-xs md:text-sm font-bold text-[var(--accent)] uppercase tracking-[0.2em] bg-[var(--glass-bg)] inline-block px-4 py-1.5 rounded-full border border-[var(--glass-border)] shadow-sm">Portal Utama Ultimate</p>
         </header>
 
+        <!-- Pencarian Super -->
         <div class="search-wrapper tilt-element relative">
-            <input type="text" id="global-search" class="search-input" placeholder="Cari kru, jadwal, tugas, atau utilitas..." autocomplete="off">
+            <input type="text" id="global-search" class="search-input" placeholder="Cari kru, mapel, game, utilitas..." autocomplete="off">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <svg class="search-clear" id="search-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             
             <div id="search-suggest" class="search-suggest">
                 <div class="px-4 py-2 text-xs font-bold opacity-60 uppercase tracking-widest border-b border-[var(--glass-border)] flex justify-between">
-                    <span>Riwayat & Sugesti</span>
-                    <span id="clear-history" class="cursor-pointer hover:text-[var(--danger)]">Hapus</span>
+                    <span>Hasil Pencarian Cepat</span>
                 </div>
                 <div id="suggest-list"></div>
             </div>
-            <div id="empty-state" class="hidden text-center p-6 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-2xl mt-4">
-                <span class="text-4xl block mb-2">🏝️</span>
-                <h3 class="font-bold text-[var(--text-primary)]">Tidak ditemukan</h3>
-                <p class="text-sm opacity-70">Coba kata kunci lain atau periksa ejaan.</p>
-            </div>
         </div>
 
+        <!-- Navigasi Utama (Tab Section) -->
         <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-4 mb-8 justify-start md:justify-center px-1 snap-x" id="main-nav">
             <button class="nav-pill active btn-interactive snap-start" data-target="semua">🌊 Semua Panel</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="pelajaran-section">📘 Jadwal</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="pelajaran-section">📘 Jadwal & Waktu</button>
             <button class="nav-pill btn-interactive snap-start" data-target="organization-section">👥 Struktur & Piket</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="calendar-section">📅 Kalender</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="gallery-section">📸 Galeri</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="shop-section">🛍️ Toko</button>
-            <button class="nav-pill btn-interactive snap-start" data-target="utilities-section">🛠️ Utilitas</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="calendar-section">📅 Kalender 2026</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="gallery-section">📸 Galeri Premium</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="shop-section">🛍️ Toko Mutiara</button>
+            <button class="nav-pill btn-interactive snap-start" data-target="utilities-section">🛠️ Pusat Utilitas</button>
             <button class="nav-pill btn-interactive snap-start border-[var(--warning)] text-[var(--warning)]" data-target="play-zone-section">🎮 Play Zone</button>
         </div>
 
+        <!-- KONTEN UTAMA -->
         <div id="content-container">
             
-            <!-- Jadwal Pelajaran (Tata Letak Kembali Seperti Lama) -->
-            <section id="pelajaran-section" class="mb-16 scroll-mt-24 content-section">
+            <!-- SECTION 1: JADWAL PELAJARAN (Dirombak Total) -->
+            <section id="pelajaran-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="jadwal pelajaran waktu mapel guru istirahat">
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 tilt-element">
-                    <h2 class="section-title mb-0">Peta Akademik</h2>
+                    <h2 class="section-title mb-0">Peta Akademik & Waktu</h2>
                     <div class="flex gap-2">
-                        <button id="btn-jump-today" class="bg-[var(--accent)] text-white px-4 py-2 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shadow-md btn-interactive">
-                            📍 Hari Ini
-                        </button>
-                        <button id="btn-copy-today" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] px-4 py-2 rounded-full font-bold text-sm hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all flex items-center gap-2 shadow-sm btn-interactive">
-                            📋 Salin
-                        </button>
+                        <button id="btn-jump-today" class="bg-[var(--accent)] text-white px-4 py-2 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shadow-md btn-interactive">📍 Ke Hari Ini</button>
                     </div>
                 </div>
-                <div class="mb-6 text-center text-sm font-bold opacity-80" id="live-indicator-text">
-                    <span class="w-2 h-2 inline-block rounded-full bg-[var(--success)] animate-pulse mr-1"></span> Sinkronisasi Jadwal Aktif
+                <div class="mb-6 text-center text-sm font-bold opacity-80">
+                    <span class="w-2 h-2 inline-block rounded-full bg-[var(--success)] animate-pulse mr-1"></span> Deteksi Waktu & Mapel Berjalan
                 </div>
-                <!-- Tempat rendering jadwal (Disesuaikan ke gaya lama) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="pelajaran-grid"></div>
+                
+                <!-- Grid Jadwal -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="pelajaran-grid"></div>
             </section>
 
-            <!-- Struktur, Piket, Seragam -->
-            <section id="organization-section" class="mb-16 scroll-mt-24 content-section">
+            <!-- SECTION 2: STRUKTUR & PIKET -->
+            <section id="organization-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="struktur komando organisasi piket rotasi kebersihan seragam atribut">
                 <h2 class="section-title tilt-element" id="struktur-anchor">Struktur Komando</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10" id="org-grid"></div>
                 
                 <h2 class="section-title tilt-element" id="piket-anchor">Rotasi Kebersihan</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10" id="piket-grid"></div>
 
-                <h2 class="section-title tilt-element" id="pakaian-anchor">Protokol Atribut</h2>
+                <h2 class="section-title tilt-element" id="pakaian-anchor">Protokol Atribut (Seragam)</h2>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="pakaian-grid"></div>
             </section>
 
-            <!-- Kalender Realtime -->
-            <section id="calendar-section" class="mb-16 scroll-mt-24 content-section">
-                <h2 class="section-title tilt-element">Kalender <span id="cal-main-year">2026</span></h2>
-                <div class="glass-card tilt-element !p-6 max-w-4xl mx-auto search-target">
+            <!-- SECTION 3: KALENDER 2026 -->
+            <section id="calendar-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="kalender tanggal libur 2026">
+                <h2 class="section-title tilt-element">Kalender 2026</h2>
+                <div class="glass-card tilt-element !p-6 max-w-4xl mx-auto">
                     <div class="flex justify-between items-center mb-6">
                         <button class="icon-btn btn-interactive" id="btn-cal-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-                        <h3 class="font-display text-2xl md:text-3xl font-black text-[var(--text-primary)]" id="cal-month-title">Bulan Tahun</h3>
+                        <h3 class="font-display text-2xl md:text-3xl font-black text-[var(--text-primary)]" id="cal-month-title">Bulan 2026</h3>
                         <button class="icon-btn btn-interactive" id="btn-cal-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
                     </div>
                     
@@ -470,48 +441,39 @@
                     <div class="cal-grid" id="calendar-grid"></div>
                     
                     <div class="mt-6 flex flex-wrap gap-4 text-xs font-bold justify-center opacity-80 border-t border-[var(--glass-border)] pt-4">
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--danger)]"></span> Libur/Tanggal Merah</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--accent)]"></span> Hari Ini (Biru)</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--danger)] shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span> Hari Ini (Libur)</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--danger)]"></span> Libur Nasional / Weekend</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[var(--accent)]"></span> Hari Ini</span>
                     </div>
                     <div id="cal-event-detail" class="mt-4 text-center text-sm font-bold text-[var(--danger)] min-h-[20px]"></div>
                 </div>
             </section>
 
-            <!-- Galeri Bersih (Hanya Official/Placeholder yang Aman) -->
-            <section id="gallery-section" class="mb-16 scroll-mt-24 content-section">
+            <!-- SECTION 4: GALERI -->
+            <section id="gallery-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="galeri foto gambar kenangan album">
                 <div class="flex justify-between items-center mb-6 tilt-element">
-                    <h2 class="section-title mb-0">Galeri 9H</h2>
+                    <h2 class="section-title mb-0">Galeri 9H Premium</h2>
                     <span class="text-xs font-bold bg-[var(--glass-bg)] border border-[var(--glass-border)] px-3 py-1 rounded-full">Album Resmi</span>
                 </div>
-                <div class="gallery-grid search-target" id="gallery-grid">
-                    <!-- JS Injected -->
-                </div>
+                <div class="gallery-grid" id="gallery-grid"></div>
             </section>
 
-            <!-- Toko -->
-            <section id="shop-section" class="mb-16 scroll-mt-24 content-section">
+            <!-- SECTION 5: TOKO -->
+            <section id="shop-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="toko shop mutiara beli item badge booster">
                 <div class="flex flex-col items-center mb-8 glass-panel p-6 text-center relative overflow-hidden tilt-element rounded-3xl border border-[var(--warning)] border-opacity-50">
                     <div class="absolute inset-0 bg-gradient-to-br from-[var(--warning)] to-transparent opacity-10"></div>
                     <h2 class="font-display text-3xl md:text-5xl font-black mb-2 text-[var(--warning)] drop-shadow-sm">Pasar Mutiara 🛍️</h2>
-                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Tukarkan Mutiara (<span class="text-[var(--warning)] text-lg mx-1">🐚</span>) untuk Badge Spesial dan Multiplier XP!</p>
+                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Tukarkan Mutiara (<span class="text-[var(--warning)] mx-1">🐚</span>) untuk Badge Spesial dan Multiplier XP di ID Card Anda!</p>
                 </div>
-                
-                <div class="flex gap-2 mb-6 justify-start md:justify-center overflow-x-auto pb-2 custom-scrollbar px-1 snap-x">
-                    <button class="nav-pill active filter-shop snap-start" data-filter="all">Semua</button>
-                    <button class="nav-pill filter-shop snap-start" data-filter="badge">🏅 Badges</button>
-                    <button class="nav-pill filter-shop snap-start" data-filter="boost">🚀 Boosters</button>
-                </div>
-
                 <div class="shop-grid" id="shop-grid"></div>
             </section>
 
-            <!-- Utilitas -->
-            <section id="utilities-section" class="mb-16 scroll-mt-24 content-section">
+            <!-- SECTION 6: UTILITAS -->
+            <section id="utilities-section" class="mb-16 scroll-mt-24 content-section search-target" data-search="utilitas pomodoro fokus misi jurnal catatan ekstra link random gacha bagikan canva chatgpt">
                 <h2 class="section-title tilt-element">Pusat Utilitas</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <div class="glass-card flex flex-col tilt-element search-target h-full">
+                    <!-- Pomodoro -->
+                    <div class="glass-card flex flex-col tilt-element h-full">
                         <div class="flex justify-between items-center mb-4 border-b border-[var(--glass-border)] pb-2">
                             <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Fokus Misi ⏱️</h3>
                             <span class="text-xs font-bold opacity-70 bg-black/5 px-2 py-1 rounded-md">25 Menit</span>
@@ -522,26 +484,27 @@
                             <span id="pomo-display" class="text-4xl font-mono font-black text-[var(--accent)] relative z-10 drop-shadow-sm">25:00</span>
                             <button id="btn-pomo" class="bg-[var(--text-primary)] text-[var(--bg-color)] w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform btn-interactive relative z-10 shadow-lg text-xl">▶</button>
                         </div>
-                        <div class="relative">
-                            <input type="text" id="task-input" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 pr-10 rounded-xl text-[var(--text-primary)] outline-none mb-3 font-medium text-sm transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik tugas & Enter...">
-                            <span class="absolute right-3 top-3 text-xs opacity-50 font-bold hidden md:block">↵</span>
+                        <div class="relative mt-auto">
+                            <input type="text" id="task-input" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 pr-10 rounded-xl text-[var(--text-primary)] outline-none mb-3 font-medium text-sm transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik tugas cepat & Enter...">
                         </div>
                         <div id="task-list" class="flex-grow overflow-y-auto max-h-[160px] custom-scrollbar space-y-2 pr-1"></div>
                     </div>
 
-                    <div class="glass-card flex flex-col tilt-element search-target h-full">
+                    <!-- Notes -->
+                    <div class="glass-card flex flex-col tilt-element h-full">
                         <div class="flex justify-between items-center mb-3 border-b border-[var(--glass-border)] pb-2">
                             <h3 class="font-display text-xl text-[var(--text-primary)] font-bold">Jurnal Lokal 📝</h3>
                             <span id="save-status" class="text-[0.65rem] bg-[var(--success)] text-white px-2 py-1 rounded-full font-bold shadow-sm">Tersimpan</span>
                         </div>
-                        <textarea id="personal-note" class="w-full flex-grow min-h-[200px] bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik catatan rahasia di sini... tersimpan aman di perangkat."></textarea>
+                        <textarea id="personal-note" class="w-full flex-grow min-h-[200px] bg-[var(--bg-color)] border border-[var(--glass-border)] p-3 rounded-xl text-[var(--text-primary)] font-medium outline-none resize-none custom-scrollbar transition-colors focus:border-[var(--accent)] shadow-inner" placeholder="Ketik catatan rahasia di sini... tersimpan aman secara offline di perangkat ini."></textarea>
                         <div class="flex justify-between items-center mt-3 px-1">
                             <span class="text-[0.65rem] font-bold opacity-50" id="note-length">0 Karakter</span>
-                            <button id="btn-copy-note" class="text-[0.7rem] font-bold text-[var(--bg-color)] bg-[var(--text-primary)] px-3 py-1 rounded-full hover:scale-105 btn-interactive shadow-sm">Salin Teks</button>
+                            <button id="btn-copy-note" class="text-[0.7rem] font-bold text-[var(--bg-color)] bg-[var(--text-primary)] px-3 py-1 rounded-full hover:scale-105 btn-interactive shadow-sm">Salin</button>
                         </div>
                     </div>
 
-                    <div class="glass-card flex flex-col tilt-element search-target h-full">
+                    <!-- Extra Links & Tools -->
+                    <div class="glass-card flex flex-col tilt-element h-full">
                         <h3 class="font-display text-xl mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] font-bold">Akses Ekstra 🚀</h3>
                         <div class="grid grid-cols-2 gap-3 mb-4">
                             <a href="https://canva.com" target="_blank" rel="noopener" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 rounded-xl text-center font-bold text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all hover:-translate-y-1 shadow-sm btn-interactive">🎨 Canva</a>
@@ -551,7 +514,7 @@
                         </div>
                         <div class="mt-auto pt-4 border-t border-[var(--glass-border)]">
                             <button id="btn-ocean-sound" class="w-full py-3 bg-gradient-to-r from-[var(--text-secondary)] to-[var(--text-primary)] text-white rounded-xl font-bold hover:shadow-lg transition-all btn-interactive flex justify-center items-center gap-2">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg> <span id="text-ocean-sound">Putar Binaural Ombak</span>
+                                <span id="icon-ocean-sound">🌊</span> <span id="text-ocean-sound">Nyalakan Suara Laut</span>
                             </button>
                         </div>
                     </div>
@@ -559,20 +522,12 @@
                 </div>
             </section>
             
-            <!-- PLAY ZONE -->
-            <section id="play-zone-section" class="mb-20 scroll-mt-24 content-section">
+            <!-- SECTION 7: PLAY ZONE (Games Diperbanyak & Mekanik Berbeda) -->
+            <section id="play-zone-section" class="mb-20 scroll-mt-24 content-section search-target" data-search="game play zone main permainan arcade puzzle math clicker">
                 <div class="flex flex-col items-center mb-8 glass-panel p-6 text-center relative overflow-hidden tilt-element rounded-3xl">
                     <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--purple)] opacity-10"></div>
                     <h2 class="font-display text-3xl md:text-5xl font-black mb-2 text-[var(--text-primary)] drop-shadow-sm">🎮 Zona Arcade 9H</h2>
-                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Mainkan <span class="text-[var(--accent)] text-lg mx-1">64</span> Mini-Games ringan untuk rileks dan kumpulkan Mutiara!</p>
-                </div>
-                
-                <div class="flex gap-2 mb-6 justify-start md:justify-center overflow-x-auto pb-2 custom-scrollbar px-1 snap-x" id="game-filters">
-                    <button class="nav-pill px-4 py-1.5 text-xs active filter-btn-game snap-start" data-filter="all">Semua</button>
-                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="solo">👤 Solo</button>
-                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="bot">🤖 Vs Bot</button>
-                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start" data-filter="multi">⚔️ Multi</button>
-                    <button class="nav-pill px-4 py-1.5 text-xs filter-btn-game snap-start text-[var(--danger)] border-[var(--danger)]" data-filter="fav">❤️ Favorit</button>
+                    <p class="text-xs md:text-sm font-bold opacity-80 max-w-xl">Mainkan berbagai jenis Mini-Games (Clicker, Math, Reaction, Memory) untuk kumpulkan XP dan Mutiara!</p>
                 </div>
 
                 <div id="game-skeleton" class="game-grid mb-6">
@@ -585,14 +540,16 @@
         </div>
     </main>
 
-    <!-- FABs -->
+    <!-- FLOATING ACTION BUTTONS -->
     <div class="fab-container" id="fab-left-container">
-        <button id="fab-today" class="fab-btn text-[var(--warning)] border-[var(--warning)] border-opacity-50" title="Klik 1x: Jadwal | 2x: Piket | 3x: Seragam">HARI<br>INI</button>
-        <button id="fab-top" class="fab-btn" title="Kembali ke Atas"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
-        <button id="fab-bottom" class="fab-btn" title="Gulir ke Bawah"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+        <button id="fab-today" class="fab-btn text-[var(--warning)] border-[var(--warning)] border-opacity-50 shadow-[0_0_15px_rgba(245,158,11,0.3)]" title="Lompat ke Jadwal Hari Ini">HARI<br>INI</button>
+        <button id="fab-top" class="fab-btn" title="Kembali ke Atas">⬆️</button>
+        <button id="fab-bottom" class="fab-btn" title="Ke Paling Bawah">⬇️</button>
     </div>
 
     <!-- MODALS -->
+
+    <!-- 1. ID Card Profile 3D -->
     <div id="modal-idcard-3d" class="modal-overlay">
         <div class="id-card-perspective">
             <div class="id-card-tilt" id="main-id-card">
@@ -608,19 +565,19 @@
                     
                     <div class="flex justify-center items-center gap-2 mb-1" style="transform: translateZ(30px);">
                         <h2 id="idcard-name" class="font-display text-2xl font-black text-[var(--text-primary)]">Nama</h2>
-                        <span id="idcard-shop-badge" class="text-sm hidden" title="Badge Toko"></span>
+                        <span id="idcard-shop-badge" class="text-lg hidden" title="Badge Spesial"></span>
                     </div>
                     <p id="idcard-role" class="text-[0.65rem] font-bold text-[var(--accent)] uppercase tracking-[0.2em] mb-5" style="transform: translateZ(20px);">Peran</p>
                     
                     <div class="flex justify-around mb-5 text-center border-t border-b border-[var(--glass-border)] py-3 bg-[var(--glass-bg)] rounded-xl" style="transform: translateZ(15px);">
                         <div>
-                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Kecerdasan</p>
-                            <p class="text-xl font-black text-[var(--text-primary)]" id="idcard-int">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Level</p>
+                            <p class="text-xl font-black text-[var(--text-primary)]" id="idcard-lvl">0</p>
                         </div>
                         <div class="border-l border-[var(--glass-border)]"></div>
                         <div>
-                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Kreativitas</p>
-                            <p class="text-xl font-black text-[var(--warning)]" id="idcard-cre">0</p>
+                            <p class="text-[0.6rem] opacity-70 uppercase font-bold tracking-wider">Afinitas</p>
+                            <p class="text-xl font-black text-[var(--warning)]" id="idcard-cre">🌊</p>
                         </div>
                     </div>
 
@@ -628,7 +585,10 @@
                     
                     <div class="space-y-2" style="transform: translateZ(10px);">
                         <a href="https://www.instagram.com/historycalnine_2526?igsh=dWh6NWNjeHM3dW1m" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-md border border-transparent hover:border-white/50">
-                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram 9H
+                            Instagram 9H
+                        </a>
+                        <a href="#" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg font-bold text-white text-sm transition-transform hover:scale-[1.02] bg-black shadow-md border border-transparent hover:border-white/50 opacity-50 cursor-not-allowed">
+                            TikTok (Segera)
                         </a>
                     </div>
                 </div>
@@ -636,7 +596,7 @@
         </div>
     </div>
 
-    <!-- GAME ENGINE MODAL -->
+    <!-- 2. Game Engine Modal -->
     <div id="game-engine-modal" class="modal-overlay">
         <div class="modal-content !max-w-2xl h-[85vh] flex flex-col p-4 md:p-6 bg-[var(--bg-color)]">
             <div class="flex justify-between items-start border-b border-[var(--glass-border)] pb-3 mb-4">
@@ -644,7 +604,6 @@
                     <div class="flex items-center gap-2 mb-1">
                         <span id="engine-badge" class="game-badge relative top-0 right-0 !text-[0.6rem] !px-2 !py-0.5">SOLO</span>
                         <h3 id="engine-title" class="font-display text-xl md:text-2xl font-black text-[var(--text-primary)]">Judul</h3>
-                        <button id="btn-fav-game" class="text-xl opacity-50 hover:opacity-100 transition-opacity btn-interactive">🤍</button>
                     </div>
                     <p id="engine-desc" class="text-xs md:text-sm font-medium opacity-70">Deskripsi</p>
                 </div>
@@ -653,24 +612,25 @@
             
             <div id="game-hud" class="flex justify-between w-full px-5 py-3 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl text-sm font-black mb-4 hidden shadow-sm">
                 <span class="text-[var(--accent)] flex items-center gap-2 text-lg">🏆 <span id="game-score">0</span></span>
-                <span class="text-[var(--danger)] flex items-center gap-2 text-lg">⏱️ <span id="game-time">15</span>s</span>
+                <span class="text-[var(--danger)] flex items-center gap-2 text-lg">⏱️ <span id="game-time">20</span>s</span>
             </div>
             
             <div id="game-stage" class="flex-1 relative rounded-xl overflow-hidden bg-white/40 dark:bg-black/40 border border-[var(--glass-border)] flex flex-col items-center justify-center shadow-inner select-none touch-none"></div>
         </div>
     </div>
 
-    <!-- SETTINGS MODAL -->
+    <!-- 3. Settings Modal -->
     <div id="modal-settings" class="modal-overlay">
         <div class="modal-content !max-w-sm">
             <button class="btn-close">&times;</button>
             <h3 class="font-display text-xl font-black mb-5 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex items-center gap-2">⚙️ Pengaturan</h3>
             <div class="space-y-2 text-sm font-semibold">
                 <div class="flex justify-between items-center p-3 glass-panel rounded-lg hover:bg-[var(--glass-bg)] transition-colors">
-                    <span>🎨 Tema Tampilan</span>
+                    <span>🎨 Tema Layar</span>
                     <select id="sel-theme" class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-md px-2 py-1 outline-none text-[var(--text-primary)] cursor-pointer text-xs font-bold">
                         <option value="light">Ocean Light</option>
                         <option value="dark">Deep Sea Dark</option>
+                        <option value="zen">Fokus (Zen)</option>
                     </select>
                 </div>
                 <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
@@ -682,14 +642,17 @@
                     <input type="checkbox" id="toggle-haptic" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
                 </label>
                 <label class="flex justify-between items-center p-3 glass-panel rounded-lg cursor-pointer hover:bg-[var(--glass-bg)] transition-colors btn-interactive">
-                    <span>🐟 Animasi Laut</span>
+                    <span>🐟 Animasi Partikel Laut</span>
                     <input type="checkbox" id="toggle-motion" class="w-4 h-4 accent-[var(--accent)] pointer-events-none">
                 </label>
+                <div class="pt-4 border-t border-[var(--glass-border)] mt-4">
+                    <button id="btn-reset-data" class="w-full py-2 rounded-lg font-bold text-xs bg-[var(--danger)] text-white hover:bg-red-700 transition-colors btn-interactive">⚠️ Reset Progress & Data</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- SHOP CONFIRM MODAL -->
+    <!-- 4. Shop Confirm Modal -->
     <div id="modal-shop-confirm" class="modal-overlay">
         <div class="modal-content !max-w-xs text-center p-6">
             <div class="text-5xl mb-4" id="shop-confirm-icon">🛍️</div>
@@ -706,25 +669,30 @@
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script>
+        /**
+         * PORTAL 9H ULTIMATE ENGINE
+         * Architectured for stability, performance, and rich features.
+         */
         const App = (() => {
+            // --- 1. DATA MODELS ---
             const Data = {
                 kru: [
-                    { id: "Andika", nama: "M. Andika Kostradnanda", g: "L", role: "Ketua Kelas", core: true }, { id: "Belva", nama: "Belva Ramania", g: "P", role: "Wakil Kelas", core: true },
-                    { id: "Gendis", nama: "Gendis Aulia Maharani", g: "P", role: "Bendahara", core: true }, { id: "Zaifa", nama: "Siti Zaifa Zhufairah", g: "P", role: "Bendahara", core: true },
-                    { id: "Rika", nama: "Rika Rismayanti", g: "P", role: "Sekretaris", core: true }, { id: "Diana", nama: "Diana Widyawati R.", g: "P", role: "Sekretaris", core: true },
-                    { id: "Yana", nama: "Yana Nuryana", g: "L", role: "Keamanan" }, { id: "Suci", nama: "Suci Latifah O.", g: "P", role: "Keamanan" },
-                    { id: "Rizky", nama: "Rizky Arief Fadillah", g: "L", role: "Perpustakaan" }, { id: "Vienard", nama: "Vienard Caizhi N.I.", g: "L", role: "Perpustakaan" },
-                    { id: "Idham", nama: "M. Idham Al-Hafidz", g: "L", role: "Kerohanian" }, { id: "Khayra", nama: "Khayra Azdkia Haifa", g: "P", role: "Kerohanian" },
-                    { id: "Ricky", nama: "Ricky Adly Maulana", g: "L", role: "Kepramukaan" }, { id: "Nadia", nama: "Nadia Ramadina", g: "P", role: "Kepramukaan" },
-                    { id: "Apri", nama: "Apriyanto", g: "L", role: "Olahraga" }, { id: "SyifaN", nama: "Syifa Nurdini H.", g: "P", role: "Olahraga" },
-                    { id: "Azhira", nama: "Azhira Vienolia", g: "P", role: "Absensi" }, { id: "Salma", nama: "Salma Nurdestiani", g: "P", role: "Absensi" },
-                    { id: "Fazri", nama: "Fazri Indra N.", g: "L", role: "Kru" }, { id: "Adi", nama: "Adi Muhamad F.", g: "L", role: "Kru" },
-                    { id: "Faiq", nama: "M. Ainur Okta Faiq", g: "L", role: "Kru" }, { id: "Kazril", nama: "Kazril Cahyarahim", g: "L", role: "Kru" },
-                    { id: "Rama", nama: "Rama Kurniawan", g: "L", role: "Kru" }, { id: "Salsabila", nama: "Salsabila Nizma", g: "P", role: "OSIS" },
-                    { id: "Dinda", nama: "Dinda Aulia W.", g: "P", role: "Kru" }, { id: "Zalfa", nama: "Siti Zalfa", g: "P", role: "Kru" },
-                    { id: "Geane", nama: "Geanne Sukma", g: "P", role: "Kru" }, { id: "Aul", nama: "Sri Aulia Ningsih", g: "P", role: "Kru" },
-                    { id: "Melisa", nama: "Melisa Rahmayanti", g: "P", role: "Kru" }, { id: "SyifaA", nama: "Syifa Aulia", g: "P", role: "Kru" },
-                    { id: "RizkyM", nama: "M. Rizky Ramdhani", g: "L", role: "Kru" }, { id: "Nadzar", nama: "Nadzar Fazri G.", g: "L", role: "Kru" }
+                    { id: "Andika", nama: "M. Andika Kostradnanda", role: "Ketua Kelas", core: true }, { id: "Belva", nama: "Belva Ramania", role: "Wakil Kelas", core: true },
+                    { id: "Gendis", nama: "Gendis Aulia Maharani", role: "Bendahara", core: true }, { id: "Zaifa", nama: "Siti Zaifa Zhufairah", role: "Bendahara", core: true },
+                    { id: "Rika", nama: "Rika Rismayanti", role: "Sekretaris", core: true }, { id: "Diana", nama: "Diana Widyawati R.", role: "Sekretaris", core: true },
+                    { id: "Yana", nama: "Yana Nuryana", role: "Keamanan" }, { id: "Suci", nama: "Suci Latifah O.", role: "Keamanan" },
+                    { id: "Rizky", nama: "Rizky Arief Fadillah", role: "Perpustakaan" }, { id: "Vienard", nama: "Vienard Caizhi N.I.", role: "Perpustakaan" },
+                    { id: "Idham", nama: "M. Idham Al-Hafidz", role: "Kerohanian" }, { id: "Khayra", nama: "Khayra Azdkia Haifa", role: "Kerohanian" },
+                    { id: "Ricky", nama: "Ricky Adly Maulana", role: "Kepramukaan" }, { id: "Nadia", nama: "Nadia Ramadina", role: "Kepramukaan" },
+                    { id: "Apri", nama: "Apriyanto", role: "Olahraga" }, { id: "SyifaN", nama: "Syifa Nurdini H.", role: "Olahraga" },
+                    { id: "Azhira", nama: "Azhira Vienolia", role: "Absensi" }, { id: "Salma", nama: "Salma Nurdestiani", role: "Absensi" },
+                    { id: "Fazri", nama: "Fazri Indra N.", role: "Kru" }, { id: "Adi", nama: "Adi Muhamad F.", role: "Kru" },
+                    { id: "Faiq", nama: "M. Ainur Okta Faiq", role: "Kru" }, { id: "Kazril", nama: "Kazril Cahyarahim", role: "Kru" },
+                    { id: "Rama", nama: "Rama Kurniawan", role: "Kru" }, { id: "Salsabila", nama: "Salsabila Nizma", role: "OSIS" },
+                    { id: "Dinda", nama: "Dinda Aulia W.", role: "Kru" }, { id: "Zalfa", nama: "Siti Zalfa", role: "Kru" },
+                    { id: "Geane", nama: "Geanne Sukma", role: "Kru" }, { id: "Aul", nama: "Sri Aulia Ningsih", role: "Kru" },
+                    { id: "Melisa", nama: "Melisa Rahmayanti", role: "Kru" }, { id: "SyifaA", nama: "Syifa Aulia", role: "Kru" },
+                    { id: "RizkyM", nama: "M. Rizky Ramdhani", role: "Kru" }, { id: "Nadzar", nama: "Nadzar Fazri G.", role: "Kru" }
                 ],
                 piket: [
                     { hari: "Senin", list: ["Azhira", "Salma", "Khayra", "Diana", "Rama", "Fazri"] },
@@ -733,32 +701,39 @@
                     { hari: "Kamis", list: ["Zalfa", "Geane", "Aul", "Faiq", "Adi", "Yana"] },
                     { hari: "Jumat", list: ["Melisa", "Nadia", "SyifaA", "Kazril", "Vienard", "RizkyM"] }
                 ],
+                // Jadwal spesifik sesuai prompt. Note: Jumat TIDAK ADA Pramuka, selesai jam 12:00.
                 pelajaran: [
-                    { hari: "Senin", list: [{t:"06:30-06:50", m:"Upacara / Pembiasaan", g:""}, {t:"06:50-08:10", m:"PJOK", g:"Drs. Priyo Edy Hariyanto"}, {t:"08:10-09:30", m:"Seni Budaya", g:"Amsor Adiwirya, S.Pd."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"11:20-12:00", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"B. Indonesia", g:"Amin, S.Pd."}] },
-                    { hari: "Selasa", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10-09:30", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"Pend. Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"11:20-12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
-                    { hari: "Rabu", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"B. Sunda", g:"Didi Junaedi, S.Pd."}, {t:"08:10-09:30", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-10:40", m:"BP / BK", g:"Anceu Andriani, S.Pd."}, {t:"10:40-12:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}] },
-                    { hari: "Kamis", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10-09:30", m:"B. Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"Informatika", g:"Didin Akbarul Rosyidin, S.Kom"}, {t:"11:20-12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00-12:40", m:"Istirahat 2", br:true}, {t:"12:40-14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
-                    { hari: "Jumat", list: [{t:"06:30-06:50", m:"Pembiasaan", g:""}, {t:"06:50-08:10", m:"B. Indonesia", g:"Amin, S.Pd."}, {t:"08:10-09:30", m:"Pend. Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"09:30-10:00", m:"Istirahat 1", br:true}, {t:"10:00-11:20", m:"B. Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"11:20-12:00", m:"Pulang", br:true}] }
+                    { hari: "Senin", list: [{t:"06:30", e:"06:50", m:"Upacara / Pembiasaan", g:""}, {t:"06:50", e:"08:10", m:"PJOK", g:"Drs. Priyo Edy Hariyanto"}, {t:"08:10", e:"09:30", m:"Seni Budaya", g:"Amsor Adiwirya, S.Pd."}, {t:"09:30", e:"10:00", m:"Istirahat 1", br:true}, {t:"10:00", e:"11:20", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"11:20", e:"12:00", m:"Bahasa Indonesia", g:"Amin, S.Pd."}, {t:"12:00", e:"12:40", m:"Istirahat 2", br:true}, {t:"12:40", e:"14:00", m:"Bahasa Indonesia", g:"Amin, S.Pd."}] },
+                    { hari: "Selasa", list: [{t:"06:30", e:"06:50", m:"Pembiasaan", g:""}, {t:"06:50", e:"08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10", e:"09:30", m:"Bahasa Indonesia", g:"Amin, S.Pd."}, {t:"09:30", e:"10:00", m:"Istirahat 1", br:true}, {t:"10:00", e:"11:20", m:"Pendidikan Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"11:20", e:"12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00", e:"12:40", m:"Istirahat 2", br:true}, {t:"12:40", e:"14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Rabu", list: [{t:"06:30", e:"06:50", m:"Pembiasaan", g:""}, {t:"06:50", e:"08:10", m:"Bahasa Sunda", g:"Didi Junaedi, S.Pd."}, {t:"08:10", e:"09:30", m:"PAIBP", g:"Eri Laelasari Pumama, S.Pd.I."}, {t:"09:30", e:"10:00", m:"Istirahat 1", br:true}, {t:"10:00", e:"10:40", m:"BP / BK", g:"Anceu Andriani, S.Pd."}, {t:"10:40", e:"12:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}, {t:"12:00", e:"12:40", m:"Istirahat 2", br:true}, {t:"12:40", e:"14:00", m:"IPS", g:"Elah Siti Rumailah, S.Pd."}] },
+                    { hari: "Kamis", list: [{t:"06:30", e:"06:50", m:"Pembiasaan", g:""}, {t:"06:50", e:"08:10", m:"Matematika", g:"Nonny Septiana Kartika, S.Pd."}, {t:"08:10", e:"09:30", m:"Bahasa Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"09:30", e:"10:00", m:"Istirahat 1", br:true}, {t:"10:00", e:"11:20", m:"Informatika", g:"Didin Akbarul Rosyidin, S.Kom"}, {t:"11:20", e:"12:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}, {t:"12:00", e:"12:40", m:"Istirahat 2", br:true}, {t:"12:40", e:"14:00", m:"IPA", g:"Hj. Elis Herawati, S.Pd."}] },
+                    { hari: "Jumat", list: [{t:"06:30", e:"06:50", m:"Pembiasaan", g:""}, {t:"06:50", e:"08:10", m:"Bahasa Indonesia", g:"Amin, S.Pd."}, {t:"08:10", e:"09:30", m:"Pendidikan Pancasila", g:"Imas Ela Nurlaela, S.H."}, {t:"09:30", e:"10:00", m:"Istirahat 1", br:true}, {t:"10:00", e:"11:20", m:"Bahasa Inggris", g:"Euis Finanjungsari, S.IP"}, {t:"11:20", e:"12:00", m:"Pulang / Ibadah", br:true}] }
                 ],
-                pakaian: ["Putih Biru + Dasi", "Batik Putih", "Batik Biru", "Baju Muslim", "Seragam Pramuka"],
-                hariIndex: new Date().getDay()
+                pakaian: ["Putih Biru + Dasi", "Batik Putih", "Batik Biru", "Baju Muslim", "Seragam Pramuka"]
             };
 
+            // --- 2. STORAGE & STATE ---
             const Storage = {
-                get: (k, d) => { try{ const v=localStorage.getItem('9h_v4_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
-                set: (k, v) => { try{ localStorage.setItem('9h_v4_'+k, JSON.stringify(v)); }catch(e){} }
+                get: (k, d) => { try{ const v=localStorage.getItem('9h_ul_'+k); return v?JSON.parse(v):d; }catch(e){return d;} },
+                set: (k, v) => { try{ localStorage.setItem('9h_ul_'+k, JSON.stringify(v)); }catch(e){} },
+                clear: () => { 
+                    Object.keys(localStorage).forEach(k => { if(k.startsWith('9h_ul_')) localStorage.removeItem(k); });
+                    location.reload(); 
+                }
             };
 
             const State = {
-                level: Storage.get('lvl', 1), xp: Storage.get('xp', 0), pearls: Storage.get('prl', 50), 
+                level: Storage.get('lvl', 1), xp: Storage.get('xp', 0), pearls: Storage.get('prl', 100), 
                 streak: Storage.get('strk', 0), lastCheckin: Storage.get('lck', ""),
                 soundOn: Storage.get('snd', true), hapticOn: Storage.get('hpt', true), motionOn: Storage.get('mtn', true),
-                audioCtx: null, oscOcean: null, searchHistory: Storage.get('shist', []),
-                inventory: Storage.get('inv', []), activeBadge: Storage.get('abadge', null), xpMultiplier: Storage.get('xpm', 1)
+                theme: Storage.get('thm', 'light'), inventory: Storage.get('inv', []), activeBadge: Storage.get('abadge', null), 
+                xpMultiplier: Storage.get('xpm', 1), audioCtx: null, oceanOscillator: null, 
+                tasks: Storage.get('tasks', []), note: Storage.get('note', '')
             };
 
-            const Audio = {
-                init: () => { if(!State.audioCtx && State.soundOn){ try{State.audioCtx = new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } },
+            // --- 3. HARDWARE ENGINES (Audio, Haptic) ---
+            const Hardware = {
+                initAudio: () => { if(!State.audioCtx && State.soundOn){ try{State.audioCtx = new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } },
                 play: (type) => {
                     if(!State.soundOn || !State.audioCtx) return;
                     if(State.audioCtx.state === 'suspended') State.audioCtx.resume();
@@ -771,8 +746,45 @@
                     else if(type==='error'){ osc.type='sawtooth'; osc.frequency.setValueAtTime(250,now); osc.frequency.setValueAtTime(150,now+0.15); gain.gain.setValueAtTime(0.03,now); gain.gain.linearRampToValueAtTime(0,now+0.3); osc.start(now); osc.stop(now+0.3); }
                 },
                 haptic: (pattern) => { if(State.hapticOn && navigator.vibrate) { try{ navigator.vibrate(pattern); }catch(e){} } },
+                toggleOceanSound: () => {
+                    Hardware.initAudio();
+                    if(!State.audioCtx) { UI.toast("Audio tidak didukung browser ini.", "error"); return; }
+                    const btnTxt = document.getElementById('text-ocean-sound');
+                    if(State.oceanOscillator) {
+                        State.oceanOscillator.stop(); State.oceanOscillator.disconnect(); State.oceanOscillator = null;
+                        btnTxt.innerText = "Nyalakan Suara Laut"; UI.toast("Suara laut dimatikan", "info");
+                    } else {
+                        const bufferSize = 2 * State.audioCtx.sampleRate;
+                        const noiseBuffer = State.audioCtx.createBuffer(1, bufferSize, State.audioCtx.sampleRate);
+                        const output = noiseBuffer.getChannelData(0);
+                        for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
+                        
+                        const whiteNoise = State.audioCtx.createBufferSource();
+                        whiteNoise.buffer = noiseBuffer; whiteNoise.loop = true;
+                        
+                        const filter = State.audioCtx.createBiquadFilter();
+                        filter.type = 'lowpass'; filter.frequency.value = 400; // Muffled ocean sound
+                        
+                        const lfo = State.audioCtx.createOscillator();
+                        lfo.type = 'sine'; lfo.frequency.value = 0.1; // Slow wave
+                        
+                        const gain = State.audioCtx.createGain();
+                        gain.gain.value = 0.1; // Master volume
+                        
+                        const lfoGain = State.audioCtx.createGain();
+                        lfoGain.gain.value = 0.05; // Modulation depth
+                        
+                        lfo.connect(lfoGain); lfoGain.connect(gain.gain);
+                        whiteNoise.connect(filter); filter.connect(gain); gain.connect(State.audioCtx.destination);
+                        
+                        lfo.start(); whiteNoise.start();
+                        State.oceanOscillator = whiteNoise;
+                        btnTxt.innerText = "Matikan Suara Laut"; UI.toast("Suara laut binaural aktif 🌊", "success");
+                    }
+                }
             };
 
+            // --- 4. CORE UI & LOGIC ---
             const UI = {
                 toast: (msg, type='info') => {
                     const c = document.getElementById('toast-container');
@@ -781,9 +793,9 @@
                     t.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
                     c.appendChild(t); 
                     
-                    if(type==='success') { Audio.play('success'); Audio.haptic([30,50,30]); }
-                    else if(type==='error' || type==='warning') { Audio.play('error'); Audio.haptic([50,100,50]); }
-                    else { Audio.play('pop'); Audio.haptic(20); }
+                    if(type==='success') { Hardware.play('success'); Hardware.haptic([30,50,30]); }
+                    else if(type==='error' || type==='warning') { Hardware.play('error'); Hardware.haptic([50,100,50]); }
+                    else { Hardware.play('pop'); Hardware.haptic(20); }
                     
                     setTimeout(() => { t.style.animation = 'fadeOut 0.3s forwards'; setTimeout(()=>t.remove(), 300); }, 3000);
                 },
@@ -803,7 +815,19 @@
                     document.getElementById('ui-pearls').innerText = State.pearls;
                     document.getElementById('ui-streak').innerText = State.streak;
                 },
-                setup3DTilt: () => {
+                updateClock: () => {
+                    const now = new Date();
+                    document.getElementById('header-clock').innerText = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                },
+                applyTheme: (theme) => {
+                    document.body.classList.remove('dark-mode', 'zen-mode');
+                    if(theme === 'dark') document.body.classList.add('dark-mode');
+                    if(theme === 'zen') document.body.classList.add('zen-mode');
+                    State.theme = theme; Storage.set('thm', theme);
+                    document.getElementById('sel-theme').value = theme;
+                },
+                setupInteractions: () => {
+                    // 3D Tilt Logic
                     if(window.matchMedia("(pointer: fine)").matches && State.motionOn) {
                         document.addEventListener('mousemove', (e) => {
                             document.querySelectorAll('.tilt-element:hover').forEach(el => {
@@ -830,15 +854,120 @@
                         });
                         idCard.addEventListener('mouseleave', () => { idCard.classList.add('reset'); idCard.style.transform = `rotateX(0) rotateY(0)`; });
                     }
+
+                    // Global Click/Sound
+                    document.addEventListener('click', (e) => { 
+                        if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON') { Hardware.initAudio(); Hardware.play('click'); }
+                    });
+
+                    // Search Engine (Fuzzy Logic)
+                    const searchInput = document.getElementById('global-search');
+                    const suggestBox = document.getElementById('search-suggest');
+                    const clearBtn = document.getElementById('search-clear');
+                    const suggestList = document.getElementById('suggest-list');
+                    
+                    const performSearch = (query) => {
+                        query = query.toLowerCase();
+                        if(query.length < 2) { suggestBox.classList.remove('active'); return; }
+                        
+                        let results = [];
+                        // Search Kru
+                        Data.kru.forEach(k => { if(k.nama.toLowerCase().includes(query) || k.role.toLowerCase().includes(query)) results.push({t: `Kru: ${k.nama}`, a: ()=>UI.showProfileIDCard(k.id)}); });
+                        // Search Sections
+                        document.querySelectorAll('.search-target').forEach(el => {
+                            const dataSearch = el.getAttribute('data-search') || el.innerText.toLowerCase();
+                            if(dataSearch.includes(query)) {
+                                const title = el.querySelector('h2, h3, h4')?.innerText || 'Bagian Halaman';
+                                results.push({t: `Akses: ${title}`, a: () => { el.scrollIntoView({behavior:'smooth', block:'center'}); el.classList.add('ring-2', 'ring-[var(--accent)]'); setTimeout(()=>el.classList.remove('ring-2'), 2000); }});
+                            }
+                        });
+                        // Search Games
+                        Games.list.forEach(g => { if(g.title.toLowerCase().includes(query)) results.push({t: `Game: ${g.title}`, a: ()=>Games.open(g.id)}); });
+                        
+                        suggestList.innerHTML = results.slice(0, 6).map((r, i) => `<div class="suggest-item" id="sr-${i}">🔍 ${r.t}</div>`).join('');
+                        results.slice(0, 6).forEach((r, i) => { document.getElementById(`sr-${i}`).onclick = () => { r.a(); suggestBox.classList.remove('active'); searchInput.value = ''; }; });
+                        
+                        if(results.length === 0) suggestList.innerHTML = `<div class="p-4 text-center text-sm opacity-50">Tidak ditemukan. Coba kata lain.</div>`;
+                        suggestBox.classList.add('active');
+                    };
+
+                    searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+                    clearBtn.addEventListener('click', () => { searchInput.value = ''; suggestBox.classList.remove('active'); searchInput.focus(); });
+                    document.addEventListener('click', (e) => { if(!e.target.closest('.search-wrapper')) suggestBox.classList.remove('active'); });
+
+                    // Navigation Pills
+                    document.querySelectorAll('.nav-pill').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            if(e.currentTarget.classList.contains('filter-btn-game')) return; // handled by game engine
+                            document.querySelectorAll('#main-nav .nav-pill').forEach(b=>b.classList.remove('active'));
+                            e.currentTarget.classList.add('active');
+                            const target = e.currentTarget.dataset.target;
+                            document.querySelectorAll('.content-section').forEach(s => s.style.display='none');
+                            if(target === 'semua') document.querySelectorAll('.content-section').forEach(s => s.style.display='block');
+                            else document.getElementById(target).style.display = 'block';
+                            window.scrollTo({top: 0, behavior: 'smooth'}); 
+                            e.currentTarget.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+                        });
+                    });
+
+                    // Context Menu
+                    const ctxMenu = document.getElementById('context-menu');
+                    const ctxOverlay = document.getElementById('context-menu-overlay');
+                    const toggleCtx = (show) => {
+                        if(show) { ctxMenu.classList.add('show', 'show-mobile'); ctxOverlay.classList.remove('hidden'); setTimeout(()=>ctxOverlay.classList.remove('opacity-0'), 10); }
+                        else { ctxMenu.classList.remove('show', 'show-mobile'); ctxOverlay.classList.add('opacity-0'); setTimeout(()=>ctxOverlay.classList.add('hidden'), 300); }
+                    };
+                    document.getElementById('btn-context-toggle').onclick = () => toggleCtx(true);
+                    ctxOverlay.onclick = () => toggleCtx(false);
+                    document.addEventListener('contextmenu', (e) => { 
+                        if(e.target.closest('input') || e.target.closest('textarea')) return;
+                        e.preventDefault(); toggleCtx(true); 
+                    });
+
+                    document.querySelectorAll('.ctx-item').forEach(el => {
+                        el.onclick = (e) => {
+                            toggleCtx(false);
+                            const action = e.currentTarget.dataset.action;
+                            if(action==='search') { document.getElementById('global-search').focus(); window.scrollTo(0,0); }
+                            if(action==='theme') { const t = State.theme==='light'?'dark':'light'; UI.applyTheme(t); UI.toast(`Tema diubah ke ${t}`); }
+                            if(action==='zen') { UI.applyTheme('zen'); UI.toast("Mode Fokus Aktif. Distraksi dihilangkan.", "success"); }
+                            if(action==='copy') { navigator.clipboard.writeText(window.location.href).then(()=>UI.toast("Link disalin!", "success")); }
+                            if(action==='shake') { document.body.style.animation = "shake 0.5s cubic-bezier(.36,.07,.19,.97) both"; setTimeout(()=>document.body.style.animation="", 500); Hardware.haptic([100,50,100,50,100]); UI.toast("Gempa buatan!", "warning"); }
+                        };
+                    });
+
+                    // FABs
+                    document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+                    document.getElementById('fab-bottom').onclick = () => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+                    document.getElementById('fab-today').onclick = () => {
+                        document.querySelector('[data-target="pelajaran-section"]').click();
+                        setTimeout(() => document.getElementById('pelajaran-section').scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+                        UI.toast("Menampilkan Jadwal Pelajaran");
+                    };
+
+                    // Modals
+                    document.querySelectorAll('.btn-close').forEach(b => b.onclick = () => UI.closeModals());
+                    document.getElementById('btn-settings').onclick = () => UI.showModal('modal-settings');
+                    document.getElementById('btn-idcard-global').onclick = () => UI.showProfileIDCard("Andika");
+
+                    // Settings Controls
+                    document.getElementById('sel-theme').onchange = (e) => UI.applyTheme(e.target.value);
+                    document.getElementById('toggle-sound').onchange = (e) => { State.soundOn = e.target.checked; Storage.set('snd', State.soundOn); };
+                    document.getElementById('toggle-haptic').onchange = (e) => { State.hapticOn = e.target.checked; Storage.set('hpt', State.hapticOn); };
+                    document.getElementById('toggle-motion').onchange = (e) => { 
+                        State.motionOn = e.target.checked; Storage.set('mtn', State.motionOn); 
+                        if(State.motionOn) document.body.classList.remove('reduce-motion'); else document.body.classList.add('reduce-motion');
+                    };
+                    document.getElementById('btn-reset-data').onclick = () => {
+                        if(confirm("Yakin ingin mereset semua data, level, dan mutiara? Ini tidak bisa dibatalkan.")) Storage.clear();
+                    };
                 },
                 showModal: (id) => { 
-                    Audio.play('pop'); Audio.haptic(20);
+                    Hardware.play('pop'); Hardware.haptic(20);
                     const m = document.getElementById(id); if(m) m.classList.add('show'); 
                 },
                 closeModals: () => { 
-                    document.querySelectorAll('.modal-overlay.show').forEach(m => {
-                        m.classList.remove('show'); Audio.play('click');
-                    }); 
+                    document.querySelectorAll('.modal-overlay.show').forEach(m => { m.classList.remove('show'); Hardware.play('click'); }); 
                 },
                 showProfileIDCard: (id) => {
                     const d = Data.kru.find(k => k.id === id); if(!d) return;
@@ -847,9 +976,10 @@
                     if(id === "Andika") imgEl.src = "https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%209H.jpg";
                     else imgEl.src = `https://ui-avatars.com/api/?name=${d.nama.replace(/ /g,'+')}&background=0ea5e9&color=fff&size=200&bold=true`;
 
-                    document.getElementById('idcard-name').innerText = d.nama.split(' ')[0];
+                    document.getElementById('idcard-name').innerText = id === "Andika" ? "Kru 9H" : d.nama.split(' ')[0];
                     document.getElementById('idcard-role').innerText = d.role;
                     document.getElementById('idcard-badge').innerText = d.core ? "INTI KAPAL" : "KRU DEK";
+                    document.getElementById('idcard-lvl').innerText = id === "Andika" ? State.level : Math.floor(Math.random()*10)+5;
                     
                     const badgeEl = document.getElementById('idcard-shop-badge');
                     if(id === "Andika" && State.activeBadge) {
@@ -857,83 +987,229 @@
                         if(item) { badgeEl.innerText = item.icon; badgeEl.classList.remove('hidden'); }
                     } else { badgeEl.classList.add('hidden'); }
 
-                    const hash = (d.nama.charCodeAt(0) * d.nama.length * 7) % 40; 
-                    document.getElementById('idcard-int').innerText = 60 + hash;
-                    document.getElementById('idcard-cre').innerText = 100 - hash;
-
                     const btnLove = document.getElementById('btn-love-3d');
                     let loves = Storage.get('loves_v3', []);
                     const isLoved = loves.includes(d.id);
                     btnLove.innerHTML = isLoved ? "❤️ Diapresiasi" : "🤍 Beri Apresiasi";
                     btnLove.className = `w-full py-3 rounded-xl border border-[var(--danger)] text-[var(--danger)] font-bold text-sm hover:bg-[var(--danger)] hover:text-white transition-all btn-interactive flex justify-center items-center gap-2 mb-4 ${isLoved ? 'bg-[var(--danger)] text-white' : 'text-[var(--danger)] bg-white/30 hover:bg-[var(--danger)] hover:text-white'}`;
-                    btnLove.style.transform = 'translateZ(25px)';
-
+                    
                     btnLove.onclick = () => {
                         if(loves.includes(d.id)) loves = loves.filter(x=>x!==d.id);
-                        else { loves.push(d.id); UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}`, 'success'); }
-                        Storage.set('loves_v3', loves);
-                        UI.showProfileIDCard(id); 
+                        else { loves.push(d.id); UI.toast(`Apresiasi dikirim ke ${d.nama.split(' ')[0]}!`, 'success'); UI.addXP(2); }
+                        Storage.set('loves_v3', loves); UI.showProfileIDCard(id); 
                     };
 
                     document.getElementById('btn-copy-id').onclick = () => {
-                        navigator.clipboard.writeText(`ID 9H: ${d.nama} | ${d.role}`).then(()=> UI.toast("Info disalin", "success"));
+                        navigator.clipboard.writeText(`ID 9H: ${d.nama} | Peran: ${d.role}`).then(()=> UI.toast("Info Kru disalin!", "success"));
                     };
 
                     UI.showModal('modal-idcard-3d');
-                },
-                updateClock: () => {
-                    const now = new Date();
-                    document.getElementById('header-clock').innerText = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
                 }
             };
 
-            // --- JADWAL RENDERER (Kembali ke Tata Letak Lama) ---
-            const renderSchedule = () => {
-                const lg = document.getElementById('pelajaran-grid'); 
-                if(!lg) return;
-                lg.innerHTML = '';
-                const now = new Date(); 
-                const tm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-                
-                Data.pelajaran.forEach((p, i) => {
-                    let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
-                    let listHtml = p.list.map(l => {
-                        let isLive = false; 
-                        try {
-                            const times = l.t.split('-');
-                            if (isToday && tm >= times[0] && tm < times[1]) { 
-                                isLive = true; 
-                            }
-                        } catch(e) {}
-                        
-                        // Layout dikembalikan seperti lama: List sederhana, tapi tetap mempertahankan info guru dengan rapi
-                        return `<li class="${l.br?'opacity-60 bg-[var(--glass-bg)] border-dashed border border-[var(--glass-border)]':''} ${isLive?'current-lesson':''}">
-                            <div class="flex flex-col">
-                                <span class="list-header text-xs md:text-sm"><span class="opacity-70 mr-2 font-mono">${l.t}</span> ${l.m}</span>
-                                ${l.g ? `<span class="text-[0.6rem] font-bold opacity-50 ml-[4.5rem] md:ml-[5.5rem] block -mt-1 tracking-wide">${l.g}</span>` : ''}
-                            </div>
-                        </li>`;
-                    }).join("");
+            // --- 5. MODULES (Schedule, Calendar, Utilities, Gallery) ---
+            const Schedule = {
+                render: () => {
+                    const lg = document.getElementById('pelajaran-grid'); lg.innerHTML = '';
+                    const now = new Date(); const dayIdx = now.getDay(); 
+                    const curTimeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
                     
-                    lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight ring-2 ring-[var(--accent)] ring-opacity-50':''}">
-                        <h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex justify-between items-center">
-                            <span>${p.hari}</span> 
-                            ${isToday?'<span class="text-[0.65rem] font-bold tracking-wider bg-[var(--accent)] text-white px-2 py-1 rounded-md shadow-md">HARI INI</span>':''}
-                        </h3>
-                        <ul class="smart-list gap-1.5">${listHtml}</ul>
-                    </div>`;
-                });
+                    Data.pelajaran.forEach((p, i) => {
+                        let isToday = (i+1 === dayIdx) && (dayIdx <= 5);
+                        let foundCurrent = false;
+
+                        let listHtml = p.list.map((l, index) => {
+                            let statusClass = '', badgeHtml = '';
+                            if (isToday) {
+                                if (curTimeStr > l.e) { 
+                                    statusClass = 'lesson-done'; badgeHtml = '<span class="status-badge bg-gray-200 text-gray-500">Selesai</span>'; 
+                                }
+                                else if (curTimeStr >= l.t && curTimeStr <= l.e) { 
+                                    statusClass = 'lesson-current'; badgeHtml = '<span class="status-badge bg-[var(--accent)] text-white animate-pulse">Berlangsung</span>'; 
+                                    foundCurrent = true;
+                                }
+                                else if (foundCurrent === true && !statusClass) { // The one immediately after current
+                                    statusClass = 'lesson-next'; badgeHtml = '<span class="status-badge bg-[var(--warning)] text-white">Berikutnya</span>';
+                                    foundCurrent = 'marked'; // prevent marking others as next
+                                }
+                            }
+                            
+                            // Handling empty/break slots gracefully
+                            if(l.br) {
+                                return `<li class="empty-slot opacity-60 bg-[var(--glass-bg)] border-dashed border border-[var(--glass-border)] text-center py-2"><span class="font-bold text-xs uppercase tracking-widest text-[var(--danger)]">☕ ${l.m} (${l.t} - ${l.e})</span></li>`;
+                            }
+
+                            return `<li class="${statusClass}">
+                                ${badgeHtml}
+                                <div class="flex flex-col pr-20">
+                                    <span class="text-xs font-mono font-bold opacity-70 text-[var(--accent)] mb-1">${l.t} - ${l.e}</span>
+                                    <span class="font-bold text-[var(--text-primary)] text-sm leading-tight">${l.m}</span>
+                                    ${l.g ? `<span class="text-[0.65rem] font-bold opacity-60 mt-1 uppercase tracking-wide">👨‍🏫 ${l.g}</span>` : ''}
+                                </div>
+                            </li>`;
+                        }).join("");
+                        
+                        lg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight ring-2 ring-[var(--accent)] ring-opacity-50':''}">
+                            <h3 class="font-display font-bold text-lg mb-4 border-b border-[var(--glass-border)] pb-2 text-[var(--text-primary)] flex justify-between items-center">
+                                <span>${p.hari}</span> 
+                                ${isToday?'<span class="text-[0.65rem] font-bold tracking-wider bg-[var(--accent)] text-white px-2 py-1 rounded-md shadow-md">HARI INI</span>':''}
+                            </h3>
+                            <ul class="smart-list gap-2">${listHtml}</ul>
+                        </div>`;
+                    });
+
+                    document.getElementById('btn-jump-today').onclick = () => {
+                        const todayCard = document.querySelector('.today-highlight');
+                        if(todayCard) { todayCard.scrollIntoView({behavior: 'smooth', block: 'center'}); UI.toast("Lompat ke jadwal hari ini");}
+                        else UI.toast("Hari ini libur/weekend!", "warning");
+                    };
+                }
             };
 
-            // --- GALLERY ENGINE ---
+            const Calendar2026 = {
+                currMonth: new Date().getMonth(), year: 2026, // FIXED TO 2026
+                holidays: {
+                    "1-1": "Tahun Baru Masehi", "2-18": "Isra Mikraj", "3-3": "Hari Raya Nyepi", "3-20": "Idul Fitri 1447 H", "3-21": "Cuti Bersama Idul Fitri", "4-3": "Wafat Isa Al Masih",
+                    "5-1": "Hari Buruh", "5-14": "Kenaikan Isa Al Masih", "5-27": "Idul Adha 1447 H", "6-1": "Hari Lahir Pancasila", "6-17": "Tahun Baru Islam", "8-17": "Hari Kemerdekaan RI",
+                    "9-25": "Maulid Nabi", "12-25": "Hari Raya Natal"
+                },
+                init: () => {
+                    document.getElementById('btn-cal-prev').onclick = () => { if(Calendar2026.currMonth > 0) { Calendar2026.currMonth--; Calendar2026.render(); Hardware.play('pop');} };
+                    document.getElementById('btn-cal-next').onclick = () => { if(Calendar2026.currMonth < 11) { Calendar2026.currMonth++; Calendar2026.render(); Hardware.play('pop');} };
+                    Calendar2026.render();
+                },
+                render: () => {
+                    const grid = document.getElementById('calendar-grid');
+                    const title = document.getElementById('cal-month-title');
+                    const detail = document.getElementById('cal-event-detail');
+                    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                    
+                    title.innerText = `${months[Calendar2026.currMonth]} ${Calendar2026.year}`;
+                    grid.innerHTML = ''; detail.innerText = '';
+                    
+                    const firstDay = new Date(Calendar2026.year, Calendar2026.currMonth, 1).getDay();
+                    const daysInMonth = new Date(Calendar2026.year, Calendar2026.currMonth + 1, 0).getDate();
+                    const today = new Date();
+                    const isCurrentMonthYear = today.getFullYear() === Calendar2026.year && today.getMonth() === Calendar2026.currMonth;
+
+                    let dayHtml = '';
+                    for (let i = 0; i < firstDay; i++) { dayHtml += `<div class="cal-day empty"></div>`; }
+                    
+                    let monthHolidays = [];
+
+                    for (let d = 1; d <= daysInMonth; d++) {
+                        const dateStr = `${Calendar2026.currMonth + 1}-${d}`;
+                        const dayOfWeek = new Date(Calendar2026.year, Calendar2026.currMonth, d).getDay();
+                        const isWeekend = dayOfWeek === 0; 
+                        const isHoliday = Calendar2026.holidays[dateStr];
+                        const isToday = isCurrentMonthYear && today.getDate() === d;
+                        
+                        let classes = 'cal-day';
+                        if (isToday) classes += ' today';
+                        else if (isWeekend || isHoliday) classes += ' holiday';
+
+                        if (isHoliday) monthHolidays.push(`${d} ${months[Calendar2026.currMonth]}: ${isHoliday}`);
+
+                        dayHtml += `
+                            <div class="${classes}" title="${isHoliday ? isHoliday : ''}" onclick="App.UI.toast('${isHoliday ? isHoliday : 'Hari biasa'}')">
+                                ${d} ${isHoliday ? '<div class="holiday-dot"></div>' : ''}
+                            </div>
+                        `;
+                    }
+                    grid.innerHTML = dayHtml;
+                    if(monthHolidays.length > 0) detail.innerHTML = monthHolidays.join('<br>');
+                    else detail.innerHTML = "<span class='text-[var(--text-secondary)] opacity-50'>Tidak ada hari libur nasional bulan ini.</span>";
+                }
+            };
+
+            const Utilities = {
+                pomoInterval: null, pomoTime: 25 * 60,
+                init: () => {
+                    // Pomodoro
+                    const btnPomo = document.getElementById('btn-pomo');
+                    const display = document.getElementById('pomo-display');
+                    const prog = document.getElementById('pomo-progress');
+                    btnPomo.onclick = () => {
+                        if(Utilities.pomoInterval) {
+                            clearInterval(Utilities.pomoInterval); Utilities.pomoInterval = null;
+                            btnPomo.innerText = "▶"; UI.toast("Pomodoro Jeda", "warning");
+                        } else {
+                            btnPomo.innerText = "⏸"; UI.toast("Pomodoro Mulai. Fokus!", "success");
+                            Hardware.play('pop');
+                            Utilities.pomoInterval = setInterval(() => {
+                                Utilities.pomoTime--;
+                                const m = Math.floor(Utilities.pomoTime/60); const s = Utilities.pomoTime%60;
+                                display.innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+                                prog.style.width = `${((25*60 - Utilities.pomoTime) / (25*60)) * 100}%`;
+                                if(Utilities.pomoTime <= 0) {
+                                    clearInterval(Utilities.pomoInterval); Utilities.pomoTime = 25*60;
+                                    btnPomo.innerText = "▶"; UI.toast("Waktu Fokus Selesai! +50 XP", "success"); UI.addXP(50);
+                                    Hardware.play('success'); Hardware.haptic([100,50,100,50,100]);
+                                }
+                            }, 1000);
+                        }
+                    };
+
+                    // Tasks
+                    const input = document.getElementById('task-input');
+                    const renderTasks = () => {
+                        document.getElementById('task-list').innerHTML = State.tasks.map((t, i) => `
+                            <div class="flex justify-between items-center p-2 bg-[var(--glass-bg)] rounded-lg text-sm border border-[var(--glass-border)]">
+                                <span class="${t.d ? 'line-through opacity-50' : 'font-bold'} cursor-pointer" onclick="App.Utilities.toggleTask(${i})">${t.t}</span>
+                                <button class="text-[var(--danger)] text-xs font-bold hover:scale-110" onclick="App.Utilities.delTask(${i})">✖</button>
+                            </div>
+                        `).join('');
+                    };
+                    input.onkeypress = (e) => {
+                        if(e.key === 'Enter' && input.value.trim() !== '') {
+                            State.tasks.push({t: input.value.trim(), d: false});
+                            Storage.set('tasks', State.tasks); input.value = ''; renderTasks();
+                            Hardware.play('pop');
+                        }
+                    };
+                    Utilities.toggleTask = (i) => { State.tasks[i].d = !State.tasks[i].d; Storage.set('tasks', State.tasks); renderTasks(); if(State.tasks[i].d) UI.addXP(5); };
+                    Utilities.delTask = (i) => { State.tasks.splice(i, 1); Storage.set('tasks', State.tasks); renderTasks(); };
+                    renderTasks();
+
+                    // Notes
+                    const noteEl = document.getElementById('personal-note');
+                    const noteLen = document.getElementById('note-length');
+                    const statusEl = document.getElementById('save-status');
+                    noteEl.value = State.note; noteLen.innerText = `${State.note.length} Karakter`;
+                    noteEl.oninput = () => {
+                        statusEl.innerText = "Menyimpan..."; statusEl.className = "text-[0.65rem] bg-[var(--warning)] text-white px-2 py-1 rounded-full font-bold shadow-sm";
+                        clearTimeout(Utilities.noteTimeout);
+                        Utilities.noteTimeout = setTimeout(() => {
+                            State.note = noteEl.value; Storage.set('note', State.note);
+                            noteLen.innerText = `${State.note.length} Karakter`;
+                            statusEl.innerText = "Tersimpan"; statusEl.className = "text-[0.65rem] bg-[var(--success)] text-white px-2 py-1 rounded-full font-bold shadow-sm";
+                        }, 1000);
+                    };
+                    document.getElementById('btn-copy-note').onclick = () => { navigator.clipboard.writeText(noteEl.value); UI.toast("Catatan disalin!"); };
+
+                    // Extra
+                    document.getElementById('btn-ocean-sound').onclick = Hardware.toggleOceanSound;
+                    document.getElementById('btn-random').onclick = () => {
+                        Hardware.play('click'); let c=0; const i = setInterval(()=>{
+                            const s = Data.kru[Math.floor(Math.random()*Data.kru.length)]; Hardware.play('pop');
+                            c++; if(c>15){ clearInterval(i); Hardware.play('success'); UI.showProfileIDCard(s.id); UI.toast(`Terpilih: ${s.nama}`, 'success'); }
+                        }, 80);
+                    };
+                    document.getElementById('btn-share').onclick = () => {
+                        if(navigator.share) navigator.share({title: 'Portal 9H', url: window.location.href});
+                        else { navigator.clipboard.writeText(window.location.href); UI.toast("Link disalin untuk dibagikan!"); }
+                    };
+                }
+            };
+
             const Gallery = {
                 init: () => {
                     const grid = document.getElementById('gallery-grid');
                     const images = [
                         { src: 'https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%209H.jpg', t: 'Logo Kebesaran 9H' },
-                        { src: 'https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png', t: 'Logo SMP' },
-                        { src: 'https://ui-avatars.com/api/?name=Foto+Kelas&background=0ea5e9&color=fff&size=400&bold=true&font-size=0.15', t: 'Foto Kelas (Segera)' },
-                        { src: 'https://ui-avatars.com/api/?name=Kegiatan+Kru&background=8b5cf6&color=fff&size=400&bold=true&font-size=0.15', t: 'Kegiatan (Segera)' }
+                        { src: 'https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png', t: 'Identitas Sekolah' },
+                        { src: 'https://ui-avatars.com/api/?name=Foto+Bersama&background=0ea5e9&color=fff&size=400&bold=true&font-size=0.15', t: 'Dokumentasi Kelas (Segera)' },
+                        { src: 'https://ui-avatars.com/api/?name=Event+9H&background=8b5cf6&color=fff&size=400&bold=true&font-size=0.15', t: 'Kegiatan Kru (Segera)' }
                     ];
 
                     grid.innerHTML = images.map(img => `
@@ -947,89 +1223,14 @@
                 }
             };
 
-            // --- CALENDAR ENGINE (Realtime Bulan & Tahun Saat Ini) ---
-            const Calendar = {
-                currMonth: new Date().getMonth(), year: new Date().getFullYear(),
-                holidays: {
-                    "1-1": "Tahun Baru Masehi", "2-18": "Isra Mikraj", "3-3": "Hari Raya Nyepi", "3-20": "Idul Fitri 1447 H", "3-21": "Cuti Bersama Idul Fitri", "4-3": "Wafat Isa Al Masih",
-                    "5-1": "Hari Buruh", "5-14": "Kenaikan Isa Al Masih", "5-27": "Idul Adha 1447 H", "6-1": "Hari Lahir Pancasila", "6-17": "Tahun Baru Islam", "8-17": "Hari Kemerdekaan RI",
-                    "9-25": "Maulid Nabi", "12-25": "Hari Raya Natal"
-                },
-                init: () => {
-                    document.getElementById('cal-main-year').innerText = Calendar.year;
-                    document.getElementById('btn-cal-prev').onclick = () => { if(Calendar.currMonth > 0) { Calendar.currMonth--; Calendar.render(); } };
-                    document.getElementById('btn-cal-next').onclick = () => { if(Calendar.currMonth < 11) { Calendar.currMonth++; Calendar.render(); } };
-                    Calendar.render();
-                },
-                render: () => {
-                    const grid = document.getElementById('calendar-grid');
-                    const title = document.getElementById('cal-month-title');
-                    const detail = document.getElementById('cal-event-detail');
-                    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-                    
-                    title.innerText = `${months[Calendar.currMonth]} ${Calendar.year}`;
-                    grid.innerHTML = ''; detail.innerText = '';
-                    
-                    const firstDay = new Date(Calendar.year, Calendar.currMonth, 1).getDay();
-                    const daysInMonth = new Date(Calendar.year, Calendar.currMonth + 1, 0).getDate();
-                    const today = new Date();
-                    const isCurrentMonthYear = today.getFullYear() === Calendar.year && today.getMonth() === Calendar.currMonth;
-
-                    let dayHtml = '';
-                    for (let i = 0; i < firstDay; i++) { dayHtml += `<div class="cal-day empty"></div>`; }
-                    
-                    let monthHolidays = [];
-
-                    for (let d = 1; d <= daysInMonth; d++) {
-                        const dateStr = `${Calendar.currMonth + 1}-${d}`;
-                        const dayOfWeek = new Date(Calendar.year, Calendar.currMonth, d).getDay();
-                        const isWeekend = dayOfWeek === 0; // Minggu
-                        const isHoliday = Calendar.holidays[dateStr];
-                        const isToday = isCurrentMonthYear && today.getDate() === d;
-                        
-                        let classes = 'cal-day';
-                        let isRedDay = isHoliday || isWeekend;
-
-                        // Logika Highlight Realtime
-                        if (isToday) {
-                            if (isRedDay) {
-                                classes += ' today-red'; // Jika hari ini dan merah, highlight merah
-                            } else {
-                                classes += ' today'; // Jika hari ini biasa, highlight biru
-                            }
-                        } else {
-                            if (isWeekend && !isHoliday) classes += ' weekend';
-                            if (isHoliday) classes += ' holiday';
-                        }
-
-                        if (isHoliday) { 
-                            if(isToday) {
-                                monthHolidays.push(`${d} ${months[Calendar.currMonth]}: ${isHoliday} (HARI INI)`);
-                            } else {
-                                monthHolidays.push(`${d} ${months[Calendar.currMonth]}: ${isHoliday}`);
-                            }
-                        }
-
-                        dayHtml += `
-                            <div class="${classes}" title="${isHoliday ? isHoliday : ''}">
-                                ${d}
-                                ${isHoliday ? '<div class="holiday-dot"></div>' : ''}
-                            </div>
-                        `;
-                    }
-                    grid.innerHTML = dayHtml;
-                    if(monthHolidays.length > 0) detail.innerHTML = monthHolidays.join('<br>');
-                }
-            };
-
-            // --- SHOP ENGINE ---
+            // --- 6. SHOP ENGINE ---
             const Shop = {
                 items: [
-                    { id: 'b_king', type: 'badge', name: 'Badge Raja', desc: 'Mahkota di ID Card', price: 100, icon: '👑' },
-                    { id: 'b_star', type: 'badge', name: 'Badge Bintang', desc: 'Bintang Terang', price: 50, icon: '⭐' },
-                    { id: 'b_ninja', type: 'badge', name: 'Badge Ninja', desc: 'Siluman Laut', price: 150, icon: '🥷' },
-                    { id: 'm_xp2', type: 'boost', name: 'XP Booster x2', desc: 'XP Game x2 (Permanen)', price: 300, icon: '🚀' },
-                    { id: 'm_xp3', type: 'boost', name: 'XP Booster x3', desc: 'XP Game x3 (Permanen)', price: 800, icon: '🔥' },
+                    { id: 'b_king', type: 'badge', name: 'Mahkota Raja', desc: 'Tampil mewah di ID Card', price: 150, icon: '👑' },
+                    { id: 'b_star', type: 'badge', name: 'Bintang Terang', desc: 'Bukti kru aktif', price: 50, icon: '⭐' },
+                    { id: 'b_ninja', type: 'badge', name: 'Siluman Laut', desc: 'Badge misterius', price: 200, icon: '🥷' },
+                    { id: 'm_xp2', type: 'boost', name: 'XP Booster x2', desc: 'XP dari Game dikali 2 selamanya!', price: 400, icon: '🚀' },
+                    { id: 'm_xp3', type: 'boost', name: 'XP Booster x3', desc: 'XP dari Game dikali 3 selamanya!', price: 1000, icon: '🔥' },
                 ],
                 init: () => { Shop.render(); },
                 render: () => {
@@ -1042,15 +1243,15 @@
                         if(isOwned || isBoostOwned) {
                             if(item.type === 'badge') {
                                 const isActive = State.activeBadge === item.id;
-                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs ${isActive ? 'bg-[var(--success)] text-white' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)]'}" onclick="App.Shop.equip('${item.id}')">${isActive ? 'Terpakai' : 'Pakai'}</button>`;
+                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs ${isActive ? 'bg-[var(--success)] text-white' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)] hover:bg-[var(--accent)] hover:text-white'}" onclick="App.Shop.equip('${item.id}')">${isActive ? 'Sedang Dipakai' : 'Pakai Badge'}</button>`;
                             } else {
-                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] opacity-50 cursor-not-allowed">Dimiliki</button>`;
+                                btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] opacity-50 cursor-not-allowed text-[var(--success)]">Sudah Aktif</button>`;
                             }
                         } else {
-                            btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--warning)] text-white hover:scale-105 transition-transform" onclick="App.Shop.confirmBuy('${item.id}')">Beli 🐚${item.price}</button>`;
+                            btnHtml = `<button class="w-full mt-3 py-2 rounded-xl font-bold text-xs bg-[var(--warning)] text-white hover:scale-105 transition-transform shadow-md" onclick="App.Shop.confirmBuy('${item.id}')">Beli 🐚${item.price}</button>`;
                         }
 
-                        grid.innerHTML += `<div class="shop-item search-target tilt-element" data-type="${item.type}"><div class="shop-icon">${item.icon}</div><h4 class="font-bold text-[var(--text-primary)] text-sm">${item.name}</h4><p class="text-[0.65rem] opacity-70 mb-2">${item.desc}</p>${btnHtml}</div>`;
+                        grid.innerHTML += `<div class="shop-item search-target tilt-element" data-type="${item.type}"><div class="shop-icon">${item.icon}</div><h4 class="font-bold text-[var(--text-primary)] text-sm mt-2">${item.name}</h4><p class="text-[0.65rem] font-medium opacity-70 mb-2">${item.desc}</p>${btnHtml}</div>`;
                     });
                 },
                 confirmBuy: (id) => {
@@ -1075,78 +1276,53 @@
                     if(item.id === 'm_xp3') State.xpMultiplier = 3;
                     
                     Storage.set('prl', State.pearls); Storage.set('inv', State.inventory); Storage.set('xpm', State.xpMultiplier);
-                    UI.updateDash(); UI.closeModals(); Audio.play('success'); UI.toast(`Berhasil membeli ${item.name}!`, 'success'); Shop.render();
+                    UI.updateDash(); UI.closeModals(); Hardware.play('success'); UI.toast(`Berhasil membeli ${item.name}!`, 'success'); Shop.render();
                 },
                 equip: (id) => {
-                    Audio.play('pop');
+                    Hardware.play('pop');
                     if(State.activeBadge === id) State.activeBadge = null; else State.activeBadge = id;
-                    Storage.set('abadge', State.activeBadge); Shop.render(); UI.toast("Badge diperbarui", "success");
+                    Storage.set('abadge', State.activeBadge); Shop.render(); UI.toast("Tampilan ID Card diperbarui!", "success");
                 }
             };
 
-            // --- GAMES ENGINE ---
+            // --- 7. MULTIPLE GAMES ENGINE (Berbeda Mekanik) ---
             const Games = {
-                list: [], favorites: Storage.get('fav_games', []), activeInterval: null, score: 0, currentMech: null,
+                list: [], activeInterval: null, score: 0, currentEngine: null,
                 generate: () => {
-                    const mechs = ['clicker', 'reaction', 'math', 'memory'];
-                    const modes = ['solo', 'bot', 'multi', 'coop'];
-                    const icons = ['🦈','🐋','🐢','🐙','🪼','🦀','⭐','🫏','🐚','🐟','🪸','🫧','⛵','⚓','🏴‍☠️','🏝️'];
-                    const adjs = ['Ganas', 'Biru', 'Misteri', 'Cepat', 'Dalam', 'Emas', 'Pintar', 'Liar', 'Gelap', 'Ajaib', 'Besi', 'Mistik'];
-
-                    for(let i=0; i<64; i++) {
-                        let mech = mechs[i%mechs.length];
-                        Games.list.push({
-                            id: `g_${i}`, title: `Ocean ${icons[i % icons.length]} ${adjs[Math.floor(i/icons.length) % adjs.length]}`,
-                            desc: mech === 'math' ? 'Selesaikan hitungan cepat!' : (mech==='memory' ? 'Ingat polanya!' : `Game ketangkasan ringan.`),
-                            icon: icons[i % icons.length], mode: modes[i%modes.length], mech: mech
-                        });
+                    // 4 Distinct Engines to ensure variety without breaking code limits
+                    const engines = [
+                        { m: 'clicker', t: 'Tangkap Cepat', d: 'Ketuk icon laut yang muncul secepat mungkin!', icon: '🐟', mode: 'SOLO' },
+                        { m: 'math', t: 'Logika 9H', d: 'Selesaikan matematika secepat kilat. Salah = Kurang waktu!', icon: '🧠', mode: 'SOLO' },
+                        { m: 'mash', t: 'Adu Kuat', d: 'Ketuk tombol sebanyak mungkin dalam 15 detik!', icon: '🔥', mode: 'BOT' },
+                        { m: 'block', t: 'Hancurkan Blok', d: 'Klik balok berwarna sama yang berdekatan!', icon: '🧱', mode: 'SOLO' }
+                    ];
+                    
+                    // Generate array based on engines
+                    for(let i=0; i<32; i++) {
+                        let e = engines[i % engines.length];
+                        Games.list.push({ id: `g_${i}`, title: `${e.t} Vol.${Math.floor(i/4)+1}`, desc: e.d, icon: e.icon, mode: e.mode, mech: e.m, diff: 1+(Math.floor(i/4)*0.2) });
                     }
                 },
                 render: () => {
                     const grid = document.getElementById('play-zone-grid'); grid.innerHTML = '';
                     Games.list.forEach(g => {
-                        const bClass = g.mode==='solo'?'badge-solo':(g.mode==='bot'?'badge-bot':(g.mode==='multi'?'badge-multi':'badge-coop'));
-                        const isFav = Games.favorites.includes(g.id);
+                        const bClass = g.mode==='SOLO'?'badge-solo':'badge-bot';
                         grid.innerHTML += `
-                            <div class="game-card tilt-element btn-interactive" data-mode="${g.mode}" data-id="${g.id}" onclick="App.Games.open('${g.id}')">
-                                ${isFav ? '<div class="absolute top-2 left-2 text-xs">❤️</div>' : ''}
+                            <div class="game-card tilt-element btn-interactive" data-mode="${g.mode}" onclick="App.Games.open('${g.id}')">
                                 <span class="game-badge ${bClass}">${g.mode}</span>
                                 <div class="game-icon">${g.icon}</div>
                                 <h4 class="game-title">${g.title}</h4>
                             </div>
                         `;
                     });
-
                     setTimeout(() => { document.getElementById('game-skeleton').style.display = 'none'; grid.classList.remove('hidden'); }, 800);
-
-                    document.querySelectorAll('.filter-btn-game').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            document.querySelectorAll('.filter-btn-game').forEach(b=>b.classList.remove('active')); e.target.classList.add('active');
-                            const filter = e.target.dataset.filter;
-                            document.querySelectorAll('.game-card').forEach(card => {
-                                const show = filter === 'all' || card.dataset.mode === filter || (filter === 'fav' && Games.favorites.includes(card.dataset.id));
-                                if(show) { card.style.display = 'flex'; setTimeout(()=>card.style.opacity=1,10); }
-                                else { card.style.opacity=0; setTimeout(()=>card.style.display='none',300); }
-                            });
-                        });
-                    });
                 },
                 open: (id) => {
                     const g = Games.list.find(x => x.id === id); if(!g) return;
-                    Audio.play('pop');
+                    Hardware.play('pop');
                     document.getElementById('engine-title').innerText = g.title; document.getElementById('engine-desc').innerText = g.desc;
                     document.getElementById('engine-badge').innerText = g.mode;
                     
-                    const btnFav = document.getElementById('btn-fav-game');
-                    btnFav.innerText = Games.favorites.includes(id) ? '❤️' : '🤍';
-                    btnFav.onclick = () => {
-                        if(Games.favorites.includes(id)) Games.favorites = Games.favorites.filter(x=>x!==id);
-                        else Games.favorites.push(id);
-                        Storage.set('fav_games', Games.favorites);
-                        btnFav.innerText = Games.favorites.includes(id) ? '❤️' : '🤍';
-                        Games.render();
-                    };
-
                     document.getElementById('game-hud').classList.add('hidden');
                     document.getElementById('game-stage').innerHTML = `
                         <div class="text-7xl mb-8 animate-bounce filter drop-shadow-lg">${g.icon}</div>
@@ -1157,205 +1333,160 @@
                 },
                 close: () => { clearInterval(Games.activeInterval); document.getElementById('game-engine-modal').classList.remove('show'); },
                 start: (g) => {
-                    Audio.play('success'); Audio.haptic([50,50]);
+                    Hardware.play('success'); Hardware.haptic([50,50]);
                     document.getElementById('game-hud').classList.remove('hidden');
                     Games.score = 0; document.getElementById('game-score').innerText = 0;
-                    let time = 15; document.getElementById('game-time').innerText = time;
+                    let time = 20; document.getElementById('game-time').innerText = time;
                     const stage = document.getElementById('game-stage'); stage.innerHTML = '';
-                    Games.currentMech = g.mech;
 
                     Games.activeInterval = setInterval(() => {
                         time--; document.getElementById('game-time').innerText = time;
                         if(time <= 0) Games.end();
                     }, 1000);
                     
+                    // ENGINE 1: CLICKER
                     if(g.mech === 'clicker') {
                         const spawn = () => {
                             if(time<=0) return;
-                            const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform drop-shadow-md';
+                            const btn = document.createElement('div'); btn.innerHTML = g.icon; btn.className = 'absolute text-5xl cursor-pointer hover:scale-125 transition-transform drop-shadow-md select-none touch-none';
                             btn.style.left = `${10 + Math.random() * 70}%`; btn.style.top = `${10 + Math.random() * 70}%`;
-                            btn.onpointerdown = (e) => { e.preventDefault(); Audio.play('bubble'); Games.score+=10; document.getElementById('game-score').innerText = Games.score; btn.remove(); spawn();};
-                            stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode){btn.remove(); spawn();}}, 1200);
+                            btn.onpointerdown = (e) => { e.preventDefault(); Hardware.play('bubble'); Games.score+=10; document.getElementById('game-score').innerText = Games.score; btn.remove(); spawn(); spawn();};
+                            stage.appendChild(btn); setTimeout(()=> {if(btn.parentNode){btn.remove(); spawn();}}, 1500 / g.diff);
                         };
-                        spawn(); spawn();
-                    } else if(g.mech === 'math') {
+                        spawn();
+                    } 
+                    // ENGINE 2: MATH
+                    else if(g.mech === 'math') {
                         const genMath = () => {
                             if(time<=0) return;
-                            const a = Math.floor(Math.random()*20)+1; const b = Math.floor(Math.random()*20)+1;
+                            const max = 10 * g.diff;
+                            const a = Math.floor(Math.random()*max)+1; const b = Math.floor(Math.random()*max)+1;
                             const ops = ['+','-']; const op = ops[Math.floor(Math.random()*ops.length)];
                             const ans = op==='+'?a+b:a-b;
-                            stage.innerHTML = `<div class="text-4xl font-black mb-6 bg-[var(--glass-bg)] p-4 rounded-xl border border-[var(--glass-border)]">${a} ${op} ${b} = ?</div><div class="grid grid-cols-2 gap-4 w-full max-w-xs" id="math-opts"></div>`;
+                            stage.innerHTML = `<div class="text-4xl font-black mb-6 bg-[var(--glass-bg)] p-4 rounded-xl border border-[var(--glass-border)] shadow-sm">${a} ${op} ${b} = ?</div><div class="grid grid-cols-2 gap-4 w-full max-w-[250px]" id="math-opts"></div>`;
                             
-                            const opts = [ans, ans+Math.floor(Math.random()*5)+1, ans-Math.floor(Math.random()*5)-1, ans+10].sort(()=>Math.random()-0.5);
+                            const opts = [ans, ans+Math.floor(Math.random()*3)+1, ans-Math.floor(Math.random()*3)-1, ans+5].sort(()=>Math.random()-0.5);
                             opts.forEach(o => {
                                 const btn = document.createElement('button'); btn.className = 'p-4 bg-[var(--accent)] text-white rounded-xl font-bold text-xl hover:bg-[var(--accent-hover)] btn-interactive shadow-md'; btn.innerText = o;
-                                btn.onclick = () => {
-                                    if(o === ans) { Audio.play('success'); Games.score+=20; document.getElementById('game-score').innerText=Games.score; genMath(); }
-                                    else { Audio.play('error'); time-=2; document.getElementById('game-time').innerText=Math.max(0,time); }
+                                btn.onpointerdown = (e) => {
+                                    e.preventDefault();
+                                    if(o === ans) { Hardware.play('success'); Games.score+=15; document.getElementById('game-score').innerText=Games.score; genMath(); }
+                                    else { Hardware.play('error'); time-=2; document.getElementById('game-time').innerText=Math.max(0,time); stage.classList.add('bg-red-500/20'); setTimeout(()=>stage.classList.remove('bg-red-500/20'),200); }
                                 };
                                 document.getElementById('math-opts').appendChild(btn);
                             });
                         };
                         genMath();
-                    } else {
-                        stage.innerHTML = `<div class="text-center p-4 w-full h-full flex justify-center items-center"><div class="text-8xl mb-4 animate-pulse btn-interactive cursor-pointer select-none" id="mash-btn">${g.icon}</div></div>`;
-                        document.getElementById('mash-btn').onpointerdown = (e) => { e.preventDefault(); Games.score+=5; document.getElementById('game-score').innerText = Games.score; Audio.play('pop'); document.getElementById('mash-btn').style.transform='scale(0.9)'; setTimeout(()=>document.getElementById('mash-btn').style.transform='scale(1)',50);};
+                    }
+                    // ENGINE 3: MASH
+                    else if(g.mech === 'mash') {
+                        stage.innerHTML = `<div class="text-center p-4 w-full h-full flex flex-col justify-center items-center"><div class="text-8xl mb-6 btn-interactive cursor-pointer select-none touch-none filter drop-shadow-xl" id="mash-btn">${g.icon}</div><div class="w-full max-w-[200px] h-4 bg-gray-200 rounded-full overflow-hidden"><div id="mash-bar" class="h-full bg-[var(--danger)] transition-all" style="width:0%"></div></div></div>`;
+                        let clicks = 0;
+                        document.getElementById('mash-btn').onpointerdown = (e) => { 
+                            e.preventDefault(); clicks++; Games.score+=5; document.getElementById('game-score').innerText = Games.score; Hardware.play('pop'); 
+                            document.getElementById('mash-bar').style.width = `${Math.min(100, clicks*2)}%`;
+                            const el = document.getElementById('mash-btn'); el.style.transform='scale(0.8)'; setTimeout(()=>el.style.transform='scale(1)',50);
+                        };
+                    }
+                    // ENGINE 4: BLOCK (Simplified matching)
+                    else if(g.mech === 'block') {
+                        const cols = ['bg-blue-500', 'bg-red-500', 'bg-green-500'];
+                        stage.innerHTML = `<div class="grid grid-cols-4 gap-2 w-[80%] max-w-[250px]" id="block-grid"></div>`;
+                        const grid = document.getElementById('block-grid');
+                        for(let i=0; i<16; i++) {
+                            const b = document.createElement('div'); b.className = `w-full aspect-square rounded-lg shadow-sm cursor-pointer hover:opacity-80 transition-opacity ${cols[Math.floor(Math.random()*cols.length)]}`;
+                            b.onpointerdown = (e) => {
+                                e.preventDefault();
+                                Hardware.play('pop'); Games.score+=5; document.getElementById('game-score').innerText = Games.score;
+                                b.className = `w-full aspect-square rounded-lg shadow-sm cursor-pointer hover:opacity-80 transition-opacity ${cols[Math.floor(Math.random()*cols.length)]}`;
+                            };
+                            grid.appendChild(b);
+                        }
                     }
                 },
                 end: () => {
-                    clearInterval(Games.activeInterval); document.getElementById('game-stage').onpointerdown = null;
-                    Audio.play('success'); Audio.haptic([100,50,100]);
+                    clearInterval(Games.activeInterval); document.getElementById('game-stage').innerHTML = ''; // Clear touch events
+                    Hardware.play('success'); Hardware.haptic([100,50,100]);
                     const xpGain = Math.floor(Games.score / 15) + 5;
                     const multGain = Math.floor(xpGain * State.xpMultiplier);
                     const pearlGain = Math.floor(multGain/2);
                     
                     document.getElementById('game-stage').innerHTML = `
-                        <div class="text-center p-6 bg-black/10 w-full h-full flex flex-col justify-center items-center">
-                            <h2 class="text-3xl font-black text-[var(--accent)] mb-2">SELESAI</h2>
-                            <p class="text-lg font-black mb-4">Skor: ${Games.score}</p>
-                            <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 mb-6 w-full max-w-[200px] shadow-sm">
-                                <div class="flex justify-between font-bold text-sm mb-2 pb-2 border-b border-[var(--glass-border)]"><span class="opacity-70">Multiplier</span><span class="text-[var(--purple)]">x${State.xpMultiplier}</span></div>
-                                <div class="flex justify-between font-bold text-sm"><span class="opacity-70">XP</span><span class="text-[var(--success)]">+${multGain}</span></div>
-                                <div class="flex justify-between font-bold text-sm mt-1"><span class="opacity-70">Mutiara</span><span class="text-[var(--warning)]">+${pearlGain}</span></div>
+                        <div class="text-center p-6 bg-black/5 w-full h-full flex flex-col justify-center items-center">
+                            <h2 class="text-3xl font-black text-[var(--accent)] mb-2">PERMAINAN SELESAI</h2>
+                            <p class="text-xl font-black mb-6 text-[var(--text-primary)]">Skor Akhir: ${Games.score}</p>
+                            <div class="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 mb-8 w-full max-w-[250px] shadow-sm">
+                                <div class="flex justify-between font-bold text-sm mb-2 pb-2 border-b border-[var(--glass-border)]"><span class="opacity-70">XP Dasar</span><span>+${xpGain}</span></div>
+                                <div class="flex justify-between font-bold text-sm mb-2 pb-2 border-b border-[var(--glass-border)]"><span class="opacity-70">Multiplier Item</span><span class="text-[var(--purple)]">x${State.xpMultiplier}</span></div>
+                                <div class="flex justify-between font-black text-base mt-2"><span class="opacity-70">Total XP</span><span class="text-[var(--success)]">+${multGain} XP</span></div>
+                                <div class="flex justify-between font-black text-base mt-1"><span class="opacity-70">Total Mutiara</span><span class="text-[var(--warning)]">+${pearlGain} 🐚</span></div>
                             </div>
-                            <button onclick="App.Games.close()" class="px-8 py-3 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold btn-interactive shadow-md">TUTUP</button>
+                            <button onclick="App.Games.close()" class="px-10 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold btn-interactive shadow-lg tracking-wider">KLAIM HADIAH</button>
                         </div>
                     `;
                     UI.addXP(xpGain);
                 }
             };
 
-            // --- INITIALIZATION ---
+            // --- 8. INITIALIZATION ---
             const Init = () => {
-                if(Storage.get('thm', 'light') === 'dark') document.body.classList.add('dark-mode');
-                document.getElementById('sel-theme').value = Storage.get('thm', 'light');
-                document.getElementById('toggle-sound').checked = State.soundOn;
-                document.getElementById('toggle-haptic').checked = State.hapticOn;
-                document.getElementById('toggle-motion').checked = State.motionOn;
+                UI.applyTheme(State.theme);
                 if(!State.motionOn) document.body.classList.add('reduce-motion');
 
+                // Daily Checkin
                 const today = new Date().toDateString();
                 if(State.lastCheckin !== today) {
                     State.streak++; State.lastCheckin = today; 
                     Storage.set('strk', State.streak); Storage.set('lck', today);
-                    setTimeout(() => { UI.addXP(20); UI.toast("🎁 Bonus Harian: +20 XP & +10 Mutiara!", "success"); }, 1500);
+                    setTimeout(() => { UI.addXP(20); UI.toast("🎁 Bonus Login Harian: +20 XP & +10 Mutiara!", "success"); }, 1500);
                 }
-                UI.updateDash(); UI.updateClock(); setInterval(UI.updateClock, 60000);
-
-                // Render Data
-                const renderData = () => {
-                    const og = document.getElementById('org-grid');
-                    const roles = ["Ketua Kelas", "Wakil Kelas", "Bendahara", "Sekretaris", "Keamanan", "Perpustakaan", "Kerohanian", "Kepramukaan", "Olahraga", "Absensi", "Kru", "OSIS"];
-                    roles.forEach(role => {
-                        const members = Data.kru.filter(k => k.role.includes(role) || (role === "Kru" && k.role === "Kru"));
-                        if(!members.length) return;
-                        let list = members.map(m => `<li tabindex="0" onclick="App.UI.showProfileIDCard('${m.id}')" class="btn-interactive"><span class="list-header">${m.nama}</span></li>`).join("");
-                        og.innerHTML += `<div class="glass-card tilt-element search-target" data-category="${members[0].g}"><h3 class="font-display font-bold text-lg text-[var(--text-primary)] mb-3 border-b border-[var(--glass-border)] pb-2">${role}</h3><ul class="smart-list">${list}</ul></div>`;
-                    });
-
-                    const pg = document.getElementById('piket-grid');
-                    Data.piket.forEach((p, i) => {
-                        let list = p.list.map(id => { let k = Data.kru.find(x => x.id === id); return `<li onclick="App.UI.showProfileIDCard('${k.id}')" class="btn-interactive"><span class="list-header">${k.nama}</span></li>`; }).join("");
-                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
-                        pg.innerHTML += `<div class="glass-card tilt-element search-target ${isToday?'today-highlight':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 flex justify-between text-[var(--text-primary)]"><span>${p.hari}</span> ${isToday?'<span class="text-[var(--accent)] text-xs uppercase flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping"></span> Hari Ini</span>':''}</h3><ul class="smart-list">${list}</ul></div>`;
-                    });
-
-                    const clg = document.getElementById('pakaian-grid');
-                    Data.pakaian.forEach((p, i) => {
-                        let isToday = (i+1 === Data.hariIndex) && (Data.hariIndex <= 5);
-                        clg.innerHTML += `<div class="glass-card tilt-element search-target text-center flex flex-col justify-center p-4 ${isToday?'today-highlight ring-2 ring-[var(--accent)]':''}"><p class="text-[0.65rem] font-bold opacity-70 mb-1 uppercase tracking-widest">${Data.piket[i].hari}</p><p class="font-black text-sm md:text-base text-[var(--text-primary)] leading-tight">${p}</p></div>`;
-                    });
-                };
                 
-                renderData();
-                renderSchedule();
-                setInterval(renderSchedule, 60000); 
-
-                // Event Listeners
-                document.addEventListener('click', (e) => { 
-                    if(e.target.closest('.btn-interactive') || e.target.tagName==='BUTTON' || e.target.tagName==='A') { Audio.init(); Audio.play('click'); }
+                UI.updateDash(); UI.updateClock(); setInterval(UI.updateClock, 60000);
+                
+                // Render Org & Uniforms
+                const og = document.getElementById('org-grid');
+                const roles = ["Ketua Kelas", "Wakil Kelas", "Bendahara", "Sekretaris", "Keamanan", "Perpustakaan", "Kerohanian", "Kepramukaan", "Olahraga", "Absensi", "Kru", "OSIS"];
+                roles.forEach(role => {
+                    const members = Data.kru.filter(k => k.role.includes(role) || (role === "Kru" && k.role === "Kru"));
+                    if(!members.length) return;
+                    let list = members.map(m => `<li tabindex="0" onclick="App.UI.showProfileIDCard('${m.id}')" class="btn-interactive cursor-pointer"><span class="list-header font-bold text-sm">${m.nama}</span></li>`).join("");
+                    og.innerHTML += `<div class="glass-card tilt-element"><h3 class="font-display font-bold text-lg text-[var(--text-primary)] mb-3 border-b border-[var(--glass-border)] pb-2">${role}</h3><ul class="smart-list">${list}</ul></div>`;
                 });
 
-                document.getElementById('btn-random').onclick = () => {
-                    Audio.play('click'); let c=0; const i = setInterval(()=>{
-                        const s = Data.kru[Math.floor(Math.random()*Data.kru.length)]; Audio.play('pop');
-                        c++; if(c>15){ clearInterval(i); Audio.play('success'); UI.showProfileIDCard(s.id); UI.toast(`Terpilih: ${s.nama}`, 'success'); }
-                    }, 80);
-                };
-
-                // Nav & Tabs
-                document.querySelectorAll('.nav-pill:not(.filter-btn-game):not(.filter-shop)').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        document.querySelectorAll('#main-nav .nav-pill').forEach(b=>b.classList.remove('active'));
-                        e.currentTarget.classList.add('active');
-                        const target = e.currentTarget.dataset.target;
-                        document.querySelectorAll('.content-section').forEach(s => s.style.display='none');
-                        if(target === 'semua') document.querySelectorAll('.content-section').forEach(s => s.style.display='block');
-                        else document.getElementById(target).style.display = 'block';
-                        window.scrollTo({top: 0, behavior: 'smooth'}); e.currentTarget.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
-                    });
+                const pg = document.getElementById('piket-grid');
+                const dayIdx = new Date().getDay();
+                Data.piket.forEach((p, i) => {
+                    let list = p.list.map(id => { let k = Data.kru.find(x => x.id === id); return `<li onclick="App.UI.showProfileIDCard('${k.id}')" class="btn-interactive cursor-pointer"><span class="list-header font-bold text-sm">${k.nama}</span></li>`; }).join("");
+                    let isToday = (i+1 === dayIdx) && (dayIdx <= 5);
+                    pg.innerHTML += `<div class="glass-card tilt-element ${isToday?'ring-2 ring-[var(--accent)] ring-opacity-50':''}"><h3 class="font-display font-bold text-lg mb-3 border-b border-[var(--glass-border)] pb-2 flex justify-between text-[var(--text-primary)]"><span>${p.hari}</span> ${isToday?'<span class="text-[var(--accent)] text-xs uppercase font-bold flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping"></span> Hari Ini</span>':''}</h3><ul class="smart-list">${list}</ul></div>`;
                 });
 
-                // FAB Multi Click Logic
-                const fabToday = document.getElementById('fab-today');
-                let todayClicks = 0;
-                let todayTimeout;
-
-                fabToday.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    todayClicks++;
-                    
-                    let msg = "";
-                    if(todayClicks===1) msg = "1x Klik: Membuka Jadwal";
-                    if(todayClicks===2) msg = "2x Klik: Membuka Piket";
-                    if(todayClicks>=3) msg = "3x Klik: Membuka Seragam";
-                    UI.toast(msg, 'info');
-
-                    clearTimeout(todayTimeout);
-                    todayTimeout = setTimeout(() => {
-                        if(todayClicks === 1) {
-                            document.querySelector('[data-target="pelajaran-section"]').click();
-                            setTimeout(() => { document.getElementById('pelajaran-section').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
-                        } else if(todayClicks === 2) {
-                            document.querySelector('[data-target="organization-section"]').click();
-                            setTimeout(() => { document.getElementById('piket-anchor').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
-                        } else if(todayClicks >= 3) {
-                            document.querySelector('[data-target="organization-section"]').click();
-                            setTimeout(() => { document.getElementById('pakaian-anchor').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
-                        }
-                        todayClicks = 0; 
-                    }, 400); 
+                const clg = document.getElementById('pakaian-grid');
+                Data.pakaian.forEach((p, i) => {
+                    let isToday = (i+1 === dayIdx) && (dayIdx <= 5);
+                    clg.innerHTML += `<div class="glass-card tilt-element text-center flex flex-col justify-center p-4 ${isToday?'ring-2 ring-[var(--accent)] bg-[var(--accent)] text-white':''}"><p class="text-[0.65rem] font-bold opacity-70 mb-1 uppercase tracking-widest">${Data.piket[i].hari}</p><p class="font-black text-sm md:text-base leading-tight ${isToday?'text-white':'text-[var(--text-primary)]'}">${p}</p></div>`;
                 });
 
-                document.getElementById('fab-top').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-                document.getElementById('fab-bottom').onclick = () => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+                // Init modules
+                Schedule.render(); setInterval(Schedule.render, 60000); 
+                Calendar2026.init();
+                Gallery.init();
+                Shop.init();
+                Games.generate(); Games.render();
+                Utilities.init();
+                UI.setupInteractions();
 
+                // Observers for animations
                 const obs = new IntersectionObserver(e => { e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal'); obs.unobserve(en.target); } }); }, { threshold: 0.1 });
                 document.querySelectorAll('.glass-card, .shop-item, .game-card, .gallery-item').forEach(el => obs.observe(el));
-
-                const progBar = document.getElementById('scroll-progress');
-                const header = document.getElementById('fixed-header');
-                window.addEventListener('scroll', () => {
-                    requestAnimationFrame(() => {
-                        let sy = window.scrollY;
-                        let docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        progBar.style.width = `${(sy / docH) * 100}%`;
-                        
-                        if(sy > 100 && sy > (window.lastScrollY||0)) header.classList.add('hide'); 
-                        else header.classList.remove('hide');
-                        window.lastScrollY = sy;
-                    });
-                }, {passive:true});
-
-                Gallery.init(); Calendar.init(); Shop.init(); Games.generate(); Games.render(); UI.setup3DTilt();
             };
 
-            return { Init, UI, Games, Shop };
+            // Public API
+            return { Init, UI, Games, Shop, Utilities };
         })();
 
+        // Start when DOM is ready
         document.addEventListener('DOMContentLoaded', App.Init);
     </script>
 </body>
 </html>
-
-```
