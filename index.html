@@ -3,605 +3,594 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Extraordinary CBT - B. Indonesia</title>
+    <title>Extraordinary CBT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
-        :root {
-            --q-font-size: 16px; 
-        }
+        :root { --q-font-size: 15px; }
 
-        /* Fixed scrolling bug: Body takes exact viewport height, prevents pull-to-refresh */
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff;
-            height: 100vh;
-            height: 100dvh; /* For mobile browsers handling URL bars */
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            overscroll-behavior-y: none; 
+            height: 100vh; height: 100dvh; 
+            display: flex; flex-direction: column; overflow: hidden; overscroll-behavior-y: none; 
+            color: #374151;
         }
 
-        /* Hexagon Background Pattern matching the screenshot */
-        .bg-hexagon {
-            background-color: #3b82f6;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='100' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231d4ed8' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M30 0L60 17.5v35L30 70 0 52.5v-35zM0 100l30-17.5v-35L0 30 30 12.5v35L60 65 30 82.5v-35z'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 60px 100px;
+        /* Hexagon Backgrounds (Mirip Asli) */
+        .bg-hexagon-blue {
+            background-color: #4da6ff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 17.32L60 34.64v34.64L30 86.6L0 69.28V34.64L30 17.32zm0-34.64L60 0v34.64L30 51.96 0 34.64V0l30-17.32zm0 103.92L60 103.92v34.64L30 155.88 0 138.56v-34.64l30-17.32z' fill='none' stroke='%231d4ed8' stroke-width='1.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
         }
 
-        /* Question Text Zooming */
-        .question-content {
-            font-size: var(--q-font-size);
-            line-height: 1.6;
-        }
+        /* View Management */
+        .view-section { display: none; height: 100%; width: 100%; flex-direction: column; background: #f9fafb; }
+        .view-section.active { display: flex; }
 
-        /* Smooth Custom Scrollbar for Main Content */
-        #main-scroll {
-            flex: 1;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-        }
-        ::-webkit-scrollbar { width: 5px; }
+        /* Scrollbar */
+        .scrollable { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #ffffff; }
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
 
-        /* Option Radio Styles */
-        .option-container {
-            border-bottom: 1px solid #f3f4f6;
-            transition: all 0.2s ease;
-        }
-        .option-container:last-child { border-bottom: none; }
+        /* Exam specific styles */
+        .question-content { font-size: var(--q-font-size); line-height: 1.6; color: #1f2937; }
+        
+        .option-container { border-bottom: 1px solid #f3f4f6; transition: background 0.2s; padding: 12px 16px; cursor: pointer; display: flex; align-items: flex-start; gap: 16px;}
+        .option-container:active { background: #f3f4f6; }
         .option-circle {
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            border: 2px solid #9ca3af;
+            width: 28px; height: 28px; border-radius: 50%; border: 1px solid #9ca3af;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 600; color: #4b5563; font-size: 14px;
-            transition: all 0.2s;
-            flex-shrink: 0;
+            font-weight: 500; color: #4b5563; font-size: 14px; flex-shrink: 0; background: #fff;
         }
         .option-container.selected .option-circle {
-            border-color: #3b82f6;
-            background-color: #3b82f6;
-            color: white;
-            box-shadow: 0 0 0 3px #dbeafe;
+            border-color: #3b82f6; background-color: #3b82f6; color: white; box-shadow: 0 0 0 3px #dbeafe;
         }
 
-        /* Circle for Question Number (UI like screenshot) */
         .q-number-circle {
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            background: #f9fafb; border: 2px solid #e5e7eb;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; font-weight: 700; color: #374151;
-            position: relative;
+            width: 46px; height: 46px; border-radius: 50%; border: 1px solid #d1d5db;
+            display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #111827; position: relative; background: #fff;
         }
         .check-badge {
-            position: absolute; top: -2px; left: -2px;
-            background: #10b981; color: white;
-            border-radius: 50%; width: 20px; height: 20px;
-            font-size: 12px; display: flex; align-items: center; justify-content: center;
-            border: 2px solid white;
-            display: none;
+            position: absolute; top: -4px; left: -4px; background: #10b981; color: white;
+            border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; border: 2px solid white; display: none;
         }
         .q-number-circle.answered .check-badge { display: flex; }
 
-        /* Footer buttons matching exactly the image */
-        .btn-prev { background-color: #ef4444; color: white; transition: 0.2s;}
-        .btn-prev:active { background-color: #dc2626; }
-        .btn-prev:disabled { opacity: 0.5; cursor: not-allowed; }
-        
-        .btn-next { background-color: #3b82f6; color: white; transition: 0.2s;}
-        .btn-next:active { background-color: #2563eb; }
-
-        /* Navigation Grid */
         .nav-grid-btn {
-            border: 1px solid #d1d5db; border-radius: 4px;
-            font-weight: 600; font-size: 14px; color: #374151;
-            display: flex; align-items: center; justify-content: center;
-            height: 40px; cursor: pointer; transition: 0.2s;
+            border: 1px solid #d1d5db; border-radius: 4px; font-weight: 600; font-size: 14px; color: #374151;
+            display: flex; align-items: center; justify-content: center; height: 40px; cursor: pointer; background: #fff;
         }
         .nav-grid-btn.answered { background-color: #3b82f6; color: white; border-color: #2563eb; }
         .nav-grid-btn.ragu { background-color: #facc15; color: white; border-color: #eab308; }
-        .nav-grid-btn.current { border: 2px solid #111827; font-weight: bold; background-color: #f3f4f6; color: #111827;}
-        .nav-grid-btn.current.answered { border: 2px solid #1e3a8a; }
-        .nav-grid-btn.current.ragu { border: 2px solid #854d0e; }
+        .nav-grid-btn.current { border: 2px solid #111827; font-weight: bold; }
+
+        .btn-exam-nav { width: 44px; height: 38px; display: flex; justify-content: center; align-items: center; border-radius: 4px; color: white; font-size: 16px; transition: 0.1s;}
+        .btn-exam-nav:disabled { opacity: 0.5; }
+        .btn-red { background-color: #ef4444; }
+        .btn-red:active { background-color: #dc2626; }
+        .btn-blue { background-color: #3b82f6; }
+        .btn-blue:active { background-color: #2563eb; }
+
+        /* Loader */
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #06b6d4; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Input Login */
+        .input-login { border: 1px solid #d1d5db; padding-left: 40px; border-radius: 6px; }
+        .input-login:focus { border-color: #06b6d4; box-shadow: 0 0 0 1px #06b6d4; outline: none; }
+        .icon-login { position: absolute; left: 14px; top: 12px; color: #6b7280; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <!-- 1. Header Area (Fixed) -->
-    <header class="bg-hexagon text-white flex-none relative shadow-sm z-20">
-        <div class="px-4 py-3 flex items-center justify-between bg-blue-600 bg-opacity-80">
-            <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-md shadow-sm h-10 w-10 flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-blue-700 text-2xl"></i>
+    <!-- ==================== VIEW 1: LOGIN ==================== -->
+    <div id="view-login" class="view-section active">
+        <!-- Header -->
+        <header class="bg-hexagon-blue h-32 flex-none relative">
+            <div class="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                <div class="bg-white p-1 rounded border border-gray-200 shadow-sm w-12 h-12 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Tut_Wuri_Handayani.png/320px-Logo_Tut_Wuri_Handayani.png" alt="Logo" class="w-8">
                 </div>
-                <div>
-                    <h1 class="font-bold text-sm tracking-wide leading-tight shadow-sm">SMP NEGERI 2 MAJALENGKA</h1>
-                    <p class="text-[11px] text-blue-100 font-medium">KAB. MAJALENGKA</p>
+                <div class="text-white">
+                    <h1 class="font-bold text-sm tracking-wider">SMP NEGERI 2 MAJALENGKA</h1>
+                    <p class="text-[11px] font-medium text-blue-100">KAB. MAJALENGKA</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:block text-right mr-2">
-                    <p class="font-bold text-sm leading-tight">M. ANDIKA KOSTRADNANDA</p>
-                    <p class="text-[11px] text-blue-100 font-medium">0103247002</p>
-                </div>
-                <button class="bg-white text-gray-700 w-9 h-9 flex items-center justify-center rounded shadow hover:bg-gray-100">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. Sub-header: Question Info & Timer (Fixed) -->
-    <div class="bg-white border-b border-gray-200 px-5 py-3 flex-none flex justify-between items-center z-10">
-        <div class="flex items-center gap-4">
-            <div id="q-number-indicator" class="q-number-circle shadow-sm">
-                <span id="current-num">1</span>
-                <div class="check-badge"><i class="fas fa-check"></i></div>
-            </div>
-            <div>
-                <h2 id="q-type-text" class="font-bold text-gray-800 text-[15px]">Pilihan ganda</h2>
-                <p class="text-xs text-gray-500 italic mt-0.5">You're too smart to cheat</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-2 border border-gray-300 rounded-md px-3 py-1.5 bg-gray-50 shadow-sm">
-            <i class="far fa-clock text-gray-600"></i>
-            <span id="timer" class="font-bold text-gray-800 tracking-wider">120:00</span>
-        </div>
-    </div>
-
-    <!-- 3. Tools Bar (Fixed) -->
-    <div class="bg-white border-b border-gray-200 px-4 py-2 flex-none flex justify-end sm:justify-between items-center text-sm text-gray-600 z-10 shadow-sm">
-        <div class="hidden sm:block text-[11px] font-bold text-blue-600 uppercase tracking-wider">UJIAN B. INDONESIA - KELAS 9</div>
-        <div class="flex items-center gap-4">
-            <button onclick="toggleSidebar()" class="hover:text-blue-600 font-semibold flex items-center gap-1.5 transition-colors">
-                <i class="fas fa-th-large"></i> Daftar soal
-            </button>
-            <div class="h-5 border-l border-gray-300"></div>
-            <div class="flex items-center gap-2">
-                <span class="font-medium text-xs">Zoom size</span>
-                <input type="range" id="zoom-slider" min="14" max="26" value="16" class="w-24 accent-blue-600">
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. MAIN SCROLLABLE CONTENT -->
-    <!-- This is the only part of the page that will scroll -->
-    <main id="main-scroll" class="bg-white relative">
-        <div class="max-w-3xl mx-auto p-5 pb-10">
-            
-            <!-- Question Content -->
-            <div class="question-content text-gray-800 mb-8" id="q-text">
-                <!-- Teks soal akan dimuat di sini oleh JS -->
-            </div>
-
-            <!-- Options Container (PG) -->
-            <div id="options-container" class="flex flex-col gap-1">
-                <!-- Pilihan ganda akan dimuat di sini -->
-            </div>
-
-            <!-- Essay Container -->
-            <div id="essay-container" class="hidden mt-4">
-                <p class="text-sm font-semibold text-gray-600 mb-2">Tuliskan jawaban uraian Anda di bawah ini:</p>
-                <textarea id="essay-input" rows="8" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-base resize-none shadow-sm" placeholder="Ketik jawaban Anda di sini..."></textarea>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- 5. FOOTER NAV (Fixed at Bottom) -->
-    <footer class="bg-white border-t border-gray-200 flex-none px-4 py-3 flex justify-between items-center z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-        <button id="btn-prev" class="btn-prev w-14 h-11 rounded shadow-md flex items-center justify-center text-xl disabled:opacity-40">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+        </header>
         
-        <label class="flex items-center gap-2 cursor-pointer p-2 border border-transparent hover:border-gray-200 rounded-md transition-all">
-            <input type="checkbox" id="cb-ragu" class="w-5 h-5 accent-yellow-500 cursor-pointer">
-            <span class="font-semibold text-gray-700 text-sm uppercase tracking-wide">Ragu-ragu</span>
-        </label>
-
-        <button id="btn-next" class="btn-next w-14 h-11 rounded shadow-md flex items-center justify-center text-xl">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-
-        <button id="btn-finish" class="hidden bg-green-600 hover:bg-green-700 text-white font-bold px-8 h-11 rounded shadow-md flex items-center justify-center transition-colors">
-            Selesai
-        </button>
-    </footer>
-
-    <!-- 6. Bottom Branding (Fixed) -->
-    <div class="bg-gray-100 text-center py-1.5 text-[10px] font-medium text-gray-500 flex-none border-t border-gray-200">
-        © 2026 Extraordinary CBT 4.6.3-ROSETTA-RELEASE
-    </div>
-
-    <!-- MODAL: DAFTAR SOAL (Sidebar) -->
-    <div id="sidebar-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-60 flex justify-end transition-opacity">
-        <div class="bg-white w-full sm:w-80 h-full flex flex-col shadow-2xl animate-slide-in">
-            <div class="p-4 border-b flex justify-between items-center bg-gray-50 shadow-sm">
-                <h3 class="font-bold text-gray-800"><i class="fas fa-list-ul mr-2 text-blue-600"></i> Daftar Soal</h3>
-                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-red-500 text-xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 transition-colors"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="p-4 flex-1 overflow-y-auto">
-                <div class="mb-3">
-                    <div class="text-xs font-extrabold text-gray-500 mb-2 uppercase tracking-wider border-b pb-1">Pilihan Ganda (1-40)</div>
-                    <div id="nav-grid-pg" class="grid grid-cols-5 gap-2"></div>
+        <!-- Main Login Content -->
+        <main class="scrollable px-4 pt-6 pb-6">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="border-b border-gray-100 bg-gray-50 p-4">
+                    <h2 class="text-base font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-qrcode"></i> Login</h2>
                 </div>
                 
-                <div class="mt-6 mb-3">
-                    <div class="text-xs font-extrabold text-gray-500 mb-2 uppercase tracking-wider border-b pb-1">Esai / Uraian (41-45)</div>
+                <div class="p-5">
+                    <div id="login-error" class="hidden mb-4 p-2 bg-red-50 border border-red-200 text-red-600 text-xs rounded text-center">
+                        Nomor Ujian atau Password salah!
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-600 mb-1.5">Nomor Ujian</label>
+                        <div class="relative">
+                            <i class="far fa-user icon-login"></i>
+                            <input type="text" id="login-username" class="w-full py-2.5 text-sm input-login" placeholder="Nomor Ujian">
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold text-gray-600 mb-1.5">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-unlock icon-login"></i>
+                            <input type="password" id="login-password" value="123" class="w-full py-2.5 text-sm input-login" placeholder="*******">
+                            <button onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400">
+                                <i class="far fa-eye-slash" id="eye-icon"></i>
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-gray-400 mt-1">Gunakan No 224 - 255. Pass: 123</p>
+                    </div>
+
+                    <button onclick="doLogin()" id="btn-login" class="px-6 py-2.5 bg-[#06b6d4] hover:bg-[#0891b2] text-white text-sm font-semibold rounded transition-colors flex items-center justify-center">
+                        <span>Login</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center py-3 text-[11px] text-gray-500 bg-white border-t flex-none">
+            © 2026 Extraordinary CBT 4.6.3-ROSETTA-RELEASE
+        </footer>
+    </div>
+
+    <!-- ==================== VIEW 2: DASHBOARD ==================== -->
+    <div id="view-dashboard" class="view-section">
+        <!-- Header -->
+        <header class="bg-hexagon-blue flex-none relative">
+            <div class="px-4 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white p-1 rounded border border-gray-200 shadow-sm w-12 h-12 flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Tut_Wuri_Handayani.png/320px-Logo_Tut_Wuri_Handayani.png" alt="Logo" class="w-8">
+                    </div>
+                    <div class="text-white hidden sm:block">
+                        <h1 class="font-bold text-sm tracking-wider">SMP NEGERI 2 MAJALENGKA</h1>
+                        <p class="text-[11px]">KAB. MAJALENGKA</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right text-white mr-1">
+                        <p id="dash-user-name" class="font-bold text-sm leading-tight uppercase">NAMA</p>
+                        <p id="dash-user-id" class="text-[11px] text-blue-100">ID</p>
+                    </div>
+                    <button onclick="doLogout()" class="bg-white text-gray-700 w-10 h-10 flex items-center justify-center rounded shadow-sm">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Tabs -->
+            <div class="bg-white flex px-4 border-b border-gray-200">
+                <div class="py-3 px-2 border-b-2 border-blue-600 text-blue-600 text-sm font-bold mr-6">Ujian</div>
+                <div class="py-3 px-2 text-gray-500 text-sm font-semibold">Hasil ujian</div>
+            </div>
+        </header>
+
+        <main class="scrollable px-4 py-5">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Profile Block -->
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-14 h-14 border border-dashed border-gray-300 rounded flex items-center justify-center text-gray-400 bg-gray-50">
+                        <i class="far fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-500">Nama Peserta</p>
+                        <p id="card-user-name" class="font-bold text-gray-800 text-sm mb-1 uppercase">NAMA</p>
+                        <p class="text-[10px] font-bold text-gray-500">Nomor Ujian</p>
+                        <p id="card-user-id" class="font-bold text-gray-800 text-sm">ID</p>
+                    </div>
+                </div>
+
+                <!-- Info Ujian Aktif -->
+                <div class="bg-gray-50 border border-gray-200 rounded p-4 mb-6">
+                    <p class="text-xs font-bold text-gray-800 mb-2">Informasi Ujian</p>
+                    <div class="bg-white border border-blue-200 p-4 rounded shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-4">
+                        <div>
+                            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded">JADWAL HARI INI</span>
+                            <h4 class="font-bold text-gray-800 mt-1">Pendidikan Pancasila (PPKn)</h4>
+                            <p class="text-xs text-gray-500">90 Menit • 45 Soal</p>
+                        </div>
+                        <button onclick="showTokenView()" class="w-full md:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded transition-colors">
+                            Mulai
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <footer class="text-center py-3 text-[11px] text-gray-500 bg-white border-t flex-none">
+            © 2026 Extraordinary CBT 4.6.3-ROSETTA-RELEASE
+        </footer>
+    </div>
+
+    <!-- ==================== VIEW 3: TOKEN ==================== -->
+    <div id="view-token" class="view-section bg-gray-900 bg-opacity-60 absolute inset-0 z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-sm w-full p-5 text-center">
+            <h2 class="text-lg font-bold text-gray-800 mb-1">Token Ujian</h2>
+            <p class="text-xs text-gray-500 mb-4">Salin dan masukkan token di bawah ini.</p>
+            
+            <div class="bg-gray-100 border border-gray-300 rounded p-3 mb-4">
+                <span id="display-token" class="text-2xl font-black tracking-widest text-gray-800 select-all">XXXXX</span>
+            </div>
+
+            <input type="text" id="input-token" class="w-full text-center text-lg font-bold uppercase py-2 border border-gray-300 rounded focus:border-blue-500 outline-none mb-1" placeholder="KETIK TOKEN">
+            <p id="token-error" class="text-red-500 text-[10px] font-semibold h-4 mb-3"></p>
+
+            <div class="flex gap-2">
+                <button onclick="cancelToken()" class="flex-1 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded">Batal</button>
+                <button onclick="verifyToken()" class="flex-1 py-2 bg-blue-600 text-white text-sm font-bold rounded">Konfirmasi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW 4: EXAM (UI SANGAT MIRIP ASLI) ==================== -->
+    <div id="view-exam" class="view-section bg-white">
+        <!-- 1. Header Biru -->
+        <header id="exam-header" class="bg-hexagon-blue flex-none relative transition-all duration-300 origin-top">
+            <div class="px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white p-1 rounded border border-gray-200 w-10 h-10 flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Tut_Wuri_Handayani.png/320px-Logo_Tut_Wuri_Handayani.png" alt="Logo" class="w-7">
+                    </div>
+                    <div class="text-white">
+                        <h1 class="font-bold text-xs tracking-wider">SMP NEGERI 2 MAJALENGKA</h1>
+                        <p class="text-[10px]">KAB. MAJALENGKA</p>
+                    </div>
+                </div>
+                <button class="bg-white text-gray-700 w-8 h-8 flex items-center justify-center rounded">
+                    <i class="fas fa-sign-out-alt text-sm"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 2. Bar Nomor & Timer -->
+        <div class="px-4 py-3 flex-none flex justify-between items-center border-b border-gray-200 bg-white">
+            <div class="flex items-center gap-3">
+                <div id="q-number-indicator" class="q-number-circle">
+                    <span id="current-num">1</span>
+                    <div class="check-badge"><i class="fas fa-check"></i></div>
+                </div>
+                <div>
+                    <h2 id="q-type-text" class="font-bold text-gray-800 text-sm">Pilihan ganda</h2>
+                    <p class="text-[10px] text-gray-400 italic">You're too smart to cheat</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 border border-gray-200 rounded px-2.5 py-1.5 bg-gray-50">
+                <i class="far fa-clock text-gray-500 text-sm"></i>
+                <span id="timer" class="font-bold text-gray-700 text-sm tracking-wide">90:00</span>
+            </div>
+        </div>
+
+        <!-- 3. Sub-bar: Daftar Soal & Fokus -->
+        <div class="border-b border-gray-200 px-4 py-2 flex-none flex justify-end items-center gap-4 text-xs font-semibold text-gray-500 bg-white">
+            <button onclick="toggleSidebar()" class="flex items-center gap-1.5 hover:text-gray-800">
+                <i class="fas fa-th-large text-gray-400"></i> Daftar soal
+            </button>
+            <button onclick="toggleFokus()" class="flex items-center gap-1.5 hover:text-gray-800">
+                <i class="fas fa-expand text-gray-400" id="icon-fokus"></i> Fokus
+            </button>
+        </div>
+
+        <!-- 4. Sub-bar: Zoom -->
+        <div class="border-b border-gray-100 px-4 py-1.5 flex-none flex justify-end items-center gap-2 text-[11px] text-gray-400 bg-white shadow-sm z-10">
+            <span>Zoom size</span>
+            <input type="range" id="zoom-slider" min="12" max="22" value="15" class="w-16 accent-blue-600">
+        </div>
+
+        <!-- 5. AREA SOAL (Scrollable) -->
+        <main id="main-scroll" class="scrollable">
+            <div class="max-w-2xl mx-auto pb-10">
+                <!-- Question Text -->
+                <div class="p-4 pt-5">
+                    <div class="question-content" id="q-text"></div>
+                </div>
+
+                <!-- Options -->
+                <div id="options-container" class="flex flex-col border-t border-gray-100">
+                    <!-- Options injected here -->
+                </div>
+
+                <!-- Essay Area -->
+                <div id="essay-container" class="hidden p-4 border-t border-gray-100">
+                    <textarea id="essay-input" rows="8" class="w-full p-3 border border-gray-300 rounded text-sm focus:border-blue-500 outline-none resize-none" placeholder="Ketik jawaban uraian di sini..."></textarea>
+                </div>
+            </div>
+        </main>
+
+        <!-- 6. FOOTER NAV (Fixed) -->
+        <footer class="bg-gray-50 border-t border-gray-200 flex-none px-4 py-2.5 flex justify-between items-center z-10">
+            <button id="btn-prev" class="btn-exam-nav btn-red"><i class="fas fa-chevron-left"></i></button>
+            
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input type="checkbox" id="cb-ragu" class="w-4 h-4 accent-white bg-white border-gray-300 rounded">
+                <span class="text-sm font-semibold text-gray-700">ragu-ragu</span>
+            </label>
+
+            <button id="btn-next" class="btn-exam-nav btn-blue"><i class="fas fa-chevron-right"></i></button>
+            <button id="btn-finish" class="hidden px-5 py-2 bg-blue-600 text-white text-sm font-bold rounded">Selesai</button>
+        </footer>
+
+        <!-- 7. Copyright Text -->
+        <div class="bg-white text-center py-1 text-[9px] text-gray-400 flex-none">
+            © 2024 Extraordinary CBT 4.6.3-ROSETTA-RELEASE
+        </div>
+    </div>
+
+    <!-- MODAL DAFTAR SOAL -->
+    <div id="sidebar-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex justify-end">
+        <div class="bg-white w-full sm:w-80 h-full flex flex-col shadow-2xl animate-slide-in">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 text-sm">Daftar Soal</h3>
+                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-4 flex-1 overflow-y-auto">
+                <div class="mb-4">
+                    <div class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Pilihan Ganda</div>
+                    <div id="nav-grid-pg" class="grid grid-cols-5 gap-2"></div>
+                </div>
+                <div>
+                    <div class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Esai</div>
                     <div id="nav-grid-essay" class="grid grid-cols-5 gap-2"></div>
                 </div>
             </div>
-
-            <div class="p-4 border-t bg-gray-50 text-[11px] font-semibold grid grid-cols-2 gap-y-2 gap-x-1">
-                <div class="flex items-center gap-2"><div class="w-3.5 h-3.5 border border-gray-400 bg-white rounded-sm"></div> Belum Dijawab</div>
-                <div class="flex items-center gap-2"><div class="w-3.5 h-3.5 bg-blue-500 rounded-sm"></div> Sudah Dijawab</div>
-                <div class="flex items-center gap-2"><div class="w-3.5 h-3.5 bg-yellow-400 rounded-sm"></div> Ragu-ragu</div>
-                <div class="flex items-center gap-2"><div class="w-3.5 h-3.5 border-2 border-gray-800 bg-gray-100 rounded-sm"></div> Posisi Saat Ini</div>
+            <div class="p-4 border-t bg-gray-50 text-[10px] font-semibold grid grid-cols-2 gap-2 text-gray-600">
+                <div class="flex items-center gap-1.5"><div class="w-3 h-3 border border-gray-300 bg-white"></div> Belum</div>
+                <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-blue-500"></div> Dijawab</div>
+                <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-yellow-400"></div> Ragu-ragu</div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: HASIL EVALUASI -->
-    <div id="result-modal" class="fixed inset-0 z-50 hidden bg-gray-900 bg-opacity-95 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center border-t-8 border-green-500 transform scale-95 transition-transform duration-300">
-            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-check text-4xl text-green-500"></i>
-            </div>
-            <h2 class="text-2xl font-extrabold text-gray-800 mb-1">Ujian Selesai!</h2>
-            <p class="text-sm text-gray-500 mb-6 font-medium">PSAJ Bahasa Indonesia - Kurikulum Merdeka</p>
+    <!-- ==================== VIEW 5: HASIL ==================== -->
+    <div id="view-result" class="view-section bg-white absolute inset-0 z-50 justify-center items-center p-4">
+        <div class="text-center max-w-sm w-full">
+            <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 mb-1">Ujian Selesai</h2>
+            <p class="text-xs text-gray-500 mb-6">Penilaian Sumatif Akhir Jenjang</p>
             
-            <div class="grid grid-cols-2 gap-3 mb-5">
-                <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 shadow-sm">
-                    <p class="text-[10px] text-blue-600 font-bold uppercase tracking-wider mb-1">NILAI PG</p>
-                    <p id="score-pg" class="text-3xl font-black text-blue-700 leading-none">0</p>
-                    <p class="text-[10px] text-gray-500 mt-1 font-medium">Maks: 60</p>
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="border border-gray-200 rounded p-4">
+                    <p class="text-[10px] text-gray-400 font-bold">NILAI PG</p>
+                    <p id="score-pg" class="text-3xl font-black text-gray-800">0</p>
                 </div>
-                <div class="bg-purple-50 border border-purple-100 rounded-xl p-3 shadow-sm">
-                    <p class="text-[10px] text-purple-600 font-bold uppercase tracking-wider mb-1">NILAI ESAI</p>
-                    <p id="score-essay" class="text-3xl font-black text-purple-700 leading-none">0</p>
-                    <p class="text-[10px] text-gray-500 mt-1 font-medium">Maks: 40</p>
+                <div class="border border-gray-200 rounded p-4">
+                    <p class="text-[10px] text-gray-400 font-bold">NILAI ESAI</p>
+                    <p id="score-essay" class="text-3xl font-black text-gray-800">0</p>
                 </div>
             </div>
-
-            <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-5 shadow-sm">
-                <p class="text-xs text-green-700 font-bold uppercase tracking-wider">TOTAL SKOR AKHIR</p>
-                <p id="score-total" class="text-5xl font-black text-green-600 mt-1 drop-shadow-sm">0</p>
-            </div>
-
-            <p class="text-[10px] text-gray-400 italic mb-6 leading-relaxed">*Nilai esai diestimasi menggunakan algoritma deteksi kata kunci. Nilai mutlak ditentukan oleh guru mata pelajaran.</p>
-
-            <button onclick="location.reload()" class="w-full py-3.5 bg-gray-800 hover:bg-gray-900 text-white font-bold rounded-xl transition-all shadow-md active:scale-95">
-                Kembali ke Beranda
-            </button>
+            <button onclick="location.reload()" class="w-full py-3 bg-blue-600 text-white text-sm font-bold rounded">Tutup & Kembali</button>
         </div>
     </div>
 
+    <!-- ==================== SCRIPT LOGIC ==================== -->
     <script>
-        // --- DATA SOAL (45 SOAL: 40 PG + 5 ESAI) ---
-        // Bersumber dari PDF (Ide Pokok, Teks Rekon, Majas, Citraan, Konjungsi, Kata Baku, dsb.)
+        // 1. DATA SISWA
+        const students = {
+            "224": "ADI MUHAMAD FERDIANSYAH", "225": "APRIYANTO", "226": "AZHIRA VIENOLIA NAVISHA BILQIS", "227": "BELVA RAMANIA", "228": "CITRA LESTARI", "229": "DIANA WIDYAWATI", "230": "DINDA AULIA WINDARIS", "231": "FAZRI INDRA NUGRAHA", "232": "GEANNE SUKMA ANINDYA", "233": "GENDIS AULIA MAHARANI WIBOWO", "234": "KAZRIL CAHYARAHIM", "235": "KHAYRA ADZKIA HAIFA", "236": "M. ANDIKA KOSTRADNANDA", "237": "MELISA RAHMAYANTI ISKANDAR PUTRI", "238": "MOCHAMMAD RIZKY RAMDHANI", "239": "MUHAMMAD AINUR OKTA FAIQ MAULANA", "240": "MUHAMMAD IDHAM AL-HAFIDZ", "241": "NADIA RAMADINA", "242": "NADZAR FAJRI GUMELAR", "243": "RAMA KURNIAWAN", "244": "RICKY ADLY MAULANA", "245": "RIKA RISMAYANTI", "246": "RIZKY ARIEF FADILLAH", "247": "SALMA NURDESTIANI", "248": "SALSABILA NIZMA", "249": "SITI ZALFA ZHUFAIRAH", "250": "SRI AULIA NINGSIH", "251": "SUCI LATIFAH OKTAVIANI", "252": "SYIFA AULIANA PUTRI", "253": "SYIFA NURDINI H.", "254": "VIENARD CAIZHI NISAESU IRHAB", "255": "YANA NURYANA"
+        };
+        let currentUser = null; let generatedToken = "";
+
+        // 2. BANK SOAL PPKN 
         const questions = [
-            // MATERI 1: PEMAHAMAN WACANA & TEKS DESKRIPSI (PDF Hal 1-4)
-            { id: 1, type: 'pg', text: "Sebuah paragraf yang kalimat utamanya atau ide pokoknya terletak di <b>awal paragraf</b>, kemudian diikuti oleh kalimat-kalimat penjelas, disebut paragraf...", options: ["Induktif", "Deduktif", "Campuran", "Persuasif"], answer: 1 },
-            { id: 2, type: 'pg', text: "Bacalah paragraf berikut!<br><br><i>Angin bertiup kencang menghamburkan daun-daun dan sampah plastik. Udara siang hari terasa panas menyengat. Musim kemarau mulai dirasakan masyarakat Majalengka.</i><br><br>Berdasarkan letak kalimat utamanya, paragraf di atas termasuk jenis paragraf...", options: ["Deduktif", "Induktif", "Campuran", "Naratif"], answer: 1 },
-            { id: 3, type: 'pg', text: "Teks yang menggambarkan suatu objek, tempat, atau benda secara terperinci sehingga pembaca seolah-olah melihat dan merasakannya sendiri disebut...", options: ["Teks Deskripsi", "Teks Narasi", "Teks Rekon", "Teks Argumentasi"], answer: 0 },
-            { id: 4, type: 'pg', text: "Bacalah teks berikut!<br><br><i>Tas Belva memiliki berbagai macam warna, yaitu putih, cream, cokelat, dan hijau kebiruan. Tas tersebut berukuran sedang dan pada selendang kirinya terdapat logo BTS. Bagian depan dilapisi kain dan sedikit busa.</i><br><br>Teks di atas mendeskripsikan...", options: ["Perasaan Belva saat pergi ke sekolah", "Ciri-ciri fisik dan bentuk tas milik Belva", "Harga tas Belva yang dibeli di pasar", "Kegunaan tas untuk membawa buku"], answer: 1 },
-            { id: 5, type: 'pg', text: "Berdasarkan kutipan pada soal nomor 4, sudut pandang yang tepat jika narator menceritakan tokoh dengan menggunakan nama 'Belva' adalah sudut pandang...", options: ["Orang pertama pelaku utama", "Orang pertama pelaku sampingan", "Orang ketiga", "Orang kedua"], answer: 2 },
-            { id: 6, type: 'pg', text: "Berdasarkan arti kata, makna kata <i>menggunjing</i> yang paling tepat adalah...", options: ["Membicarakan keburukan orang lain", "Membantu orang lain yang sedang kesusahan", "Merenungkan nasib diri sendiri", "Menertawakan kejadian yang lucu"], answer: 0 },
-            { id: 7, type: 'pg', text: "Makna kata <i>gundah</i> berdasarkan kamus adalah...", options: ["Bahagia luar biasa", "Perasaan tidak senang atau gelisah", "Rasa benci yang mendalam", "Lega karena masalah selesai"], answer: 1 },
+            { id:1, type:'pg', text:"Pandangan hidup, ilmu pengetahuan, serta berbagai strategi kehidupan yang berwujud aktivitas yang dilakukan yang menjamin kelangsungan hidup manusia disebut...", options:["Kebudayaan nasional", "Kearifan lokal", "Tradisi", "Hukum adat"], answer:1 },
+            { id:2, type:'pg', text:"Hasil karya, cipta, rasa dan karsa manusia yang didasarkan nilai leluhur di suatu daerah tertentu disebut...", options:["Budaya", "Tradisi", "Adat", "Kebiasaan"], answer:0 },
+            { id:3, type:'pg', text:"Salah satu fungsi etnosentrisme pada suatu suku bangsa adalah...", options:["Membentuk kebudayaan modern", "Mempertahankan kebudayaan nasional", "Mempertahankan kebudayaan asing", "Mempertahankan kebudayaan sendiri"], answer:3 },
+            { id:4, type:'pg', text:"Daerah asal dari kesenian tari atau tari Baris adalah...", options:["Bali", "Jawa tengah", "Sumatra", "Jawa barat"], answer:0 },
+            { id:5, type:'pg', text:"Sistem kekerabatan yang mengutamakan hubungan kerabat melalui garis keturunan perempuan disebut sistem kekerabatan...", options:["Parental", "Matrilineal", "Patrilineal", "Bilateral"], answer:1 },
+            { id:6, type:'pg', text:"Filosofi <i>Ajining diri saka lathi, ajining raga saka busana</i> berasal dari...", options:["Sumatra", "Bali", "Jawa", "Papua"], answer:2 },
+            { id:7, type:'pg', text:"<i>Lojor teu meunang dipotong, pondok teu meunang disambung</i> merupakan filosofi hidup yang menjaga kelestarian alam dan lingkungan wilayah tradisional...", options:["Baduy", "Jawa", "Sunda", "Papua"], answer:2 },
+            { id:8, type:'pg', text:"Tradisi subak di Bali yang mengatur sistem irigasi pertanian mencerminkan nilai...", options:["Individualisme", "Gotong royong dan kebersamaan", "Persaingan usaha", "Efisiensi modern"], answer:1 },
+            { id:9, type:'pg', text:"Dampak negatif dari hilangnya kearifan lokal akibat globalisasi adalah...", options:["Terjadinya pertukaran budaya", "Hilangnya identitas budaya asli", "Berkembangnya ilmu pengetahuan", "Meningkatnya budaya antar kota"], answer:1 },
+            { id:10, type:'pg', text:"Salah satu contoh kearifan lokal dalam menjaga kelestarian lingkungan adalah...", options:["Penggunaan pestisida kimia berlebih", "Sistem hutan adat yang melarang penebangan liar (Riau)", "Pembangunan gedung pencakar langit", "Pengalihan fungsi hutan menjadi perkotaan"], answer:1 },
+            { id:11, type:'pg', text:"Masyarakat Indonesia disebut etnik pluralistik karena merupakan masyarakat yang...", options:["Persatuan suku-suku bangsanya kuat", "Agama dan kepercayaanya bervariasi", "Terdiri dari berbagai ras", "Terdiri atas beraneka ragam suku bangsa"], answer:3 },
+            { id:12, type:'pg', text:"Masyarakat Indonesia adalah masyarakat yang majemuk atau multikultural. Kemajemukan masyarakat Indonesia ditandai dengan...", options:["Tingginya angka kematian", "Banyaknya suku, agama, dan budaya", "Strategisnya letak wilayah", "Besarnya jumlah penduduk"], answer:1 },
+            { id:13, type:'pg', text:"Salah satu faktor yang menyebabkan terbentuknya masyarakat Indonesia yang ber-Bhinneka Tunggal Ika adalah persamaan...", options:["Ras", "Pandangan Hidup", "Nenek Moyang", "Adat istiadat"], answer:1 }, 
+            { id:14, type:'pg', text:"Semangat berikut yang dapat meningkatkan semangat persatuan dan kesatuan dalam masyarakat multikultural adalah...", options:["Etnosentrisme", "Primordialisme", "Nasionalisme", "Fanatisme"], answer:2 },
+            { id:15, type:'pg', text:"Salah satu pengaruh primordialisme terhadap kehidupan berbangsa dan bernegara adalah...", options:["Menghambat proses integrasi nasional", "Mempertajam perbedaan pandangan", "Menghilangkan sentimen kedaerahan", "Membangkitkan rasa permusuhan"], answer:0 },
+            { id:16, type:'pg', text:"Untuk menjaga kerukunan hidup antar umat beragama dapat dilakukan dengan...", options:["Saling menghormati antara sesama umat beragama", "Berkewajiban menyatukan agama yang berbeda", "Menaati segala aturan agama", "Bertanggung jawab terhadap agama tetangga"], answer:0 },
+            { id:17, type:'pg', text:"Konflik yang terjadi karena adanya pengusaha yang memanfaatkan kesempatan untuk mendapatkan proyek pemerintah dengan tujuan menambah keuntungan bisnisnya merupakan konflik berupa...", options:["Menggunakan aturan ketat", "Perbedaan kepentingan", "Kemenangan salah satu pihak", "Toleransi terhadap pihak lain"], answer:1 },
+            { id:18, type:'pg', text:"Sikap yang dapat memajukan kebudayaan nasional sebagai cermin kepribadian bangsa Indonesia adalah...", options:["Memupuk diri dengan perilaku yang baik", "Membantu orang lain karena pamrih", "Melestarikan semangat kebangsaan", "Menjaga warisan keluarga sendiri"], answer:2 },
+            { id:19, type:'pg', text:"Diketahui di suatu sekolah terdapat siswa baru pindahan dari luar daerah. Teman-temannya menyambut baik walaupun asal dan bahasa daerahnya berbeda. Berdasarkan ilustrasi, termasuk perwujudan Pancasila sila ke...", options:["Kedua", "Ketiga", "Keempat", "Kelima"], answer:1 }, 
+            { id:20, type:'pg', text:"Seorang anak dibesarkan dalam lingkungan keluarga yang menjunjung tinggi nilai kesopanan akan selalu bersikap sopan. Hal tersebut disebabkan oleh...", options:["Kepentingan masyarakat", "Pemberontakan dalam masyarakat", "Proses tumbuhnya nilai-nilai sejak dini", "Perubahan sosial budaya"], answer:2 },
+            { id:21, type:'pg', text:"Hubungan Pancasila dengan UUD NRI Tahun 1945 adalah...", options:["Keduanya tidak memiliki keterkaitan hukum", "UUD 1945 merupakan sumber dari Pancasila", "Pancasila menjadi sumber dari segala sumber hukum yang mendasari seluruh pasal dalam UUD 1945", "Pancasila dapat diubah melalui amandemen UUD 1945"], answer:2 },
+            { id:22, type:'pg', text:"Pembukaan UUD NRI 1945 memuat nilai-nilai Pancasila sehingga jika Pembukaan tersebut diubah, maka...", options:["Pemerintahan akan menjadi lebih baik", "Dasar berdirinya negara juga akan berubah", "Rakyat akan semakin sejahtera", "Teks proklamasi harus dibacakan ulang"], answer:1 },
+            { id:23, type:'pg', text:"Perwujudan nilai-nilai Pancasila di bidang ekonomi dikembangkan melalui sistem ekonomi yang dijiwai oleh nilai Pancasila yang telah ditegaskan dalam UUD NRI Tahun 1945 pada...", options:["Pasal 30", "Pasal 31", "Pasal 32", "Pasal 33"], answer:3 },
+            { id:24, type:'pg', text:"Rumusan Pancasila yang merupakan kesatuan yang bulat dan utuh dari kelima silanya tercantum dalam...", options:["Pembukaan UUD NRI Tahun 1945", "Peraturan Perundang-undangan", "Ketetapan MPR", "Penetapan Presiden"], answer:0 },
+            { id:25, type:'pg', text:"Pancasila dipastikan bukan merupakan ideologi tertutup, tetapi ideologi terbuka. Keterbukaan tersebut dalam era globalisasi mengandung pemahaman...", options:["Menerima berbagai pengaruh dari luar negeri", "Berusaha menutup diri dari perubahan", "Berusaha mempertahankan tanpa menerima perubahan manapun", "Menerima nilai-nilai dari luar secara selektif yang bersifat reformis demi kemajuan bangsa"], answer:3 },
+            { id:26, type:'pg', text:"Menjaga dan melestarikan budaya merupakan bentuk dari hak dan kewajiban seorang warga negara yang tercantum dalam UUD NRI Tahun 1945 yaitu...", options:["Pasal 32 ayat (1)", "Pasal 32 ayat (2)", "Pasal 33 ayat (1)", "Pasal 34 ayat (2)"], answer:0 },
+            { id:27, type:'pg', text:"Landasan konstitusional pemerintah adalah menjalankan peraturan sesuai dengan UUD 1945. Apabila penyelenggara negara dalam melaksanakan tugasnya tidak sesuai dengan amanat UUD 1945, maka telah terjadi...", options:["Gerakan revolusi", "Penyimpangan terhadap UUD 1945", "Ketidaksesuaian penyelenggara", "Kebebasan negara"], answer:1 },
+            { id:28, type:'pg', text:"Peraturan perundang-undangan yang mempunyai kedudukan tertinggi di negara Indonesia adalah...", options:["UUD NRI 1945", "Ketetapan MPR", "Undang-Undang", "Peraturan Pemerintah"], answer:0 },
+            { id:29, type:'pg', text:"UU No.12 Tahun 2011 mengatur tata urutan peraturan. Tata urutan yang tepat adalah...", options:["UUD 1945, PP, TAP MPR, UU, Perda", "UUD 1945, TAP MPR, UU, PP", "UUD 1945, Perda, TAP MPR, UU", "UUD 1945, TAP MPR, PP, UU"], answer:1 },
+            { id:30, type:'pg', text:"Urutan yang tepat dalam perumusan Pancasila adalah...<br>1. Ir. Soekarno pidato 1 Juni 1945<br>2. Terbentuknya Panitia Sembilan<br>3. Disahkannya Pancasila dlm UUD 1945<br>4. Perumusan Piagam Jakarta", options:["1-2-4-3", "1-4-2-3", "2-4-3-1", "4-1-2-3"], answer:0 },
+            { id:31, type:'pg', text:"Berikut ini yang merupakan tantangan dalam upaya mempertahankan wilayah NKRI adalah...", options:["Banyaknya pulau yang dikelola", "Sistem pendidikan yang terlalu maju", "Wilayah yang sangat luas dan akses antar daerah yang kurang setara", "Tidak adanya budaya lokal"], answer:2 },
+            { id:32, type:'pg', text:"Penyebaran penduduk yang belum merata, di mana penduduk masih terpusat di Pulau Jawa, dapat memicu tantangan berupa...", options:["Kemudahan dalam pertahanan militer", "Kesulitan mempertahankan NKRI karena pulau terluar sepi", "Peningkatan ekonomi pulau Jawa", "Pemerataan fasilitas kesehatan"], answer:1 },
+            { id:33, type:'pg', text:"Mengemukakan pendapat di muka umum berarti...", options:["Menyampaikan pendapat di hadapan orang banyak atau orang lain, termasuk tempat yang dapat didatangi setiap orang", "Menyampaikan pendapat untuk memengaruhi pemerintah", "Berbicara di depan sekelompok orang secara tertutup", "Komunikasi rahasia pembicara dan pendengar"], answer:0 },
+            { id:34, type:'pg', text:"Warga negara yang menyampaikan pendapat di muka umum berhak untuk mendapatkan perlindungan hukum, artinya...", options:["Mengeluarkan pendapat terbebas dari tekanan fisik dan mental", "Segala daya upaya untuk menciptakan kondisi harmonis", "Menyampaikan pendapat memperhatikan HAM", "Mendapat jaminan keamanan yang absolut"], answer:0 },
+            { id:35, type:'pg', text:"Unjuk rasa atau demonstrasi sebagai salah satu bentuk penyampaian pendapat di muka umum, yaitu kegiatan...", options:["Seseorang atau lebih untuk menyampaikan pendapatnya di jalanan", "Berbicara di depan umum memberikan informasi", "Menyiarkan tulisan di media", "Komunikasi antar individu"], answer:0 },
+            { id:36, type:'pg', text:"Seorang siswa melihat temannya menyebarkan informasi provokatif di grup kelas. Tindakan terbaik yang menunjukkan peran menjaga keutuhan NKRI adalah...", options:["Ikut menyebarkan agar ramai", "Membiarkan saja", "Mengingatkan dan mengajak cek fakta", "Keluar dari grup"], answer:2 },
+            { id:37, type:'pg', text:"Kemerdekaan berpendapat warga negara secara konstitusional dijamin di dalam UUD NRI Tahun 1945 Pasal...", options:["Pasal 27 ayat 1", "Pasal 28E ayat 3", "Pasal 29 ayat 2", "Pasal 30 ayat 1"], answer:1 },
+            { id:38, type:'pg', text:"Salah satu bentuk kemerdekaan menyampaikan pendapat adalah melalui 'debat'. Apa yang dilakukan oleh 'tim pro' dalam sebuah debat?", options:["Menentang topik yang dibahas", "Menyetujui dan mendukung topik gagasan yang dibahas", "Menjadi penengah atau moderator", "Mencatat kesimpulan"], answer:1 },
+            { id:39, type:'pg', text:"Sikap yang harus dihindari saat menyampaikan pendapat di media sosial pada era keterbukaan informasi adalah...", options:["Tabayyun (Mencari kebenaran informasi)", "Menghindari kata-kata kasar", "Menyebarkan hoaks atau ujaran kebencian (Hate speech)", "Bertanggung jawab atas apa yang diposting"], answer:2 },
+            { id:40, type:'pg', text:"Sikap gotong royong dan toleransi di tengah keberagaman budaya bangsa sangat penting karena...", options:["Akan menghambat globalisasi", "Memicu masuknya kebudayaan asing secara bebas", "Menjaga persatuan dan menjadi alat filter alami terhadap dampak negatif budaya asing", "Memperkuat paham primordialisme kedaerahan"], answer:2 },
 
-            // MATERI 2: KATA BAKU & TIDAK BAKU (PDF Hal 11-13)
-            { id: 8, type: 'pg', text: "Kata baku adalah kata yang penulisannya sesuai dengan kaidah Ejaan Bahasa Indonesia (PUEBI) dan KBBI. Di bawah ini, manakah kelompok kata yang semuanya <b>baku</b>?", options: ["Praktik, Antre, Respons, Ijazah", "Praktek, Antri, Respon, Ijasah", "Praktik, Antri, Respons, Ijazah", "Praktek, Antre, Respon, Ijasah"], answer: 0 },
-            { id: 9, type: 'pg', text: "Penulisan kata serapan yang baku dari kata dasar bahasa Inggris <i>'Accessory'</i> dan <i>'Bus'</i> adalah...", options: ["Asesoris dan Bis", "Aksesori dan Bus", "Aksesoris dan Bis", "Asesori dan Bus"], answer: 1 },
-            { id: 10, type: 'pg', text: "Manakah pasangan kata baku dan tidak baku yang <b>salah</b> di bawah ini?", options: ["Aktif (baku) - Aktip (tidak baku)", "Baterai (baku) - Batere (tidak baku)", "Lembap (baku) - Lembab (tidak baku)", "Hidayat (baku) - Hidayah (tidak baku)"], answer: 3 }, // Hidayah is baku
-
-            // MATERI 3: KONJUNGSI & KOHESI KOHERENSI (PDF Hal 5-9)
-            { id: 11, type: 'pg', text: "<i>Rini selalu membaca buku ... tidak bisa tidur.</i><br>Konjungsi yang tepat untuk melengkapi kalimat tersebut adalah...", options: ["Sebelum", "Saat", "Karena", "Tetapi"], answer: 1 },
-            { id: 12, type: 'pg', text: "<i>... hujan, dia tetap pergi bekerja.</i><br>Kata hubung (konjungsi) yang menyatakan konsesif (pertentangan) yang tepat adalah...", options: ["Sebab", "Walaupun", "Seandainya", "Sehingga"], answer: 1 },
-            { id: 13, type: 'pg', text: "<i>Menteri Keuangan mengatakan ... mulai bulan depan BBM akan naik.</i><br>Konjungsi komplementasi yang tepat untuk kalimat di atas adalah...", options: ["Bahwa", "Agar", "Sebab", "Hingga"], answer: 0 },
-            { id: 14, type: 'pg', text: "Keterpaduan makna atau gagasan antar kalimat dalam sebuah paragraf sehingga saling berkaitan secara logis disebut...", options: ["Kohesi", "Konjungsi", "Koherensi", "Substitusi"], answer: 2 },
-            { id: 15, type: 'pg', text: "Hubungan antargagasan yang menunjukkan persamaan atau kesamaan objek disebut hubungan...", options: ["Sebab Akibat", "Pertentangan", "Perbandingan", "Urutan Waktu"], answer: 2 },
-
-            // MATERI 4: KALIMAT EFEKTIF (PDF Hal 26-27)
-            { id: 16, type: 'pg', text: "Kalimat efektif harus memenuhi syarat kehematan kata (tidak boros). Manakah kalimat di bawah ini yang <b>tidak efektif</b>?", options: ["Bapak-bapak saling bersalaman.", "Para tamu undangan sudah hadir.", "Suasana di pasar sangat ramai sekali.", "Ibu Susi rela bekerja demi anaknya."], answer: 2 },
-            { id: 17, type: 'pg', text: "Perhatikan kalimat berikut!<br><i>Waktu dan tempat kami persilahkan.</i><br>Alasan kalimat tersebut tidak efektif secara logis adalah...", options: ["Yang dipersilakan seharusnya orang (Bapak/Ibu), bukan waktu dan tempat.", "Kata 'persilahkan' seharusnya 'silahkan'.", "Tidak ada unsur subjek dalam kalimat.", "Menggunakan kata penghubung yang salah."], answer: 0 },
-            { id: 18, type: 'pg', text: "<i>Riana rajin belajar agar supaya menjadi pintar.</i><br>Perbaikan menjadi kalimat efektif yang benar adalah...", options: ["Riana rajin belajar agar pintar supaya.", "Riana rajin belajar agar menjadi pintar.", "Supaya agar pintar Riana rajin belajar.", "Rajin belajar Riana agar supaya pintar."], answer: 1 },
-
-            // MATERI 5: TEKS REKON & EKSPLANASI (PDF Hal 18 & 28)
-            { id: 19, type: 'pg', text: "Teks yang menceritakan pengalaman masa lalu dengan tujuan memberi informasi atau hiburan berupa kejadian nyata (seperti sejarah) disebut...", options: ["Teks Deskripsi", "Teks Eksplanasi", "Teks Rekon (Cerita Ulang)", "Teks Prosedur"], answer: 2 },
-            { id: 20, type: 'pg', text: "Struktur teks rekon yang berisi pengenalan tokoh, waktu, dan tempat disebut...", options: ["Orientasi", "Urutan Peristiwa", "Reorientasi", "Klimaks"], answer: 0 },
-            { id: 21, type: 'pg', text: "Teks yang menceritakan proses atau sebab akibat terjadinya suatu fenomena alam, sosial, atau budaya disebut...", options: ["Teks Narasi", "Teks Deskripsi", "Teks Rekon", "Teks Eksplanasi"], answer: 3 },
-            { id: 22, type: 'pg', text: "Informasi yang dimuat dalam teks eksplanasi selalu bersifat...", options: ["Fiktif (Khayalan)", "Faktual (Sesuai Fakta)", "Subjektif (Opini Penulis)", "Persuasif (Ajakan)"], answer: 1 },
-            { id: 23, type: 'pg', text: "Hubungan antargagasan yang paling mendominasi dalam teks eksplanasi tentang fenomena alam adalah...", options: ["Sebab - Akibat", "Pertentangan", "Perbandingan", "Pemilihan"], answer: 0 },
-
-            // MATERI 6: PUISI, MAJAS, DAN CITRAAN (PDF Hal 22-25)
-            { id: 24, type: 'pg', text: "Perbandingan langsung antara dua hal tanpa menggunakan kata pembanding (seperti, bagaikan) disebut majas...", options: ["Simile", "Personifikasi", "Metafora", "Hiperbola"], answer: 2 },
-            { id: 25, type: 'pg', text: "<i>'Matanya bening laksana embun pagi.'</i><br>Kalimat tersebut menggunakan majas...", options: ["Metafora", "Personifikasi", "Hiperbola", "Simile"], answer: 3 },
-            { id: 26, type: 'pg', text: "Majas yang memberikan sifat-sifat manusia pada benda mati sehingga seolah hidup disebut majas...", options: ["Personifikasi", "Hiperbola", "Simile", "Metafora"], answer: 0 },
-            { id: 27, type: 'pg', text: "<i>'Angin malam mengantarkan rinduku padanya yang berada di sana.'</i><br>Majas yang dominan pada kalimat tersebut adalah...", options: ["Hiperbola", "Personifikasi", "Simile", "Metafora"], answer: 1 },
-            { id: 28, type: 'pg', text: "<i>'Aku sudah menunggumu seribu tahun lamanya untuk bertemu denganmu.'</i><br>Kalimat ini mengandung pernyataan berlebihan. Majas yang digunakan adalah...", options: ["Metafora", "Personifikasi", "Simile", "Hiperbola"], answer: 3 },
-            { id: 29, type: 'pg', text: "Citraan (imaji) dalam puisi yang merangsang indra pembaca seolah-olah dapat merasakan tekstur atau suhu benda disebut citraan...", options: ["Penglihatan", "Pendengaran", "Perabaan", "Penciuman"], answer: 2 },
-            { id: 30, type: 'pg', text: "<i>'Detik jam dinding terdengar keras di malam yang sunyi.'</i><br>Larik puisi tersebut menggunakan citraan...", options: ["Penglihatan", "Pendengaran", "Perabaan", "Pengecapan"], answer: 1 },
-            { id: 31, type: 'pg', text: "<i>'Aroma tanah basah setelah hujan menyapa jendela.'</i><br>Citraan yang terdapat pada baris puisi di atas adalah...", options: ["Pengecapan", "Pendengaran", "Penciuman", "Perabaan"], answer: 2 },
-            { id: 32, type: 'pg', text: "<i>'Sambal terasi terasa pedas membakar lidah.'</i><br>Larik di atas merangsang indra...", options: ["Penglihatan", "Pendengaran", "Pengecapan", "Perabaan"], answer: 2 },
-
-            // MATERI 7: PIDATO & UNSUR CERPEN (Umum Kelas 9)
-            { id: 33, type: 'pg', text: "Tujuan utama dari sebuah teks pidato persuasif adalah...", options: ["Memberikan informasi mendetail tentang sejarah", "Menceritakan pengalaman liburan masa lalu", "Membujuk dan mengajak pendengar untuk melakukan sesuatu", "Menggambarkan suasana pantai secara fisik"], answer: 2 },
-            { id: 34, type: 'pg', text: "<i>'Marilah kita bersama-sama menjaga kebersihan lingkungan agar terhindar dari penyakit.'</i><br>Kalimat tersebut biasanya terdapat pada bagian ... dalam pidato.", options: ["Salam Pembuka", "Isi Pidato / Ajakan", "Ucapan Penghormatan", "Kesimpulan"], answer: 1 },
-            { id: 35, type: 'pg', text: "Unsur intrinsik cerpen yang menjelaskan mengenai tempat, waktu, dan suasana terjadinya cerita adalah...", options: ["Tema", "Alur (Plot)", "Amanat", "Latar (Setting)"], answer: 3 },
-            { id: 36, type: 'pg', text: "Urutan peristiwa yang membangun sebuah cerita fiksi secara kronologis disebut...", options: ["Sudut pandang", "Alur", "Penokohan", "Amanat"], answer: 1 },
-            { id: 37, type: 'pg', text: "Pesan moral atau pelajaran hidup yang ingin disampaikan pengarang kepada pembaca melalui cerpen disebut...", options: ["Gaya Bahasa", "Alur", "Amanat", "Tema"], answer: 2 },
-            { id: 38, type: 'pg', text: "Penggunaan kata ganti 'Aku' atau 'Saya' dalam sebuah cerita menandakan pengarang menggunakan sudut pandang...", options: ["Orang pertama", "Orang kedua", "Orang ketiga serba tahu", "Orang ketiga pengamat"], answer: 0 },
-            { id: 39, type: 'pg', text: "Kata sapaan penghormatan <i>'Yang terhormat Bapak Kepala Sekolah...'</i> dalam pidato terletak pada bagian...", options: ["Penutup", "Isi", "Pembukaan", "Harapan"], answer: 2 },
-            { id: 40, type: 'pg', text: "<i>'Hanya kesunyian malam yang menyapa, tanpa kata.'</i><br>Larik puisi ini memiliki paduan majas dan citraan...", options: ["Majas Metafora, Citraan Penglihatan", "Majas Personifikasi, Citraan Pendengaran", "Majas Simile, Citraan Perabaan", "Majas Hiperbola, Citraan Penciuman"], answer: 1 },
-
-            // --- ESAI (41 - 45) ---
-            { id: 41, type: 'essay', text: "Jelaskan dengan bahasamu sendiri apa perbedaan antara **Paragraf Deduktif** dan **Paragraf Induktif**!", 
-              keywords: ["deduktif", "awal", "utama di awal", "induktif", "akhir", "utama di akhir"], maxScore: 8 },
-            { id: 42, type: 'essay', text: "Ubahlah dua kata tidak baku berikut menjadi **Kata Baku** sesuai ejaan yang benar:<br>1. *Praktek*<br>2. *Ijasah*", 
-              keywords: ["praktik", "ijazah"], maxScore: 8 },
-            { id: 43, type: 'essay', text: "Sebutkan minimal 3 (tiga) macam **Majas** (Bahasa Kias) beserta penjelasan singkatnya!", 
-              keywords: ["metafora", "personifikasi", "hiperbola", "simile", "perbandingan", "benda mati", "berlebihan"], maxScore: 8 },
-            { id: 44, type: 'essay', text: "Apa yang dimaksud dengan **Teks Eksplanasi**? Jelaskan pengertiannya secara singkat!", 
-              keywords: ["sebab akibat", "proses", "fenomena", "alam", "sosial", "fakta", "faktual"], maxScore: 8 },
-            { id: 45, type: 'essay', text: "Sebutkan minimal 4 (empat) jenis **Citraan (Imaji)** dalam puisi!", 
-              keywords: ["penglihatan", "pendengaran", "perabaan", "penciuman", "pengecapan", "gerak"], maxScore: 8 }
+            { id:41, type:'essay', text:"Jelaskan pengertian **Kearifan Lokal** dan berikan contohnya!", keywords:["pandangan", "hidup", "masyarakat", "tri hita karana", "lojor"], max:8 },
+            { id:42, type:'essay', text:"Sebutkan minimal 3 **tantangan dalam mempertahankan NKRI**!", keywords:["wilayah luas", "akses", "kesenjangan", "penduduk", "sara", "keamanan"], max:8 },
+            { id:43, type:'essay', text:"Jelaskan **Hubungan Pancasila dengan UUD NRI Tahun 1945**!", keywords:["sumber", "hukum", "dasar", "pembukaan", "erat"], max:8 },
+            { id:44, type:'essay', text:"Apa isi **Pasal 32 ayat (1) UUD NRI 1945**?", keywords:["negara", "memajukan", "kebudayaan", "nasional"], max:8 },
+            { id:45, type:'essay', text:"Sikap apa yang harus dilakukan menghadapi budaya asing?", keywords:["filter", "menyaring", "selektif", "pancasila"], max:8 }
         ];
 
-        // --- STATE & VARIABEL ---
-        let currentIndex = 0;
-        let userAnswers = {}; // { index: nilai }
-        let raguState = {};   // { index: boolean }
-        let timeRemaining = 7200; // 120 menit (detik)
-        let timerInterval;
+        // 3. STATE APLIKASI
+        let currentIndex = 0; let userAnswers = {}; let raguState = {}; let timeRemaining = 5400; let timerInterval;
 
-        // --- ELEMEN DOM ---
-        const elQText = document.getElementById('q-text');
-        const elOptions = document.getElementById('options-container');
-        const elEssay = document.getElementById('essay-container');
-        const elEssayInput = document.getElementById('essay-input');
-        const elQNumIndicator = document.getElementById('q-number-indicator');
-        const elCurrentNum = document.getElementById('current-num');
-        const elQTypeText = document.getElementById('q-type-text');
-        const mainScrollArea = document.getElementById('main-scroll');
-        
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const btnFinish = document.getElementById('btn-finish');
-        const cbRagu = document.getElementById('cb-ragu');
-        const zoomSlider = document.getElementById('zoom-slider');
-        const modalSidebar = document.getElementById('sidebar-modal');
+        // 4. NAVIGASI TAMPILAN
+        function switchView(v) { document.querySelectorAll('.view-section').forEach(e => e.classList.remove('active')); document.getElementById(v).classList.add('active'); }
 
-        // --- INISIALISASI ---
-        function initApp() {
-            renderNavGrid();
-            loadQuestion(0);
-            startTimer();
+        // 5. LOGIN
+        function togglePassword() {
+            const i = document.getElementById('login-password'); const icon = document.getElementById('eye-icon');
+            if(i.type==="password"){ i.type="text"; icon.classList.replace('fa-eye-slash','fa-eye'); }
+            else{ i.type="password"; icon.classList.replace('fa-eye','fa-eye-slash'); }
+        }
+        function doLogin() {
+            let user = document.getElementById('login-username').value.trim();
+            const pass = document.getElementById('login-password').value;
+            if(user.includes('-')) user = user.split('-').pop(); // Handle 02-21-0015-236
 
-            // Event Listeners Navigasi
-            btnPrev.addEventListener('click', () => { if(currentIndex > 0) loadQuestion(currentIndex - 1); });
-            btnNext.addEventListener('click', () => { if(currentIndex < questions.length - 1) loadQuestion(currentIndex + 1); });
-            btnFinish.addEventListener('click', confirmFinish);
-            
-            // Ragu-ragu
-            cbRagu.addEventListener('change', (e) => {
-                raguState[currentIndex] = e.target.checked;
-                updateNavStyles();
-            });
+            if (students[user] && pass === "123") {
+                document.getElementById('login-error').classList.add('hidden');
+                document.getElementById('btn-login').innerHTML = `<div class="loader mx-auto"></div>`;
+                setTimeout(() => {
+                    currentUser = { id: `02-21-0015-${user}`, name: students[user] };
+                    document.getElementById('dash-user-name').innerText = currentUser.name;
+                    document.getElementById('dash-user-id').innerText = currentUser.id;
+                    document.getElementById('card-user-name').innerText = currentUser.name;
+                    document.getElementById('card-user-id').innerText = currentUser.id;
+                    switchView('view-dashboard');
+                    document.getElementById('btn-login').innerHTML = `<span>Login</span>`;
+                }, 600);
+            } else { document.getElementById('login-error').classList.remove('hidden'); }
+        }
+        function doLogout() { if(confirm("Yakin ingin keluar?")) { switchView('view-login'); } }
 
-            // Input Esai
-            elEssayInput.addEventListener('input', (e) => {
-                userAnswers[currentIndex] = e.target.value;
-                updateNavStyles();
-            });
-
-            // Zoom Slider
-            zoomSlider.addEventListener('input', (e) => {
-                document.documentElement.style.setProperty('--q-font-size', e.target.value + 'px');
-            });
+        // 6. TOKEN
+        function showTokenView() {
+            generatedToken = Math.random().toString(36).substring(2, 7).toUpperCase();
+            document.getElementById('display-token').innerText = generatedToken;
+            document.getElementById('input-token').value = "";
+            document.getElementById('view-token').style.display = 'flex';
+        }
+        function cancelToken() { document.getElementById('view-token').style.display = 'none'; }
+        function verifyToken() {
+            if (document.getElementById('input-token').value.trim().toUpperCase() === generatedToken) {
+                document.getElementById('view-token').style.display = 'none'; startExam();
+            } else { document.getElementById('token-error').innerText = "Token salah!"; }
         }
 
-        // --- FUNGSI INTI ---
+        // 7. EXAM LOGIC
+        function startExam() {
+            switchView('view-exam'); renderNavGrid(); loadQuestion(0); startTimer();
+            document.getElementById('btn-prev').onclick = () => { if(currentIndex > 0) loadQuestion(currentIndex - 1); };
+            document.getElementById('btn-next').onclick = () => { if(currentIndex < questions.length - 1) loadQuestion(currentIndex + 1); };
+            document.getElementById('btn-finish').onclick = finishExam;
+            document.getElementById('cb-ragu').onchange = e => { raguState[currentIndex] = e.target.checked; updateNavStyles(); };
+            document.getElementById('essay-input').oninput = e => { userAnswers[currentIndex] = e.target.value; updateNavStyles(); };
+            document.getElementById('zoom-slider').oninput = e => document.documentElement.style.setProperty('--q-font-size', e.target.value + 'px');
+        }
+
+        let isFokus = false;
+        function toggleFokus() {
+            isFokus = !isFokus;
+            const header = document.getElementById('exam-header');
+            const icon = document.getElementById('icon-fokus');
+            if(isFokus) { header.style.display = 'none'; icon.classList.replace('fa-expand', 'fa-compress'); } 
+            else { header.style.display = 'block'; icon.classList.replace('fa-compress', 'fa-expand'); }
+        }
+
         function loadQuestion(index) {
-            currentIndex = index;
-            const q = questions[index];
+            currentIndex = index; const q = questions[index];
+            document.getElementById('main-scroll').scrollTop = 0;
+            document.getElementById('current-num').innerText = index + 1;
+            document.getElementById('q-text').innerHTML = q.text;
 
-            // Reset Scroll to top instantly
-            mainScrollArea.scrollTop = 0;
-
-            // UI Header
-            elCurrentNum.innerText = index + 1;
-            elQText.innerHTML = q.text;
+            const elOpt = document.getElementById('options-container');
+            const elEss = document.getElementById('essay-container');
 
             if (q.type === 'pg') {
-                elQTypeText.innerText = "Pilihan ganda";
-                elOptions.style.display = 'flex';
-                elEssay.style.display = 'none';
-
-                // Render Pilihan A, B, C, D
-                elOptions.innerHTML = '';
-                const labels = ['A', 'B', 'C', 'D'];
-                q.options.forEach((optText, optIdx) => {
-                    const isSelected = userAnswers[index] === optIdx;
-                    const optHtml = `
-                        <div onclick="handleSelectPG(${optIdx})" class="option-container p-4 cursor-pointer flex items-start gap-4 rounded-lg mt-1 ${isSelected ? 'selected bg-blue-50/70' : 'hover:bg-gray-50'}">
-                            <div class="option-circle shadow-sm bg-white">${labels[optIdx]}</div>
-                            <div class="flex-1 mt-0.5 leading-relaxed">${optText}</div>
-                        </div>
-                    `;
-                    elOptions.insertAdjacentHTML('beforeend', optHtml);
+                document.getElementById('q-type-text').innerText = "Pilihan ganda";
+                elOpt.style.display = 'block'; elEss.style.display = 'none';
+                elOpt.innerHTML = '';
+                ['A','B','C','D'].forEach((lbl, i) => {
+                    const sel = userAnswers[index] === i ? 'selected bg-blue-50/50' : 'bg-white';
+                    elOpt.innerHTML += `
+                        <div onclick="selectPG(${i})" class="option-container ${sel}">
+                            <div class="option-circle">${lbl}</div>
+                            <div class="text-sm pt-1">${q.options[i]}</div>
+                        </div>`;
                 });
             } else {
-                elQTypeText.innerText = "Esai / Uraian";
-                elOptions.style.display = 'none';
-                elEssay.style.display = 'block';
-                elEssayInput.value = userAnswers[index] || '';
+                document.getElementById('q-type-text').innerText = "Esai / Uraian";
+                elOpt.style.display = 'none'; elEss.style.display = 'block';
+                document.getElementById('essay-input').value = userAnswers[index] || '';
             }
 
-            // Restore Status Ragu
-            cbRagu.checked = !!raguState[index];
-
-            // Atur Tombol Bawah
-            btnPrev.disabled = index === 0;
-            if (index === questions.length - 1) {
-                btnNext.classList.add('hidden');
-                btnFinish.classList.remove('hidden');
-            } else {
-                btnNext.classList.remove('hidden');
-                btnFinish.classList.add('hidden');
-            }
-
+            document.getElementById('cb-ragu').checked = !!raguState[index];
+            document.getElementById('btn-prev').disabled = index === 0;
+            
+            document.getElementById('btn-next').style.display = (index === questions.length - 1) ? 'none' : 'flex';
+            document.getElementById('btn-finish').style.display = (index === questions.length - 1) ? 'flex' : 'none';
             updateNavStyles();
         }
 
-        function handleSelectPG(optIdx) {
-            userAnswers[currentIndex] = optIdx;
-            // Jika memilih jawaban baru, otomatis hilangkan status ragu (Opsional sesuai kebiasaan CBT)
-            raguState[currentIndex] = false; 
-            cbRagu.checked = false;
-
-            loadQuestion(currentIndex); // Render ulang opsi
-        }
+        function selectPG(idx) { userAnswers[currentIndex] = idx; raguState[currentIndex] = false; loadQuestion(currentIndex); }
 
         function renderNavGrid() {
-            const gridPg = document.getElementById('nav-grid-pg');
-            const gridEssay = document.getElementById('nav-grid-essay');
-            gridPg.innerHTML = ''; gridEssay.innerHTML = '';
-
+            const p = document.getElementById('nav-grid-pg'); const e = document.getElementById('nav-grid-essay');
+            p.innerHTML = ''; e.innerHTML = '';
             questions.forEach((q, i) => {
-                const btn = document.createElement('button');
-                btn.id = `nav-btn-${i}`;
-                btn.className = 'nav-grid-btn';
-                btn.innerText = i + 1;
-                btn.onclick = () => {
-                    loadQuestion(i);
-                    toggleSidebar();
-                };
-                if (q.type === 'pg') gridPg.appendChild(btn);
-                else gridEssay.appendChild(btn);
-            });
-            updateNavStyles();
+                const b = document.createElement('button'); b.id = `nav-${i}`; b.className = 'nav-grid-btn'; b.innerText = i + 1;
+                b.onclick = () => { loadQuestion(i); document.getElementById('sidebar-modal').classList.add('hidden'); };
+                (q.type === 'pg' ? p : e).appendChild(b);
+            }); updateNavStyles();
         }
 
         function updateNavStyles() {
-            // Update indikator nomor di sub-header (Ceklis hijau)
-            const isCurrentAnswered = (questions[currentIndex].type === 'pg' && userAnswers[currentIndex] !== undefined) || 
-                                      (questions[currentIndex].type === 'essay' && userAnswers[currentIndex]?.trim() !== '');
-            
-            if (isCurrentAnswered) elQNumIndicator.classList.add('answered');
-            else elQNumIndicator.classList.remove('answered');
+            const isAns = (questions[currentIndex].type==='pg' && userAnswers[currentIndex]!==undefined) || (questions[currentIndex].type==='essay' && userAnswers[currentIndex]?.trim()!=='');
+            document.getElementById('q-number-indicator').classList.toggle('answered', !!isAns);
 
-            // Update warna di Grid Modal
             questions.forEach((q, i) => {
-                const btn = document.getElementById(`nav-btn-${i}`);
-                if (!btn) return;
-                
-                let isAnswered = (q.type === 'pg' && userAnswers[i] !== undefined) || 
-                                 (q.type === 'essay' && userAnswers[i] && userAnswers[i].trim() !== '');
-                let isRagu = raguState[i];
-                let isCurrent = (currentIndex === i);
-
-                // Reset Class
-                btn.className = 'nav-grid-btn'; 
-                
-                if (isAnswered) btn.classList.add('answered');
-                if (isRagu) btn.classList.add('ragu');
-                if (isCurrent) btn.classList.add('current');
+                const b = document.getElementById(`nav-${i}`); if(!b) return;
+                const hasA = (q.type==='pg' && userAnswers[i]!==undefined) || (q.type==='essay' && userAnswers[i]?.trim()!=='');
+                b.className = 'nav-grid-btn';
+                if(hasA) b.classList.add('answered');
+                if(raguState[i]) b.classList.add('ragu');
+                if(currentIndex === i) b.classList.add('current');
             });
         }
 
-        function toggleSidebar() {
-            modalSidebar.classList.toggle('hidden');
-        }
+        function toggleSidebar() { document.getElementById('sidebar-modal').classList.toggle('hidden'); }
 
-        // --- SISTEM WAKTU & SUBMISSION ---
         function startTimer() {
-            const elTimer = document.getElementById('timer');
             timerInterval = setInterval(() => {
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    processResults(); // Force finish
-                    return;
-                }
+                if (timeRemaining <= 0) { clearInterval(timerInterval); calculateScore(); return; }
                 timeRemaining--;
-                const h = Math.floor(timeRemaining / 3600);
-                const m = Math.floor((timeRemaining % 3600) / 60);
-                const s = timeRemaining % 60;
-                
-                elTimer.innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-                
-                if(timeRemaining < 300) elTimer.classList.add('text-red-600', 'animate-pulse'); // 5 menit terakhir merah
+                const m = Math.floor(timeRemaining / 60); const s = timeRemaining % 60;
+                document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
             }, 1000);
         }
 
-        function confirmFinish() {
-            const totalQ = questions.length;
-            const answered = Object.keys(userAnswers).filter(k => {
-                if(questions[k].type === 'pg') return userAnswers[k] !== undefined;
-                return userAnswers[k] && userAnswers[k].trim() !== '';
-            }).length;
-
-            if (answered < totalQ) {
-                if(!confirm(`PERINGATAN!\nAnda baru menjawab ${answered} dari ${totalQ} soal.\nYakin ingin MENGAKHIRI ujian sekarang?`)) return;
-            } else {
-                if(!confirm("Anda sudah menjawab semua soal. Yakin ingin mengakhiri ujian dan melihat nilai?")) return;
-            }
-            processResults();
+        function finishExam() {
+            const ansCount = Object.keys(userAnswers).filter(k => questions[k].type==='pg' ? userAnswers[k]!==undefined : userAnswers[k]?.trim()!=='').length;
+            if(ansCount < 45) { if(confirm(`Baru dijawab ${ansCount}/45 soal.\nYakin selesai?`)) calculateScore(); }
+            else { if(confirm("Kirim jawaban sekarang?")) calculateScore(); }
         }
 
-        // --- ALGORITMA PENILAIAN OTOMATIS ---
-        function processResults() {
+        function calculateScore() {
             clearInterval(timerInterval);
-            let scorePG = 0;
-            let scoreEssay = 0;
-
-            // Hitung PG (Maks 60 Poin. 40 soal -> 1.5 Poin per soal)
+            let pg = 0, es = 0;
             questions.forEach((q, i) => {
-                if (q.type === 'pg') {
-                    if (userAnswers[i] === q.answer) {
-                        scorePG += 1.5;
-                    }
-                } else if (q.type === 'essay') {
-                    // Hitung Esai (Auto-Grader mendeteksi Kata Kunci)
-                    // Maks 40 Poin (5 soal x 8 poin)
-                    const ans = (userAnswers[i] || '').toLowerCase();
-                    if (ans.trim() !== '') {
-                        let matchCount = 0;
-                        q.keywords.forEach(kw => {
-                            if (ans.includes(kw.toLowerCase())) matchCount++;
-                        });
-                        
-                        // Logika skor AI sederhana:
-                        // Jika ada >= 2 kata kunci yang cocok -> FULL SCORE (8)
-                        // Jika ada 1 kata kunci yang cocok -> Setengah (4)
-                        // Jika menjawab tapi tidak ada kata kunci yg tepat -> (2 poin apresiasi)
-                        if (matchCount >= 2) scoreEssay += q.maxScore;
-                        else if (matchCount === 1) scoreEssay += (q.maxScore / 2);
-                        else scoreEssay += 2;
-                    }
+                if(q.type === 'pg' && userAnswers[i] === q.answer) pg += 1.5;
+                if(q.type === 'essay' && userAnswers[i]?.trim()) {
+                    let m = 0; q.keywords.forEach(k => { if(userAnswers[i].toLowerCase().includes(k)) m++; });
+                    es += (m>=2 ? q.max : (m===1 ? q.max/2 : 2));
                 }
             });
-
-            scorePG = Math.round(scorePG);
-            scoreEssay = Math.round(scoreEssay);
-            const total = scorePG + scoreEssay;
-
-            // Tampilkan ke Modal Hasil
-            document.getElementById('score-pg').innerText = scorePG;
-            document.getElementById('score-essay').innerText = scoreEssay;
-            document.getElementById('score-total').innerText = total;
-
-            document.getElementById('result-modal').classList.remove('hidden');
+            document.getElementById('score-pg').innerText = Math.round(pg);
+            document.getElementById('score-essay').innerText = Math.round(es);
+            switchView('view-result');
         }
-
-        // Mulai aplikasi saat dimuat
-        window.onload = initApp;
     </script>
 </body>
 </html>
