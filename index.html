@@ -1,841 +1,1305 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Extraordinary CBT - PSAJ IPA Kelas 9</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-        :root { --q-font-size: 15px; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f3f4f6;
-            height: 100vh; height: 100dvh;
-            display: flex; flex-direction: column;
-            overflow: hidden;
-            color: #374151;
-            position: fixed; width: 100%;
-        }
-
-        /* ── HEX PATTERNS ─────────────────────────────── */
-        .bg-hex-teal {
-            background-color: #06b6d4;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,4 58,20 58,52 30,68 2,52 2,20' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3Cpolygon points='30,72 58,88 58,120 30,136 2,120 2,88' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3Cpolygon points='60,38 88,54 88,86 60,102 32,86 32,54' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3C/svg%3E");
-        }
-        .bg-hex-blue {
-            background-color: #4da6ff;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,4 58,20 58,52 30,68 2,52 2,20' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3Cpolygon points='30,72 58,88 58,120 30,136 2,120 2,88' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3Cpolygon points='60,38 88,54 88,86 60,102 32,86 32,54' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3C/svg%3E");
-        }
-
-        /* ── VIEW MANAGEMENT ──────────────────────────── */
-        .view { display: none; flex-direction: column; height: 100%; overflow: hidden; }
-        .view.active { display: flex; }
-
-        /* ── SCROLL ───────────────────────────────────── */
-        .scroll-area { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #fff; }
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
-
-        /* ── LOGIN INPUTS ─────────────────────────────── */
-        .cbt-input {
-            width: 100%; padding: 12px 12px 12px 42px;
-            border: 1.5px solid #d1d5db; border-radius: 8px;
-            font-size: 14px; outline: none; background: white; color: #374151;
-            transition: border-color .2s;
-        }
-        .cbt-input:focus { border-color: #06b6d4; box-shadow: 0 0 0 2px rgba(6,182,212,.12); }
-        .cbt-input::placeholder { color: #9ca3af; }
-        .inp-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 14px; }
-
-        /* ── OPTION ITEMS ─────────────────────────────── */
-        .opt-item {
-            display: flex; align-items: flex-start; gap: 16px;
-            padding: 13px 16px; border-bottom: 1px solid #f3f4f6;
-            cursor: pointer; transition: background .12s;
-        }
-        .opt-item:active { background: #f9fafb; }
-        .opt-lbl {
-            min-width: 28px; height: 28px; border-radius: 50%;
-            border: 1.5px solid #9ca3af; display: flex; align-items: center;
-            justify-content: center; font-size: 13px; font-weight: 600;
-            color: #6b7280; background: white; flex-shrink: 0;
-        }
-        .opt-item.sel { background: #eff6ff; }
-        .opt-item.sel .opt-lbl { background: #3b82f6; border-color: #3b82f6; color: white; }
-        .opt-txt { font-size: var(--q-font-size); color: #1f2937; line-height: 1.65; text-align: justify; padding-top: 2px; flex: 1; }
-
-        /* ── Q-NUMBER CIRCLE ──────────────────────────── */
-        .q-circle {
-            position: relative; width: 46px; height: 46px; border-radius: 50%;
-            border: 1.5px solid #d1d5db; background: white; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; font-weight: 800; color: #111827;
-        }
-        .q-badge {
-            position: absolute; top: -5px; left: -5px;
-            width: 20px; height: 20px; border-radius: 50%;
-            border: 2px solid white;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 9px; font-weight: 900;
-        }
-        .badge-red  { background: #ef4444; color: white; }
-        .badge-grn  { background: #10b981; color: white; }
-        .badge-yel  { background: #f59e0b; color: white; }
-
-        /* ── NAV GRID BUTTONS ─────────────────────────── */
-        .ngb {
-            position: relative; height: 42px;
-            border: 1px solid #d1d5db; border-radius: 6px;
-            font-size: 14px; font-weight: 600; color: #374151;
-            background: white; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            margin-top: 8px;
-        }
-        .ngb-dot {
-            position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
-            width: 12px; height: 12px; border-radius: 50%;
-            border: 1.5px solid #9ca3af; background: white;
-        }
-        .ngb.ans { background: #22c55e; color: white; border-color: #16a34a; }
-        .ngb.ans .ngb-dot { background: #22c55e; border-color: #16a34a; }
-        .ngb.ragu { background: #facc15; color: #78350f; border-color: #ca8a04; }
-        .ngb.ragu .ngb-dot { background: #facc15; border-color: #ca8a04; }
-        .ngb.curr { border: 2.5px solid #111827; font-weight: 800; }
-
-        /* ── FOOTER NAV BUTTONS ───────────────────────── */
-        .nfb { width: 42px; height: 38px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-        .nfb:disabled { opacity: .4; pointer-events: none; }
-        .nfb-red  { background: #ef4444; }
-        .nfb-blue { background: #3b82f6; }
-
-        /* ── TIMER BOX ────────────────────────────────── */
-        .timer-box { display: flex; align-items: center; gap: 6px; border: 1px solid #d1d5db; border-radius: 6px; padding: 5px 12px; background: white; }
-
-        /* ── LOADER ───────────────────────────────────── */
-        .loader { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,.35); border-top-color: white; border-radius: 50%; animation: spin .8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ── EXAM SCHEDULE CARD ───────────────────────── */
-        .exam-card { border: 1px solid #93c5fd; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; background: white; }
-        .radio-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #3b82f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .radio-dot::after { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #3b82f6; }
-
-        /* ── TOKEN INPUT (dashboard) ──────────────────── */
-        .token-input { width: 100%; padding: 11px 14px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; color: #374151; background: white; }
-        .token-input:focus { border-color: #3b82f6; }
-        .token-input::placeholder { color: #9ca3af; }
-
-        /* ── MASUK BUTTON ─────────────────────────────── */
-        .btn-masuk { width: 100%; padding: 14px; background: #4da6ff; color: white; font-weight: 700; font-size: 15px; border-radius: 6px; letter-spacing: 0.02em; transition: background .15s; }
-        .btn-masuk:active { background: #3b82f6; }
-
-        /* ── TABS ─────────────────────────────────────── */
-        .tab-item { padding: 12px 4px; margin-right: 20px; font-size: 14px; border-bottom: 2.5px solid transparent; cursor: pointer; white-space: nowrap; }
-        .tab-item.active { border-bottom-color: #2563eb; color: #2563eb; font-weight: 700; }
-        .tab-item.inactive { color: #6b7280; font-weight: 500; }
-
-        /* ── TABLE ────────────────────────────────────── */
-        .hasil-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .hasil-table th { background: #f3f4f6; padding: 10px 12px; text-align: left; font-weight: 700; color: #374151; border: 1px solid #e5e7eb; }
-        .hasil-table td { padding: 10px 12px; border: 1px solid #e5e7eb; color: #6b7280; }
-
-        /* ── COPYRIGHT ────────────────────────────────── */
-        .copy-bar { text-align: center; font-size: 10px; color: #9ca3af; padding: 5px 0 4px; background: white; flex-shrink: 0; }
-
-        /* ── QUESTION CONTENT ─────────────────────────── */
-        .q-content { font-size: var(--q-font-size); line-height: 1.7; color: #1f2937; text-align: justify; }
-        .q-img { max-width: 100%; border-radius: 6px; margin: 12px 0; border: 1px solid #e5e7eb; }
-
-        /* ── DASHED AVATAR ────────────────────────────── */
-        .avatar-box { width: 56px; height: 56px; border: 1.5px dashed #9ca3af; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #9ca3af; background: #fafafa; flex-shrink: 0; }
-
-        /* ── SCHOOL LOGO BOX ──────────────────────────── */
-        .logo-box { width: 48px; height: 48px; background: white; border: 1px solid #e5e7eb; border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; flex-shrink: 0; }
-        .logo-box-sm { width: 40px; height: 40px; background: white; border: 1px solid #e5e7eb; border-radius: 5px; display: flex; align-items: center; justify-content: center; padding: 3px; flex-shrink: 0; }
-
-        /* ── INFO BOX ─────────────────────────────────── */
-        .info-box { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; }
-
-        /* ── RANGE SLIDER ─────────────────────────────── */
-        input[type=range] { accent-color: #3b82f6; }
-
-        /* ── NAVIGASI MODAL ───────────────────────────── */
-        #modal-nav { display: none; position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.5); }
-        #modal-nav.open { display: flex; flex-direction: column; justify-content: flex-end; }
-        .nav-sheet { background: white; border-radius: 16px 16px 0 0; max-height: 90vh; display: flex; flex-direction: column; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Extraordinary CBT – Bahasa Inggris – SMP Negeri 2 Majalengka</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root{--qfs:15px;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:#f3f4f6;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;color:#374151;position:fixed;width:100%;}
+.bg-hex-teal{background-color:#06b6d4;background-image:url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,4 58,20 58,52 30,68 2,52 2,20' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3Cpolygon points='30,72 58,88 58,120 30,136 2,120 2,88' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3Cpolygon points='60,38 88,54 88,86 60,102 32,86 32,54' fill='none' stroke='%230891b2' stroke-width='1.5' opacity='0.55'/%3E%3C/svg%3E");}
+.bg-hex-blue{background-color:#4da6ff;background-image:url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,4 58,20 58,52 30,68 2,52 2,20' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3Cpolygon points='30,72 58,88 58,120 30,136 2,120 2,88' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3Cpolygon points='60,38 88,54 88,86 60,102 32,86 32,54' fill='none' stroke='%231d6fbf' stroke-width='1.5' opacity='0.35'/%3E%3C/svg%3E");}
+.view{display:none;flex-direction:column;height:100%;overflow:hidden;}
+.view.active{display:flex;}
+.scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px;}
+.cbt-input{width:100%;padding:12px 12px 12px 42px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;background:white;color:#374151;transition:border-color .2s;}
+.cbt-input:focus{border-color:#06b6d4;box-shadow:0 0 0 2px rgba(6,182,212,.12);}
+.cbt-input::placeholder{color:#9ca3af;}
+.inp-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:14px;}
+.opt-item{display:flex;align-items:flex-start;gap:16px;padding:13px 16px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background .12s;}
+.opt-item:active{background:#f9fafb;}
+.opt-lbl{min-width:28px;height:28px;border-radius:50%;border:1.5px solid #9ca3af;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#6b7280;background:white;flex-shrink:0;}
+.opt-item.sel{background:#eff6ff;}
+.opt-item.sel .opt-lbl{background:#3b82f6;border-color:#3b82f6;color:white;}
+.opt-txt{font-size:var(--qfs);color:#1f2937;line-height:1.65;text-align:justify;padding-top:2px;flex:1;}
+.q-circle{position:relative;width:46px;height:46px;border-radius:50%;border:1.5px solid #d1d5db;background:white;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#111827;}
+.q-badge{position:absolute;top:-5px;left:-5px;width:20px;height:20px;border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;}
+.badge-red{background:#ef4444;color:white;}
+.badge-grn{background:#10b981;color:white;}
+.badge-yel{background:#f59e0b;color:white;}
+.ngb{position:relative;height:42px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;font-weight:600;color:#374151;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:8px;}
+.ngb-dot{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;border:1.5px solid #9ca3af;background:white;}
+.ngb.ans{background:#22c55e;color:white;border-color:#16a34a;}
+.ngb.ans .ngb-dot{background:#22c55e;border-color:#16a34a;}
+.ngb.ragu{background:#facc15;color:#78350f;border-color:#ca8a04;}
+.ngb.ragu .ngb-dot{background:#facc15;border-color:#ca8a04;}
+.ngb.curr{border:2.5px solid #111827;font-weight:800;}
+.nfb{width:42px;height:38px;border-radius:6px;color:white;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.nfb:disabled{opacity:.4;pointer-events:none;}
+.nfb-red{background:#ef4444;}
+.nfb-blue{background:#3b82f6;}
+.timer-box{display:flex;align-items:center;gap:6px;border:1px solid #d1d5db;border-radius:6px;padding:5px 12px;background:white;}
+.loader{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:spin .8s linear infinite;}
+.loader-dark{width:22px;height:22px;border:3px solid #e5e7eb;border-top-color:#3b82f6;border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.exam-card{border:1px solid #93c5fd;border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:12px;background:white;}
+.radio-dot{width:18px;height:18px;border-radius:50%;border:2px solid #3b82f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.radio-dot::after{content:'';width:9px;height:9px;border-radius:50%;background:#3b82f6;}
+.token-input{width:100%;padding:11px 14px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;color:#374151;background:white;}
+.token-input:focus{border-color:#3b82f6;}
+.token-input::placeholder{color:#9ca3af;}
+.btn-masuk{width:100%;padding:14px;background:#4da6ff;color:white;font-weight:700;font-size:15px;border-radius:6px;letter-spacing:.02em;transition:background .15s;}
+.btn-masuk:active{background:#3b82f6;}
+.tab-item{padding:12px 4px;margin-right:20px;font-size:14px;border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap;}
+.tab-item.active{border-bottom-color:#2563eb;color:#2563eb;font-weight:700;}
+.tab-item.inactive{color:#6b7280;font-weight:500;}
+.hasil-table{width:100%;border-collapse:collapse;font-size:13px;}
+.hasil-table th{background:#f3f4f6;padding:10px 12px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;}
+.hasil-table td{padding:10px 12px;border:1px solid #e5e7eb;color:#6b7280;}
+.hasil-table tr.clickable:hover td{background:#eff6ff;cursor:pointer;}
+.copy-bar{text-align:center;font-size:10px;color:#9ca3af;padding:5px 0 4px;background:white;flex-shrink:0;}
+.q-content{font-size:var(--qfs);line-height:1.7;color:#1f2937;text-align:justify;}
+.avatar-box{width:56px;height:56px;border:1.5px dashed #9ca3af;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#9ca3af;background:#fafafa;flex-shrink:0;}
+.logo-box{width:48px;height:48px;background:white;border:1px solid #e5e7eb;border-radius:6px;display:flex;align-items:center;justify-content:center;padding:4px;flex-shrink:0;}
+.logo-box-sm{width:40px;height:40px;background:white;border:1px solid #e5e7eb;border-radius:5px;display:flex;align-items:center;justify-content:center;padding:3px;flex-shrink:0;}
+.info-box{background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px;}
+input[type=range]{accent-color:#3b82f6;}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.5);}
+.modal-overlay.open{display:flex;flex-direction:column;justify-content:flex-end;}
+.sheet{background:white;border-radius:16px 16px 0 0;max-height:90vh;display:flex;flex-direction:column;}
+#modal-confirm.open{display:flex;align-items:flex-end;}
+.confirm-sheet{background:white;border-radius:16px 16px 0 0;width:100%;padding:20px 20px 32px;}
+.detail-q-row{padding:12px 16px;border-bottom:1px solid #f3f4f6;display:flex;gap:12px;align-items:flex-start;}
+.status-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;}
+.status-benar{background:#dcfce7;color:#16a34a;}
+.status-salah{background:#fee2e2;color:#dc2626;}
+.status-essay{background:#e0f2fe;color:#0284c7;}
+#v-loading{background:#fff;align-items:center;justify-content:center;}
+.essay-score-bar{height:6px;border-radius:3px;background:#e5e7eb;margin-top:4px;}
+.essay-score-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3b82f6,#06b6d4);transition:width .6s ease;}
+#v-detail{background:#f9fafb;}
+.detail-tab-bar{display:flex;background:white;border-bottom:1px solid #e5e7eb;padding:0 16px;}
+.dtab{padding:10px 12px;font-size:13px;font-weight:600;color:#6b7280;border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap;}
+.dtab.active{color:#2563eb;border-bottom-color:#2563eb;}
+</style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW 1 · LOGIN
-═══════════════════════════════════════════════ -->
+<!-- VIEW 1: LOGIN -->
 <div id="v-login" class="view active">
-    <!-- Teal header -->
-    <header class="bg-hex-teal flex-shrink-0 relative" style="height:140px;">
-        <div class="absolute bottom-4 left-4 flex items-center gap-3">
-            <div class="logo-box shadow-sm">
-                <!-- Placeholder for generic school logo -->
-                <i class="fas fa-graduation-cap text-cyan-500 text-2xl"></i>
-            </div>
-            <div class="text-white">
-                <p class="font-bold text-sm tracking-wide leading-tight">SMP NEGERI 2 MAJALENGKA</p>
-                <p class="text-[11px] font-medium text-cyan-100">KAB. MAJALENGKA</p>
-            </div>
+  <header class="bg-hex-teal flex-shrink-0 relative" style="height:140px;">
+    <div class="absolute bottom-4 left-4 flex items-center gap-3">
+      <div class="logo-box shadow-sm">
+        <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo" class="w-8">
+      </div>
+      <div class="text-white">
+        <p class="font-bold text-sm tracking-wide leading-tight">SMP NEGERI 2 MAJALENGKA</p>
+        <p class="text-[11px] font-medium text-cyan-100">KAB. MAJALENGKA</p>
+      </div>
+    </div>
+  </header>
+  <main class="scroll-area px-4 pt-5 pb-6">
+    <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-3.5 border-b border-gray-100">
+        <i class="fas fa-qrcode text-gray-700 text-base"></i>
+        <span class="font-bold text-gray-800 text-base">Login – PSAJ Bahasa Inggris</span>
+      </div>
+      <div class="p-4 pt-5">
+        <div id="login-err" class="hidden mb-4 bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg p-3 text-center font-semibold">Nomor Ujian atau Password salah!</div>
+        <div class="mb-4">
+          <label class="block text-xs font-bold text-gray-600 mb-1.5">Nomor Ujian</label>
+          <div class="relative">
+            <i class="far fa-user inp-icon"></i>
+            <input id="l-user" type="text" class="cbt-input" placeholder="Nomor Ujian" autocomplete="off">
+          </div>
         </div>
-    </header>
-
-    <!-- Form card -->
-    <main class="scroll-area px-4 pt-5 pb-6">
-        <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
-            <!-- Card header row -->
-            <div class="flex items-center gap-2 px-4 py-3.5 border-b border-gray-100">
-                <i class="fas fa-qrcode text-gray-700 text-base"></i>
-                <span class="font-bold text-gray-800 text-base">Login Peserta Ujian</span>
-            </div>
-            <!-- Card body -->
-            <div class="p-4 pt-5">
-                <div id="login-err" class="hidden mb-4 bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg p-3 text-center font-semibold">
-                    Nomor Ujian atau Password salah!
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Nomor Ujian</label>
-                    <div class="relative">
-                        <i class="far fa-user inp-icon"></i>
-                        <input id="l-user" type="text" class="cbt-input" placeholder="Misal: 236" autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="mb-5">
-                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Password</label>
-                    <div class="relative">
-                        <i class="fas fa-lock inp-icon"></i>
-                        <input id="l-pass" type="password" class="cbt-input" placeholder="Password default: 123" autocomplete="off" value="123">
-                        <button onclick="togglePw()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                            <i id="eye-ic" class="far fa-eye-slash"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <button onclick="doLogin()" id="btn-login"
-                    class="px-7 py-2.5 bg-[#06b6d4] hover:bg-[#0891b2] text-white font-bold text-sm rounded-lg transition-colors flex items-center gap-2">
-                    <span id="btn-login-lbl">Login</span>
-                </button>
-            </div>
+        <div class="mb-5">
+          <label class="block text-xs font-bold text-gray-600 mb-1.5">Password</label>
+          <div class="relative">
+            <i class="fas fa-lock inp-icon"></i>
+            <input id="l-pass" type="password" class="cbt-input" placeholder="*******" autocomplete="off">
+            <button onclick="togglePw()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <i id="eye-ic" class="far fa-eye-slash"></i>
+            </button>
+          </div>
         </div>
-    </main>
-
-    <div class="copy-bar">© 2026 Extraordinary CBT 5.0-MERDEKA-RELEASE</div>
+        <button onclick="doLogin()" id="btn-login"
+          class="px-7 py-2.5 bg-[#06b6d4] hover:bg-[#0891b2] text-white font-bold text-sm rounded-lg transition-colors flex items-center gap-2">
+          <span id="btn-login-lbl">Login</span>
+        </button>
+      </div>
+    </div>
+  </main>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · Kelas 9H · SMPN 2 Majalengka</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW 2 · DASHBOARD
-═══════════════════════════════════════════════ -->
+<!-- VIEW 2: DASHBOARD -->
 <div id="v-dash" class="view">
-    <!-- Blue header with student info -->
-    <header class="bg-hex-blue flex-shrink-0">
-        <div class="px-4 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="logo-box shadow-sm">
-                    <i class="fas fa-graduation-cap text-blue-500 text-xl"></i>
-                </div>
-                <div class="text-white">
-                    <p class="font-bold text-xs tracking-wider leading-tight">SMP NEGERI 2 MAJALENGKA</p>
-                    <p class="text-[10px] text-blue-100">KAB. MAJALENGKA</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2.5">
-                <div class="text-right text-white">
-                    <p id="d-name" class="font-bold text-xs leading-tight uppercase">NAMA</p>
-                    <p id="d-id"   class="text-[10px] text-blue-100">ID</p>
-                </div>
-                <button onclick="doLogout()" class="bg-white text-gray-600 w-9 h-9 flex items-center justify-center rounded-lg shadow-sm">
-                    <i class="fas fa-sign-out-alt text-sm"></i>
-                </button>
-            </div>
+  <header class="bg-hex-blue flex-shrink-0">
+    <div class="px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="logo-box shadow-sm">
+          <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo" class="w-8">
         </div>
-
-        <!-- Tabs -->
-        <div class="bg-white flex px-4 border-b border-gray-200">
-            <div id="tab-ujian"  class="tab-item active"   onclick="setTab('ujian')">Ujian</div>
-            <div id="tab-hasil" class="tab-item inactive"  onclick="setTab('hasil')">Hasil ujian</div>
+        <div class="text-white">
+          <p class="font-bold text-xs tracking-wider leading-tight">SMP NEGERI 2 MAJALENGKA</p>
+          <p class="text-[10px] text-blue-100">KAB. MAJALENGKA</p>
         </div>
-    </header>
-
-    <main class="scroll-area px-4 py-5">
-
-        <!-- ── TAB: UJIAN ── -->
-        <div id="pane-ujian">
-            <!-- Profile row -->
-            <div class="flex items-center gap-4 mb-6">
-                <div class="avatar-box"><i class="far fa-user text-xl"></i></div>
-                <div>
-                    <p class="text-[10px] font-bold text-gray-500 mb-0.5">Nama Peserta</p>
-                    <p id="d-name2" class="font-bold text-gray-800 text-sm uppercase mb-1">NAMA</p>
-                    <p class="text-[10px] font-bold text-gray-500 mb-0.5">Nomor Ujian</p>
-                    <p id="d-id2"   class="font-bold text-gray-800 text-sm">ID</p>
-                </div>
-            </div>
-
-            <!-- Exam schedule card -->
-            <div id="pane-ada">
-                <p class="text-xs font-bold text-gray-700 mb-2">Jadwal Ujian</p>
-                <div class="exam-card mb-5">
-                    <div class="radio-dot"></div>
-                    <div>
-                        <p class="font-bold text-gray-800 text-sm leading-tight">Ilmu Pengetahuan Alam (IPA)</p>
-                        <p class="text-xs text-gray-500 mt-0.5">2026-05-18 07:30 - Kurikulum Merdeka</p>
-                    </div>
-                </div>
-
-                <p class="text-xs font-bold text-gray-700 mb-1.5">Token</p>
-                <input id="d-token" type="text" class="token-input mb-1" placeholder="Masukkan Token Ujian" autocomplete="off">
-                <p id="d-token-hint" class="text-[10px] text-blue-500 mb-4 font-medium"></p>
-                <button onclick="doMasuk()" class="btn-masuk">Mulai Ujian</button>
-            </div>
-
-            <div id="pane-kosong" class="hidden">
-                <div class="info-box">
-                    <p class="text-xs font-bold text-gray-700 mb-1">Informasi</p>
-                    <p class="text-xs text-gray-600">Tidak ada mata ujian untuk anda saat ini</p>
-                </div>
-            </div>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <div class="text-right text-white">
+          <p id="d-name" class="font-bold text-xs leading-tight uppercase">NAMA</p>
+          <p id="d-id" class="text-[10px] text-blue-100">ID</p>
         </div>
-
-        <!-- ── TAB: HASIL UJIAN ── -->
-        <div id="pane-hasil" class="hidden">
-            <table class="hasil-table">
-                <thead>
-                    <tr>
-                        <th style="width:42px">NO</th>
-                        <th>UJIAN</th>
-                        <th>HASIL</th>
-                    </tr>
-                </thead>
-                <tbody id="hasil-body">
-                    <tr><td colspan="3" class="text-gray-400 text-xs text-center py-4">Belum ada hasil ujian</td></tr>
-                </tbody>
-            </table>
+        <button onclick="doLogout()" class="bg-white text-gray-600 w-9 h-9 flex items-center justify-center rounded-lg shadow-sm">
+          <i class="fas fa-sign-out-alt text-sm"></i>
+        </button>
+      </div>
+    </div>
+    <div class="bg-white flex px-4 border-b border-gray-200">
+      <div id="tab-ujian" class="tab-item active" onclick="setTab('ujian')">Ujian</div>
+      <div id="tab-hasil" class="tab-item inactive" onclick="setTab('hasil')">Hasil Ujian</div>
+    </div>
+  </header>
+  <main class="scroll-area px-4 py-5">
+    <div id="pane-ujian">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="avatar-box"><i class="far fa-user text-xl"></i></div>
+        <div>
+          <p class="text-[10px] font-bold text-gray-500 mb-0.5">Nama Peserta</p>
+          <p id="d-name2" class="font-bold text-gray-800 text-sm uppercase mb-1">NAMA</p>
+          <p class="text-[10px] font-bold text-gray-500 mb-0.5">Nomor Ujian</p>
+          <p id="d-id2" class="font-bold text-gray-800 text-sm">ID</p>
         </div>
-    </main>
-
-    <div class="copy-bar">© 2026 Extraordinary CBT 5.0-MERDEKA-RELEASE</div>
+      </div>
+      <div id="pane-ada">
+        <p class="text-xs font-bold text-gray-700 mb-2">Jadwal Ujian</p>
+        <div class="exam-card mb-5">
+          <div class="radio-dot"></div>
+          <div>
+            <p class="font-bold text-gray-800 text-sm leading-tight">Bahasa Inggris</p>
+            <p class="text-xs text-gray-500 mt-0.5">PSAJ 2025/2026 · 120 Menit · 45 Soal</p>
+          </div>
+        </div>
+        <p class="text-xs font-bold text-gray-700 mb-1.5">Token</p>
+        <input id="d-token" type="text" class="token-input mb-1" placeholder="Masukkan token ujian" autocomplete="off">
+        <p id="d-token-hint" class="text-[10px] text-blue-500 mb-4 font-medium"></p>
+        <button onclick="doMasuk()" class="btn-masuk">Masuk Ujian</button>
+      </div>
+    </div>
+    <div id="pane-hasil" class="hidden">
+      <table class="hasil-table">
+        <thead><tr><th style="width:42px">NO</th><th>UJIAN</th><th>HASIL</th></tr></thead>
+        <tbody id="hasil-body">
+          <tr><td colspan="3" class="text-gray-400 text-xs">Belum ada hasil ujian</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · Kelas 9H · SMPN 2 Majalengka</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW 3 · EXAM
-═══════════════════════════════════════════════ -->
+<!-- VIEW 3: EXAM -->
 <div id="v-exam" class="view bg-white">
-    <!-- Blue header -->
-    <header id="exam-hdr" class="bg-hex-blue flex-shrink-0">
-        <div class="px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="logo-box-sm shadow-sm">
-                    <i class="fas fa-graduation-cap text-blue-500 text-sm"></i>
-                </div>
-                <div class="text-white">
-                    <p class="font-bold text-[11px] tracking-wider leading-tight">SMP NEGERI 2 MAJALENGKA</p>
-                    <p class="text-[10px] text-blue-100">Ilmu Pengetahuan Alam</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <div class="text-right text-white">
-                    <p id="e-name" class="font-bold text-[11px] leading-tight uppercase"></p>
-                    <p id="e-id"   class="text-[10px] text-blue-100"></p>
-                </div>
-                <button class="bg-white text-gray-600 w-8 h-8 flex items-center justify-center rounded-lg">
-                    <i class="fas fa-sign-out-alt text-xs"></i>
-                </button>
-            </div>
+  <header id="exam-hdr" class="bg-hex-blue flex-shrink-0">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="logo-box-sm shadow-sm">
+          <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo" class="w-7">
         </div>
-    </header>
-
-    <!-- Question number + type + timer bar -->
-    <div class="px-4 py-2.5 flex-shrink-0 flex justify-between items-center border-b border-gray-200 bg-white shadow-sm z-10 relative">
-        <div class="flex items-center gap-3">
-            <div id="q-circle" class="q-circle shadow-sm">
-                <span id="q-num">1</span>
-                <div id="q-badge" class="q-badge badge-red">!</div>
-            </div>
-            <div>
-                <p id="q-type" class="font-bold text-gray-800 text-[14px] leading-tight">Pilihan ganda</p>
-                <p class="text-[10px] text-gray-400 italic">Jawablah dengan jujur</p>
-            </div>
+        <div class="text-white">
+          <p class="font-bold text-[11px] tracking-wider leading-tight">PSAJ · Bahasa Inggris · Kelas 9</p>
+          <p class="text-[10px] text-blue-100">SMP NEGERI 2 MAJALENGKA</p>
         </div>
-        <div class="timer-box shadow-sm">
-            <i class="far fa-clock text-blue-500 text-sm"></i>
-            <span id="timer" class="font-bold text-gray-700 text-sm tracking-wider">90:00</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="text-right text-white">
+          <p id="e-name" class="font-bold text-[11px] leading-tight uppercase"></p>
+          <p id="e-id" class="text-[10px] text-blue-100"></p>
         </div>
-    </div>
-
-    <!-- Daftar soal + Fokus bar -->
-    <div class="flex-shrink-0 flex justify-end items-center gap-4 px-4 py-2 border-b border-gray-200 bg-white text-[12px] font-semibold text-gray-500">
-        <button onclick="openNav()" class="flex items-center gap-1.5 hover:text-gray-700 transition">
-            <i class="fas fa-th-large text-blue-400 text-xs"></i> Daftar soal
+        <button onclick="exitExam()" class="bg-white text-gray-600 w-8 h-8 flex items-center justify-center rounded-lg">
+          <i class="fas fa-sign-out-alt text-xs"></i>
         </button>
-        <button onclick="toggleFokus()" class="flex items-center gap-1.5 hover:text-gray-700 transition">
-            <i id="fokus-ic" class="fas fa-expand text-blue-400 text-xs"></i> Fokus
-        </button>
+      </div>
     </div>
-
-    <!-- Zoom bar -->
-    <div class="flex-shrink-0 flex justify-end items-center gap-2 px-4 py-1.5 border-b border-gray-100 bg-gray-50 text-[11px] text-gray-400">
-        <span>Ukuran Teks</span>
-        <input type="range" id="zoom-sl" min="14" max="22" value="15" class="w-20">
+  </header>
+  <div class="px-4 py-2.5 flex-shrink-0 flex justify-between items-center border-b border-gray-200 bg-white">
+    <div class="flex items-center gap-3">
+      <div id="q-circle" class="q-circle">
+        <span id="q-num">1</span>
+        <div id="q-badge" class="q-badge badge-red">!</div>
+      </div>
+      <div>
+        <p id="q-type" class="font-bold text-gray-800 text-[14px] leading-tight">Pilihan Ganda</p>
+        <p class="text-[10px] text-gray-400 italic">Think carefully before answering</p>
+      </div>
     </div>
-
-    <!-- Scrollable question area -->
-    <main id="q-scroll" class="scroll-area">
-        <div class="max-w-3xl mx-auto pb-8">
-            <div class="p-5 pt-6">
-                <div id="q-text" class="q-content"></div>
-            </div>
-
-            <!-- PG options -->
-            <div id="opts" class="border-t border-gray-100"></div>
-
-            <!-- Essay section -->
-            <div id="essay-wrap" class="hidden p-5 border-t border-gray-100">
-                <p class="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                    <i class="fas fa-keyboard text-blue-500"></i> Ketik jawaban kamu di bawah ini:
-                </p>
-                <textarea id="essay-ta" rows="8"
-                    class="w-full p-4 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none resize-vertical text-gray-700 leading-relaxed shadow-sm transition"
-                    placeholder="Tuliskan proses dan jawaban akhir dengan jelas..."></textarea>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer nav -->
-    <footer class="flex-shrink-0 bg-white border-t border-gray-200 px-4 py-3 flex items-center justify-between shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
-        <button id="btn-prev" class="nfb nfb-red shadow-sm hover:bg-red-600 transition"><i class="fas fa-chevron-left"></i></button>
-        <label class="flex items-center gap-2 cursor-pointer select-none bg-gray-50 px-3 py-2 rounded-lg border border-gray-200">
-            <input id="cb-ragu" type="checkbox"
-                class="w-4 h-4 border-gray-300 rounded"
-                style="accent-color:#facc15;">
-            <span class="text-sm font-semibold text-gray-700">Ragu-ragu</span>
-        </label>
-        <div class="flex items-center gap-2">
-            <button id="btn-next"   class="nfb nfb-blue shadow-sm hover:bg-blue-600 transition"><i class="fas fa-chevron-right"></i></button>
-            <button id="btn-finish" class="hidden px-6 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold rounded-lg shadow-sm transition">Selesai Ujian</button>
-        </div>
-    </footer>
+    <div class="timer-box">
+      <i class="far fa-clock text-gray-500 text-sm"></i>
+      <span id="timer" class="font-bold text-gray-700 text-sm tracking-wider">120:00</span>
+    </div>
+  </div>
+  <div class="flex-shrink-0 flex justify-end items-center gap-4 px-4 py-2 border-b border-gray-200 bg-white text-[12px] font-semibold text-gray-500">
+    <button onclick="openNav()" class="flex items-center gap-1.5 hover:text-gray-700">
+      <i class="fas fa-th-large text-gray-400 text-xs"></i> Daftar Soal
+    </button>
+    <button onclick="toggleFokus()" class="flex items-center gap-1.5 hover:text-gray-700">
+      <i id="fokus-ic" class="fas fa-expand text-gray-400 text-xs"></i> Fokus
+    </button>
+  </div>
+  <div class="flex-shrink-0 flex justify-end items-center gap-2 px-4 py-1.5 border-b border-gray-100 bg-white text-[11px] text-gray-400">
+    <span>Ukuran teks</span>
+    <input type="range" id="zoom-sl" min="12" max="22" value="15" class="w-16">
+  </div>
+  <main id="q-scroll" class="scroll-area">
+    <div class="max-w-2xl mx-auto pb-8">
+      <div class="p-4 pt-5"><div id="q-text" class="q-content"></div></div>
+      <div id="opts" class="border-t border-gray-100"></div>
+      <div id="essay-wrap" class="hidden p-4 border-t border-gray-100">
+        <p class="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="fas fa-keyboard text-gray-500"></i> Tulis jawabanmu di bawah ini
+        </p>
+        <textarea id="essay-ta" rows="8"
+          class="w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-400 outline-none resize-none text-gray-700 leading-relaxed"
+          placeholder="Write your answer here in English..."></textarea>
+      </div>
+    </div>
+  </main>
+  <footer class="flex-shrink-0 bg-gray-50 border-t border-gray-200 px-4 py-2.5 flex items-center justify-between">
+    <button id="btn-prev" class="nfb nfb-red"><i class="fas fa-chevron-left"></i></button>
+    <label class="flex items-center gap-2 cursor-pointer select-none">
+      <input id="cb-ragu" type="checkbox" class="w-4 h-4 border-gray-300 rounded" style="accent-color:white;border:1.5px solid #9ca3af;">
+      <span class="text-sm font-semibold text-gray-700">ragu-ragu</span>
+    </label>
+    <div class="flex items-center gap-2">
+      <button id="btn-next" class="nfb nfb-blue"><i class="fas fa-chevron-right"></i></button>
+      <button id="btn-finish" class="hidden px-5 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg">Selesai</button>
+    </div>
+  </footer>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · Kelas 9H · SMPN 2 Majalengka</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW 4 · RESULT
-═══════════════════════════════════════════════ -->
-<div id="v-result" class="view items-center justify-center bg-gray-50">
-    <div class="text-center px-8 max-w-sm w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-        <i class="fas fa-check-circle text-6xl text-green-500 mb-4 drop-shadow-md"></i>
-        <h2 class="text-2xl font-black text-gray-800 mb-1">Ujian Selesai</h2>
-        <p class="text-sm text-gray-500 mb-8">Jawaban Anda berhasil disimpan di server sekolah.</p>
-        
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="border border-gray-200 bg-gray-50 rounded-xl p-4">
-                <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Skor Pilihan Ganda</p>
-                <p id="s-pg" class="text-3xl font-black text-blue-600">—</p>
-            </div>
-            <div class="border border-gray-200 bg-gray-50 rounded-xl p-4">
-                <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Estimasi Skor Esai</p>
-                <p id="s-es" class="text-3xl font-black text-teal-600">—</p>
-            </div>
-        </div>
-        
-        <button onclick="location.reload()" class="w-full py-3.5 bg-gray-800 hover:bg-gray-900 text-white font-bold rounded-xl text-sm transition shadow-md">Kembali ke Beranda</button>
+<!-- VIEW 4: LOADING -->
+<div id="v-loading" class="view">
+  <div class="flex flex-col items-center justify-center flex-1 px-8 text-center">
+    <div class="loader-dark mb-5"></div>
+    <h3 class="text-gray-800 font-bold text-base mb-1">Sedang Menilai Jawaban</h3>
+    <p id="loading-msg" class="text-sm text-gray-500 mb-6">Menganalisis jawaban pilihan ganda...</p>
+    <div class="w-full max-w-xs bg-gray-100 rounded-full h-2">
+      <div id="loading-bar" class="bg-blue-500 h-2 rounded-full transition-all duration-500" style="width:0%"></div>
     </div>
+    <p id="loading-step" class="text-xs text-gray-400 mt-2"></p>
+  </div>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · SMPN 2 Majalengka</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     MODAL · NAVIGASI SOAL
-═══════════════════════════════════════════════ -->
-<div id="modal-nav" onclick="closeNavOutside(event)">
-    <div class="nav-sheet">
-        <!-- Title -->
-        <div class="px-5 pt-5 pb-3 flex justify-between items-center border-b border-gray-100">
-            <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
-                <i class="fas fa-list text-blue-500"></i> Navigasi Soal
-            </h3>
-            <button onclick="closeNav()" class="text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
-        </div>
-        <!-- Grid (scrollable) -->
-        <div class="flex-1 overflow-y-auto px-5 py-4 bg-gray-50">
-            <p class="text-xs font-bold text-gray-500 mb-3">PILIHAN GANDA</p>
-            <div id="nav-pg" class="grid grid-cols-5 sm:grid-cols-6 gap-2.5 mb-6"></div>
-            
-            <p class="text-xs font-bold text-gray-500 mb-3">ESAI</p>
-            <div id="nav-es" class="grid grid-cols-5 sm:grid-cols-6 gap-2.5 mb-2"></div>
-        </div>
-        <!-- Legend -->
-        <div class="px-5 py-3 border-t border-gray-200 bg-white">
-            <div class="flex items-center gap-4 flex-wrap text-xs font-semibold text-gray-600 justify-center">
-                <span class="flex items-center gap-1.5">
-                    <span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #d1d5db;background:white;display:inline-block"></span> Belum
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <span style="width:14px;height:14px;border-radius:50%;background:#22c55e;display:inline-block"></span> Terjawab
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <span style="width:14px;height:14px;border-radius:50%;background:#facc15;display:inline-block"></span> Ragu
-                </span>
-            </div>
-        </div>
+<!-- VIEW 5: RESULT SUMMARY -->
+<div id="v-result" class="view bg-white">
+  <div class="bg-hex-blue flex-shrink-0 px-4 py-3 flex items-center gap-3">
+    <div class="logo-box-sm shadow-sm">
+      <img src="https://raw.githubusercontent.com/Andikakostradnanda/Profile-9H/main/Logo%20Smp.png" alt="Logo" class="w-7">
     </div>
+    <div class="text-white">
+      <p class="font-bold text-[11px] tracking-wider">SMP NEGERI 2 MAJALENGKA</p>
+      <p class="text-[10px] text-blue-100">Ujian Selesai – Bahasa Inggris</p>
+    </div>
+  </div>
+  <main class="scroll-area">
+    <div class="px-6 py-8 max-w-sm mx-auto text-center">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-check-circle text-4xl text-green-500"></i>
+      </div>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">Ujian Selesai!</h2>
+      <p class="text-xs text-gray-500 mb-6">Jawaban kamu telah berhasil dikumpulkan</p>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="border border-gray-200 rounded-xl p-4">
+          <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Nilai PG</p>
+          <p id="s-pg" class="text-3xl font-black text-gray-800">—</p>
+          <p class="text-[10px] text-gray-400 mt-1">dari 60</p>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-4">
+          <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Nilai Esai</p>
+          <p id="s-es" class="text-3xl font-black text-gray-800">—</p>
+          <p class="text-[10px] text-gray-400 mt-1">dari 40</p>
+        </div>
+      </div>
+      <div class="border border-blue-200 bg-blue-50 rounded-xl p-3 mb-6">
+        <p class="text-[10px] font-bold text-blue-700 uppercase mb-0.5">Nilai Akhir</p>
+        <p id="s-total" class="text-4xl font-black text-blue-700">—</p>
+        <p class="text-[10px] text-blue-500 mt-1">dari 100</p>
+      </div>
+      <button onclick="showDetail()" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl text-sm mb-3 flex items-center justify-center gap-2">
+        <i class="fas fa-list-ul"></i> Lihat Detail Jawaban
+      </button>
+      <button onclick="goToDashboard()" class="w-full py-3 border border-gray-300 text-gray-700 font-semibold rounded-xl text-sm">
+        Kembali ke Beranda
+      </button>
+    </div>
+  </main>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · SMPN 2 Majalengka</div>
 </div>
 
+<!-- VIEW 6: DETAIL RESULT -->
+<div id="v-detail" class="view">
+  <div class="bg-hex-blue flex-shrink-0 px-4 py-3 flex items-center gap-3">
+    <button onclick="show('v-result')" class="bg-white text-gray-600 w-8 h-8 flex items-center justify-center rounded-lg">
+      <i class="fas fa-chevron-left text-xs"></i>
+    </button>
+    <div class="text-white">
+      <p class="font-bold text-[11px] tracking-wider">Detail Jawaban</p>
+      <p id="detail-name" class="text-[10px] text-blue-100"></p>
+    </div>
+  </div>
+  <div id="detail-summary" class="flex-shrink-0 bg-white border-b border-gray-200 px-4 py-3 flex gap-4">
+    <div class="flex-1 text-center">
+      <p class="text-[10px] font-bold text-gray-500 uppercase">PG</p>
+      <p id="detail-pg" class="text-lg font-black text-gray-800">—</p>
+    </div>
+    <div class="w-px bg-gray-200"></div>
+    <div class="flex-1 text-center">
+      <p class="text-[10px] font-bold text-gray-500 uppercase">Esai</p>
+      <p id="detail-es" class="text-lg font-black text-gray-800">—</p>
+    </div>
+    <div class="w-px bg-gray-200"></div>
+    <div class="flex-1 text-center">
+      <p class="text-[10px] font-bold text-blue-600 uppercase">Akhir</p>
+      <p id="detail-total" class="text-lg font-black text-blue-600">—</p>
+    </div>
+  </div>
+  <div class="detail-tab-bar flex-shrink-0">
+    <div id="dtab-pg" class="dtab active" onclick="setDetailTab('pg')">Pilihan Ganda (40)</div>
+    <div id="dtab-es" class="dtab inactive" onclick="setDetailTab('es')">Esai (5)</div>
+  </div>
+  <div id="detail-content" class="scroll-area">
+    <div id="detail-pg-list"></div>
+    <div id="detail-es-list" class="hidden"></div>
+  </div>
+  <div class="copy-bar">© 2025 Extraordinary CBT · PSAJ B. Inggris · SMPN 2 Majalengka</div>
+</div>
 
-<!-- ═══════════════════════════════════════════════
-     SCRIPT
-═══════════════════════════════════════════════ -->
+<!-- MODAL: NAVIGASI -->
+<div id="modal-nav" class="modal-overlay" onclick="closeNavOutside(event)">
+  <div class="sheet">
+    <div class="px-5 pt-5 pb-3">
+      <h3 class="font-bold text-gray-800 text-base">Navigasi Soal</h3>
+    </div>
+    <div class="flex-1 overflow-y-auto px-5 pb-3">
+      <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Pilihan Ganda (1–40)</p>
+      <div id="nav-pg" class="grid grid-cols-6 gap-2 mb-2"></div>
+      <p class="text-[10px] font-bold text-gray-400 uppercase mt-4 mb-1">Esai (41–45)</p>
+      <div id="nav-es" class="grid grid-cols-6 gap-2 mt-1 mb-1"></div>
+    </div>
+    <div class="px-5 py-3 border-t border-gray-100">
+      <div class="flex items-center gap-6 flex-wrap text-xs font-semibold text-gray-600">
+        <span class="flex items-center gap-1.5"><span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #9ca3af;background:white;display:inline-block"></span> Belum</span>
+        <span class="flex items-center gap-1.5"><span style="width:14px;height:14px;border-radius:50%;background:#22c55e;display:inline-block"></span> Sudah</span>
+        <span class="flex items-center gap-1.5"><span style="width:14px;height:14px;border-radius:50%;background:#facc15;display:inline-block"></span> Ragu</span>
+      </div>
+    </div>
+    <div class="px-5 pb-5 pt-2">
+      <button onclick="closeNav()" class="w-full py-3 border border-gray-300 rounded-xl font-bold text-gray-700 text-sm bg-white">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: KONFIRMASI SELESAI -->
+<div id="modal-confirm" class="modal-overlay" onclick="closeConfirmOutside(event)">
+  <div class="confirm-sheet">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+        <i class="fas fa-exclamation-triangle text-amber-500"></i>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-800 text-base">Konfirmasi Selesai Ujian</h3>
+        <p class="text-xs text-gray-500">Periksa kembali sebelum mengakhiri</p>
+      </div>
+    </div>
+    <div class="bg-gray-50 rounded-xl p-3 mb-4 grid grid-cols-2 gap-2">
+      <div class="text-center">
+        <p id="confirm-pg-count" class="text-xl font-black text-gray-800">—</p>
+        <p class="text-[10px] text-gray-500 font-semibold">PG Dijawab</p>
+      </div>
+      <div class="text-center">
+        <p id="confirm-es-count" class="text-xl font-black text-gray-800">—</p>
+        <p class="text-[10px] text-gray-500 font-semibold">Esai Dijawab</p>
+      </div>
+    </div>
+    <div id="confirm-warn" class="hidden bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-4 text-xs text-red-600 font-semibold flex items-center gap-2">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="confirm-warn-text"></span>
+    </div>
+    <label class="flex items-start gap-3 mb-5 cursor-pointer select-none">
+      <input type="checkbox" id="cb-confirm" class="mt-0.5 w-5 h-5 accent-green-500 flex-shrink-0" onchange="toggleAkhiriBtn()">
+      <span class="text-sm font-semibold text-gray-700 leading-snug">Saya yakin sudah selesai dan telah memeriksa seluruh jawaban.</span>
+    </label>
+    <button id="btn-akhiri" onclick="doFinish()" disabled
+      class="w-full py-3.5 bg-gray-300 text-gray-500 font-bold text-sm rounded-xl mb-3 flex items-center justify-center gap-2 transition-all duration-200"
+      style="cursor:not-allowed;">
+      <i class="fas fa-check"></i> Akhiri Ujian
+    </button>
+    <button onclick="closeConfirm()" class="w-full py-3 border border-gray-300 text-gray-600 font-semibold text-sm rounded-xl">Batalkan</button>
+  </div>
+</div>
+
 <script>
-// ─── DATA SISWA ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════
+// DATA SISWA
+// ═══════════════════════════════════════════
 const STUDENTS = {
-    "101":"ADI MUHAMAD FERDIANSYAH","102":"APRIYANTO",
-    "103":"AZHIRA VIENOLIA NAVISHA BILQIS","104":"BELVA RAMANIA",
-    "105":"CITRA LESTARI","106":"DIANA WIDYAWATI",
-    "236":"M. ANDIKA KOSTRADNANDA", "999":"SISWA UJI COBA"
+  "224":["ADI MUHAMAD FERDIANSYAH","02-21-0015-224"],
+  "225":["APRIYANTO","02-21-0015-225"],
+  "226":["AZHIRA VIENOLIA NAVISHA BILQIS","02-21-0015-226"],
+  "227":["BELVA RAMANIA","02-21-0015-227"],
+  "228":["CITRA LESTARI","02-21-0015-228"],
+  "229":["DIANA WIDYAWATI","02-21-0015-229"],
+  "230":["DINDA AULIA WINDARIS","02-21-0015-230"],
+  "231":["FAZRI INDRA NUGRAHA","02-21-0015-231"],
+  "232":["GEANNE SUKMA ANINDYA","02-21-0015-232"],
+  "233":["GENDIS AULIA MAHARANI WIBOWO","02-21-0015-233"],
+  "234":["KAZRIL CAHYARAHIM","02-21-0015-234"],
+  "235":["KHAYRA ADZKIA HAIFA","02-21-0015-235"],
+  "236":["M. ANDIKA KOSTRADNANDA","02-21-0015-236"],
+  "237":["MELISA RAHMAYANTI ISKANDAR PUTRI","02-21-0015-237"],
+  "238":["MOCHAMMAD RIZKY RAMDHANI","02-21-0015-238"],
+  "239":["MUHAMMAD AINUR OKTA FAIQ MAULANA","02-21-0015-239"],
+  "240":["MUHAMMAD IDHAM AL-HAFIDZ","02-21-0015-240"],
+  "241":["NADIA RAMADINA","02-21-0015-241"],
+  "242":["NADZAR FAJRI GUMELAR","02-21-0015-242"],
+  "243":["RAMA KURNIAWAN","02-21-0015-243"],
+  "244":["RICKY ADLY MAULANA","02-21-0015-244"],
+  "245":["RIKA RISMAYANTI","02-21-0015-245"],
+  "246":["RIZKY ARIEF FADILLAH","02-21-0015-246"],
+  "247":["SALMA NURDESTIANI","02-21-0015-247"],
+  "248":["SALSABILA NIZMA","02-21-0015-248"],
+  "249":["SITI ZALFA ZHUFAIRAH","02-21-0015-249"],
+  "250":["SRI AULIA NINGSIH","02-21-0015-250"],
+  "251":["SUCI LATIFAH OKTAVIANI","02-21-0015-251"],
+  "252":["SYIFA AULIANA PUTRI","02-21-0015-252"],
+  "253":["SYIFA NURDINI H.","02-21-0015-253"],
+  "254":["VIENARD CAIZHI NISAESU IRHAB","02-21-0015-254"],
+  "255":["YANA NURYANA","02-21-0015-255"]
 };
 
-// ─── BANK SOAL BARU (SESUAI KISI-KISI IPA KELAS 9 KURIKULUM MERDEKA) ───────
-// Cakupan Materi: Listrik Dinamis, Magnet & Elektromagnetik, Energi Terbarukan, Reaksi Kimia, Asam Basa, Laju Reaksi, Bioteknologi, Pewarisan Sifat.
-const QS = [
-    // --- LISTRIK DINAMIS ---
-    {id:1, type:'pg', text:"Arus listrik dalam sebuah penghantar logam sejatinya terjadi karena adanya perpindahan muatan listrik. Secara fisis, partikel sub-atomik yang berpindah dan menyebabkan timbulnya arus listrik dalam konduktor adalah...", opts:["Proton","Neutron","Elektron","Inti atom"], ans:2},
-    {id:2, type:'pg', text:"Seutas kawat penghantar dialiri muatan listrik sebesar 120 Coulomb dalam waktu 2 menit. Berapakah besar kuat arus listrik yang mengalir pada kawat tersebut?", opts:["1 Ampere","2 Ampere","60 Ampere","240 Ampere"], ans:0},
-    {id:3, type:'pg', text:"Berdasarkan Hukum Ohm, jika sebuah alat elektronik memiliki hambatan dalam sebesar 4 &Omega; dan dihubungkan pada sumber tegangan baterai 12 V, maka kuat arus yang akan mengalir pada alat tersebut adalah...", opts:["48 A","16 A","3 A","0,3 A"], ans:2},
-    {id:4, type:'pg', text:"Tiga buah lampu pijar masing-masing memiliki hambatan sebesar 2 &Omega;, 3 &Omega;, dan 6 &Omega;. Jika ketiga lampu tersebut dirangkai secara paralel untuk mendapatkan nyala yang terang, berapakah besar hambatan pengganti total dari rangkaian paralel tersebut?", opts:["11 &Omega;","6 &Omega;","3 &Omega;","1 &Omega;"], ans:3},
-    {id:5, type:'pg', text:"Sebuah setrika listrik yang memiliki hambatan 40 &Omega; dialiri arus listrik sebesar 2 A saat sedang digunakan. Besar daya listrik yang digunakan oleh setrika tersebut adalah... <br><br><i>(Petunjuk: Rumus daya listrik P = I<sup>2</sup> &times; R atau P = V &times; I)</i>", opts:["160 Watt","80 Watt","42 Watt","20 Watt"], ans:0},
-    {id:6, type:'pg', text:"Alat pemanas air (dispenser) di rumah tangga adalah salah satu contoh penerapan konsep energi. Alat ini bekerja dengan prinsip utama mengubah energi listrik menjadi energi...", opts:["Gerak mekanik","Kalor (Panas)","Cahaya tampak","Bunyi dan getaran"], ans:1},
-    {id:7, type:'pg', text:"Sebuah lampu LED rumah dihubungkan pada sumber tegangan listrik PLN 220 V dan ternyata arus yang mengalir adalah sebesar 0,5 A. Berapakah daya listrik dari lampu LED tersebut?", opts:["440 Watt","220,5 Watt","110 Watt","55 Watt"], ans:2},
-    {id:8, type:'pg', text:"Beda potensial listrik (tegangan) dapat diartikan sebagai energi yang dibutuhkan untuk memindahkan sejumlah muatan. Jika untuk memindahkan muatan sebesar 50 Coulomb diperlukan energi listrik 150 Joule, berapakah beda potensial rangkaian tersebut?", opts:["3 Volt","100 Volt","200 Volt","7500 Volt"], ans:0},
-    {id:9, type:'pg', text:"Jika di rumah sakit terdapat sebuah alat sterilisasi yang menggunakan daya 1.000 Watt dan dinyalakan nonstop selama 10 jam setiap hari, maka energi listrik yang terpakai oleh alat tersebut per harinya adalah...", opts:["100 kWh","10 kWh","1 kWh","0,1 kWh"], ans:1},
-    
-    // --- MAGNET & ELEKTROMAGNETIK ---
-    {id:10, type:'pg', text:"Berdasarkan sifat kemagnetannya, benda-benda yang dapat ditarik dengan sangat kuat oleh magnet, seperti besi dan baja murni, dikelompokkan ke dalam bahan...", opts:["Diamagnetik","Paramagnetik","Feromagnetik","Non-magnetik"], ans:2},
-    {id:11, type:'pg', text:"Salah satu cara membuat magnet buatan adalah dengan menggosokkan magnet tetap pada batang besi murni. Syarat utama agar batang besi cepat menjadi magnet dengan cara digosok adalah gerakan menggosoknya harus...", opts:["Searah dan berulang-ulang","Bolak-balik secara cepat","Ditekan sekuat tenaga","Melingkari batang besi"], ans:0},
-    {id:12, type:'pg', text:"Perhatikan sifat kutub magnet berikut! Apabila kita mendekatkan kutub utara (U) dari suatu magnet batang dengan kutub utara (U) magnet batang lainnya, interaksi yang akan terjadi adalah...", opts:["Saling tarik-menarik dengan kuat","Saling tolak-menolak","Tidak ada reaksi apa-apa","Menimbulkan percikan listrik"], ans:1},
-    {id:13, type:'pg', text:"Sifat kemagnetan pada suatu benda magnet buatan dapat dihilangkan secara sengaja. Berikut ini yang <b>bukan</b> merupakan cara untuk menghilangkan sifat kemagnetan suatu benda adalah...", opts:["Membakar atau memanaskan magnet hingga memerah","Memukul-mukul magnet dengan palu keras","Mendinginkan magnet ke dalam lemari es freezer","Mengaliri magnet dengan arus listrik bolak-balik (AC)"], ans:2},
-    {id:14, type:'pg', text:"Ruang di sekitar sebuah magnet yang mana di dalamnya benda-benda magnetik lainnya masih akan merasakan pengaruh tarikan atau tolakan gaya magnet disebut sebagai...", opts:["Kutub magnet","Garis gaya magnet","Medan magnet","Medan listrik"], ans:2},
-    {id:15, type:'pg', text:"Berdasarkan aturan atau kaidah tangan kanan untuk Gaya Lorentz, apabila arah ibu jari menunjukkan arah arus listrik (ke atas), dan keempat jari telunjuk menunjukkan arah medan magnet (ke arah timur/kanan), maka arah telapak tangan (Gaya Lorentz) menunjuk ke arah...", opts:["Utara (atas)","Selatan (bawah)","Menjauhi kita (masuk ke dalam layar/kertas)","Mendekati kita (keluar dari layar/kertas)"], ans:2},
-    {id:16, type:'pg', text:"Sebuah kawat lurus panjangnya 2 meter dialiri arus listrik sebesar 2 Ampere dan berada memotong tegak lurus di dalam suatu medan magnet sebesar 0,5 Tesla. Besar Gaya Lorentz yang dialami oleh kawat tersebut adalah...", opts:["4 Newton","2 Newton","1 Newton","0,5 Newton"], ans:1},
-    {id:17, type:'pg', text:"Alat berat di tempat pembuangan sampah sering menggunakan cakram logam raksasa yang bisa berubah menjadi magnet sangat kuat untuk mengangkat berton-ton besi tua. Alat ini menerapkan prinsip kerja dari...", opts:["Induksi elektromagnetik (Elektromagnet)","Generator Listrik Arus Searah","Transformator Step-up","Motor Listrik"], ans:0},
-    {id:18, type:'pg', text:"Pada Pembangkit Listrik Tenaga Air (PLTA), air terjun memutar turbin yang tersambung ke poros mesin. Mesin yang berfungsi untuk mengubah energi gerak mekanik ini menjadi energi listrik disebut...", opts:["Motor Listrik","Adaptor Listrik","Generator Listrik","Transformator Listrik"], ans:2},
-    {id:19, type:'pg', text:"Menurut percobaan Michael Faraday, GGL (Gaya Gerak Listrik) induksi akan timbul akibat perubahan fluks magnetik. Dari pernyataan di bawah ini, manakah yang <b>tidak</b> memperbesar nilai GGL induksi pada kumparan?", opts:["Memperbanyak jumlah lilitan pada kumparan","Mempercepat gerakan keluar masuk magnet pada kumparan","Menggunakan magnet yang medan magnetnya lebih kuat","Mempertebal kawat pembungkus kumparan"], ans:3},
-    
-    // --- ENERGI TERBARUKAN ---
-    {id:20, type:'pg', text:"Energi terbarukan merupakan solusi di masa depan. Pembangkit listrik masa kini yang memanfaatkan komponen panel (fotovoltaik) untuk mengubah secara langsung radiasi sinar matahari menjadi energi listrik adalah...", opts:["Pembangkit Listrik Tenaga Bayu (PLTB)","Pembangkit Listrik Tenaga Panas Bumi (PLTP)","Pembangkit Listrik Tenaga Surya (PLTS)","Pembangkit Listrik Tenaga Uap (PLTU)"], ans:2},
-    {id:21, type:'pg', text:"Pembangkit Listrik Tenaga Nuklir (PLTN) mampu menghasilkan energi panas yang super masif yang digunakan untuk mendidihkan air dan menggerakkan turbin. Panas tersebut dihasilkan dari reaksi...", opts:["Pembakaran murni dari batubara bertekanan","Fusi penggabungan inti hidrogen","Pembelahan (fisi) inti radioaktif Uranium","Reaksi oksigen dengan air berat"], ans:2},
-
-    // --- REAKSI KIMIA & ASAM BASA ---
-    {id:22, type:'pg', text:"Asam sitrat adalah senyawa pemberi rasa masam pada jeruk yang memiliki rumus kimia molekul <br>C<sub>6</sub>H<sub>8</sub>O<sub>7</sub>.<br>Berapakah total jumlah atom hidrogen yang terdapat di dalam 1 buah molekul asam sitrat tersebut?", opts:["6 atom","7 atom","8 atom","21 atom"], ans:2},
-    {id:23, type:'pg', text:"Perhatikan persamaan reaksi asam basa (penetralan) berikut:<br><b>HCl(aq) + NaOH(aq) &rarr; NaCl(aq) + H<sub>2</sub>O(l)</b><br>Zat <b>NaCl</b> yang ada pada bagian hasil reaksi (produk) di atas memiliki nama senyawa kimia...", opts:["Natrium klorida (Garam dapur)","Natrium hidroksida (Soda api)","Asam hidroklorida","Natrium oksida"], ans:0},
-    {id:24, type:'pg', text:"Untuk memenuhi hukum kekekalan massa, persamaan reaksi kimia harus setara antara ruas kiri dan kanan. Koefisien yang tepat secara berurutan untuk menyetarakan reaksi pembuatan air:<br><b>... H<sub>2</sub> + ... O<sub>2</sub> &rarr; ... H<sub>2</sub>O</b> adalah...", opts:["1, 2, 1","2, 1, 2","2, 2, 2","1, 1, 2"], ans:1},
-    {id:25, type:'pg', text:"Zat yang bereaksi akan mengalami perubahan menjadi zat baru. Reaksi pembentukan gas CO<sub>2</sub> dari penggabungan unsur karbon (C) dengan gas oksigen (O<sub>2</sub>) digolongkan sebagai jenis reaksi...", opts:["Reaksi Penguraian","Reaksi Sintesis (Penggabungan)","Reaksi Penetralan Asam-Basa","Reaksi Pengendapan"], ans:1},
-    {id:26, type:'pg', text:"Berdasarkan sifat kimianya, jika kita menguji perasan jeruk nipis menggunakan kertas lakmus, maka karakteristik senyawa asam yang akan terlihat adalah...", opts:["Rasanya pahit dan lakmus biru menjadi merah","Rasanya masam dan lakmus biru menjadi merah","Terasa licin di tangan dan lakmus merah menjadi biru","Rasanya masam dan tidak mengubah lakmus biru"], ans:1},
-    {id:27, type:'pg', text:"Air ekstrak kelopak bunga sepatu akan berwarna merah gelap, namun jika diteteskan ke air cuka warnanya berubah cerah, dan jika diteteskan ke air sabun warnanya menjadi hijau tua. Dalam praktikum IPA, ekstrak bunga sepatu ini berfungsi sebagai...", opts:["Larutan penyangga basa","Zat pengawet kimiawi","Katalisator reaksi","Indikator asam-basa alami"], ans:3},
-    {id:28, type:'pg', text:"Apabila air sabun pembersih noda dicelupkan kertas indikator universal, lalu diukur skalanya, maka air sabun yang bersifat basa kuat akan berada pada rentang indikator angka pH...", opts:["pH 0 sampai 6","pH 7 (netral)","pH 8 sampai 14","pH di bawah angka 0"], ans:2},
-    {id:29, type:'pg', text:"Reaksi netralisasi merupakan reaksi yang terjadi apabila larutan asam dicampur dengan larutan basa kuat. Hasil pencampuran dua senyawa ini akan selalu menghasilkan zat yang netral berupa...", opts:["Gas beracun dan logam murni","Garam dan air (H<sub>2</sub>O)","Asam kuat dan basa lemah","Gas oksigen murni"], ans:1},
-
-    // --- LAJU REAKSI ---
-    {id:30, type:'pg', text:"Ketika menyeduh teh manis hangat, gula pasir halus akan larut jauh lebih cepat dibandingkan dengan gula batu berukuran besar, padahal takarannya sama. Fakta ini membuktikan bahwa laju reaksi sangat dipengaruhi oleh...", opts:["Tingkat keasaman air","Konsentrasi larutan gula","Luas permukaan bidang sentuh partikel","Tekanan udara di sekitar gelas"], ans:2},
-    {id:31, type:'pg', text:"Makanan seperti daging mentah dan ikan segar akan lebih cepat membusuk jika dibiarkan di meja dapur, dibandingkan jika disimpan di dalam lemari es (kulkas). Konsep laju reaksi yang menjelaskan fenomena pengawetan ini adalah...", opts:["Suhu yang rendah akan memperlambat laju reaksi pembusukan oleh bakteri","Luas permukaan daging mengecil di dalam kulkas","Suhu rendah menambah katalis dalam daging","Massa jenis daging meningkat sehingga susah bereaksi"], ans:0},
-    {id:32, type:'pg', text:"Dalam proses perakitan industri kimia, untuk mempercepat proses suatu reaksi bahan kimiawi tanpa membuat zat tersebut ikut habis bereaksi (tidak permanen berubah), teknisi biasanya menambahkan zat pembantu yang disebut...", opts:["Oksidator","Katalisator","Inhibitor alami","Reaktan netral"], ans:1},
-    {id:33, type:'pg', text:"Saat murid kelas 9 mencampurkan karbit dengan air ke dalam tabung reaksi tertutup, tabung seketika menjadi panas jika disentuh. Reaksi yang melepaskan kalor/panas dari sistem (tabung) menuju ke lingkungan sekitarnya (tangan kita) dikenal sebagai...", opts:["Reaksi Endoterm","Reaksi Eksoterm","Reaksi Fisi","Reaksi Katalitik"], ans:1},
-    {id:34, type:'pg', text:"Suhu tubuh kita akan terasa dingin saat es batu diletakkan di telapak tangan hingga es tersebut mencair. Peristiwa mencairnya es batu menyerap panas (kalor) dari telapak tangan (lingkungan) ke es (sistem). Proses kimia menyerap panas ini disebut reaksi...", opts:["Eksoterm","Isoterm","Endoterm","Hipotermia"], ans:2},
-
-    // --- BIOTEKNOLOGI ---
-    {id:35, type:'pg', text:"Bioteknologi sudah digunakan sejak ratusan tahun lalu. Salah satu ciri utama pembeda dari produk bioteknologi konvensional jika dibandingkan dengan bioteknologi modern adalah...", opts:["Melibatkan rekayasa genetika (pemotongan gen) tingkat DNA","Banyak menggunakan alat pabrik berskala super raksasa","Teknologinya masih sederhana dan biayanya relatif jauh lebih murah","Hasil rekayasanya selalu berdampak buruk bagi manusia"], ans:2},
-    {id:36, type:'pg', text:"Mikroorganisme jamur <i>Rhizopus oryzae</i> sangat vital dan krusial perannya bagi industri pangan masyarakat Indonesia, utamanya dalam proses bioteknologi pembuatan lauk tradisional bernutrisi tinggi, yaitu...", opts:["Pembuatan tempe dari kacang kedelai","Fermentasi air kelapa menjadi Nata de coco","Penggumpalan susu murni menjadi Keju","Pembuatan tape manis dari singkong"], ans:0},
-    {id:37, type:'pg', text:"Minuman yoghurt yang baik untuk sistem pencernaan dibuat dari bahan susu sapi segar yang digumpalkan secara biologis melalui bantuan bakteri pengurai khusus yang dinamakan...", opts:["<i>Acetobacter xylinum</i>","<i>Aspergillus wentii</i>","<i>Lactobacillus bulgaricus</i>","<i>Saccharomyces cerevisiae</i>"], ans:2},
-    {id:38, type:'pg', text:"Teknik produksi hormon insulin buatan untuk penderita Diabetes di rumah sakit yang memanfaatkan rekayasa genetika pada struktur gen bakteri <i>Escherichia coli</i> merupakan contoh nyata dari penerapan bioteknologi modern di bidang...", opts:["Pertanian dan Pangan","Kesehatan dan Medis","Pengendalian Lingkungan","Pemurnian Logam"], ans:1},
-    {id:39, type:'pg', text:"Di era pertanian modern, para ilmuwan menggunakan bioteknologi modern untuk menyisipkan gen khusus ke dalam bibit tumbuhan sehingga menghasilkan tanaman Transgenik. Apa dampak positif (keunggulan utama) dari produk jagung transgenik ini bagi petani?", opts:["Umur jagung tumbuh sangat lambat","Pohon jagung menjadi beracun jika dikonsumsi unggas liar","Dihasilkan tanaman jagung yang lebih kuat dan kebal terhadap hama tertentu","Membutuhkan lahan yang 10 kali lebih luas untuk panen"], ans:2},
-
-    // --- PEWARISAN SIFAT ---
-    {id:40, type:'pg', text:"Pada pewarisan sifat makhluk hidup, genotip adalah susunan komposisi gen yang tidak terlihat langsung oleh mata. Individu yang memiliki genotip dengan pasangan huruf alel yang berbeda-beda, contohnya seperti Tt atau Mm, secara genetis disebut...", opts:["Individu Homozigot Dominan","Individu Homozigot Resesif","Individu Mutan","Individu Heterozigot"], ans:3},
-    {id:41, type:'pg', text:"Bapak genetika Gregor Mendel melakukan persilangan tanaman ercis berbiji Bulat (BB) dengan tanaman ercis berbiji Kisut (bb). Sifat bulat dominan penuh terhadap kisut. Jika keturunan pertamanya (F1) menghasilkan 100% tanaman ercis berbiji Bulat (Bb), lalu F1 ini disilangkan lagi dengan sesamanya (Bb x Bb), maka perbandingan fenotipe pada keturunan kedua (F2) adalah...", opts:["100% semua berbiji Bulat","Berbiji Bulat 1 : Berbiji Kisut 3","Berbiji Bulat 3 : Berbiji Kisut 1","Berbiji Kisut 2 : Berbiji Bulat 2"], ans:2},
-    {id:42, type:'pg', text:"Dalam fenomena intermediet (sifat di antara gen), persilangan antara bunga Mawar warna Merah (MM) disilangkan dengan Mawar warna Putih (mm) tidak memunculkan dominasi penuh. Keturunan pertamanya (F1) yang memiliki genotipe Mm akan memunculkan fenotipe warna...", opts:["Merah muda (Pink)","Merah tua","Putih kotor","Kuning"], ans:0},
-    {id:43, type:'pg', text:"Berdasarkan soal sebelumnya (sifat intermediet), jika sesama keturunan F1 Mawar warna Merah Muda (Mm) disilangkan kembali dengan Mawar Merah Muda (Mm) lainnya, maka berapakah persentase probabilitas munculnya bunga berwarna Putih (mm) pada generasi (F2)?", opts:["0% (Tidak mungkin muncul)","25% (Seperempat dari total anakan)","50% (Setengah dari total anakan)","100% (Semua keturunan F2)"], ans:1},
-    {id:44, type:'pg', text:"Seorang siswa diminta oleh gurunya untuk menentukan jumlah macam sel gamet reproduksi yang dapat terbentuk pada persilangan dihibrid. Individu kelinci yang bergenotip BbKk dapat menghasilkan susunan sel gamet yang bervariasi. Berapa banyak macam gamet yang bisa diproduksinya?", opts:["1 macam (yaitu BbKk)","2 macam (yaitu BB dan kk)","3 macam (yaitu BB, BK, kk)","4 macam (yaitu BK, Bk, bK, dan bk)"], ans:3},
-
-    // --- ESSAY ---
-    {id:45, type:'essay', text:"<b>(Perhitungan Hambatan Listrik)</b><br>Tiga buah lampu (Hambatan Listrik) di rumah Pak Budi dirangkai secara paralel untuk menerangi ruangan. Masing-masing hambatan tersebut bernilai R<sub>1</sub> = 2 &Omega;, R<sub>2</sub> = 3 &Omega;, dan R<sub>3</sub> = 6 &Omega;.<br><br>Gunakan rumus hambatan paralel (1/Rp = 1/R1 + 1/R2 + 1/R3) untuk menghitung besarnya <b>Hambatan Pengganti Total</b> (Rp) dari rangkaian listrik rumah Pak Budi tersebut! Uraikan cara perhitungan Anda.", kw:["1/rp","1/2","1/3","1/6","3/6","2/6","6/6","1 ohm","1 &Omega;"], max:8},
-    {id:46, type:'essay', text:"<b>(Konsep Elektromagnetik)</b><br>Generator listrik di PLTA mengandalkan fenomena induksi elektromagnetik yang digagas oleh Michael Faraday. <br><br>Sebutkan dan jelaskan secara singkat <b>3 (tiga) cara</b> yang dapat dilakukan oleh teknisi listrik untuk memperbesar nilai Gaya Gerak Listrik (GGL) induksi yang dihasilkan oleh suatu generator listrik!", kw:["lilitan","jumlah lilitan","magnet","kuat medan","kecepatan","mempercepat","putaran","gerakan"], max:8},
-    {id:47, type:'essay', text:"<b>(Reaksi Kimia Penetralan)</b><br>Apabila seorang pasien mengalami kelebihan asam lambung (Asam Klorida / HCl), obat maag yang mengandung basa kuat seperti Natrium Hidroksida (NaOH) seringkali digunakan dalam permodelan reaksi kimia di lab untuk menetralkannya.<br><br>Tuliskan <b>persamaan reaksi kimia</b> yang tepat (setara) dari pencampuran <i>HCl</i> dengan <i>NaOH</i>, dan sebutkan <b>nama senyawa netral</b> (Garam dan wujud cairan) yang dihasilkan pada produk reaksi tersebut!", kw:["hcl","naoh","nacl","h2o","natrium klorida","air","garam dapur"], max:8},
-    {id:48, type:'essay', text:"<b>(Bioteknologi)</b><br>Bioteknologi terbagi menjadi Bioteknologi Konvensional dan Bioteknologi Modern.<br><br>Sebutkan <b>3 (tiga) perbedaan</b> dari kedua jenis bioteknologi tersebut (dari segi teknologi, biaya, atau skalanya), serta sebutkan masing-masing <b>1 (satu) contoh produk olahannya</b>!", kw:["konvensional","modern","sederhana","rekayasa gen","dna","biaya","murah","mahal","skala","tempe","yoghurt","tape","insulin","vaksin","bayi tabung"], max:8},
-    {id:49, type:'essay', text:"<b>(Pewarisan Sifat Mendel)</b><br>Peternak menyilangkan ras kelinci jantan berbulu Hitam murni (HH) dengan kelinci betina berbulu Putih murni (hh). Diketahui gen Hitam (H) bersifat dominan penuh terhadap gen Putih (h). <br>Keturunan generasi pertama (F1) terlahir 100% kelinci berbulu Hitam (Hh).<br><br>Apabila sesama kelinci F1 (Hh) tersebut disilangkan kembali (Hh disilang dengan Hh), buatlah tabel silangnya, lalu tentukan <b>perbandingan genotipe F2</b> dan <b>persentase fenotipe F2</b> yang akan muncul!", kw:["hh","hh","1:2:1","hitam","putih","3:1","75%","25%","1 hh","2 hh","1 hh"], max:8}
+// ═══════════════════════════════════════════
+// RUBRIK PENILAIAN ESAI
+// ═══════════════════════════════════════════
+const ESSAY_RUBRICS = [
+  {
+    subject:"Greeting Dialogue",
+    maxScore:8,
+    apiRubric:"Nilai jawaban dialog sapaan/greeting. Periksa: (1) penggunaan ungkapan salam yang tepat seperti Good morning/Hello/Hi/Nice to meet you, (2) respons salam yang wajar seperti I'm fine/Great/Doing well, (3) perkenalan nama jika bertemu pertama kali, (4) minimal 4 giliran bicara yang logis dan koheren, (5) grammar yang benar. Skor penuh jika semua elemen ada dan grammar tepat. Kurangi poin jika ada kesalahan grammar yang signifikan atau dialog tidak lengkap.",
+    concepts:[
+      {terms:["good morning","good afternoon","good evening","hello","hi","hey"],w:1.5},
+      {terms:["nice to meet you","pleased to meet","great to meet","glad to meet you"],w:2.0},
+      {terms:["my name is","i'm","i am","call me","name"],w:1.5},
+      {terms:["fine","great","good","doing well","wonderful","not bad","okay","alright"],w:1.5},
+      {terms:["how are you","how do you do","how have you been","how's it going"],w:1.5},
+      {terms:["and you","what about you","how about you","yourself"],w:0.5}
+    ],
+    expectedCount:4
+  },
+  {
+    subject:"Narrative Text Analysis – The Wolf and The Goat",
+    maxScore:8,
+    apiRubric:"Nilai berdasarkan kelengkapan jawaban 3 bagian: (a) komplikasi = serigala mencoba menipu kambing dengan menawarkan rumput yang lebih enak agar turun dari tebing supaya bisa dimakan, (b) pesan moral = berhati-hatilah dengan orang yang berpura-pura baik / kata-kata manis menyembunyikan niat jahat, (c) jenis teks = narrative text, fungsi sosial = to entertain / menghibur pembaca dan menyampaikan pesan moral. Masing-masing bagian a,b,c bernilai sekitar 2-3 poin.",
+    concepts:[
+      {terms:["wolf","trick","lure","deceive","tempt","called","eat","goat","come down"],w:2.5},
+      {terms:["complication","problem","conflict","challenge","tried"],w:0.5},
+      {terms:["moral","lesson","learn","beware","careful","kind words","selfish","hidden","intention","wise","smart","refused"],w:2.5},
+      {terms:["narrative","story","fiction","tale","fable"],w:1.0},
+      {terms:["entertain","amuse","enjoy","pleasure","moral value","social function","purpose"],w:1.5}
+    ],
+    expectedCount:4
+  },
+  {
+    subject:"Animal Description with Adjective Series",
+    maxScore:8,
+    apiRubric:"Nilai berdasarkan 4 kriteria: (1) penggunaan urutan adjektif yang tepat (quality→size→age→shape→color→origin→material) dalam minimal 1 kalimat, (2) deskripsi penampilan fisik, (3) habitat/tempat tinggal, (4) diet/makanan hewan. Skor penuh jika keempat kriteria terpenuhi dengan grammar yang baik. Berikan kredit parsial jika hanya sebagian kriteria terpenuhi.",
+    concepts:[
+      {terms:["beautiful","large","small","big","tiny","long","short","fat","thick","slender","fluffy","spotted","striped"],w:1.5},
+      {terms:["brown","black","white","orange","grey","yellow","blue","green","red","golden","dark","light"],w:1.5},
+      {terms:["lives","found","inhabits","habitat","forest","ocean","jungle","mountain","river","sea","rainforest","grassland"],w:2.0},
+      {terms:["eats","feeds","diet","food","insects","fruits","grass","meat","fish","leaves","seeds","plants","vegetables"],w:2.0},
+      {terms:["appearance","feathers","fur","scales","wings","tail","stripes","spots","claws","beak","legs"],w:0.5},
+      {terms:["quality","size","color","origin","material","order","adjective"],w:0.5}
+    ],
+    expectedCount:3
+  },
+  {
+    subject:"Passive and Active Voice Transformation",
+    maxScore:8,
+    apiRubric:"Nilai berdasarkan ketepatan 2 transformasi kalimat: (a) aktif ke pasif = 'The plants are watered by the gardener every morning' — formula: S + is/are + V3 + by + agent, (b) pasif ke aktif = 'Our school football team won the trophy last year' — formula: S + V2 + O. Setiap transformasi benar = 3 poin, penjelasan formula = 2 poin tambahan. Berikan kredit parsial jika transformasi hampir benar.",
+    concepts:[
+      {terms:["are watered","is watered","plants are watered","watered by","by the gardener"],w:3.0},
+      {terms:["won the trophy","team won","football team won","won","our school"],w:3.0},
+      {terms:["formula","am/is/are","v3","v2","by","past tense","subject","object"],w:1.5},
+      {terms:["passive","active","voice","changed","transform","active voice","passive voice"],w:0.5}
+    ],
+    expectedCount:3
+  },
+  {
+    subject:"Procedure Text Writing",
+    maxScore:8,
+    apiRubric:"Nilai berdasarkan: (1) penggunaan minimal 3 time-order connector (first, second, next, then, finally), (2) minimal 5 langkah yang jelas, logis, dan berurutan, (3) kalimat imperatif/perintah yang tepat (Boil the water / Pour / Add / Click / etc.), (4) topik yang dipilih (lemon tea/tanam benih/kirim email) dengan langkah-langkah yang relevan dan sesuai. Skor penuh jika semua 4 kriteria terpenuhi dengan grammar yang baik.",
+    concepts:[
+      {terms:["first","second","next","then","finally","lastly","after that","third"],w:3.0},
+      {terms:["boil","pour","add","mix","stir","squeeze","cut","put","place","fill","water","click","type","open","attach","press","turn"],w:2.0},
+      {terms:["lemon","tea","water","seed","pot","soil","dirt","email","send","subject","message","attachment","recipient","address"],w:1.5},
+      {terms:["step","steps","materials","ingredients","tools","procedure","needed","required","you need"],w:0.5},
+      {terms:["cup","glass","kettle","spoon","tablespoon","teaspoon","garden","inbox","browser","search"],w:0.5}
+    ],
+    expectedCount:4
+  }
 ];
 
-// ─── STATE MANAJEMEN ───────────────────────────────────────────────────────
-let curUser = null, curIdx = 0;
-let answers = {}, ragu = {};
-let timeLeft = 5400, timerID = null;
-let genToken = "";
+// ═══════════════════════════════════════════
+// DATA SOAL – 40 PG + 5 ESAI
+// ═══════════════════════════════════════════
+const QS = [
+  // ── Q1–2: GREETINGS ──────────────────────
+  {id:1,type:'pg',
+   text:"Which expression is the most appropriate way to greet your teacher when you arrive at school in the morning?",
+   opts:["Good night, Sir. How are you today?","Good morning, Sir! How are you doing today?","See you tomorrow, Sir! Take care.","Goodbye, Sir! Have a nice day."],
+   ans:1},
 
-// ─── HELPER FUNCTIONS ──────────────────────────────────────────────────────
-function show(id){ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function $(id){ return document.getElementById(id); }
+  {id:2,type:'pg',
+   text:'Andi: <i>"Hey, Gendis! Long time no see. How have you been?"</i><br>Gendis: "<b>___</b>"<br><br>Which response is MOST appropriate to complete the conversation?',
+   opts:["Nice to meet you for the first time!","I'm doing great, thanks! How about you?","Good luck with everything, Andi.","You are very welcome, Andi."],
+   ans:1},
 
-// ─── TABS DASHBOARD ────────────────────────────────────────────────────────
+  // ── Q3–5: HOBBY TEXT ─────────────────────
+  {id:3,type:'pg',
+   text:'Read the following text, then answer questions <b>3–5</b>.<br><br><div style="background:#f0f9ff;border-left:3px solid #0ea5e9;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>My Favourite Hobby</b><br><br>My name is Galang. I have a really interesting hobby — I love collecting stamps from different countries. Every weekend, I visit the local flea market to search for rare and unique stamps. Sometimes, I also trade stamps with my online friends from various cities in Indonesia. My collection now includes more than 400 stamps from over 25 countries. Through this hobby, I have learned a great deal about different cultures and histories around the world.</div><br>What is the text mainly about?',
+   opts:["Galang's daily school activities","Galang's hobby of collecting stamps","Galang's online trading business","Galang's travels to different countries"],
+   ans:1},
+
+  {id:4,type:'pg',
+   text:'<i>(Refer to the text in question 3.)</i><br><br>Where does Galang go every weekend to look for rare and unique stamps?',
+   opts:["At an online marketplace","At the school library","At the local flea market","At the post office"],
+   ans:2},
+
+  {id:5,type:'pg',
+   text:'<i>(Refer to the text in question 3.)</i><br><br>What has Galang learned through his stamp-collecting hobby?',
+   opts:["How to use social media and the internet","About different cultures and histories around the world","How to earn money from trading","How to make friends online"],
+   ans:1},
+
+  // ── Q6–9: NARRATIVE TEXT ─────────────────
+  {id:6,type:'pg',
+   text:'Read the following narrative text, then answer questions <b>6–9</b>.<br><br><div style="background:#fff7ed;border-left:3px solid #f97316;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>The Wolf and The Goat</b><br><br>Once upon a time, in a dense forest, there lived a cunning wolf. One hot afternoon, the wolf spotted a plump goat standing on top of a rocky cliff, happily chewing fresh green grass.<br><br>The wolf called out in a sweet voice, <i>"My dear friend! Why are you eating that dry, rough grass up there? Come down to the valley — the grass here is much greener and more delicious!"</i><br><br>However, the goat was wise. It looked down calmly and replied, <i>"Thank you for your kind offer, but I believe you are not really concerned about my well-being. You are thinking about your own stomach. If I come down, you will surely eat me!"</i><br><br>Feeling embarrassed and outwitted, the wolf slipped away in silence.<br><br><i>Moral: Beware of those whose kind words hide selfish intentions.</i></div><br>What is the <b>social function (purpose)</b> of the narrative text above?',
+   opts:["To describe the physical appearance of a wolf","To report events that really happened in a forest","To entertain readers through an imaginative story and convey a moral lesson","To explain how wolves search for food in the wild"],
+   ans:2},
+
+  {id:7,type:'pg',
+   text:'<i>(Refer to the text in question 6.)</i><br><br><i>"Once upon a time, in a dense forest, there lived a cunning wolf."</i><br><br>This opening part of the narrative text is called...',
+   opts:["Complication","Resolution","Orientation","Coda"],
+   ans:2},
+
+  {id:8,type:'pg',
+   text:'<i>(Refer to the text in question 6.)</i><br><br>Based on the story, what is the <b>character</b> of the wolf?',
+   opts:["Kind-hearted and generous","Brave and completely honest","Cunning and selfish","Wise and very patient"],
+   ans:2},
+
+  {id:9,type:'pg',
+   text:'<i>(Refer to the text in question 6.)</i><br><br>What moral lesson can we learn from <b>The Wolf and The Goat</b>?',
+   opts:["We should never eat grass on a rocky cliff","Wolves and goats can always be best friends","We should be careful of people who seem very kind but have hidden selfish intentions","It is always better and safer to live in a valley"],
+   ans:2},
+
+  // ── Q10–13: DESCRIPTIVE TEXT – CENDRAWASIH ──
+  {id:10,type:'pg',
+   text:'Read the following descriptive text, then answer questions <b>10–13</b>.<br><br><div style="background:#f0fdf4;border-left:3px solid #22c55e;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>The Bird of Paradise (Cendrawasih)</b><br><br>The Bird of Paradise, locally known as <i>Cendrawasih</i>, is considered one of the most beautiful birds in the world. It inhabits the tropical rainforests of eastern Indonesia, Papua New Guinea, and parts of eastern Australia.<br><br>The male Bird of Paradise is famous for its stunning appearance. It has bright feathers in shades of yellow, blue, red, and green, with long and elaborate decorative tail feathers that make it look truly magnificent. The female, however, has a much simpler appearance — brownish feathers and a significantly shorter tail.<br><br>This bird feeds on fruits, insects, and small arthropods. During mating season, the male performs a spectacular courtship dance to attract the female.<br><br>Unfortunately, the Bird of Paradise is under serious threat from illegal hunting, deforestation, and habitat conversion for agricultural use. Because of its extraordinary beauty and uniqueness, this bird has become the proud symbol of Papua Province.</div><br>What does the text mainly describe?',
+   opts:["Farming activities in eastern Indonesia","The dangers of deforestation in Papua New Guinea","The life and appearance of the Bird of Paradise (Cendrawasih)","The mating habits of all tropical birds in Asia"],
+   ans:2},
+
+  {id:11,type:'pg',
+   text:'<i>(Refer to the text in question 10.)</i><br><br>What makes the <b>male</b> Cendrawasih different from the <b>female</b>?',
+   opts:["The female has brighter and longer decorative feathers","The male has bright colorful feathers and long elaborate tail feathers","The male is smaller in size and lives in a different area","The female performs a special courtship dance during mating season"],
+   ans:1},
+
+  {id:12,type:'pg',
+   text:'<i>(Refer to the text in question 10.)</i><br><br>According to the text, what <b>threatens</b> the survival of the Bird of Paradise?',
+   opts:["Competition with other bird species and disease","Climate change and ocean water pollution","Shortage of food and clean water in the rainforest","Illegal hunting, deforestation, and habitat conversion for agricultural use"],
+   ans:3},
+
+  {id:13,type:'pg',
+   text:'<i>(Refer to the text in question 10.)</i><br><br><i>"...this bird has become the proud symbol of Papua Province."</i><br><br>The word <b>"this bird"</b> refers to...',
+   opts:["Eastern Australia","Papua New Guinea","The tropical rainforest of Indonesia","The Bird of Paradise (Cendrawasih)"],
+   ans:3},
+
+  // ── Q14–16: POSSESSIVE ADJECTIVES ───────
+  {id:14,type:'pg',
+   text:'Syifa loves reading novels. <b>_____</b> book collection fills two entire shelves in her room.<br><br>Choose the correct <b>possessive adjective</b>.',
+   opts:["Its","His","Their","Her"],
+   ans:3},
+
+  {id:15,type:'pg',
+   text:'Rizky and Idham are best friends and classmates. <b>_____</b> English teacher always praises them for their teamwork.<br><br>Choose the correct <b>possessive adjective</b>.',
+   opts:["His","Her","Their","Its"],
+   ans:2},
+
+  {id:16,type:'pg',
+   text:'Andre is a very talented young painter. <b>_____</b> artwork was chosen to decorate the main hallway of the school.<br><br>Choose the correct <b>possessive adjective</b>.',
+   opts:["Her","Our","Their","His"],
+   ans:3},
+
+  // ── Q17: HAVE / HAS ──────────────────────
+  {id:17,type:'pg',
+   text:'Which of the following sentences uses <b>have</b> or <b>has</b> CORRECTLY?',
+   opts:["She have a brand new laptop for school this year.","He has three younger sisters who live in Bandung.","They has joined the school art club this semester.","I has completed all my homework before dinner."],
+   ans:1},
+
+  // ── Q18: CONNECTORS – ONCE / BEFORE ─────
+  {id:18,type:'pg',
+   text:'Choose the connector that best completes the sentence to mean <b>"sebelum"</b> (indicating that one action must happen first).<br><br><i>"Please check your grammar and spelling carefully <b>_____</b> you submit your assignment."</i>',
+   opts:["Once","After","Before","As soon as"],
+   ans:2},
+
+  // ── Q19–20: ADJECTIVE IN SERIES ─────────
+  {id:19,type:'pg',
+   text:'Choose the sentence with adjectives in the <b>CORRECT order</b>.<br><br>Monita bought a _____ bag at the bazaar.',
+   opts:["leather small beautiful red","beautiful small red leather","red leather beautiful small","small red beautiful leather"],
+   ans:1},
+
+  {id:20,type:'pg',
+   text:'Which sentence has adjectives arranged in the <b>CORRECT order</b>?<br><br>(quality → size → age → shape → color → origin → material)',
+   opts:["She found an old small round Indonesian wooden jewellery box.","She found a small old round Indonesian wooden jewellery box.","She found a round Indonesian old small wooden jewellery box.","She found a wooden round Indonesian small old jewellery box."],
+   ans:1},
+
+  // ── Q21: ACTIVE → PASSIVE ───────────────
+  {id:21,type:'pg',
+   text:'What is the correct <b>PASSIVE</b> form of the sentence below?<br><br><i>"Students clean the park every Friday morning."</i>',
+   opts:["The park was cleaned by students every Friday morning.","The park cleaned by students every Friday morning.","The park has been cleaned by students every Friday morning.","The park is cleaned by students every Friday morning."],
+   ans:3},
+
+  // ── Q22: PASSIVE → ACTIVE ───────────────
+  {id:22,type:'pg',
+   text:'What is the correct <b>ACTIVE</b> form of the sentence below?<br><br><i>"This problem can be solved by us."</i>',
+   opts:["We could solve this problem easily.","We solved this problem yesterday.","We can solve this problem.","We are solving this problem right now."],
+   ans:2},
+
+  // ── Q23–25: PROCEDURE TEXT ───────────────
+  {id:23,type:'pg',
+   text:'Read the following procedure text, then answer questions <b>23–25</b>.<br><br><div style="background:#fdf4ff;border-left:3px solid #a855f7;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>How to Make a Paper Bookmark</b><br><br><b>Materials needed:</b><br>• Thick paper or cardboard (15 cm × 5 cm)<br>• Scissors<br>• Colored pens or markers<br>• A hole punch<br>• A short ribbon (about 20 cm)<br><br><b>Steps:</b><br><b>Step 1:</b> Cut the thick paper or cardboard into a rectangular shape (15 cm × 5 cm).<br><b>Step 2:</b> Using colored pens or markers, decorate the surface with drawings, patterns, or your favourite motivational quotes.<br><b>Step 3:</b> Use the hole punch to make a small hole at the top centre of the bookmark.<br><b>Step 4:</b> Thread the ribbon through the hole and tie it into a neat knot.<br><b>Step 5:</b> Allow the ink to dry completely before using the bookmark in your book.</div><br>What is the <b>purpose (social function)</b> of the text above?',
+   opts:["To describe what a beautiful bookmark looks like","To report a student's experience making a bookmark at school","To give step-by-step instructions on how to make a paper bookmark","To persuade readers to buy handmade bookmarks at the school store"],
+   ans:2},
+
+  {id:24,type:'pg',
+   text:'<i>(Refer to the text in question 23.)</i><br><br>According to the procedure, what should you do <b>right after</b> decorating the bookmark (Step 2)?',
+   opts:["Cut the cardboard into a rectangular shape","Allow the ink to dry completely","Thread the ribbon through the hole","Use the hole punch to make a small hole at the top"],
+   ans:3},
+
+  {id:25,type:'pg',
+   text:'<i>(Refer to the text in question 23.)</i><br><br>What is the purpose of making a hole at the top of the bookmark in Step 3?',
+   opts:["To make the bookmark look more stylish and unique","To attach a ribbon through it","To use it as a clip to hold pages together","To test whether the cardboard is thick enough"],
+   ans:1},
+
+  // ── Q26–27: AGREEMENT / DISAGREEMENT ────
+  {id:26,type:'pg',
+   text:'Apriyanto: <i>"I think we should start collecting used bottles and cans to raise funds for our school charity program."</i><br>Vienard: <i>"<b>___</b>! That is a brilliant idea — we protect the environment and help others at the same time."</i><br><br>Which expression shows <b>AGREEMENT</b>?',
+   opts:["I don\'t think so, Apriyanto","I beg to differ with you","I totally agree with you","I\'m afraid I disagree"],
+   ans:2},
+
+  {id:27,type:'pg',
+   text:'Salma: <i>"I believe social media has far more negative effects than positive ones for teenagers our age."</i><br>Diana: <i>"<b>___</b>. Social media also helps us stay in touch with friends and access a lot of useful information quickly."</i><br><br>Which expression shows <b>DISAGREEMENT</b>?',
+   opts:["That\'s a very good point, Salma","I couldn\'t agree more with you","I see it differently from you","Yes, I fully agree with your view"],
+   ans:2},
+
+  // ── Q28–31: DIGITAL LIFE – UPCYCLING / CHARITY ──
+  {id:28,type:'pg',
+   text:'Read the following text, then answer questions <b>28–31</b>.<br><br><div style="background:#fff1f2;border-left:3px solid #f43f5e;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>Going Green with Upcycling</b><br><br>Every year, Indonesia produces millions of tonnes of plastic waste that pollutes the environment. However, a growing movement of eco-friendly students across the country is turning waste into something valuable through <b>upcycling</b> — the creative process of transforming old or discarded materials into new, higher-quality and useful products.<br><br>At a recent school bazaar, students created and sold items made from <b>preloved</b> materials, including plastic bottles, cardboard boxes, and fabric scraps. Preloved items are second-hand goods that have been previously owned and used, but are still in good or usable condition.<br><br>All the proceeds from the bazaar were donated to a <b>charity</b> fund that supports underprivileged students in the local community. The school strongly encourages this eco-friendly habit to teach students the importance of recycling and environmental responsibility.</div><br>What is the text mainly about?',
+   opts:["The history and origin of school bazaars in Indonesia","The benefits of upcycling and eco-friendly habits among students","How to purchase preloved items on online shopping platforms","The regulations for managing a school charity fund"],
+   ans:1},
+
+  {id:29,type:'pg',
+   text:'<i>(Refer to the text in question 28.)</i><br><br>What does the word <b>"preloved"</b> mean based on the text?',
+   opts:["Brand new products directly from a factory","Second-hand goods that have been used by previous owners but are still in good condition","Products manufactured entirely from recycled plastic materials","Items that have been donated specifically to a charity organisation"],
+   ans:1},
+
+  {id:30,type:'pg',
+   text:'<i>(Refer to the text in question 28.)</i><br><br>What happened to all the money earned from the school bazaar?',
+   opts:["It was used to buy new equipment for the school lab","It was donated to a charity fund that supports underprivileged students","It was given to the school principal as a gift","It was used to purchase more raw materials for next year\'s project"],
+   ans:1},
+
+  {id:31,type:'pg',
+   text:'<i>(Refer to the text in question 28.)</i><br><br>Which word in the text describes something that is <b>safe and not harmful to the environment</b>?',
+   opts:["Upcycling","Preloved","Eco-friendly","Charity"],
+   ans:2},
+
+  // ── Q32–34: DIGITAL LIFE – ONLINE LEARNING / NEGATIVE EFFECTS ──
+  {id:32,type:'pg',
+   text:'Read the following text, then answer questions <b>32–34</b>.<br><br><div style="background:#eff6ff;border-left:3px solid #3b82f6;padding:10px 14px;border-radius:6px;margin:8px 0;font-size:0.88em;line-height:1.8"><b>Digital Life: Benefits and Challenges</b><br><br>The digital era has fundamentally transformed the way we learn and communicate. <b>Online learning</b> now allows students to access lessons, videos, and e-books at any time and from any location. Students can simply <b>download</b> educational materials from websites and study at their own pace without needing to be in a classroom.<br><br>However, the digital world is not without its challenges. Spending too much time online can lead to gadget addiction, <b>cyberbullying</b>, and exposure to inappropriate or harmful content. Privacy issues are also a growing concern, as personal data shared online can be misused by irresponsible parties.<br><br>To enjoy a healthy digital life, students must use technology wisely — by setting daily screen time limits, always verifying information before sharing it, and prioritising productive activities over entertainment.</div><br>What is ONE <b>benefit</b> of online learning mentioned in the text?',
+   opts:["Students no longer need any teachers or classrooms","Students can access lessons and download educational materials at any time from anywhere","Online platforms are always completely free of charge for students","Students never have to take any tests again"],
+   ans:1},
+
+  {id:33,type:'pg',
+   text:'<i>(Refer to the text in question 32.)</i><br><br>What does the word <b>"download"</b> mean in the context of the text?',
+   opts:["To send files or data from your device to another person online","To transfer data or files from the internet to a personal device","To print documents and worksheets from a school computer","To create brand new digital content and post it online"],
+   ans:1},
+
+  {id:34,type:'pg',
+   text:'<i>(Refer to the text in question 32.)</i><br><br>According to the text, which of the following is a <b>NEGATIVE EFFECT</b> of spending too much time online?',
+   opts:["Students can access a wide variety of educational resources","Learning can take place from any location at any time","Gadget addiction, cyberbullying, and exposure to inappropriate content","Communication between people has become faster and more convenient"],
+   ans:2},
+
+  // ── Q35: ECO-FRIENDLY ───────────────────
+  {id:35,type:'pg',
+   text:'Which of the following is the BEST example of an <b>eco-friendly</b> action in daily life?',
+   opts:["Using single-use plastic straws and bags every day","Buying a new electronic gadget every few months","Separating household waste into organic and non-organic bins for proper disposal","Printing all school assignments on paper instead of submitting them digitally"],
+   ans:2},
+
+  // ── Q36: DIGITAL LITERACY ───────────────
+  {id:36,type:'pg',
+   text:'Dinda found a shocking headline on social media saying that a well-known hospital in Majalengka had suddenly closed. What should she do <b>FIRST</b> before sharing this news with her friends?',
+   opts:["Share it immediately with all contacts to warn as many people as possible","Verify the information by checking official websites and other reliable sources","Report it directly to the school security guard","Permanently delete all of her social media accounts to be safe"],
+   ans:1},
+
+  // ── Q37: NEGATIVE EFFECTS DIGITAL LIFE ──
+  {id:37,type:'pg',
+   text:'Which of the following best describes a <b>NEGATIVE EFFECT</b> of digital life?',
+   opts:["Students can easily access a wide range of online learning resources","Communication between people has become significantly faster","Cyberbullying and personal privacy violations online are increasingly common","Online businesses can reach far more customers through digital platforms"],
+   ans:2},
+
+  // ── Q38: RECYCLING ──────────────────────
+  {id:38,type:'pg',
+   text:'Based on the concept of <b>recycling</b>, which of the following activities is the MOST environmentally responsible?',
+   opts:["Burning plastic waste in an open field near your home","Dumping old electronic devices and batteries into rivers","Collecting used paper, cardboard, and plastic and bringing them to a recycling centre","Using more plastic bags to make grocery shopping faster and more convenient"],
+   ans:2},
+
+  // ── Q39–40: HOW MUCH ────────────────────
+  {id:39,type:'pg',
+   text:'Nadia is browsing a school bazaar and sees a handmade keychain she likes.<br><br>Nadia: <i>"Excuse me, <b>_____</b> is this keychain?"</i><br>Seller: <i>"It\'s 8,000 rupiahs."</i><br><br>Choose the correct expression to complete the dialogue.',
+   opts:["How many","How long","How much","How often"],
+   ans:2},
+
+  {id:40,type:'pg',
+   text:'Rama is at a school store. He picks up a pair of socks (Rp15.000) and a belt (Rp25.000).<br><br>Rama: <i>"<b>_____</b> the socks and belt cost altogether?"</i><br>Seller: <i>"That will be 40,000 rupiahs in total, Sir."</i><br><br>Choose the correct expression.',
+   opts:["How many are","How much are","How long are","How often are"],
+   ans:1},
+
+  // ── Q41–45: ESSAY ───────────────────────
+  {id:41,type:'essay',
+   text:'Write a short <b>greeting dialogue</b> (4–5 exchanges) between <b>you</b> and a <b>new friend</b> you have just met at school for the very first time.<br><br>Your dialogue must include:<br>• A proper greeting expression (e.g., <i>Good morning / Hello / Hi</i>)<br>• An introduction (name, class)<br>• A response to the greeting<br>• A polite closing or continuation of conversation<br><br>Write in correct English.',
+   maxScore:8},
+
+  {id:42,type:'essay',
+   text:'Based on the narrative text <b>"The Wolf and The Goat"</b> (questions 6–9), answer the following questions in English:<br><br><b>a.</b> What is the <b>complication</b> (problem or conflict) in the story?<br><b>b.</b> What <b>moral lesson</b> can we learn from the story?<br><b>c.</b> What <b>type of text</b> is it, and what is its <b>social function</b>?',
+   maxScore:8},
+
+  {id:43,type:'essay',
+   text:'Write <b>3–5 sentences</b> describing <b>an animal of your choice</b> in English.<br><br>Your description <b>must</b> include:<br>• At least <b>ONE sentence</b> with adjectives in the correct order: <i>quality → size → age → shape → colour → origin → material</i><br>• Information about the animal\'s <b>physical appearance</b><br>• Information about its <b>habitat</b> (where it lives)<br>• Information about its <b>diet</b> (what it eats)',
+   maxScore:8},
+
+  {id:44,type:'essay',
+   text:'Change the following sentences as instructed. Write the <b>new sentence AND the formula</b> you used.<br><br><b>a. Change to PASSIVE VOICE (Active → Passive):</b><br><i>"The gardener waters the plants every morning."</i><br><br><b>b. Change to ACTIVE VOICE (Passive → Active):</b><br><i>"The trophy was won by our school\'s football team last year."</i>',
+   maxScore:8},
+
+  {id:45,type:'essay',
+   text:'Write a simple <b>procedure text</b> with at least <b>5 clear steps</b> on <b>ONE</b> of these topics:<br><br>a. How to make a glass of lemon tea<br>b. How to plant a seed in a pot<br>c. How to send an email<br><br>You <b>must</b> use time-order connectors: <i>First, Second, Next, Then, Finally</i>.<br><br>Write in correct English.',
+   maxScore:8}
+];
+
+// ═══════════════════════════════════════════
+// STATE VARIABLES
+// ═══════════════════════════════════════════
+let curUser=null, curIdx=0;
+let answers={}, ragu={};
+let timeLeft=7200, timerID=null;
+let genToken="";
+let examResult=null;
+let fokusOn=false;
+
+// ═══════════════════════════════════════════
+// HELPER FUNCTIONS
+// ═══════════════════════════════════════════
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function $(id){return document.getElementById(id);}
+
 function setTab(tab){
-    $('tab-ujian').className  = 'tab-item ' + (tab==='ujian'  ? 'active' : 'inactive');
-    $('tab-hasil').className  = 'tab-item ' + (tab==='hasil'  ? 'active' : 'inactive');
-    $('pane-ujian').classList.toggle('hidden', tab !== 'ujian');
-    $('pane-hasil').classList.toggle('hidden', tab !== 'hasil');
+  $('tab-ujian').className='tab-item '+(tab==='ujian'?'active':'inactive');
+  $('tab-hasil').className='tab-item '+(tab==='hasil'?'active':'inactive');
+  $('pane-ujian').classList.toggle('hidden',tab!=='ujian');
+  $('pane-hasil').classList.toggle('hidden',tab!=='hasil');
 }
 
-// ─── PASSWORD VISIBILITY ───────────────────────────────────────────────────
+// ═══════════════════════════════════════════
+// LOGIN / LOGOUT
+// ═══════════════════════════════════════════
 function togglePw(){
-    const el = $('l-pass'), ic = $('eye-ic');
-    el.type = el.type === 'password' ? 'text' : 'password';
-    ic.classList.toggle('fa-eye-slash', el.type === 'password');
-    ic.classList.toggle('fa-eye',       el.type === 'text');
+  const el=$('l-pass'),ic=$('eye-ic');
+  el.type=el.type==='password'?'text':'password';
+  ic.classList.toggle('fa-eye-slash',el.type==='password');
+  ic.classList.toggle('fa-eye',el.type==='text');
 }
 
-// ─── AUTENTIKASI LOGIN ─────────────────────────────────────────────────────
 function doLogin(){
-    let raw = $('l-user').value.trim();
-    const pass = $('l-pass').value;
-    
-    // Auto extract ID if student inputs standard regional format
-    let key = raw.includes('-') ? raw.split('-').pop() : raw;
-    
-    // By-pass / Simulasi Login test: Any 3 digit number will act as '999' if not mapped, but let's strictly check object.
-    if(raw.length > 0 && pass === '123'){
-        if (!STUDENTS[key]) { key = "999"; } // Fallback to Simulasi for unregistered
-        
-        $('login-err').classList.add('hidden');
-        const lbl = $('btn-login-lbl');
-        lbl.outerHTML = '<div class="loader"></div>';
-        
-        setTimeout(() => {
-            curUser = { rawId: key, id: `01032470`+key, name: STUDENTS[key] };
-            
-            $('d-name').innerText  = curUser.name;
-            $('d-id').innerText    = curUser.id;
-            $('d-name2').innerText = curUser.name;
-            $('d-id2').innerText   = curUser.id;
-            
-            genToken = Math.random().toString(36).substring(2,7).toUpperCase();
-            $('d-token-hint').innerText = '🔑 Token Ujian Simulasi: ' + genToken;
-            show('v-dash');
-            
-            document.querySelector('#btn-login').innerHTML = '<span id="btn-login-lbl">Login</span>';
-        }, 800);
-    } else {
-        $('login-err').classList.remove('hidden');
-        $('login-err').innerText = 'Silahkan masukkan Nomor Ujian dan Password Anda!';
-    }
+  let raw=$('l-user').value.trim();
+  const pass=$('l-pass').value;
+  let key=raw.includes('-')?raw.split('-').pop():raw;
+  if(STUDENTS[key]&&pass==='123'){
+    $('login-err').classList.add('hidden');
+    $('btn-login').innerHTML='<div class="loader"></div>';
+    setTimeout(()=>{
+      const [name,nid]=STUDENTS[key];
+      curUser={key,name,nid};
+      $('d-name').innerText=name;
+      $('d-id').innerText=nid;
+      $('d-name2').innerText=name;
+      $('d-id2').innerText=nid;
+      genToken=Math.random().toString(36).substring(2,7).toUpperCase();
+      $('d-token-hint').innerText='🔑 Token sesi: '+genToken;
+      renderHasil();
+      show('v-dash');
+      $('btn-login').innerHTML='<span id="btn-login-lbl">Login</span>';
+    },700);
+  } else {
+    $('login-err').classList.remove('hidden');
+  }
 }
 
-function doLogout(){ 
-    if(confirm('Anda yakin ingin keluar dari halaman ujian?')){ 
-        show('v-login'); 
-        clearInterval(timerID); 
-        $('d-token').value = '';
-    } 
-}
-
-// ─── VALIDASI TOKEN UJIAN ──────────────────────────────────────────────────
-function doMasuk(){
-    const t = $('d-token').value.trim().toUpperCase();
-    if(!t){ alert('Harap masukkan token ujian terlebih dahulu!'); return; }
-    if(t !== genToken){ alert('Token ujian tidak valid. Pastikan Anda mengetik dengan benar (Cek kapitalisasi). Token demo Anda adalah: ' + genToken); return; }
-    startExam();
-}
-
-// ─── INISIALISASI UJIAN ────────────────────────────────────────────────────
-function startExam(){
-    $('e-name').innerText = curUser.name;
-    $('e-id').innerText   = curUser.id;
-    show('v-exam');
-    buildNavGrid();
-    loadQ(0);
-    startTimer();
-
-    $('btn-prev').onclick   = () => { if(curIdx > 0) loadQ(curIdx-1); };
-    $('btn-next').onclick   = () => { if(curIdx < QS.length-1) loadQ(curIdx+1); };
-    $('btn-finish').onclick = confirmFinish;
-    $('cb-ragu').onchange   = e => { ragu[curIdx] = e.target.checked; refreshNav(); updateBadge(); };
-    
-    // Sync essay text
-    $('essay-ta').oninput   = e => { answers[curIdx] = e.target.value; refreshNav(); updateBadge(); };
-    $('zoom-sl').oninput    = e => document.documentElement.style.setProperty('--q-font-size', e.target.value+'px');
-}
-
-// ─── RENDER SOAL ───────────────────────────────────────────────────────────
-function loadQ(i){
-    curIdx = i;
-    const q = QS[i];
-    $('q-scroll').scrollTop = 0;
-    $('q-num').innerText = i + 1;
-    $('q-text').innerHTML = q.text;
-    $('q-type').innerText = q.type === 'pg' ? 'Pilihan ganda' : 'Esai Terstruktur';
-
-    const opts = $('opts');
-    const ess  = $('essay-wrap');
-
-    if(q.type === 'pg'){
-        opts.style.display = ''; ess.classList.add('hidden');
-        opts.innerHTML = '';
-        ['A','B','C','D'].forEach((lbl, k) => {
-            const sel = answers[i] === k;
-            const div = document.createElement('div');
-            div.className = 'opt-item hover:bg-gray-50' + (sel ? ' sel' : '');
-            div.innerHTML = `<div class="opt-lbl">${lbl}</div><div class="opt-txt">${q.opts[k]}</div>`;
-            div.onclick = () => { answers[i] = k; ragu[i] = false; loadQ(i); };
-            opts.appendChild(div);
-        });
-    } else {
-        opts.style.display = 'none'; ess.classList.remove('hidden');
-        $('essay-ta').value = answers[i] || '';
-    }
-
-    $('cb-ragu').checked = !!ragu[i];
-    $('btn-prev').disabled = i === 0;
-    
-    const isLast = i === QS.length - 1;
-    $('btn-next').classList.toggle('hidden',  isLast);
-    $('btn-finish').classList.toggle('hidden', !isLast);
-
-    updateBadge();
-    refreshNav();
-}
-
-// ─── UPDATE STATUS SOAL SAAT INI ───────────────────────────────────────────
-function updateBadge(){
-    const q = QS[curIdx];
-    const hasAns = q.type==='pg' ? answers[curIdx]!==undefined : (answers[curIdx]||'').trim()!=='';
-    const badge = $('q-badge');
-    badge.className = 'q-badge ' + (ragu[curIdx] ? 'badge-yel' : (hasAns ? 'badge-grn' : 'badge-red'));
-    badge.innerText = ragu[curIdx] ? '?' : (hasAns ? '✓' : '!');
-}
-
-// ─── FITUR FOKUS PENUH ─────────────────────────────────────────────────────
-let fokusOn = false;
-function toggleFokus(){
-    fokusOn = !fokusOn;
-    $('exam-hdr').style.display = fokusOn ? 'none' : '';
-    $('fokus-ic').classList.toggle('fa-expand',  !fokusOn);
-    $('fokus-ic').classList.toggle('fa-compress', fokusOn);
-}
-
-// ─── NAVIGASI KOTAK SOAL (MODAL) ───────────────────────────────────────────
-function buildNavGrid(){
-    $('nav-pg').innerHTML = '';
-    $('nav-es').innerHTML = '';
-    QS.forEach((q, i) => {
-        const b = document.createElement('button');
-        b.id = 'nb-' + i;
-        b.className = 'ngb hover:border-gray-400 transition';
-        b.innerHTML = `<div class="ngb-dot"></div>${i+1}`;
-        b.onclick = () => { loadQ(i); closeNav(); };
-        (q.type === 'pg' ? $('nav-pg') : $('nav-es')).appendChild(b);
-    });
-}
-
-function refreshNav(){
-    QS.forEach((q, i) => {
-        const b = $('nb-' + i); if(!b) return;
-        const hasAns = q.type==='pg' ? answers[i]!==undefined : (answers[i]||'').trim()!=='';
-        b.className = 'ngb hover:border-gray-400 transition';
-        if(hasAns)   b.classList.add('ans');
-        if(ragu[i])  b.classList.add('ragu');
-        if(i===curIdx) b.classList.add('curr');
-    });
-}
-
-function openNav(){  $('modal-nav').classList.add('open'); }
-function closeNav(){ $('modal-nav').classList.remove('open'); }
-function closeNavOutside(e){ if(e.target === $('modal-nav')) closeNav(); }
-
-// ─── WAKTU UJIAN ───────────────────────────────────────────────────────────
-function startTimer(){
-    timerID = setInterval(() => {
-        if(timeLeft <= 0){ 
-            clearInterval(timerID); 
-            alert("Waktu Ujian Telah Habis!");
-            calcScore(); 
-            return; 
-        }
-        timeLeft--;
-        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
-        const s = String(timeLeft%60).padStart(2,'0');
-        $('timer').innerText = `${m}:${s}`;
-        
-        // Peringatan waktu mau habis
-        if(timeLeft < 300) { $('timer').parentElement.classList.add('border-red-500', 'bg-red-50'); }
-    }, 1000);
-}
-
-// ─── KALKULASI & SELESAI UJIAN ─────────────────────────────────────────────
-function confirmFinish(){
-    const filled = Object.keys(answers).filter(k => {
-        const q = QS[k];
-        return q.type==='pg' ? answers[k]!==undefined : (answers[k]||'').trim()!=='';
-    }).length;
-    
-    const msg = filled < QS.length
-        ? `PERHATIAN: Anda baru menjawab ${filled} dari ${QS.length} soal!\n\nYakin ingin mengakhiri ujian dan menyimpan jawaban permanen?`
-        : 'Seluruh soal telah dijawab.\nApakah Anda yakin ingin menyelesaikan ujian sekarang?';
-        
-    if(confirm(msg)) {
-        calcScore();
-    }
-}
-
-function calcScore(){
+function doLogout(){
+  if(confirm('Yakin ingin keluar?')){
     clearInterval(timerID);
-    let pg = 0, es = 0;
-    
-    // Perhitungan:
-    // Pilihan Ganda (1-45): Tiap soal benar bobot rasio misal 100/45 = 2.22 
-    QS.forEach((q, i) => {
-        if(q.type === 'pg'){
-            if(answers[i] === q.ans) pg += (100 / 45); // Skala maks PG = 100
-        }
-        if(q.type === 'essay' && (answers[i]||'').trim()){
-            let m = 0;
-            const usrTxt = answers[i].toLowerCase();
-            (q.kw||[]).forEach(k => { if(usrTxt.includes(k)) m++; });
-            
-            // Logika koreksi essay dasar (simulasi CBT)
-            let currScore = 0;
-            if(m >= 3) currScore = q.max;
-            else if(m >= 1) currScore = q.max / 2;
-            else currScore = q.max / 4; // Mengisi tapi tidak ada keyword
-            
-            es += currScore;
-        }
-    });
-    
-    // Essay (5 soal x max 8 = 40). Skala konversi 100. (es / 40) * 100
-    let finalEs = Math.round((es / 40) * 100);
-    
-    $('s-pg').innerText = Math.round(pg);
-    $('s-es').innerText = finalEs;
-
-    // Rekap hasil di Dashboard > Hasil Ujian
-    const row = document.createElement('tr');
-    row.innerHTML = `<td class="text-center font-semibold">1</td><td>Ilmu Pengetahuan Alam (IPA)</td><td class="font-bold text-blue-600">PG: ${Math.round(pg)} | Esai: ${finalEs}</td>`;
-    const tbody = $('hasil-body');
-    tbody.innerHTML = '';
-    tbody.appendChild(row);
-
-    show('v-result');
+    answers={};ragu={};curIdx=0;timeLeft=7200;
+    fokusOn=false;
+    $('exam-hdr').style.display='';
+    $('fokus-ic').classList.remove('fa-compress');
+    $('fokus-ic').classList.add('fa-expand');
+    show('v-login');
+  }
 }
 
-// ─── EVENT LISTENER KEYBOARD ───────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-    if(e.key === 'Enter'){
-        if($('v-login').classList.contains('active'))  doLogin();
-        if($('v-dash').classList.contains('active'))   doMasuk();
+// ═══════════════════════════════════════════
+// DASHBOARD TOKEN & START
+// ═══════════════════════════════════════════
+function doMasuk(){
+  const t=$('d-token').value.trim().toUpperCase();
+  if(!t){alert('Masukkan token ujian terlebih dahulu!');return;}
+  if(t!==genToken){alert('Token salah!\nToken demo: '+genToken);return;}
+  startExam();
+}
+
+// ═══════════════════════════════════════════
+// START EXAM
+// ═══════════════════════════════════════════
+function startExam(){
+  $('e-name').innerText=curUser.name;
+  $('e-id').innerText=curUser.nid;
+  answers={};ragu={};curIdx=0;timeLeft=7200;
+  show('v-exam');
+  buildNavGrid();
+  loadQ(0);
+  startTimer();
+  $('btn-prev').onclick=()=>{if(curIdx>0)loadQ(curIdx-1);};
+  $('btn-next').onclick=()=>{if(curIdx<QS.length-1)loadQ(curIdx+1);};
+  $('btn-finish').onclick=showConfirm;
+  $('cb-ragu').onchange=e=>{ragu[curIdx]=e.target.checked;refreshNav();updateBadge();};
+  $('essay-ta').oninput=e=>{answers[curIdx]=e.target.value;refreshNav();updateBadge();};
+  $('zoom-sl').oninput=e=>document.documentElement.style.setProperty('--qfs',e.target.value+'px');
+}
+
+function exitExam(){
+  if(confirm('Keluar dari ujian? Semua jawaban akan hilang.'))doLogout();
+}
+
+// ═══════════════════════════════════════════
+// LOAD QUESTION
+// ═══════════════════════════════════════════
+function loadQ(i){
+  curIdx=i;
+  const q=QS[i];
+  $('q-scroll').scrollTop=0;
+  $('q-num').innerText=i+1;
+  $('q-text').innerHTML=q.text;
+  $('q-type').innerText=q.type==='pg'?'Pilihan Ganda':'Esai';
+  const opts=$('opts'),ess=$('essay-wrap');
+  if(q.type==='pg'){
+    opts.style.display='';ess.classList.add('hidden');
+    opts.innerHTML='';
+    ['A','B','C','D'].forEach((lbl,k)=>{
+      const sel=answers[i]===k;
+      const div=document.createElement('div');
+      div.className='opt-item'+(sel?' sel':'');
+      div.innerHTML=`<div class="opt-lbl">${lbl}</div><div class="opt-txt">${q.opts[k]}</div>`;
+      div.onclick=()=>{answers[i]=k;ragu[i]=false;loadQ(i);};
+      opts.appendChild(div);
+    });
+  } else {
+    opts.style.display='none';ess.classList.remove('hidden');
+    $('essay-ta').value=answers[i]||'';
+  }
+  $('cb-ragu').checked=!!ragu[i];
+  $('btn-prev').disabled=i===0;
+  const isLast=i===QS.length-1;
+  $('btn-next').classList.toggle('hidden',isLast);
+  $('btn-finish').classList.toggle('hidden',!isLast);
+  updateBadge();refreshNav();
+}
+
+function updateBadge(){
+  const q=QS[curIdx];
+  const has=q.type==='pg'?answers[curIdx]!==undefined:(answers[curIdx]||'').trim()!=='';
+  const b=$('q-badge');
+  b.className='q-badge '+(ragu[curIdx]?'badge-yel':(has?'badge-grn':'badge-red'));
+  b.innerText=ragu[curIdx]?'?':(has?'✓':'!');
+}
+
+// ═══════════════════════════════════════════
+// FOCUS MODE
+// ═══════════════════════════════════════════
+function toggleFokus(){
+  fokusOn=!fokusOn;
+  $('exam-hdr').style.display=fokusOn?'none':'';
+  $('fokus-ic').classList.toggle('fa-expand',!fokusOn);
+  $('fokus-ic').classList.toggle('fa-compress',fokusOn);
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION MODAL
+// ═══════════════════════════════════════════
+function buildNavGrid(){
+  $('nav-pg').innerHTML='';$('nav-es').innerHTML='';
+  QS.forEach((q,i)=>{
+    const b=document.createElement('button');
+    b.id='nb-'+i;b.className='ngb';
+    b.innerHTML=`<div class="ngb-dot"></div>${i+1}`;
+    b.onclick=()=>{loadQ(i);closeNav();};
+    (q.type==='pg'?$('nav-pg'):$('nav-es')).appendChild(b);
+  });
+}
+function refreshNav(){
+  QS.forEach((q,i)=>{
+    const b=$('nb-'+i);if(!b)return;
+    const has=q.type==='pg'?answers[i]!==undefined:(answers[i]||'').trim()!=='';
+    b.className='ngb';
+    if(has)b.classList.add('ans');
+    if(ragu[i])b.classList.add('ragu');
+    if(i===curIdx)b.classList.add('curr');
+  });
+}
+function openNav(){$('modal-nav').classList.add('open');}
+function closeNav(){$('modal-nav').classList.remove('open');}
+function closeNavOutside(e){if(e.target===$('modal-nav'))closeNav();}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer(){
+  timerID=setInterval(()=>{
+    if(timeLeft<=0){clearInterval(timerID);doFinish(true);return;}
+    timeLeft--;
+    const m=String(Math.floor(timeLeft/60)).padStart(2,'0');
+    const s=String(timeLeft%60).padStart(2,'0');
+    $('timer').innerText=`${m}:${s}`;
+    if(timeLeft===600)$('timer').style.color='#ef4444';
+    if(timeLeft===300){$('timer').style.fontWeight='900';$('timer').style.animation='pulse 1s infinite';}
+  },1000);
+}
+
+// ═══════════════════════════════════════════
+// CONFIRMATION MODAL
+// ═══════════════════════════════════════════
+function showConfirm(){
+  const pgAns=Object.keys(answers).filter(k=>QS[k].type==='pg'&&answers[k]!==undefined).length;
+  const esAns=Object.keys(answers).filter(k=>QS[k].type==='essay'&&(answers[k]||'').trim()!=='').length;
+  $('confirm-pg-count').innerText=pgAns+'/40';
+  $('confirm-es-count').innerText=esAns+'/5';
+  const unanswered=(40-pgAns)+(5-esAns);
+  if(unanswered>0){
+    $('confirm-warn').classList.remove('hidden');
+    $('confirm-warn-text').innerText=`Masih ada ${unanswered} soal yang belum dijawab!`;
+  } else {
+    $('confirm-warn').classList.add('hidden');
+  }
+  $('cb-confirm').checked=false;
+  toggleAkhiriBtn();
+  $('modal-confirm').classList.add('open');
+}
+function closeConfirm(){$('modal-confirm').classList.remove('open');}
+function closeConfirmOutside(e){if(e.target===$('modal-confirm'))closeConfirm();}
+function toggleAkhiriBtn(){
+  const checked=$('cb-confirm').checked;
+  const btn=$('btn-akhiri');
+  if(checked){
+    btn.disabled=false;
+    btn.className='w-full py-3.5 bg-green-500 hover:bg-green-600 text-white font-bold text-sm rounded-xl mb-3 flex items-center justify-center gap-2 transition-all duration-200';
+    btn.style.cursor='pointer';
+  } else {
+    btn.disabled=true;
+    btn.className='w-full py-3.5 bg-gray-300 text-gray-500 font-bold text-sm rounded-xl mb-3 flex items-center justify-center gap-2 transition-all duration-200';
+    btn.style.cursor='not-allowed';
+  }
+}
+
+// ═══════════════════════════════════════════
+// ESSAY SCORING — LOCAL (SEMANTIC FALLBACK)
+// ═══════════════════════════════════════════
+function scoreEssayLocal(essayIdx, answer){
+  const rubric=ESSAY_RUBRICS[essayIdx];
+  if(!answer||!answer.trim()) return {score:0,maxScore:rubric.maxScore,comment:'Tidak ada jawaban yang ditulis.',source:'local'};
+  const lower=answer.toLowerCase();
+  const words=lower.split(/\s+/).filter(w=>w.length>1);
+  let totalW=0,matchedW=0;
+  const hitConcepts=[];
+  for(const concept of rubric.concepts){
+    totalW+=concept.w;
+    const hit=concept.terms.some(t=>lower.includes(t.toLowerCase()));
+    if(hit){matchedW+=concept.w;hitConcepts.push(concept.terms[0]);}
+  }
+  const wordBonus=words.length>=40?0.5:words.length>=20?0.25:0;
+  const ratio=matchedW/totalW;
+  let score;
+  if(ratio>=0.72) score=rubric.maxScore;
+  else if(ratio>=0.52) score=Math.round(rubric.maxScore*0.75);
+  else if(ratio>=0.32) score=Math.round(rubric.maxScore*0.5);
+  else if(ratio>=0.12) score=Math.round(rubric.maxScore*0.3);
+  else if(words.length>=5) score=1;
+  else score=0;
+  score=Math.min(Math.round(score+wordBonus),rubric.maxScore);
+  let comment;
+  if(score>=rubric.maxScore) comment=`Excellent! Key concepts covered: ${hitConcepts.slice(0,3).join(', ')}.`;
+  else if(score>=Math.round(rubric.maxScore*0.75)) comment=`Good answer. Concepts found: ${hitConcepts.join(', ')}. Could be more complete.`;
+  else if(score>=Math.round(rubric.maxScore*0.5)) comment=hitConcepts.length>0?`Some key concepts present (${hitConcepts.join(', ')}). Needs more detail.`:'Answer present but key concepts not well addressed.';
+  else if(score>0) comment='Answer is incomplete. Key concepts are mostly missing.';
+  else comment='Answer is empty or not relevant to the question.';
+  return {score,maxScore:rubric.maxScore,comment,source:'local'};
+}
+
+// ═══════════════════════════════════════════
+// ESSAY SCORING — AI (Claude API)
+// ═══════════════════════════════════════════
+async function scoreEssayAI(essayIdx, answer){
+  const rubric=ESSAY_RUBRICS[essayIdx];
+  const qText=QS[40+essayIdx].text.replace(/<[^>]*>/g,'').trim();
+  if(!answer||!answer.trim()) return {score:0,maxScore:rubric.maxScore,comment:'Tidak ada jawaban yang ditulis.',source:'ai'};
+  try{
+    const resp=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:350,
+        messages:[{
+          role:"user",
+          content:`Kamu adalah guru Bahasa Inggris SMP yang menilai jawaban esai ujian akhir (PSAJ). Nilai jawaban berikut secara objektif dan adil.
+
+Pertanyaan: ${qText}
+
+Jawaban siswa: "${answer}"
+
+Rubrik penilaian (skor 0–${rubric.maxScore}):
+${rubric.apiRubric}
+
+Panduan skor:
+- ${rubric.maxScore}: Sangat lengkap, semua konsep kunci terpenuhi, grammar baik
+- ${Math.round(rubric.maxScore*0.75)}-${rubric.maxScore-1}: Baik, sebagian besar terpenuhi
+- ${Math.round(rubric.maxScore*0.5)}-${Math.round(rubric.maxScore*0.7)}: Cukup, ada sebagian konsep
+- 1-${Math.round(rubric.maxScore*0.4)}: Kurang lengkap
+- 0: Tidak menjawab atau tidak relevan
+
+PENTING: Nilai berdasarkan MAKNA dan KONTEN, bukan hanya pilihan kata. Bahasa Inggris yang tidak sempurna tapi isinya benar tetap mendapat nilai sesuai kualitas kontennya.
+
+Balas HANYA dengan JSON tanpa teks lain:
+{"skor":angka,"komentar":"komentar guru max 70 kata bahasa Indonesia"}`
+        }]
+      })
+    });
+    const data=await resp.json();
+    const text=data.content[0].text.trim();
+    const parsed=JSON.parse(text);
+    return {
+      score:Math.min(Math.max(0,Math.round(Number(parsed.skor))),rubric.maxScore),
+      maxScore:rubric.maxScore,
+      comment:parsed.komentar,
+      source:'ai'
+    };
+  } catch(e){
+    const local=scoreEssayLocal(essayIdx,answer);
+    local.source='local_fallback';
+    return local;
+  }
+}
+
+// ═══════════════════════════════════════════
+// FINISH EXAM
+// ═══════════════════════════════════════════
+async function doFinish(autoEnd=false){
+  $('modal-confirm').classList.remove('open');
+  clearInterval(timerID);
+  show('v-loading');
+  $('loading-bar').style.width='10%';
+  $('loading-msg').innerText='Menghitung nilai pilihan ganda...';
+  $('loading-step').innerText='';
+
+  // Score PG
+  let pgCorrect=0;
+  const pgDetails=[];
+  await new Promise(r=>setTimeout(r,300));
+  QS.slice(0,40).forEach((q,i)=>{
+    const sel=answers[i];
+    const isRight=(sel!==undefined&&sel===q.ans);
+    if(isRight)pgCorrect++;
+    pgDetails.push({qId:i+1,text:q.text,opts:q.opts,ans:q.ans,selected:sel,isRight});
+  });
+  const pgScore=Math.round(pgCorrect*1.5);
+  $('loading-bar').style.width='20%';
+  await new Promise(r=>setTimeout(r,200));
+
+  // Score Essays
+  const essayDetails=[];
+  let esTotal=0;
+  const essayQs=QS.slice(40);
+  for(let i=0;i<essayQs.length;i++){
+    const q=essayQs[i];
+    const ans=answers[40+i]||'';
+    $('loading-msg').innerText=`Menilai esai ${i+1} dari 5...`;
+    $('loading-step').innerText=ESSAY_RUBRICS[i].subject;
+    $('loading-bar').style.width=`${20+(i+1)*14}%`;
+    const result=await scoreEssayAI(i,ans);
+    esTotal+=result.score;
+    essayDetails.push({
+      qId:40+i+1,
+      text:q.text,
+      answer:ans,
+      score:result.score,
+      maxScore:result.maxScore,
+      comment:result.comment,
+      source:result.source
+    });
+    await new Promise(r=>setTimeout(r,150));
+  }
+
+  $('loading-bar').style.width='100%';
+  $('loading-msg').innerText='Penilaian selesai!';
+  await new Promise(r=>setTimeout(r,500));
+
+  // Total: PG (max 60) + Essay (max 40) = 100
+  const total=Math.min(100,Math.round(pgScore+esTotal));
+
+  examResult={
+    name:curUser.name,nid:curUser.nid,
+    date:new Date().toLocaleDateString('id-ID'),
+    pgCorrect,pgScore,esTotal,total,
+    pgDetails,essayDetails
+  };
+
+  $('s-pg').innerText=pgScore;
+  $('s-es').innerText=esTotal;
+  $('s-total').innerText=total;
+  renderHasil();
+  show('v-result');
+}
+
+// ═══════════════════════════════════════════
+// RENDER HASIL
+// ═══════════════════════════════════════════
+function renderHasil(){
+  if(!examResult)return;
+  const tbody=$('hasil-body');
+  tbody.innerHTML='';
+  const tr=document.createElement('tr');
+  tr.className='clickable';
+  tr.innerHTML=`<td class="font-bold text-gray-700">1</td><td>Bahasa Inggris<br><span class="text-[10px] text-gray-400">PSAJ 2025/2026 · ${examResult.date}</span></td><td><span class="font-bold text-blue-700">${examResult.total}</span><span class="text-gray-400 text-[11px]"> / 100</span><br><span class="text-[10px] text-gray-400">PG: ${examResult.pgScore} | Esai: ${examResult.esTotal}</span></td>`;
+  tr.onclick=()=>{show('v-detail');renderDetailView();};
+  tbody.appendChild(tr);
+}
+
+// ═══════════════════════════════════════════
+// DETAIL VIEW
+// ═══════════════════════════════════════════
+function showDetail(){show('v-detail');renderDetailView();}
+
+function renderDetailView(){
+  if(!examResult)return;
+  $('detail-name').innerText=examResult.name+' · '+examResult.nid;
+  $('detail-pg').innerText=examResult.pgScore+'/60';
+  $('detail-es').innerText=examResult.esTotal+'/40';
+  $('detail-total').innerText=examResult.total+'/100';
+
+  // PG list
+  const pgList=$('detail-pg-list');
+  pgList.innerHTML='';
+  examResult.pgDetails.forEach(d=>{
+    const div=document.createElement('div');
+    div.className='detail-q-row';
+    const labelMap=['A','B','C','D'];
+    const selLabel=d.selected!==undefined?labelMap[d.selected]:'–';
+    div.innerHTML=`
+      <div class="status-icon ${d.isRight?'status-benar':'status-salah'}">
+        <i class="fas fa-${d.isRight?'check':'times'}"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-[11px] font-bold text-gray-500 mb-0.5">Soal ${d.qId}</p>
+        <p class="text-xs text-gray-700 leading-snug mb-1.5 line-clamp-2">${d.text.replace(/<[^>]*>/g,'').substring(0,120)}…</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${d.isRight?'bg-green-100 text-green-700':'bg-red-100 text-red-700'}">
+            Jawabanmu: ${selLabel}${d.selected!==undefined?' – '+d.opts[d.selected]:'(tidak dijawab)'}
+          </span>
+          ${!d.isRight?`<span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-blue-100 text-blue-700">Benar: ${labelMap[d.ans]} – ${d.opts[d.ans]}</span>`:''}
+        </div>
+      </div>`;
+    pgList.appendChild(div);
+  });
+
+  // Essay list
+  const esList=$('detail-es-list');
+  esList.innerHTML='';
+  examResult.essayDetails.forEach(d=>{
+    const pct=Math.round(d.score/d.maxScore*100);
+    const div=document.createElement('div');
+    div.className='detail-q-row flex-col';
+    div.innerHTML=`
+      <div class="flex items-start gap-3 w-full mb-2">
+        <div class="status-icon status-essay flex-shrink-0"><i class="fas fa-pen"></i></div>
+        <div class="flex-1">
+          <p class="text-[11px] font-bold text-gray-500 mb-0.5">Soal ${d.qId} — Esai</p>
+          <p class="text-xs text-gray-700 leading-snug mb-2">${d.text.replace(/<[^>]*>/g,'').substring(0,140)}…</p>
+          <div class="bg-gray-50 border border-gray-200 rounded-lg p-2.5 mb-2">
+            <p class="text-[10px] font-bold text-gray-500 mb-1">JAWABAN KAMU:</p>
+            <p class="text-xs text-gray-700 leading-relaxed">${d.answer?d.answer:'<span class="italic text-gray-400">Tidak dijawab</span>'}</p>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-gray-600">Skor: <span class="text-blue-700">${d.score} / ${d.maxScore}</span></span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${pct>=75?'bg-green-100 text-green-700':pct>=50?'bg-yellow-100 text-yellow-700':'bg-red-100 text-red-700'}">${pct}%</span>
+          </div>
+          <div class="essay-score-bar"><div class="essay-score-fill" style="width:${pct}%"></div></div>
+          <p class="text-[10px] text-gray-500 mt-1.5 italic">${d.comment||''}</p>
+          ${d.source==='ai'?'<p class="text-[9px] text-blue-400 mt-1">✦ Dinilai oleh AI (Claude)</p>':d.source==='local_fallback'?'<p class="text-[9px] text-gray-400 mt-1">Dinilai otomatis (offline mode)</p>':'<p class="text-[9px] text-gray-400 mt-1">Dinilai otomatis</p>'}
+        </div>
+      </div>`;
+    esList.appendChild(div);
+  });
+}
+
+function setDetailTab(tab){
+  $('dtab-pg').className='dtab '+(tab==='pg'?'active':'inactive');
+  $('dtab-es').className='dtab '+(tab==='es'?'active':'inactive');
+  $('detail-pg-list').classList.toggle('hidden',tab!=='pg');
+  $('detail-es-list').classList.toggle('hidden',tab!=='es');
+}
+
+function goToDashboard(){setTab('hasil');show('v-dash');}
+
+// ═══════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    if($('v-login').classList.contains('active'))doLogin();
+    if($('v-dash').classList.contains('active'))doMasuk();
+  }
+  if($('v-exam').classList.contains('active')){
+    if(e.key==='ArrowRight'&&curIdx<QS.length-1)loadQ(curIdx+1);
+    if(e.key==='ArrowLeft'&&curIdx>0)loadQ(curIdx-1);
+    if(['1','2','3','4'].includes(e.key)&&QS[curIdx].type==='pg'){
+      const k=parseInt(e.key)-1;
+      answers[curIdx]=k;ragu[curIdx]=false;loadQ(curIdx);
     }
+  }
 });
 </script>
 </body>
